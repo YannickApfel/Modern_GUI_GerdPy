@@ -68,20 +68,10 @@ class MainWindow(QMainWindow):
 
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
-        widgets.btn_widgets.clicked.connect(self.buttonClick)
-        widgets.btn_new.clicked.connect(self.buttonClick)
-        widgets.btn_save.clicked.connect(self.buttonClick)
-
-        # EXTRA LEFT BOX
-        def openCloseLeftBox():
-            UIFunctions.toggleLeftBox(self, True)
-        widgets.toggleLeftBox.clicked.connect(openCloseLeftBox)
-        widgets.extraCloseColumnBtn.clicked.connect(openCloseLeftBox)
-
-        # EXTRA RIGHT BOX
-        def openCloseRightBox():
-            UIFunctions.toggleRightBox(self, True)
-        widgets.settingsTopBtn.clicked.connect(openCloseRightBox)
+        widgets.btn_weather.clicked.connect(self.buttonClick)
+        widgets.btn_ground.clicked.connect(self.buttonClick)
+        widgets.btn_surface.clicked.connect(self.buttonClick)
+        widgets.btn_simparas.clicked.connect(self.buttonClick)
 
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
@@ -120,17 +110,29 @@ class MainWindow(QMainWindow):
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
-        # SHOW WIDGETS PAGE
-        if btnName == "btn_widgets":
-            widgets.stackedWidget.setCurrentWidget(widgets.widgets)
+        # SHOW WEATHER PAGE
+        if btnName == "btn_weather":
+            widgets.stackedWidget.setCurrentWidget(widgets.weather)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
-        # SHOW NEW PAGE
-        if btnName == "btn_new":
-            widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
-            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
-            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+        # SHOW GROUND PAGE
+        if btnName == "btn_ground":
+           widgets.stackedWidget.setCurrentWidget(widgets.ground)
+           UIFunctions.resetStyle(self, btnName)
+           btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+
+        # SHOW SURFACE PAGE
+        if btnName == "btn_surface":
+           widgets.stackedWidget.setCurrentWidget(widgets.surface)
+           UIFunctions.resetStyle(self, btnName)
+           btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+
+        # SHOW SIMPARAS PAGE
+        if btnName == "btn_simparas":
+           widgets.stackedWidget.setCurrentWidget(widgets.simparas)
+           UIFunctions.resetStyle(self, btnName)
+           btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         if btnName == "btn_save":
             print("Save BTN clicked!")
