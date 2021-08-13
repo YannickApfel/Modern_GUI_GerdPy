@@ -69,7 +69,7 @@ class MainWindow(QMainWindow):
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
         widgets.btn_weather.clicked.connect(self.buttonClick)
-        widgets.btn_ground.clicked.connect(self.buttonClick)
+        widgets.btn_borefield.clicked.connect(self.buttonClick)
         widgets.btn_surface.clicked.connect(self.buttonClick)
         widgets.btn_simparas.clicked.connect(self.buttonClick)
 
@@ -117,8 +117,8 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         # SHOW GROUND PAGE
-        if btnName == "btn_ground":
-           widgets.stackedWidget.setCurrentWidget(widgets.ground)
+        if btnName == "btn_borefield":
+           widgets.stackedWidget.setCurrentWidget(widgets.borefield)
            UIFunctions.resetStyle(self, btnName)
            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
