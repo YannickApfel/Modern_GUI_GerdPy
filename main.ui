@@ -1488,7 +1488,7 @@ Button */
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>3</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -1507,7 +1507,8 @@ background-repeat: no-repeat;</string>
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">background: none;</string>
+                          <string notr="true">background: none;
+color: rgb(231, 81, 19);</string>
                          </property>
                          <property name="text">
                           <string>Welcome to GerdPy</string>
