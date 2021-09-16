@@ -73,6 +73,12 @@ class MainWindow(QMainWindow):
         widgets.btn_surface.clicked.connect(self.buttonClick)
         widgets.btn_simparas.clicked.connect(self.buttonClick)
 
+        # WEATHER SHEET
+        widgets.btn_browse_weather.clicked.connect(self.buttonClick)
+
+        # BOREFIELD SHEET
+        widgets.btn_browse_borefield.clicked.connect(self.buttonClick)
+
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
         self.show()
@@ -133,6 +139,18 @@ class MainWindow(QMainWindow):
            widgets.stackedWidget.setCurrentWidget(widgets.simparas)
            UIFunctions.resetStyle(self, btnName)
            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+
+        # BROWSE WEATHER DATA
+        if btnName == "btn_browse_weather":
+            from modules.use_functions import USEFunctions
+            w_file = USEFunctions.fcn_browse(self)
+            widgets.line_weather_file.setText(w_file[0])
+
+        # BROWSE BOREFIELD DATA
+        if btnName == "btn_browse_borefield":
+            from modules.use_functions import USEFunctions
+            b_file = USEFunctions.fcn_browse(self)
+            widgets.line_borefield_file.setText(b_file[0])
 
         if btnName == "btn_save":
             print("Save BTN clicked!")

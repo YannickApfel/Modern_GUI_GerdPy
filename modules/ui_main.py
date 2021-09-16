@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainnzzeMp.ui'
+## Form generated from reading UI file 'mainsJjSyt.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -12,13 +12,13 @@ from PySide6.QtCore import *  # type: ignore
 from PySide6.QtGui import *  # type: ignore
 from PySide6.QtWidgets import *  # type: ignore
 
-from .resources_rc import *
+from . resources_rc import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1280, 720)
+        MainWindow.resize(998, 711)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -70,7 +70,7 @@ class Ui_MainWindow(object):
 "}\n"
 "#topLogo {\n"
 "	background-color: rgb(33, 37, 43);\n"
-"	background-image: url(:/images/images/images/PyDracula.png);\n"
+"	background-image: url(:/images/images/images/ZAE-Logo_mini.png);\n"
 "	background-position: centered;\n"
 "	background-repeat: no-repeat;\n"
 "}\n"
@@ -91,8 +91,8 @@ class Ui_MainWindow(object):
 "	background-color: rgb(40, 44, 52);\n"
 "}\n"
 "#topMenu .QPushButton:pressed {	\n"
-"	background-color: rgb(189, 14"
-                        "7, 249);\n"
+"	background-color: rgb(189"
+                        ", 147, 249);\n"
 "	color: rgb(255, 255, 255);\n"
 "}\n"
 "#bottomMenu .QPushButton {	\n"
@@ -130,8 +130,8 @@ class Ui_MainWindow(object):
 "	background-color: rgb(40, 44, 52);\n"
 "}\n"
 "#toggleButton:pressed {\n"
-"	background-color: rgb(189, "
-                        "147, 249);\n"
+"	background-color: rgb(1"
+                        "89, 147, 249);\n"
 "}\n"
 "\n"
 "/* Title Menu */\n"
@@ -164,8 +164,8 @@ class Ui_MainWindow(object):
 "\n"
 "/* Extra Content */\n"
 "#extraContent{\n"
-"	border-top:"
-                        " 3px solid rgb(40, 44, 52);\n"
+"	border-"
+                        "top: 3px solid rgb(40, 44, 52);\n"
 "}\n"
 "\n"
 "/* Extra Top Menus */\n"
@@ -197,8 +197,8 @@ class Ui_MainWindow(object):
 "\n"
 "/* Top Buttons */\n"
 "#rightButtons .QPushButton { background-color: rgba(255, 255, 255, 0); border: none;  border-radius: 5px; }\n"
-"#rightButtons .QPushButton:hover { background-color: rgb(44, 49, 57); border-style: s"
-                        "olid; border-radius: 4px; }\n"
+"#rightButtons .QPushButton:hover { background-color: rgb(44, 49, 57); border-styl"
+                        "e: solid; border-radius: 4px; }\n"
 "#rightButtons .QPushButton:pressed { background-color: rgb(23, 26, 30); border-style: solid; border-radius: 4px; }\n"
 "\n"
 "/* Theme Settings */\n"
@@ -225,8 +225,8 @@ class Ui_MainWindow(object):
 "}\n"
 "#contentSettings .QPushButton:pressed {	\n"
 "	background-color: rgb(189, 147, 249);\n"
-"	color: rgb(255,"
-                        " 255, 255);\n"
+"	color: rgb("
+                        "255, 255, 255);\n"
 "}\n"
 "\n"
 "/* /////////////////////////////////////////////////////////////////////////////////////////////////\n"
@@ -261,8 +261,8 @@ class Ui_MainWindow(object):
 "QHeaderView::section:horizontal\n"
 "{\n"
 "    border: 1px solid rgb(33, 37, 43);\n"
-"	background-color: "
-                        "rgb(33, 37, 43);\n"
+"	background-col"
+                        "or: rgb(33, 37, 43);\n"
 "	padding: 3px;\n"
 "	border-top-left-radius: 7px;\n"
 "    border-top-right-radius: 7px;\n"
@@ -296,8 +296,8 @@ class Ui_MainWindow(object):
 "	border-radius: 5px;\n"
 "	padding: 10px;\n"
 "	selection-color: rgb(255, 255, 255);\n"
-"	selection-background-color:"
-                        " rgb(255, 121, 198);\n"
+"	selection-background-co"
+                        "lor: rgb(255, 121, 198);\n"
 "}\n"
 "QPlainTextEdit  QScrollBar:vertical {\n"
 "    width: 8px;\n"
@@ -335,8 +335,8 @@ class Ui_MainWindow(object):
 "    subcontrol-position: right;\n"
 "    subcontrol-origin: margin;\n"
 "}\n"
-"QSc"
-                        "rollBar::sub-line:horizontal {\n"
+""
+                        "QScrollBar::sub-line:horizontal {\n"
 "    border: none;\n"
 "    background: rgb(55, 63, 77);\n"
 "    width: 20px;\n"
@@ -372,8 +372,8 @@ class Ui_MainWindow(object):
 "	border-bottom-left-radius: 4px;\n"
 "    border-bottom-right-radius: 4px;\n"
 "     subcontrol-position: bottom;\n"
-"     subco"
-                        "ntrol-origin: margin;\n"
+"     su"
+                        "bcontrol-origin: margin;\n"
 " }\n"
 " QScrollBar::sub-line:vertical {\n"
 "	border: none;\n"
@@ -407,8 +407,8 @@ class Ui_MainWindow(object):
 "QCheckBox::indicator:checked {\n"
 "    background: 3px solid rgb(52, 59, 72);\n"
 "	border: 3px solid rgb(52, 59, 72);	\n"
-"	backgro"
-                        "und-image: url(:/icons/images/icons/cil-check-alt.png);\n"
+"	back"
+                        "ground-image: url(:/icons/images/icons/cil-check-alt.png);\n"
 "}\n"
 "\n"
 "/* /////////////////////////////////////////////////////////////////////////////////////////////////\n"
@@ -442,8 +442,8 @@ class Ui_MainWindow(object):
 "}\n"
 "QComboBox::drop-down {\n"
 "	subcontrol-origin: padding;\n"
-"	subcontr"
-                        "ol-position: top right;\n"
+"	subco"
+                        "ntrol-position: top right;\n"
 "	width: 25px; \n"
 "	border-left-width: 3px;\n"
 "	border-left-color: rgba(39, 44, 54, 150);\n"
@@ -476,8 +476,8 @@ class Ui_MainWindow(object):
 "QSpinBox::up-button {\n"
 "	subcontrol-origin: padding;\n"
 "	subcontrol-position: center right;\n"
-"	width:"
-                        " 25px;\n"
+"	wid"
+                        "th: 25px;\n"
 "	border-left-width: 3px;\n"
 "	border-left-color: rgba(39, 44, 54, 150);\n"
 "	border-left-style: solid;\n"
@@ -508,8 +508,8 @@ class Ui_MainWindow(object):
 "	selection-background-color: rgb(39, 44, 54);\n"
 "}\n"
 "\n"
-"/* //////////////////////////////"
-                        "///////////////////////////////////////////////////////////////////\n"
+"/* ///////////////////////////"
+                        "//////////////////////////////////////////////////////////////////////\n"
 "DoubleSpinBox */\n"
 "QDoubleSpinBox{\n"
 "	background-color: rgb(27, 29, 35);\n"
@@ -541,8 +541,8 @@ class Ui_MainWindow(object):
 "	width: 25px;\n"
 "	border-left-width: 3px;\n"
 "	border-left-color: rgba(39, 44, 54, 150);\n"
-"	border-lef"
-                        "t-style: solid;\n"
+"	border-"
+                        "left-style: solid;\n"
 "	border-top-right-radius: 3px;\n"
 "	border-bottom-right-radius: 3px;\n"
 "	background-image: url(:/icons/images/icons/cil-arrow-bottom.png);\n"
@@ -576,8 +576,8 @@ class Ui_MainWindow(object):
 "	border-radius: 5px;\n"
 "}\n"
 "QSlider::handle:horizontal:hover {\n"
-"    bac"
-                        "kground-color: rgb(195, 155, 255);\n"
+"    "
+                        "background-color: rgb(195, 155, 255);\n"
 "}\n"
 "QSlider::handle:horizontal:pressed {\n"
 "    background-color: rgb(255, 121, 198);\n"
@@ -615,8 +615,8 @@ class Ui_MainWindow(object):
 "	padding: 5px;\n"
 "	color: rgb(255, 170, 255);\n"
 "}\n"
-"QComma"
-                        "ndLinkButton:hover {	\n"
+"QCo"
+                        "mmandLinkButton:hover {	\n"
 "	color: rgb(255, 170, 255);\n"
 "	background-color: rgb(44, 49, 60);\n"
 "}\n"
@@ -969,7 +969,8 @@ class Ui_MainWindow(object):
         font4.setBold(False)
         font4.setItalic(False)
         self.label_2.setFont(font4)
-        self.label_2.setStyleSheet(u"background: none;")
+        self.label_2.setStyleSheet(u"background: none;\n"
+"color: rgb(231, 81, 19);")
         self.label_2.setAlignment(Qt.AlignHCenter|Qt.AlignTop)
 
         self.verticalLayout_21.addWidget(self.label_2)
@@ -1031,17 +1032,17 @@ class Ui_MainWindow(object):
 
         self.gridLayout_3.addWidget(self.label_7, 0, 0, 1, 1)
 
-        self.btn_browse = QPushButton(self.frame_2)
-        self.btn_browse.setObjectName(u"btn_browse")
-        self.btn_browse.setMinimumSize(QSize(150, 35))
-        self.btn_browse.setFont(font1)
-        self.btn_browse.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_browse.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_browse_weather = QPushButton(self.frame_2)
+        self.btn_browse_weather.setObjectName(u"btn_browse_weather")
+        self.btn_browse_weather.setMinimumSize(QSize(150, 35))
+        self.btn_browse_weather.setFont(font1)
+        self.btn_browse_weather.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_browse_weather.setStyleSheet(u"background-color: rgb(52, 59, 72);")
         icon3 = QIcon()
         icon3.addFile(u":/icons/images/icons/cil-folder-open.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_browse.setIcon(icon3)
+        self.btn_browse_weather.setIcon(icon3)
 
-        self.gridLayout_3.addWidget(self.btn_browse, 2, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.btn_browse_weather, 2, 1, 1, 1)
 
         self.label_6 = QLabel(self.frame_2)
         self.label_6.setObjectName(u"label_6")
@@ -1171,23 +1172,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.label_13, 1, 0, 1, 1)
 
-        self.line_weather_file_2 = QLineEdit(self.frame_5)
-        self.line_weather_file_2.setObjectName(u"line_weather_file_2")
-        self.line_weather_file_2.setMinimumSize(QSize(0, 35))
-        self.line_weather_file_2.setFont(font1)
-        self.line_weather_file_2.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.line_borefield_file = QLineEdit(self.frame_5)
+        self.line_borefield_file.setObjectName(u"line_borefield_file")
+        self.line_borefield_file.setMinimumSize(QSize(0, 35))
+        self.line_borefield_file.setFont(font1)
+        self.line_borefield_file.setStyleSheet(u"background-color: rgb(33, 37, 43);")
 
-        self.gridLayout_5.addWidget(self.line_weather_file_2, 2, 0, 1, 1)
+        self.gridLayout_5.addWidget(self.line_borefield_file, 2, 0, 1, 1)
 
-        self.btn_browse_2 = QPushButton(self.frame_5)
-        self.btn_browse_2.setObjectName(u"btn_browse_2")
-        self.btn_browse_2.setMinimumSize(QSize(150, 35))
-        self.btn_browse_2.setFont(font1)
-        self.btn_browse_2.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_browse_2.setStyleSheet(u"background-color: rgb(52, 59, 72);")
-        self.btn_browse_2.setIcon(icon3)
+        self.btn_browse_borefield = QPushButton(self.frame_5)
+        self.btn_browse_borefield.setObjectName(u"btn_browse_borefield")
+        self.btn_browse_borefield.setMinimumSize(QSize(150, 35))
+        self.btn_browse_borefield.setFont(font1)
+        self.btn_browse_borefield.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_browse_borefield.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_browse_borefield.setIcon(icon3)
 
-        self.gridLayout_5.addWidget(self.btn_browse_2, 2, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.btn_browse_borefield, 2, 1, 1, 1)
 
 
         self.verticalLayout_12.addWidget(self.frame_5)
@@ -1707,7 +1708,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 356, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 274, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1968,7 +1969,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1976,8 +1977,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.titleLeftApp.setText(QCoreApplication.translate("MainWindow", u"PyDracula", None))
-        self.titleLeftDescription.setText(QCoreApplication.translate("MainWindow", u"Modern GUI / Flat Style", None))
+        self.titleLeftApp.setText(QCoreApplication.translate("MainWindow", u"GerdPy", None))
+        self.titleLeftDescription.setText(QCoreApplication.translate("MainWindow", u"Simulation Tool", None))
         self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
         self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
         self.btn_weather.setText(QCoreApplication.translate("MainWindow", u"Weather data", None))
@@ -2002,7 +2003,7 @@ class Ui_MainWindow(object):
         self.line_weather_file.setText("")
         self.line_weather_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Weather", None))
-        self.btn_browse.setText(QCoreApplication.translate("MainWindow", u" Browse", None))
+        self.btn_browse_weather.setText(QCoreApplication.translate("MainWindow", u" Browse", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Enter weather data file:", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Local ground parameters", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Thermal diffusivity [1e-6 m2/s]:", None))
@@ -2011,9 +2012,9 @@ class Ui_MainWindow(object):
         self.label.setText(QCoreApplication.translate("MainWindow", u"Borefield parameters", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Geometry import", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Enter borefield geometry file:", None))
-        self.line_weather_file_2.setText("")
-        self.line_weather_file_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
-        self.btn_browse_2.setText(QCoreApplication.translate("MainWindow", u" Browse", None))
+        self.line_borefield_file.setText("")
+        self.line_borefield_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
+        self.btn_browse_borefield.setText(QCoreApplication.translate("MainWindow", u" Browse", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Borefield parameters", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"Number of boreholes:", None))
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity backfill [W/mK]:", None))

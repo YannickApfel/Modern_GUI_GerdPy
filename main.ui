@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>720</height>
+    <width>1258</width>
+    <height>711</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -71,7 +71,7 @@ Left Menu */
 }
 #topLogo {
 	background-color: rgb(33, 37, 43);
-	background-image: url(:/images/images/images/PyDracula.png);
+	background-image: url(:/images/images/images/ZAE-Logo_mini.png);
 	background-position: centered;
 	background-repeat: no-repeat;
 }
@@ -1488,7 +1488,7 @@ Button */
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>1</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -3130,7 +3130,7 @@ color: rgb(231, 81, 19);</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>356</width>
+                                 <width>345</width>
                                  <height>218</height>
                                 </rect>
                                </property>
