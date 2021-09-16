@@ -32,6 +32,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
+        from modules.use_functions import USEFunctions
+
         # SET AS GLOBAL WIDGETS
         # ///////////////////////////////////////////////////////////////
         self.ui = Ui_MainWindow()
@@ -62,6 +64,24 @@ class MainWindow(QMainWindow):
         # QTableWidget PARAMETERS
         # ///////////////////////////////////////////////////////////////
         widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        # DROPDOWN MONTHS
+        widgets.cb_month.addItem("January", 1)
+        widgets.cb_month.addItem("February", 2)
+        widgets.cb_month.addItem("March", 3)
+        widgets.cb_month.addItem("April", 4)
+        widgets.cb_month.addItem("May", 5)
+        widgets.cb_month.addItem("June", 6)
+        widgets.cb_month.addItem("July", 7)
+        widgets.cb_month.addItem("August", 8)
+        widgets.cb_month.addItem("September", 9)
+        widgets.cb_month.addItem("October", 10)
+        widgets.cb_month.addItem("November", 11)
+        widgets.cb_month.addItem("December", 12)
+
+        # DROPDOWN PAVEMENT
+        widgets.cb_pavement.addItem("Concrete")
+        widgets.cb_pavement.addItem("Tarmac")
 
         # BUTTONS CLICK
         # ///////////////////////////////////////////////////////////////
@@ -142,13 +162,11 @@ class MainWindow(QMainWindow):
 
         # BROWSE WEATHER DATA
         if btnName == "btn_browse_weather":
-            from modules.use_functions import USEFunctions
             w_file = USEFunctions.fcn_browse(self)
             widgets.line_weather_file.setText(w_file[0])
 
         # BROWSE BOREFIELD DATA
         if btnName == "btn_browse_borefield":
-            from modules.use_functions import USEFunctions
             b_file = USEFunctions.fcn_browse(self)
             widgets.line_borefield_file.setText(b_file[0])
 
