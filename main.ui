@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1258</width>
-    <height>711</height>
+    <width>1234</width>
+    <height>670</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -772,7 +772,7 @@ Button */
               </font>
              </property>
              <property name="text">
-              <string>PyDracula</string>
+              <string>GerdPy</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -801,7 +801,7 @@ Button */
               </font>
              </property>
              <property name="text">
-              <string>Modern GUI / Flat Style</string>
+              <string>Simulation Tool</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1488,7 +1488,7 @@ Button */
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>2</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -1658,7 +1658,7 @@ color: rgb(231, 81, 19);</string>
                            </widget>
                           </item>
                           <item row="2" column="1">
-                           <widget class="QPushButton" name="btn_browse">
+                           <widget class="QPushButton" name="btn_browse_weather">
                             <property name="minimumSize">
                              <size>
                               <width>150</width>
@@ -1967,7 +1967,7 @@ color: rgb(231, 81, 19);</string>
                            </widget>
                           </item>
                           <item row="2" column="0">
-                           <widget class="QLineEdit" name="line_weather_file_2">
+                           <widget class="QLineEdit" name="line_borefield_file">
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
@@ -1993,7 +1993,7 @@ color: rgb(231, 81, 19);</string>
                            </widget>
                           </item>
                           <item row="2" column="1">
-                           <widget class="QPushButton" name="btn_browse_2">
+                           <widget class="QPushButton" name="btn_browse_borefield">
                             <property name="minimumSize">
                              <size>
                               <width>150</width>
@@ -2103,6 +2103,18 @@ color: rgb(231, 81, 19);</string>
                              </item>
                              <item row="0" column="1">
                               <widget class="QSpinBox" name="sb_numbe_boreholes">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>130</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>12</pointsize>
@@ -2289,6 +2301,12 @@ color: rgb(231, 81, 19);</string>
                              </item>
                              <item row="0" column="1">
                               <widget class="QDoubleSpinBox" name="sb_radius_w">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>150</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>12</pointsize>
@@ -2676,7 +2694,30 @@ color: rgb(231, 81, 19);</string>
                              <enum>QFrame::Raised</enum>
                             </property>
                             <layout class="QGridLayout" name="gridLayout_9">
-                             <item row="0" column="0">
+                             <item row="0" column="0" colspan="2">
+                              <widget class="QLabel" name="label_31">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>50</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>20</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">color: #f9b200;</string>
+                               </property>
+                               <property name="text">
+                                <string>Startdate</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="1" column="0">
                               <widget class="QLabel" name="label_27">
                                <property name="font">
                                 <font>
@@ -2690,7 +2731,7 @@ color: rgb(231, 81, 19);</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="0" column="1">
+                             <item row="1" column="1">
                               <widget class="QComboBox" name="cb_month">
                                <property name="font">
                                 <font>
@@ -2702,12 +2743,15 @@ color: rgb(231, 81, 19);</string>
                                <property name="styleSheet">
                                 <string notr="true">background-color: rgb(33, 37, 43);</string>
                                </property>
+                               <property name="currentText">
+                                <string/>
+                               </property>
                                <property name="maxVisibleItems">
                                 <number>12</number>
                                </property>
                               </widget>
                              </item>
-                             <item row="1" column="0">
+                             <item row="2" column="0">
                               <widget class="QLabel" name="label_28">
                                <property name="font">
                                 <font>
@@ -2721,7 +2765,7 @@ color: rgb(231, 81, 19);</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="1" column="1">
+                             <item row="2" column="1">
                               <widget class="QSpinBox" name="sb_day">
                                <property name="font">
                                 <font>
@@ -2741,7 +2785,30 @@ color: rgb(231, 81, 19);</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="2" column="0">
+                             <item row="3" column="0" colspan="2">
+                              <widget class="QLabel" name="label_32">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>50</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>20</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">color: #f9b200;</string>
+                               </property>
+                               <property name="text">
+                                <string>Simulation time parameters</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="4" column="0">
                               <widget class="QLabel" name="label_29">
                                <property name="font">
                                 <font>
@@ -2755,7 +2822,7 @@ color: rgb(231, 81, 19);</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="2" column="1">
+                             <item row="4" column="1">
                               <widget class="QSpinBox" name="sb_years">
                                <property name="font">
                                 <font>
@@ -2781,7 +2848,7 @@ color: rgb(231, 81, 19);</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="3" column="0">
+                             <item row="5" column="0">
                               <widget class="QLabel" name="label_30">
                                <property name="font">
                                 <font>
@@ -2795,7 +2862,7 @@ color: rgb(231, 81, 19);</string>
                                </property>
                               </widget>
                              </item>
-                             <item row="3" column="1">
+                             <item row="5" column="1">
                               <widget class="QSpinBox" name="sb_dt">
                                <property name="font">
                                 <font>
@@ -3130,7 +3197,7 @@ color: rgb(231, 81, 19);</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>345</width>
+                                 <width>277</width>
                                  <height>218</height>
                                 </rect>
                                </property>

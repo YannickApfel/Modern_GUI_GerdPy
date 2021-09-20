@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainsJjSyt.ui'
+## Form generated from reading UI file 'mainHgRURo.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(998, 711)
+        MainWindow.resize(1234, 670)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -1225,6 +1225,8 @@ class Ui_MainWindow(object):
 
         self.sb_numbe_boreholes = QSpinBox(self.frame_7)
         self.sb_numbe_boreholes.setObjectName(u"sb_numbe_boreholes")
+        self.sb_numbe_boreholes.setMinimumSize(QSize(130, 0))
+        self.sb_numbe_boreholes.setMaximumSize(QSize(16777215, 16777215))
         self.sb_numbe_boreholes.setFont(font1)
         self.sb_numbe_boreholes.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_numbe_boreholes.setMinimum(1)
@@ -1249,6 +1251,8 @@ class Ui_MainWindow(object):
 
         self.label_17 = QLabel(self.frame_7)
         self.label_17.setObjectName(u"label_17")
+        self.label_17.setMinimumSize(QSize(400, 0))
+        self.label_17.setMaximumSize(QSize(16777215, 16777215))
         self.label_17.setFont(font7)
 
         self.gridLayout_7.addWidget(self.label_17, 2, 0, 1, 1)
@@ -1282,6 +1286,7 @@ class Ui_MainWindow(object):
 
         self.frame_9 = QFrame(self.frame_6)
         self.frame_9.setObjectName(u"frame_9")
+        self.frame_9.setMinimumSize(QSize(2, 0))
         self.frame_9.setMaximumSize(QSize(2, 16777215))
         self.frame_9.setStyleSheet(u"background-color: rgb(221, 221, 221);\n"
 "")
@@ -1307,6 +1312,7 @@ class Ui_MainWindow(object):
 
         self.sb_radius_w = QDoubleSpinBox(self.frame_8)
         self.sb_radius_w.setObjectName(u"sb_radius_w")
+        self.sb_radius_w.setMinimumSize(QSize(150, 0))
         self.sb_radius_w.setFont(font1)
         self.sb_radius_w.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_radius_w.setDecimals(2)
@@ -1316,6 +1322,8 @@ class Ui_MainWindow(object):
 
         self.label_19 = QLabel(self.frame_8)
         self.label_19.setObjectName(u"label_19")
+        self.label_19.setMinimumSize(QSize(290, 0))
+        self.label_19.setMaximumSize(QSize(16777215, 16777215))
         self.label_19.setFont(font7)
 
         self.gridLayout_8.addWidget(self.label_19, 1, 0, 1, 1)
@@ -1490,11 +1498,19 @@ class Ui_MainWindow(object):
         self.frame_16.setFrameShadow(QFrame.Raised)
         self.gridLayout_9 = QGridLayout(self.frame_16)
         self.gridLayout_9.setObjectName(u"gridLayout_9")
+        self.label_31 = QLabel(self.frame_16)
+        self.label_31.setObjectName(u"label_31")
+        self.label_31.setMaximumSize(QSize(16777215, 50))
+        self.label_31.setFont(font6)
+        self.label_31.setStyleSheet(u"color: #f9b200;")
+
+        self.gridLayout_9.addWidget(self.label_31, 0, 0, 1, 2)
+
         self.label_27 = QLabel(self.frame_16)
         self.label_27.setObjectName(u"label_27")
         self.label_27.setFont(font7)
 
-        self.gridLayout_9.addWidget(self.label_27, 0, 0, 1, 1)
+        self.gridLayout_9.addWidget(self.label_27, 1, 0, 1, 1)
 
         self.cb_month = QComboBox(self.frame_16)
         self.cb_month.setObjectName(u"cb_month")
@@ -1502,13 +1518,13 @@ class Ui_MainWindow(object):
         self.cb_month.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.cb_month.setMaxVisibleItems(12)
 
-        self.gridLayout_9.addWidget(self.cb_month, 0, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.cb_month, 1, 1, 1, 1)
 
         self.label_28 = QLabel(self.frame_16)
         self.label_28.setObjectName(u"label_28")
         self.label_28.setFont(font7)
 
-        self.gridLayout_9.addWidget(self.label_28, 1, 0, 1, 1)
+        self.gridLayout_9.addWidget(self.label_28, 2, 0, 1, 1)
 
         self.sb_day = QSpinBox(self.frame_16)
         self.sb_day.setObjectName(u"sb_day")
@@ -1517,13 +1533,21 @@ class Ui_MainWindow(object):
         self.sb_day.setMinimum(1)
         self.sb_day.setMaximum(500)
 
-        self.gridLayout_9.addWidget(self.sb_day, 1, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.sb_day, 2, 1, 1, 1)
+
+        self.label_32 = QLabel(self.frame_16)
+        self.label_32.setObjectName(u"label_32")
+        self.label_32.setMaximumSize(QSize(16777215, 50))
+        self.label_32.setFont(font6)
+        self.label_32.setStyleSheet(u"color: #f9b200;")
+
+        self.gridLayout_9.addWidget(self.label_32, 3, 0, 1, 2)
 
         self.label_29 = QLabel(self.frame_16)
         self.label_29.setObjectName(u"label_29")
         self.label_29.setFont(font7)
 
-        self.gridLayout_9.addWidget(self.label_29, 2, 0, 1, 1)
+        self.gridLayout_9.addWidget(self.label_29, 4, 0, 1, 1)
 
         self.sb_years = QSpinBox(self.frame_16)
         self.sb_years.setObjectName(u"sb_years")
@@ -1534,13 +1558,13 @@ class Ui_MainWindow(object):
         self.sb_years.setValue(10)
         self.sb_years.setDisplayIntegerBase(10)
 
-        self.gridLayout_9.addWidget(self.sb_years, 2, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.sb_years, 4, 1, 1, 1)
 
         self.label_30 = QLabel(self.frame_16)
         self.label_30.setObjectName(u"label_30")
         self.label_30.setFont(font7)
 
-        self.gridLayout_9.addWidget(self.label_30, 3, 0, 1, 1)
+        self.gridLayout_9.addWidget(self.label_30, 5, 0, 1, 1)
 
         self.sb_dt = QSpinBox(self.frame_16)
         self.sb_dt.setObjectName(u"sb_dt")
@@ -1549,7 +1573,7 @@ class Ui_MainWindow(object):
         self.sb_dt.setMinimum(1)
         self.sb_dt.setMaximum(500)
 
-        self.gridLayout_9.addWidget(self.sb_dt, 3, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.sb_dt, 5, 1, 1, 1)
 
 
         self.verticalLayout_23.addWidget(self.frame_16)
@@ -1708,7 +1732,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 274, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 277, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -2029,8 +2053,11 @@ class Ui_MainWindow(object):
         self.label_24.setText(QCoreApplication.translate("MainWindow", u"Minimal surface distance [mm]:", None))
         self.label_25.setText(QCoreApplication.translate("MainWindow", u"Pavement surface:", None))
         self.label_26.setText(QCoreApplication.translate("MainWindow", u"Simulation parameters", None))
+        self.label_31.setText(QCoreApplication.translate("MainWindow", u"Startdate", None))
         self.label_27.setText(QCoreApplication.translate("MainWindow", u"Month:", None))
+        self.cb_month.setCurrentText("")
         self.label_28.setText(QCoreApplication.translate("MainWindow", u"Day:", None))
+        self.label_32.setText(QCoreApplication.translate("MainWindow", u"Simulation time parameters", None))
         self.label_29.setText(QCoreApplication.translate("MainWindow", u"Years:", None))
         self.label_30.setText(QCoreApplication.translate("MainWindow", u"Time step [h]:", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"SIMULATION", None))
