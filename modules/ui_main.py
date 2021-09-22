@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainHgRURo.ui'
+## Form generated from reading UI file 'mainAdeXUb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -791,17 +791,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.btn_surface)
 
-        self.btn_simparas = QPushButton(self.topMenu)
-        self.btn_simparas.setObjectName(u"btn_simparas")
-        sizePolicy.setHeightForWidth(self.btn_simparas.sizePolicy().hasHeightForWidth())
-        self.btn_simparas.setSizePolicy(sizePolicy)
-        self.btn_simparas.setMinimumSize(QSize(0, 45))
-        self.btn_simparas.setFont(font)
-        self.btn_simparas.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_simparas.setLayoutDirection(Qt.LeftToRight)
-        self.btn_simparas.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-equalizer.png);")
+        self.btn_sim = QPushButton(self.topMenu)
+        self.btn_sim.setObjectName(u"btn_sim")
+        sizePolicy.setHeightForWidth(self.btn_sim.sizePolicy().hasHeightForWidth())
+        self.btn_sim.setSizePolicy(sizePolicy)
+        self.btn_sim.setMinimumSize(QSize(0, 45))
+        self.btn_sim.setFont(font)
+        self.btn_sim.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_sim.setLayoutDirection(Qt.LeftToRight)
+        self.btn_sim.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-media-play.png);")
 
-        self.verticalLayout_8.addWidget(self.btn_simparas)
+        self.verticalLayout_8.addWidget(self.btn_sim)
 
 
         self.verticalMenuLayout.addWidget(self.topMenu, 0, Qt.AlignTop)
@@ -1582,17 +1582,82 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.addWidget(self.frame_12)
 
         self.stackedWidget.addWidget(self.surface)
-        self.simparas = QWidget()
-        self.simparas.setObjectName(u"simparas")
-        self.verticalLayout_10 = QVBoxLayout(self.simparas)
+        self.simulation = QWidget()
+        self.simulation.setObjectName(u"simulation")
+        self.verticalLayout_10 = QVBoxLayout(self.simulation)
         self.verticalLayout_10.setObjectName(u"verticalLayout_10")
-        self.label_5 = QLabel(self.simparas)
-        self.label_5.setObjectName(u"label_5")
-        self.label_5.setAlignment(Qt.AlignCenter)
+        self.frame_17 = QFrame(self.simulation)
+        self.frame_17.setObjectName(u"frame_17")
+        self.frame_17.setMaximumSize(QSize(16777215, 60))
+        self.frame_17.setFrameShape(QFrame.StyledPanel)
+        self.frame_17.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_24 = QVBoxLayout(self.frame_17)
+        self.verticalLayout_24.setSpacing(0)
+        self.verticalLayout_24.setObjectName(u"verticalLayout_24")
+        self.verticalLayout_24.setContentsMargins(0, 0, 0, 0)
+        self.label_33 = QLabel(self.frame_17)
+        self.label_33.setObjectName(u"label_33")
+        self.label_33.setMaximumSize(QSize(16777215, 50))
+        self.label_33.setFont(font5)
+        self.label_33.setStyleSheet(u"color: #e75113;")
 
-        self.verticalLayout_10.addWidget(self.label_5)
+        self.verticalLayout_24.addWidget(self.label_33)
 
-        self.stackedWidget.addWidget(self.simparas)
+
+        self.verticalLayout_10.addWidget(self.frame_17)
+
+        self.frame_19 = QFrame(self.simulation)
+        self.frame_19.setObjectName(u"frame_19")
+        self.frame_19.setFrameShape(QFrame.StyledPanel)
+        self.frame_19.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_25 = QVBoxLayout(self.frame_19)
+        self.verticalLayout_25.setObjectName(u"verticalLayout_25")
+        self.label_34 = QLabel(self.frame_19)
+        self.label_34.setObjectName(u"label_34")
+        self.label_34.setFont(font7)
+        self.label_34.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+
+        self.verticalLayout_25.addWidget(self.label_34)
+
+
+        self.verticalLayout_10.addWidget(self.frame_19)
+
+        self.frame_18 = QFrame(self.simulation)
+        self.frame_18.setObjectName(u"frame_18")
+        self.frame_18.setFrameShape(QFrame.StyledPanel)
+        self.frame_18.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_7 = QHBoxLayout(self.frame_18)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.frame_20 = QFrame(self.frame_18)
+        self.frame_20.setObjectName(u"frame_20")
+        self.frame_20.setFrameShape(QFrame.StyledPanel)
+        self.frame_20.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_7.addWidget(self.frame_20)
+
+        self.btn_startsim = QPushButton(self.frame_18)
+        self.btn_startsim.setObjectName(u"btn_startsim")
+        self.btn_startsim.setMinimumSize(QSize(0, 100))
+        self.btn_startsim.setFont(font7)
+        self.btn_startsim.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_startsim.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/images/icons/cil-media-play.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_startsim.setIcon(icon4)
+
+        self.horizontalLayout_7.addWidget(self.btn_startsim)
+
+        self.frame_21 = QFrame(self.frame_18)
+        self.frame_21.setObjectName(u"frame_21")
+        self.frame_21.setFrameShape(QFrame.StyledPanel)
+        self.frame_21.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_7.addWidget(self.frame_21)
+
+
+        self.verticalLayout_10.addWidget(self.frame_18)
+
+        self.stackedWidget.addWidget(self.simulation)
         self.widgets = QWidget()
         self.widgets.setObjectName(u"widgets")
         self.widgets.setStyleSheet(u"b")
@@ -1732,7 +1797,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 277, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 324, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1780,9 +1845,9 @@ class Ui_MainWindow(object):
         self.commandLinkButton.setObjectName(u"commandLinkButton")
         self.commandLinkButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.commandLinkButton.setStyleSheet(u"")
-        icon4 = QIcon()
-        icon4.addFile(u":/icons/images/icons/cil-link.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.commandLinkButton.setIcon(icon4)
+        icon5 = QIcon()
+        icon5.addFile(u":/icons/images/icons/cil-link.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.commandLinkButton.setIcon(icon5)
 
         self.gridLayout_2.addWidget(self.commandLinkButton, 1, 6, 1, 1)
 
@@ -1993,7 +2058,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2008,7 +2073,7 @@ class Ui_MainWindow(object):
         self.btn_weather.setText(QCoreApplication.translate("MainWindow", u"Weather data", None))
         self.btn_borefield.setText(QCoreApplication.translate("MainWindow", u"Ground data", None))
         self.btn_surface.setText(QCoreApplication.translate("MainWindow", u"Surface data", None))
-        self.btn_simparas.setText(QCoreApplication.translate("MainWindow", u"Simulation parameters", None))
+        self.btn_sim.setText(QCoreApplication.translate("MainWindow", u"Simulation parameters", None))
         self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"PyDracula APP - Theme with colors based on Dracula for Python.", None))
 #if QT_CONFIG(tooltip)
         self.minimizeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))
@@ -2060,7 +2125,9 @@ class Ui_MainWindow(object):
         self.label_32.setText(QCoreApplication.translate("MainWindow", u"Simulation time parameters", None))
         self.label_29.setText(QCoreApplication.translate("MainWindow", u"Years:", None))
         self.label_30.setText(QCoreApplication.translate("MainWindow", u"Time step [h]:", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"SIMULATION", None))
+        self.label_33.setText(QCoreApplication.translate("MainWindow", u"Simulation", None))
+        self.label_34.setText(QCoreApplication.translate("MainWindow", u"Make sure that all parameters are correctly filled.", None))
+        self.btn_startsim.setText(QCoreApplication.translate("MainWindow", u" Start Simulation", None))
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"FILE BOX", None))
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
@@ -2127,7 +2194,7 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Line", None));
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
-        self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Wanderson M. Pimenta", None))
+        self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"based on \"Modern GUI PyDracula\" by Wanderson M. Pimenta", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0.3", None))
     # retranslateUi
 

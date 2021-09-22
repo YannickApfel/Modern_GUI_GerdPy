@@ -28,3 +28,6 @@ from . ui_functions import *
 
 # APP FUNCTIONS
 from . app_functions import *
+
+# USE FUNCTIONS
+from . use_functions import *

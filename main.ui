@@ -1066,7 +1066,7 @@ Button */
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="btn_simparas">
+                 <widget class="QPushButton" name="btn_sim">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1093,7 +1093,7 @@ Button */
                    <enum>Qt::LeftToRight</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-image: url(:/icons/images/icons/cil-equalizer.png);</string>
+                   <string notr="true">background-image: url(:/icons/images/icons/cil-media-play.png);</string>
                   </property>
                   <property name="text">
                    <string>Simulation parameters</string>
@@ -1488,7 +1488,7 @@ Button */
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>4</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -2169,6 +2169,18 @@ color: rgb(231, 81, 19);</string>
                              </item>
                              <item row="2" column="0">
                               <widget class="QLabel" name="label_17">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>400</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>15</pointsize>
@@ -2240,6 +2252,12 @@ color: rgb(231, 81, 19);</string>
                           </item>
                           <item row="1" column="1">
                            <widget class="QFrame" name="frame_9">
+                            <property name="minimumSize">
+                             <size>
+                              <width>2</width>
+                              <height>0</height>
+                             </size>
+                            </property>
                             <property name="maximumSize">
                              <size>
                               <width>2</width>
@@ -2327,6 +2345,18 @@ color: rgb(231, 81, 19);</string>
                              </item>
                              <item row="1" column="0">
                               <widget class="QLabel" name="label_19">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>290</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
                                <property name="font">
                                 <font>
                                  <pointsize>15</pointsize>
@@ -2890,16 +2920,153 @@ color: rgb(231, 81, 19);</string>
                        </item>
                       </layout>
                      </widget>
-                     <widget class="QWidget" name="simparas">
+                     <widget class="QWidget" name="simulation">
                       <layout class="QVBoxLayout" name="verticalLayout_10">
                        <item>
-                        <widget class="QLabel" name="label_5">
-                         <property name="text">
-                          <string>SIMULATION</string>
+                        <widget class="QFrame" name="frame_17">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>60</height>
+                          </size>
                          </property>
-                         <property name="alignment">
-                          <set>Qt::AlignCenter</set>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
                          </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_24">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_33">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>50</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>25</pointsize>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #e75113;</string>
+                            </property>
+                            <property name="text">
+                             <string>Simulation</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="frame_19">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_25">
+                          <item>
+                           <widget class="QLabel" name="label_34">
+                            <property name="font">
+                             <font>
+                              <pointsize>15</pointsize>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>Make sure that all parameters are correctly filled.</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="frame_18">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_7">
+                          <item>
+                           <widget class="QFrame" name="frame_20">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="btn_startsim">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>100</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>15</pointsize>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="cursor">
+                             <cursorShape>PointingHandCursor</cursorShape>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: rgb(52, 59, 72);</string>
+                            </property>
+                            <property name="text">
+                             <string> Start Simulation</string>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="resources.qrc">
+                              <normaloff>:/icons/images/icons/cil-media-play.png</normaloff>:/icons/images/icons/cil-media-play.png</iconset>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_21">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                       </layout>
@@ -3197,7 +3364,7 @@ color: rgb(231, 81, 19);</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>277</width>
+                                 <width>324</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -3799,7 +3966,7 @@ color: rgb(231, 81, 19);</string>
                    </font>
                   </property>
                   <property name="text">
-                   <string>By: Wanderson M. Pimenta</string>
+                   <string>based on &quot;Modern GUI PyDracula&quot; by Wanderson M. Pimenta</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

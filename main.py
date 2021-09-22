@@ -14,10 +14,15 @@
 #
 # ///////////////////////////////////////////////////////////////
 
+import sys
+import os
+import platform
+
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
-from modules import *
 
+from modules import *
+from widgets import *
 os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
 
 # SET AS GLOBAL WIDGETS
@@ -28,7 +33,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
-        1# SET AS GLOBAL WIDGETS
+        # SET AS GLOBAL WIDGETS
         # ///////////////////////////////////////////////////////////////
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -85,13 +90,16 @@ class MainWindow(QMainWindow):
         widgets.btn_weather.clicked.connect(self.buttonClick)
         widgets.btn_borefield.clicked.connect(self.buttonClick)
         widgets.btn_surface.clicked.connect(self.buttonClick)
-        widgets.btn_simparas.clicked.connect(self.buttonClick)
+        widgets.btn_sim.clicked.connect(self.buttonClick)
 
         # WEATHER SHEET
         widgets.btn_browse_weather.clicked.connect(self.buttonClick)
 
         # BOREFIELD SHEET
         widgets.btn_browse_borefield.clicked.connect(self.buttonClick)
+
+        # SIMULATION SHEET
+        widgets.btn_startsim.clicked.connect(self.buttonClick)
 
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
@@ -148,9 +156,9 @@ class MainWindow(QMainWindow):
            UIFunctions.resetStyle(self, btnName)
            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
-        # SHOW SIMPARAS PAGE
-        if btnName == "btn_simparas":
-           widgets.stackedWidget.setCurrentWidget(widgets.simparas)
+        # SHOW SIMULATION PAGE
+        if btnName == "btn_sim":
+           widgets.stackedWidget.setCurrentWidget(widgets.simulation)
            UIFunctions.resetStyle(self, btnName)
            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
