@@ -172,11 +172,11 @@ class MainWindow(QMainWindow):
             b_file = USEFunctions.fcn_browse(self)
             widgets.line_borefield_file.setText(b_file[0])
 
-        if btnName == "btn_save":
-            print("Save BTN clicked!")
+        if btnName == "btn_startsim":
+            USEFunctions.fcn_paras(widgets)
 
         # PRINT BTN NAME
-        print(f'Button "{btnName}" pressed!')
+        # print(f'Button "{btnName}" pressed!')
 
 
     # RESIZE EVENTS
@@ -191,11 +191,6 @@ class MainWindow(QMainWindow):
         # SET DRAG POS WINDOW
         self.dragPos = event.globalPos()
 
-        # PRINT MOUSE EVENTS
-        if event.buttons() == Qt.LeftButton:
-            print('Mouse click: LEFT CLICK')
-        if event.buttons() == Qt.RightButton:
-            print('Mouse click: RIGHT CLICK')
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

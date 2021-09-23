@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainAdeXUb.ui'
+## Form generated from reading UI file 'mainupqpJd.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -1223,16 +1223,16 @@ class Ui_MainWindow(object):
 
         self.gridLayout_7.addWidget(self.label_15, 0, 0, 1, 1)
 
-        self.sb_numbe_boreholes = QSpinBox(self.frame_7)
-        self.sb_numbe_boreholes.setObjectName(u"sb_numbe_boreholes")
-        self.sb_numbe_boreholes.setMinimumSize(QSize(130, 0))
-        self.sb_numbe_boreholes.setMaximumSize(QSize(16777215, 16777215))
-        self.sb_numbe_boreholes.setFont(font1)
-        self.sb_numbe_boreholes.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_numbe_boreholes.setMinimum(1)
-        self.sb_numbe_boreholes.setMaximum(500)
+        self.sb_number_boreholes = QSpinBox(self.frame_7)
+        self.sb_number_boreholes.setObjectName(u"sb_number_boreholes")
+        self.sb_number_boreholes.setMinimumSize(QSize(130, 0))
+        self.sb_number_boreholes.setMaximumSize(QSize(16777215, 16777215))
+        self.sb_number_boreholes.setFont(font1)
+        self.sb_number_boreholes.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_number_boreholes.setMinimum(1)
+        self.sb_number_boreholes.setMaximum(500)
 
-        self.gridLayout_7.addWidget(self.sb_numbe_boreholes, 0, 1, 1, 1)
+        self.gridLayout_7.addWidget(self.sb_number_boreholes, 0, 1, 1, 1)
 
         self.label_16 = QLabel(self.frame_7)
         self.label_16.setObjectName(u"label_16")
@@ -1797,7 +1797,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 324, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -2058,7 +2058,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
