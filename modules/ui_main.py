@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainupqpJd.ui'
+## Form generated from reading UI file 'maintrzOND.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -1445,12 +1445,14 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addWidget(self.label_25)
 
-        self.cb_pavement = QComboBox(self.frame_14)
-        self.cb_pavement.setObjectName(u"cb_pavement")
-        self.cb_pavement.setFont(font1)
-        self.cb_pavement.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_lambda_pavement = QDoubleSpinBox(self.frame_14)
+        self.sb_lambda_pavement.setObjectName(u"sb_lambda_pavement")
+        self.sb_lambda_pavement.setFont(font1)
+        self.sb_lambda_pavement.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_lambda_pavement.setDecimals(1)
+        self.sb_lambda_pavement.setValue(2.300000000000000)
 
-        self.verticalLayout_7.addWidget(self.cb_pavement)
+        self.verticalLayout_7.addWidget(self.sb_lambda_pavement)
 
 
         self.verticalLayout_20.addWidget(self.frame_14)
@@ -2116,7 +2118,7 @@ class Ui_MainWindow(object):
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Surface & heating element", None))
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"Surface area [m2]:", None))
         self.label_24.setText(QCoreApplication.translate("MainWindow", u"Minimal surface distance [mm]:", None))
-        self.label_25.setText(QCoreApplication.translate("MainWindow", u"Pavement surface:", None))
+        self.label_25.setText(QCoreApplication.translate("MainWindow", u"Pavement thermal conductivity [W/mK]:", None))
         self.label_26.setText(QCoreApplication.translate("MainWindow", u"Simulation parameters", None))
         self.label_31.setText(QCoreApplication.translate("MainWindow", u"Startdate", None))
         self.label_27.setText(QCoreApplication.translate("MainWindow", u"Month:", None))

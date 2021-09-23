@@ -34,7 +34,7 @@ class USEFunctions(MainWindow):
       # SURFACE PARAMETERS
       i_surface_area = self.sb_A_he.value()
       i_min_surface_dist = self.sb_x_min.value()
-      c_pavement = self.cb_pavement.currentText()
+      d_therm_cond_pavement = self.sb_lambda_pavement.value()
 
       # SIMULATION PARAMETERS
       c_month = self.cb_month.currentText()
@@ -57,9 +57,10 @@ class USEFunctions(MainWindow):
       print(d_fillet_heatpipe)
       print(i_surface_area)
       print(i_min_surface_dist)
-      print(c_pavement)
+      print(d_therm_cond_pavement)
       print(c_month)
       print(i_day)
       print(i_years)
       print(i_dt)
+
 

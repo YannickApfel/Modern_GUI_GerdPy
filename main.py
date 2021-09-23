@@ -78,10 +78,6 @@ class MainWindow(QMainWindow):
         widgets.cb_month.addItem("November", 11)
         widgets.cb_month.addItem("December", 12)
 
-        # DROPDOWN PAVEMENT
-        widgets.cb_pavement.addItem("Concrete")
-        widgets.cb_pavement.addItem("Tarmac")
-
         # BUTTONS CLICK
         # ///////////////////////////////////////////////////////////////
 

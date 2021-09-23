@@ -2102,7 +2102,7 @@ color: rgb(231, 81, 19);</string>
                               </widget>
                              </item>
                              <item row="0" column="1">
-                              <widget class="QSpinBox" name="sb_numbe_boreholes">
+                              <widget class="QSpinBox" name="sb_number_boreholes">
                                <property name="minimumSize">
                                 <size>
                                  <width>130</width>
@@ -3045,7 +3045,14 @@ color: rgb(231, 81, 19);</string>
                              <cursorShape>PointingHandCursor</cursorShape>
                             </property>
                             <property name="styleSheet">
-                             <string notr="true">background-color: rgb(52, 59, 72);</string>
+                             <string notr="true">background-color: rgb(52, 59, 72);
+
+contentSettings .QPushButton:hover {
+	background-color: rgb(249, 178, 0);
+}
+contentSettings .QPushButton:pressed {	
+	background-color: rgb(231, 81, 19);
+}</string>
                             </property>
                             <property name="text">
                              <string> Start Simulation</string>
@@ -3364,7 +3371,7 @@ color: rgb(231, 81, 19);</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>324</width>
+                                 <width>218</width>
                                  <height>218</height>
                                 </rect>
                                </property>
