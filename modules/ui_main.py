@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'maintrzOND.ui'
+## Form generated from reading UI file 'mainPrBHuB.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -1083,6 +1083,7 @@ class Ui_MainWindow(object):
         self.sb_therm_diffu.setFont(font1)
         self.sb_therm_diffu.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_therm_diffu.setDecimals(1)
+        self.sb_therm_diffu.setSingleStep(0.100000000000000)
         self.sb_therm_diffu.setValue(1.000000000000000)
 
         self.gridLayout_4.addWidget(self.sb_therm_diffu, 1, 1, 1, 1)
@@ -1230,7 +1231,7 @@ class Ui_MainWindow(object):
         self.sb_number_boreholes.setFont(font1)
         self.sb_number_boreholes.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_number_boreholes.setMinimum(1)
-        self.sb_number_boreholes.setMaximum(500)
+        self.sb_number_boreholes.setMaximum(1000)
 
         self.gridLayout_7.addWidget(self.sb_number_boreholes, 0, 1, 1, 1)
 
@@ -1245,6 +1246,7 @@ class Ui_MainWindow(object):
         self.sb_lambda_b.setFont(font1)
         self.sb_lambda_b.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_lambda_b.setDecimals(1)
+        self.sb_lambda_b.setSingleStep(0.100000000000000)
         self.sb_lambda_b.setValue(2.000000000000000)
 
         self.gridLayout_7.addWidget(self.sb_lambda_b, 1, 1, 1, 1)
@@ -1262,6 +1264,7 @@ class Ui_MainWindow(object):
         self.sb_lambda_iso.setFont(font1)
         self.sb_lambda_iso.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_lambda_iso.setDecimals(1)
+        self.sb_lambda_iso.setSingleStep(0.100000000000000)
         self.sb_lambda_iso.setValue(0.300000000000000)
 
         self.gridLayout_7.addWidget(self.sb_lambda_iso, 2, 1, 1, 1)
@@ -1316,6 +1319,8 @@ class Ui_MainWindow(object):
         self.sb_radius_w.setFont(font1)
         self.sb_radius_w.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_radius_w.setDecimals(2)
+        self.sb_radius_w.setMaximum(10.000000000000000)
+        self.sb_radius_w.setSingleStep(0.010000000000000)
         self.sb_radius_w.setValue(0.120000000000000)
 
         self.gridLayout_8.addWidget(self.sb_radius_w, 0, 1, 1, 1)
@@ -1333,6 +1338,8 @@ class Ui_MainWindow(object):
         self.sb_radius_pa.setFont(font1)
         self.sb_radius_pa.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_radius_pa.setDecimals(3)
+        self.sb_radius_pa.setMaximum(1.000000000000000)
+        self.sb_radius_pa.setSingleStep(0.001000000000000)
         self.sb_radius_pa.setValue(0.016000000000000)
 
         self.gridLayout_8.addWidget(self.sb_radius_pa, 1, 1, 1, 1)
@@ -1348,6 +1355,8 @@ class Ui_MainWindow(object):
         self.sb_radius_iso.setFont(font1)
         self.sb_radius_iso.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_radius_iso.setDecimals(3)
+        self.sb_radius_iso.setMaximum(1.000000000000000)
+        self.sb_radius_iso.setSingleStep(0.001000000000000)
         self.sb_radius_iso.setValue(0.016000000000000)
 
         self.gridLayout_8.addWidget(self.sb_radius_iso, 2, 1, 1, 1)
@@ -1363,6 +1372,8 @@ class Ui_MainWindow(object):
         self.sb_radius_pi.setFont(font1)
         self.sb_radius_pi.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_radius_pi.setDecimals(3)
+        self.sb_radius_pi.setMaximum(1.000000000000000)
+        self.sb_radius_pi.setSingleStep(0.001000000000000)
         self.sb_radius_pi.setValue(0.015000000000000)
 
         self.gridLayout_8.addWidget(self.sb_radius_pi, 3, 1, 1, 1)
@@ -1420,7 +1431,8 @@ class Ui_MainWindow(object):
         self.sb_A_he.setFont(font1)
         self.sb_A_he.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_A_he.setMinimum(1)
-        self.sb_A_he.setMaximum(500)
+        self.sb_A_he.setMaximum(1000000)
+        self.sb_A_he.setSingleStep(10)
 
         self.verticalLayout_7.addWidget(self.sb_A_he)
 
@@ -1450,6 +1462,7 @@ class Ui_MainWindow(object):
         self.sb_lambda_pavement.setFont(font1)
         self.sb_lambda_pavement.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_lambda_pavement.setDecimals(1)
+        self.sb_lambda_pavement.setSingleStep(0.100000000000000)
         self.sb_lambda_pavement.setValue(2.300000000000000)
 
         self.verticalLayout_7.addWidget(self.sb_lambda_pavement)
@@ -1533,7 +1546,7 @@ class Ui_MainWindow(object):
         self.sb_day.setFont(font1)
         self.sb_day.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_day.setMinimum(1)
-        self.sb_day.setMaximum(500)
+        self.sb_day.setMaximum(31)
 
         self.gridLayout_9.addWidget(self.sb_day, 2, 1, 1, 1)
 
@@ -1573,7 +1586,7 @@ class Ui_MainWindow(object):
         self.sb_dt.setFont(font1)
         self.sb_dt.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_dt.setMinimum(1)
-        self.sb_dt.setMaximum(500)
+        self.sb_dt.setMaximum(1000000)
 
         self.gridLayout_9.addWidget(self.sb_dt, 5, 1, 1, 1)
 
@@ -1640,11 +1653,23 @@ class Ui_MainWindow(object):
         self.btn_startsim = QPushButton(self.frame_18)
         self.btn_startsim.setObjectName(u"btn_startsim")
         self.btn_startsim.setMinimumSize(QSize(0, 100))
-        self.btn_startsim.setFont(font7)
+        font9 = QFont()
+        font9.setPointSize(16)
+        font9.setBold(False)
+        font9.setItalic(False)
+        self.btn_startsim.setFont(font9)
         self.btn_startsim.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_startsim.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+        self.btn_startsim.setStyleSheet(u"QPushButton{\n"
+"background-color: rgb(52, 59, 72);\n"
+"}\n"
+"QPushButton:hover{\n"
+"	background-color: rgba(242, 146, 0, 130);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"	background-color: rgba(228, 38, 24, 130);\n"
+"}")
         icon4 = QIcon()
-        icon4.addFile(u":/icons/images/icons/cil-media-play.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(u"images/icons/cil-media-play.png", QSize(), QIcon.Normal, QIcon.Off)
         self.btn_startsim.setIcon(icon4)
 
         self.horizontalLayout_7.addWidget(self.btn_startsim)
@@ -1888,9 +1913,9 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         if (self.tableWidget.rowCount() < 16):
             self.tableWidget.setRowCount(16)
-        font9 = QFont()
+        font10 = QFont()
         __qtablewidgetitem4 = QTableWidgetItem()
-        __qtablewidgetitem4.setFont(font9);
+        __qtablewidgetitem4.setFont(font10);
         self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem5)
@@ -2021,10 +2046,10 @@ class Ui_MainWindow(object):
         self.creditsLabel = QLabel(self.bottomBar)
         self.creditsLabel.setObjectName(u"creditsLabel")
         self.creditsLabel.setMaximumSize(QSize(16777215, 16))
-        font10 = QFont()
-        font10.setBold(False)
-        font10.setItalic(False)
-        self.creditsLabel.setFont(font10)
+        font11 = QFont()
+        font11.setBold(False)
+        font11.setItalic(False)
+        self.creditsLabel.setFont(font11)
         self.creditsLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_5.addWidget(self.creditsLabel)
@@ -2060,7 +2085,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2128,8 +2153,8 @@ class Ui_MainWindow(object):
         self.label_29.setText(QCoreApplication.translate("MainWindow", u"Years:", None))
         self.label_30.setText(QCoreApplication.translate("MainWindow", u"Time step [h]:", None))
         self.label_33.setText(QCoreApplication.translate("MainWindow", u"Simulation", None))
-        self.label_34.setText(QCoreApplication.translate("MainWindow", u"Make sure that all parameters are correctly filled.", None))
-        self.btn_startsim.setText(QCoreApplication.translate("MainWindow", u" Start Simulation", None))
+        self.label_34.setText(QCoreApplication.translate("MainWindow", u"Please make sure that all parameters are correctly filled.", None))
+        self.btn_startsim.setText(QCoreApplication.translate("MainWindow", u"START SIMULATION", None))
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"FILE BOX", None))
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
