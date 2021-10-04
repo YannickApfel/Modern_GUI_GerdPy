@@ -1,6 +1,6 @@
 # MAIN FILE
 # ///////////////////////////////////////////////////////////////
-from main import *
+from guimain import *
 import pandas as pd
 
 # SET AS GLOBAL WIDGETS

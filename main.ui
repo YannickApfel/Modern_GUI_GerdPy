@@ -3042,7 +3042,7 @@ color: rgb(231, 81, 19);</string>
                              </font>
                             </property>
                             <property name="text">
-                             <string>Make sure that all parameters are correctly filled.</string>
+                             <string>Please make sure that all parameters are correctly filled.</string>
                             </property>
                             <property name="alignment">
                              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -3094,7 +3094,10 @@ color: rgb(231, 81, 19);</string>
 background-color: rgb(52, 59, 72);
 }
 QPushButton:hover{
-	background-color: rgb(249, 178, 0);
+	background-color: rgba(242, 146, 0, 130);
+}
+QPushButton:pressed{
+	background-color: rgba(228, 38, 24, 130);
 }</string>
                             </property>
                             <property name="text">

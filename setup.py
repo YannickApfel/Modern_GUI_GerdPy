@@ -7,7 +7,7 @@ files = ['icon.ico','themes/']
 
 # TARGET
 target = Executable(
-    script="main.py",
+    script="guimain.py",
     base="Win32GUI",
     icon="icon.ico"
 )
