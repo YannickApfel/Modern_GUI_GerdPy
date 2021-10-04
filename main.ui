@@ -1488,7 +1488,7 @@ Button */
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>4</number>
+                      <number>1</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -1586,7 +1586,7 @@ color: rgb(231, 81, 19);</string>
                          <property name="maximumSize">
                           <size>
                            <width>16777215</width>
-                           <height>200</height>
+                           <height>150</height>
                           </size>
                          </property>
                          <property name="frameShape">
@@ -1713,16 +1713,7 @@ color: rgb(231, 81, 19);</string>
                           <enum>QFrame::Raised</enum>
                          </property>
                          <layout class="QGridLayout" name="gridLayout_4">
-                          <property name="topMargin">
-                           <number>9</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>9</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>9</number>
-                          </property>
-                          <item row="0" column="0" colspan="2">
+                          <item row="0" column="0">
                            <widget class="QLabel" name="label_8">
                             <property name="maximumSize">
                              <size>
@@ -1856,6 +1847,58 @@ color: rgb(231, 81, 19);</string>
                             </property>
                             <property name="value">
                              <double>10.000000000000000</double>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="4" column="0">
+                           <widget class="QLabel" name="label_35">
+                            <property name="font">
+                             <font>
+                              <pointsize>15</pointsize>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>Höhe über Normal-Null [m]:</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="4" column="1">
+                           <widget class="QSpinBox" name="sb_h_NHN">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>0</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>12</pointsize>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: rgb(33, 37, 43);</string>
+                            </property>
+                            <property name="minimum">
+                             <number>0</number>
+                            </property>
+                            <property name="maximum">
+                             <number>9000</number>
+                            </property>
+                            <property name="singleStep">
+                             <number>10</number>
+                            </property>
+                            <property name="value">
+                             <number>520</number>
                             </property>
                            </widget>
                           </item>
@@ -3417,7 +3460,7 @@ QPushButton:pressed{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>333</width>
                                  <height>218</height>
                                 </rect>
                                </property>
