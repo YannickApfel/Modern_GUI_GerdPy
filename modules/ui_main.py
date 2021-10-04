@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainPrBHuB.ui'
+## Form generated from reading UI file 'mainHWyjaG.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -1006,7 +1006,7 @@ class Ui_MainWindow(object):
 
         self.frame_2 = QFrame(self.weather)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setMaximumSize(QSize(16777215, 200))
+        self.frame_2.setMaximumSize(QSize(16777215, 150))
         self.frame_2.setFrameShape(QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.gridLayout_3 = QGridLayout(self.frame_2)
@@ -1063,14 +1063,13 @@ class Ui_MainWindow(object):
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.gridLayout_4 = QGridLayout(self.frame_3)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.gridLayout_4.setContentsMargins(-1, 9, 9, 9)
         self.label_8 = QLabel(self.frame_3)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setMaximumSize(QSize(16777215, 50))
         self.label_8.setFont(font6)
         self.label_8.setStyleSheet(u"color: #f9b200;")
 
-        self.gridLayout_4.addWidget(self.label_8, 0, 0, 1, 2)
+        self.gridLayout_4.addWidget(self.label_8, 0, 0, 1, 1)
 
         self.label_9 = QLabel(self.frame_3)
         self.label_9.setObjectName(u"label_9")
@@ -1120,6 +1119,25 @@ class Ui_MainWindow(object):
         self.sb_undis_soil_temp.setValue(10.000000000000000)
 
         self.gridLayout_4.addWidget(self.sb_undis_soil_temp, 3, 1, 1, 1)
+
+        self.label_35 = QLabel(self.frame_3)
+        self.label_35.setObjectName(u"label_35")
+        self.label_35.setFont(font7)
+
+        self.gridLayout_4.addWidget(self.label_35, 4, 0, 1, 1)
+
+        self.sb_h_NHN = QSpinBox(self.frame_3)
+        self.sb_h_NHN.setObjectName(u"sb_h_NHN")
+        self.sb_h_NHN.setMinimumSize(QSize(0, 0))
+        self.sb_h_NHN.setMaximumSize(QSize(16777215, 16777215))
+        self.sb_h_NHN.setFont(font1)
+        self.sb_h_NHN.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_h_NHN.setMinimum(0)
+        self.sb_h_NHN.setMaximum(9000)
+        self.sb_h_NHN.setSingleStep(10)
+        self.sb_h_NHN.setValue(520)
+
+        self.gridLayout_4.addWidget(self.sb_h_NHN, 4, 1, 1, 1)
 
 
         self.verticalLayout_5.addWidget(self.frame_3)
@@ -1824,7 +1842,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 333, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -2085,7 +2103,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2125,6 +2143,7 @@ class Ui_MainWindow(object):
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Thermal diffusivity [1e-6 m2/s]:", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity [W/mK]:", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Undisturbed soil temperature [\u00b0C]:", None))
+        self.label_35.setText(QCoreApplication.translate("MainWindow", u"H\u00f6he \u00fcber Normal-Null [m]:", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Borefield parameters", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Geometry import", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Enter borefield geometry file:", None))

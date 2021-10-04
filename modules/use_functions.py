@@ -19,6 +19,7 @@ class USEFunctions(MainWindow):
       d_therm_diff = self.sb_therm_diffu.value()
       d_therm_cond = self.sb_therm_cond.value()
       d_undis_soil_temp = self.sb_undis_soil_temp.value()
+      h_NHN = self.sb_h_NHN.value()
 
       # BOREFIELD PARAMETERS
       c_path_borefield_data = self.line_borefield_file.text()
@@ -46,6 +47,7 @@ class USEFunctions(MainWindow):
       print(d_therm_diff)
       print(d_therm_cond)
       print(d_undis_soil_temp)
+      print(h_NHN)
       print(c_path_borefield_data)
       print(i_boreholes)
       print(d_thermal_cond_backfill)
