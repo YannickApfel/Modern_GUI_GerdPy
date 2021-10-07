@@ -4,8 +4,8 @@ import numpy as np
 from scipy.constants import pi
 from scipy.interpolate import interp1d as interp1d
 
-from boreholes import Borehole
-from heat_transfer import thermal_response_factors
+from .boreholes import Borehole
+from .heat_transfer import thermal_response_factors
 
 
 def uniform_temperature(boreholes, time, alpha, nSegments=12, method='linear',

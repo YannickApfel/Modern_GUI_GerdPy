@@ -1488,7 +1488,7 @@ Button */
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>5</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -1511,7 +1511,7 @@ background-repeat: no-repeat;</string>
 color: rgb(231, 81, 19);</string>
                          </property>
                          <property name="text">
-                          <string>Welcome to GerdPy</string>
+                          <string>Welcome to GERDPy</string>
                          </property>
                          <property name="alignment">
                           <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -1860,7 +1860,7 @@ color: rgb(231, 81, 19);</string>
                              </font>
                             </property>
                             <property name="text">
-                             <string>Höhe über Normal-Null [m]:</string>
+                             <string>Altitude above sea level [m]:</string>
                             </property>
                            </widget>
                           </item>
@@ -1959,7 +1959,7 @@ color: rgb(231, 81, 19);</string>
                              <string notr="true">color: #e75113;</string>
                             </property>
                             <property name="text">
-                             <string>Borefield parameters</string>
+                             <string>Borefield  &amp; borehole parameters</string>
                             </property>
                            </widget>
                           </item>
@@ -1994,7 +1994,7 @@ color: rgb(231, 81, 19);</string>
                              <string notr="true">color: #f9b200;</string>
                             </property>
                             <property name="text">
-                             <string>Geometry import</string>
+                             <string>Borefiled geometry import</string>
                             </property>
                            </widget>
                           </item>
@@ -2102,7 +2102,7 @@ color: rgb(231, 81, 19);</string>
                              <string notr="true">color: #f9b200;</string>
                             </property>
                             <property name="text">
-                             <string>Borefield parameters</string>
+                             <string>Borehole parameters</string>
                             </property>
                            </widget>
                           </item>
@@ -2646,6 +2646,9 @@ color: rgb(231, 81, 19);</string>
                                <property name="singleStep">
                                 <number>10</number>
                                </property>
+                               <property name="value">
+                                <number>35</number>
+                               </property>
                               </widget>
                              </item>
                              <item>
@@ -2959,7 +2962,7 @@ color: rgb(231, 81, 19);</string>
                                 <number>500</number>
                                </property>
                                <property name="value">
-                                <number>10</number>
+                                <number>1</number>
                                </property>
                                <property name="displayIntegerBase">
                                 <number>10</number>

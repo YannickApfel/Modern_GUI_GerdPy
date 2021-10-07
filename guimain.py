@@ -20,7 +20,7 @@ import platform
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
-
+from GerdPy._main import main as simulation
 from modules import *
 from widgets import *
 os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
@@ -169,7 +169,7 @@ class MainWindow(QMainWindow):
             widgets.line_borefield_file.setText(b_file[0])
 
         if btnName == "btn_startsim":
-            USEFunctions.fcn_paras(widgets)
+           simulation(self)
 
         # PRINT BTN NAME
         # print(f'Button "{btnName}" pressed!')

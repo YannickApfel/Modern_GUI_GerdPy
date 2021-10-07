@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 
-import utilities
+import GerdPy.utilities
 
 
 class _LoadAggregation(object):

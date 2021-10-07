@@ -16,21 +16,22 @@ from matplotlib.ticker import AutoMinorLocator
 from scipy.constants import pi
 
 # import GERDPy-modules
-import boreholes, heatpipes, heating_element, gfunction, load_aggregation
-from load_generator_synthetic import synthetic_load
-from load_generator import *
-from weather_data import *
-from geometrycheck import check_geometry
-from R_th_tot import R_th_tot
+import GerdPy.boreholes, GerdPy.heatpipes, GerdPy.heating_element, GerdPy.gfunction, GerdPy.load_aggregation
+from .load_generator_synthetic import synthetic_load
+from .load_generator import *
+from .weather_data import *
+from .geometrycheck import check_geometry
+from .R_th_tot import R_th_tot
 
 
-def main():
+def main(self):
     # -------------------------------------------------------------------------
     # 1.) Parametrierung der Simulation (Geometrien, Stoffwerte, etc.)
     # -------------------------------------------------------------------------
 
     # 1.0) Standort
-    h_NHN = 520                # Höhe über Normal-Null des Standorts
+    h_NHN = self.ui.sb_h_NHN.value()      # Höhe über Normal-Null des Standorts (default: 520)
+    print(h_NHN)
 
     # 1.1) Erdboden
     a = 1.0e-6                  # Temperaturleitfähigkeit [m2/s]
