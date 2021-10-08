@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainHWyjaG.ui'
+## Form generated from reading UI file 'maintuiyuh.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -12,13 +12,13 @@ from PySide6.QtCore import *  # type: ignore
 from PySide6.QtGui import *  # type: ignore
 from PySide6.QtWidgets import *  # type: ignore
 
-from . resources_rc import *
+from .resources_rc import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1234, 670)
+        MainWindow.resize(1267, 670)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -424,7 +424,7 @@ class Ui_MainWindow(object):
 "    border: 3px solid rgb(58, 66, 81);\n"
 "}\n"
 "QRadioButton::indicator:checked {\n"
-"    background: 3px solid rgb(94, 106, 130);\n"
+"    background: 3px solid rgba(249, 178, 0, 130);\n"
 "	border: 3px solid rgb(52, 59, 72);	\n"
 "}\n"
 "\n"
@@ -442,8 +442,8 @@ class Ui_MainWindow(object):
 "}\n"
 "QComboBox::drop-down {\n"
 "	subcontrol-origin: padding;\n"
-"	subco"
-                        "ntrol-position: top right;\n"
+"	"
+                        "subcontrol-position: top right;\n"
 "	width: 25px; \n"
 "	border-left-width: 3px;\n"
 "	border-left-color: rgba(39, 44, 54, 150);\n"
@@ -476,8 +476,8 @@ class Ui_MainWindow(object):
 "QSpinBox::up-button {\n"
 "	subcontrol-origin: padding;\n"
 "	subcontrol-position: center right;\n"
-"	wid"
-                        "th: 25px;\n"
+""
+                        "	width: 25px;\n"
 "	border-left-width: 3px;\n"
 "	border-left-color: rgba(39, 44, 54, 150);\n"
 "	border-left-style: solid;\n"
@@ -508,8 +508,8 @@ class Ui_MainWindow(object):
 "	selection-background-color: rgb(39, 44, 54);\n"
 "}\n"
 "\n"
-"/* ///////////////////////////"
-                        "//////////////////////////////////////////////////////////////////////\n"
+"/* ///////////////////////"
+                        "//////////////////////////////////////////////////////////////////////////\n"
 "DoubleSpinBox */\n"
 "QDoubleSpinBox{\n"
 "	background-color: rgb(27, 29, 35);\n"
@@ -541,8 +541,8 @@ class Ui_MainWindow(object):
 "	width: 25px;\n"
 "	border-left-width: 3px;\n"
 "	border-left-color: rgba(39, 44, 54, 150);\n"
-"	border-"
-                        "left-style: solid;\n"
+"	bor"
+                        "der-left-style: solid;\n"
 "	border-top-right-radius: 3px;\n"
 "	border-bottom-right-radius: 3px;\n"
 "	background-image: url(:/icons/images/icons/cil-arrow-bottom.png);\n"
@@ -576,8 +576,8 @@ class Ui_MainWindow(object):
 "	border-radius: 5px;\n"
 "}\n"
 "QSlider::handle:horizontal:hover {\n"
-"    "
-                        "background-color: rgb(195, 155, 255);\n"
+""
+                        "    background-color: rgb(195, 155, 255);\n"
 "}\n"
 "QSlider::handle:horizontal:pressed {\n"
 "    background-color: rgb(255, 121, 198);\n"
@@ -615,8 +615,8 @@ class Ui_MainWindow(object):
 "	padding: 5px;\n"
 "	color: rgb(255, 170, 255);\n"
 "}\n"
-"QCo"
-                        "mmandLinkButton:hover {	\n"
+""
+                        "QCommandLinkButton:hover {	\n"
 "	color: rgb(255, 170, 255);\n"
 "	background-color: rgb(44, 49, 60);\n"
 "}\n"
@@ -704,10 +704,10 @@ class Ui_MainWindow(object):
         self.leftMenuFrame.setObjectName(u"leftMenuFrame")
         self.leftMenuFrame.setFrameShape(QFrame.NoFrame)
         self.leftMenuFrame.setFrameShadow(QFrame.Raised)
-        self.verticalMenuLayout = QVBoxLayout(self.leftMenuFrame)
-        self.verticalMenuLayout.setSpacing(0)
-        self.verticalMenuLayout.setObjectName(u"verticalMenuLayout")
-        self.verticalMenuLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_25 = QVBoxLayout(self.leftMenuFrame)
+        self.verticalLayout_25.setSpacing(0)
+        self.verticalLayout_25.setObjectName(u"verticalLayout_25")
+        self.verticalLayout_25.setContentsMargins(0, 0, 0, 0)
         self.toggleBox = QFrame(self.leftMenuFrame)
         self.toggleBox.setObjectName(u"toggleBox")
         self.toggleBox.setMaximumSize(QSize(16777215, 45))
@@ -733,7 +733,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addWidget(self.toggleButton)
 
 
-        self.verticalMenuLayout.addWidget(self.toggleBox)
+        self.verticalLayout_25.addWidget(self.toggleBox)
 
         self.topMenu = QFrame(self.leftMenuFrame)
         self.topMenu.setObjectName(u"topMenu")
@@ -787,7 +787,7 @@ class Ui_MainWindow(object):
         self.btn_surface.setFont(font)
         self.btn_surface.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_surface.setLayoutDirection(Qt.LeftToRight)
-        self.btn_surface.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-rectangle.png);")
+        self.btn_surface.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-equalizer.png);")
 
         self.verticalLayout_8.addWidget(self.btn_surface)
 
@@ -803,8 +803,20 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.btn_sim)
 
+        self.btn_results = QPushButton(self.topMenu)
+        self.btn_results.setObjectName(u"btn_results")
+        sizePolicy.setHeightForWidth(self.btn_results.sizePolicy().hasHeightForWidth())
+        self.btn_results.setSizePolicy(sizePolicy)
+        self.btn_results.setMinimumSize(QSize(0, 45))
+        self.btn_results.setFont(font)
+        self.btn_results.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_results.setLayoutDirection(Qt.LeftToRight)
+        self.btn_results.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-chart.png);")
 
-        self.verticalMenuLayout.addWidget(self.topMenu, 0, Qt.AlignTop)
+        self.verticalLayout_8.addWidget(self.btn_results)
+
+
+        self.verticalLayout_25.addWidget(self.topMenu)
 
         self.bottomMenu = QFrame(self.leftMenuFrame)
         self.bottomMenu.setObjectName(u"bottomMenu")
@@ -815,7 +827,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
 
-        self.verticalMenuLayout.addWidget(self.bottomMenu, 0, Qt.AlignBottom)
+        self.verticalLayout_25.addWidget(self.bottomMenu)
 
 
         self.verticalLayout_3.addWidget(self.leftMenuFrame)
@@ -948,10 +960,8 @@ class Ui_MainWindow(object):
         self.pagesContainer.setStyleSheet(u"")
         self.pagesContainer.setFrameShape(QFrame.NoFrame)
         self.pagesContainer.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_15 = QVBoxLayout(self.pagesContainer)
-        self.verticalLayout_15.setSpacing(0)
-        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
-        self.verticalLayout_15.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_23 = QVBoxLayout(self.pagesContainer)
+        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
         self.stackedWidget = QStackedWidget(self.pagesContainer)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setStyleSheet(u"background: transparent;")
@@ -976,12 +986,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_21.addWidget(self.label_2)
 
         self.stackedWidget.addWidget(self.home)
-        self.weather = QWidget()
-        self.weather.setObjectName(u"weather")
-        self.verticalLayout_5 = QVBoxLayout(self.weather)
-        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(-1, 0, 9, 0)
-        self.frame = QFrame(self.weather)
+        self.weather_local = QWidget()
+        self.weather_local.setObjectName(u"weather_local")
+        self.gridLayout_11 = QGridLayout(self.weather_local)
+        self.gridLayout_11.setObjectName(u"gridLayout_11")
+        self.frame = QFrame(self.weather_local)
         self.frame.setObjectName(u"frame")
         self.frame.setMaximumSize(QSize(16777215, 60))
         self.frame.setFrameShape(QFrame.StyledPanel)
@@ -1002,9 +1011,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.addWidget(self.label_3)
 
 
-        self.verticalLayout_5.addWidget(self.frame)
+        self.gridLayout_11.addWidget(self.frame, 0, 0, 1, 1)
 
-        self.frame_2 = QFrame(self.weather)
+        self.frame_2 = QFrame(self.weather_local)
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setMaximumSize(QSize(16777215, 150))
         self.frame_2.setFrameShape(QFrame.StyledPanel)
@@ -1055,29 +1064,55 @@ class Ui_MainWindow(object):
         self.gridLayout_3.addWidget(self.label_6, 1, 0, 1, 1)
 
 
-        self.verticalLayout_5.addWidget(self.frame_2)
+        self.gridLayout_11.addWidget(self.frame_2, 1, 0, 1, 1)
 
-        self.frame_3 = QFrame(self.weather)
+        self.frame_25 = QFrame(self.weather_local)
+        self.frame_25.setObjectName(u"frame_25")
+        self.frame_25.setFrameShape(QFrame.StyledPanel)
+        self.frame_25.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_8 = QHBoxLayout(self.frame_25)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.frame_3 = QFrame(self.frame_25)
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setFrameShape(QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Raised)
-        self.gridLayout_4 = QGridLayout(self.frame_3)
-        self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.label_8 = QLabel(self.frame_3)
+        self.verticalLayout_29 = QVBoxLayout(self.frame_3)
+        self.verticalLayout_29.setObjectName(u"verticalLayout_29")
+        self.verticalLayout_29.setContentsMargins(0, -1, -1, -1)
+        self.frame_26 = QFrame(self.frame_3)
+        self.frame_26.setObjectName(u"frame_26")
+        self.frame_26.setMaximumSize(QSize(16777215, 50))
+        self.frame_26.setFrameShape(QFrame.StyledPanel)
+        self.frame_26.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_5 = QVBoxLayout(self.frame_26)
+        self.verticalLayout_5.setSpacing(0)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.label_8 = QLabel(self.frame_26)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setMaximumSize(QSize(16777215, 50))
         self.label_8.setFont(font6)
         self.label_8.setStyleSheet(u"color: #f9b200;")
 
-        self.gridLayout_4.addWidget(self.label_8, 0, 0, 1, 1)
+        self.verticalLayout_5.addWidget(self.label_8)
 
-        self.label_9 = QLabel(self.frame_3)
+
+        self.verticalLayout_29.addWidget(self.frame_26)
+
+        self.frame_28 = QFrame(self.frame_3)
+        self.frame_28.setObjectName(u"frame_28")
+        self.frame_28.setFrameShape(QFrame.StyledPanel)
+        self.frame_28.setFrameShadow(QFrame.Raised)
+        self.gridLayout_12 = QGridLayout(self.frame_28)
+        self.gridLayout_12.setObjectName(u"gridLayout_12")
+        self.gridLayout_12.setContentsMargins(-1, 0, -1, -1)
+        self.label_9 = QLabel(self.frame_28)
         self.label_9.setObjectName(u"label_9")
         self.label_9.setFont(font7)
 
-        self.gridLayout_4.addWidget(self.label_9, 1, 0, 1, 1)
+        self.gridLayout_12.addWidget(self.label_9, 0, 0, 1, 1)
 
-        self.sb_therm_diffu = QDoubleSpinBox(self.frame_3)
+        self.sb_therm_diffu = QDoubleSpinBox(self.frame_28)
         self.sb_therm_diffu.setObjectName(u"sb_therm_diffu")
         self.sb_therm_diffu.setFont(font1)
         self.sb_therm_diffu.setStyleSheet(u"background-color: rgb(33, 37, 43);")
@@ -1085,30 +1120,30 @@ class Ui_MainWindow(object):
         self.sb_therm_diffu.setSingleStep(0.100000000000000)
         self.sb_therm_diffu.setValue(1.000000000000000)
 
-        self.gridLayout_4.addWidget(self.sb_therm_diffu, 1, 1, 1, 1)
+        self.gridLayout_12.addWidget(self.sb_therm_diffu, 0, 1, 1, 1)
 
-        self.label_10 = QLabel(self.frame_3)
+        self.label_10 = QLabel(self.frame_28)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setFont(font7)
 
-        self.gridLayout_4.addWidget(self.label_10, 2, 0, 1, 1)
+        self.gridLayout_12.addWidget(self.label_10, 1, 0, 1, 1)
 
-        self.sb_therm_cond = QDoubleSpinBox(self.frame_3)
+        self.sb_therm_cond = QDoubleSpinBox(self.frame_28)
         self.sb_therm_cond.setObjectName(u"sb_therm_cond")
         self.sb_therm_cond.setFont(font1)
         self.sb_therm_cond.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_therm_cond.setDecimals(1)
         self.sb_therm_cond.setValue(2.000000000000000)
 
-        self.gridLayout_4.addWidget(self.sb_therm_cond, 2, 1, 1, 1)
+        self.gridLayout_12.addWidget(self.sb_therm_cond, 1, 1, 1, 1)
 
-        self.label_11 = QLabel(self.frame_3)
+        self.label_11 = QLabel(self.frame_28)
         self.label_11.setObjectName(u"label_11")
         self.label_11.setFont(font7)
 
-        self.gridLayout_4.addWidget(self.label_11, 3, 0, 1, 1)
+        self.gridLayout_12.addWidget(self.label_11, 2, 0, 1, 1)
 
-        self.sb_undis_soil_temp = QDoubleSpinBox(self.frame_3)
+        self.sb_undis_soil_temp = QDoubleSpinBox(self.frame_28)
         self.sb_undis_soil_temp.setObjectName(u"sb_undis_soil_temp")
         self.sb_undis_soil_temp.setFont(font1)
         self.sb_undis_soil_temp.setStyleSheet(u"background-color: rgb(33, 37, 43);")
@@ -1118,15 +1153,15 @@ class Ui_MainWindow(object):
         self.sb_undis_soil_temp.setSingleStep(1.000000000000000)
         self.sb_undis_soil_temp.setValue(10.000000000000000)
 
-        self.gridLayout_4.addWidget(self.sb_undis_soil_temp, 3, 1, 1, 1)
+        self.gridLayout_12.addWidget(self.sb_undis_soil_temp, 2, 1, 1, 1)
 
-        self.label_35 = QLabel(self.frame_3)
+        self.label_35 = QLabel(self.frame_28)
         self.label_35.setObjectName(u"label_35")
         self.label_35.setFont(font7)
 
-        self.gridLayout_4.addWidget(self.label_35, 4, 0, 1, 1)
+        self.gridLayout_12.addWidget(self.label_35, 3, 0, 1, 1)
 
-        self.sb_h_NHN = QSpinBox(self.frame_3)
+        self.sb_h_NHN = QSpinBox(self.frame_28)
         self.sb_h_NHN.setObjectName(u"sb_h_NHN")
         self.sb_h_NHN.setMinimumSize(QSize(0, 0))
         self.sb_h_NHN.setMaximumSize(QSize(16777215, 16777215))
@@ -1137,17 +1172,358 @@ class Ui_MainWindow(object):
         self.sb_h_NHN.setSingleStep(10)
         self.sb_h_NHN.setValue(520)
 
-        self.gridLayout_4.addWidget(self.sb_h_NHN, 4, 1, 1, 1)
+        self.gridLayout_12.addWidget(self.sb_h_NHN, 3, 1, 1, 1)
 
 
-        self.verticalLayout_5.addWidget(self.frame_3)
+        self.verticalLayout_29.addWidget(self.frame_28)
 
-        self.stackedWidget.addWidget(self.weather)
-        self.borefield = QWidget()
-        self.borefield.setObjectName(u"borefield")
-        self.verticalLayout_12 = QVBoxLayout(self.borefield)
+
+        self.horizontalLayout_8.addWidget(self.frame_3)
+
+        self.frame_27 = QFrame(self.frame_25)
+        self.frame_27.setObjectName(u"frame_27")
+        self.frame_27.setMinimumSize(QSize(2, 0))
+        self.frame_27.setMaximumSize(QSize(2, 16777215))
+        self.frame_27.setStyleSheet(u"background-color: rgb(221, 221, 221);\n"
+"")
+        self.frame_27.setFrameShape(QFrame.StyledPanel)
+        self.frame_27.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_8.addWidget(self.frame_27)
+
+        self.frame_10 = QFrame(self.frame_25)
+        self.frame_10.setObjectName(u"frame_10")
+        self.frame_10.setFrameShape(QFrame.StyledPanel)
+        self.frame_10.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_20 = QVBoxLayout(self.frame_10)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.frame_13 = QFrame(self.frame_10)
+        self.frame_13.setObjectName(u"frame_13")
+        self.frame_13.setMaximumSize(QSize(16777215, 50))
+        self.frame_13.setFrameShape(QFrame.StyledPanel)
+        self.frame_13.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_14 = QVBoxLayout(self.frame_13)
+        self.verticalLayout_14.setSpacing(0)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.label_4 = QLabel(self.frame_13)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setFont(font6)
+        self.label_4.setStyleSheet(u"color: #f9b200;")
+
+        self.verticalLayout_14.addWidget(self.label_4)
+
+
+        self.verticalLayout_20.addWidget(self.frame_13)
+
+        self.frame_14 = QFrame(self.frame_10)
+        self.frame_14.setObjectName(u"frame_14")
+        self.frame_14.setFrameShape(QFrame.StyledPanel)
+        self.frame_14.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_7 = QVBoxLayout(self.frame_14)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.verticalLayout_7.setContentsMargins(-1, 0, -1, -1)
+        self.label_23 = QLabel(self.frame_14)
+        self.label_23.setObjectName(u"label_23")
+        self.label_23.setFont(font7)
+
+        self.verticalLayout_7.addWidget(self.label_23)
+
+        self.sb_A_he = QSpinBox(self.frame_14)
+        self.sb_A_he.setObjectName(u"sb_A_he")
+        self.sb_A_he.setFont(font1)
+        self.sb_A_he.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_A_he.setMinimum(1)
+        self.sb_A_he.setMaximum(1000000)
+        self.sb_A_he.setSingleStep(10)
+        self.sb_A_he.setValue(35)
+
+        self.verticalLayout_7.addWidget(self.sb_A_he)
+
+        self.label_24 = QLabel(self.frame_14)
+        self.label_24.setObjectName(u"label_24")
+        self.label_24.setFont(font7)
+
+        self.verticalLayout_7.addWidget(self.label_24)
+
+        self.sb_x_min = QSpinBox(self.frame_14)
+        self.sb_x_min.setObjectName(u"sb_x_min")
+        self.sb_x_min.setFont(font1)
+        self.sb_x_min.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_x_min.setMinimum(1)
+        self.sb_x_min.setMaximum(500)
+        self.sb_x_min.setValue(25)
+
+        self.verticalLayout_7.addWidget(self.sb_x_min)
+
+
+        self.verticalLayout_20.addWidget(self.frame_14)
+
+
+        self.horizontalLayout_8.addWidget(self.frame_10)
+
+
+        self.gridLayout_11.addWidget(self.frame_25, 2, 0, 1, 1)
+
+        self.stackedWidget.addWidget(self.weather_local)
+        self.boreholes = QWidget()
+        self.boreholes.setObjectName(u"boreholes")
+        self.verticalLayout_22 = QVBoxLayout(self.boreholes)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.frame_30 = QFrame(self.boreholes)
+        self.frame_30.setObjectName(u"frame_30")
+        self.frame_30.setMaximumSize(QSize(16777215, 60))
+        self.frame_30.setStyleSheet(u"background: transparent;")
+        self.frame_30.setFrameShape(QFrame.StyledPanel)
+        self.frame_30.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_12 = QVBoxLayout(self.frame_30)
+        self.verticalLayout_12.setSpacing(0)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
-        self.frame_4 = QFrame(self.borefield)
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
+        self.label_14 = QLabel(self.frame_30)
+        self.label_14.setObjectName(u"label_14")
+        self.label_14.setFont(font5)
+        self.label_14.setStyleSheet(u"color: #e75113;background: transparent;")
+
+        self.verticalLayout_12.addWidget(self.label_14)
+
+
+        self.verticalLayout_22.addWidget(self.frame_30)
+
+        self.frame_6 = QFrame(self.boreholes)
+        self.frame_6.setObjectName(u"frame_6")
+        self.frame_6.setFrameShape(QFrame.StyledPanel)
+        self.frame_6.setFrameShadow(QFrame.Raised)
+        self.gridLayout_8 = QGridLayout(self.frame_6)
+        self.gridLayout_8.setObjectName(u"gridLayout_8")
+        self.gridLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.frame_7 = QFrame(self.frame_6)
+        self.frame_7.setObjectName(u"frame_7")
+        self.frame_7.setFrameShape(QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QFrame.Raised)
+        self.gridLayout_7 = QGridLayout(self.frame_7)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.gridLayout_7.setHorizontalSpacing(15)
+        self.gridLayout_7.setVerticalSpacing(0)
+        self.gridLayout_7.setContentsMargins(9, 0, 9, 0)
+        self.label_30 = QLabel(self.frame_7)
+        self.label_30.setObjectName(u"label_30")
+        self.label_30.setFont(font7)
+
+        self.gridLayout_7.addWidget(self.label_30, 1, 0, 1, 1)
+
+        self.sb_lambda_b = QDoubleSpinBox(self.frame_7)
+        self.sb_lambda_b.setObjectName(u"sb_lambda_b")
+        self.sb_lambda_b.setFont(font1)
+        self.sb_lambda_b.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_lambda_b.setDecimals(1)
+        self.sb_lambda_b.setSingleStep(0.100000000000000)
+        self.sb_lambda_b.setValue(2.000000000000000)
+
+        self.gridLayout_7.addWidget(self.sb_lambda_b, 6, 1, 1, 1)
+
+        self.sb_r_borehole = QDoubleSpinBox(self.frame_7)
+        self.sb_r_borehole.setObjectName(u"sb_r_borehole")
+        self.sb_r_borehole.setFont(font1)
+        self.sb_r_borehole.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_r_borehole.setDecimals(2)
+        self.sb_r_borehole.setMaximum(2.000000000000000)
+        self.sb_r_borehole.setSingleStep(0.050000000000000)
+        self.sb_r_borehole.setValue(0.150000000000000)
+
+        self.gridLayout_7.addWidget(self.sb_r_borehole, 3, 1, 1, 1)
+
+        self.label_16 = QLabel(self.frame_7)
+        self.label_16.setObjectName(u"label_16")
+        self.label_16.setFont(font7)
+
+        self.gridLayout_7.addWidget(self.label_16, 6, 0, 1, 1)
+
+        self.label_25 = QLabel(self.frame_7)
+        self.label_25.setObjectName(u"label_25")
+        self.label_25.setFont(font7)
+
+        self.gridLayout_7.addWidget(self.label_25, 3, 0, 1, 1)
+
+        self.label_15 = QLabel(self.frame_7)
+        self.label_15.setObjectName(u"label_15")
+        self.label_15.setFont(font7)
+
+        self.gridLayout_7.addWidget(self.label_15, 5, 0, 1, 1)
+
+        self.label_17 = QLabel(self.frame_7)
+        self.label_17.setObjectName(u"label_17")
+        self.label_17.setMinimumSize(QSize(400, 0))
+        self.label_17.setMaximumSize(QSize(16777215, 16777215))
+        self.label_17.setFont(font7)
+
+        self.gridLayout_7.addWidget(self.label_17, 7, 0, 1, 1)
+
+        self.sb_lambda_iso = QDoubleSpinBox(self.frame_7)
+        self.sb_lambda_iso.setObjectName(u"sb_lambda_iso")
+        self.sb_lambda_iso.setFont(font1)
+        self.sb_lambda_iso.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_lambda_iso.setDecimals(1)
+        self.sb_lambda_iso.setSingleStep(0.100000000000000)
+        self.sb_lambda_iso.setValue(0.300000000000000)
+
+        self.gridLayout_7.addWidget(self.sb_lambda_iso, 7, 1, 1, 1)
+
+        self.label_18 = QLabel(self.frame_7)
+        self.label_18.setObjectName(u"label_18")
+        self.label_18.setFont(font7)
+
+        self.gridLayout_7.addWidget(self.label_18, 8, 0, 1, 1)
+
+        self.sb_lambda_p = QDoubleSpinBox(self.frame_7)
+        self.sb_lambda_p.setObjectName(u"sb_lambda_p")
+        self.sb_lambda_p.setFont(font1)
+        self.sb_lambda_p.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_lambda_p.setDecimals(1)
+        self.sb_lambda_p.setValue(14.000000000000000)
+
+        self.gridLayout_7.addWidget(self.sb_lambda_p, 8, 1, 1, 1)
+
+        self.sb_number_heatpipes = QSpinBox(self.frame_7)
+        self.sb_number_heatpipes.setObjectName(u"sb_number_heatpipes")
+        self.sb_number_heatpipes.setMinimumSize(QSize(130, 0))
+        self.sb_number_heatpipes.setMaximumSize(QSize(16777215, 16777215))
+        self.sb_number_heatpipes.setFont(font1)
+        self.sb_number_heatpipes.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_number_heatpipes.setMinimum(1)
+        self.sb_number_heatpipes.setMaximum(1000)
+        self.sb_number_heatpipes.setValue(6)
+
+        self.gridLayout_7.addWidget(self.sb_number_heatpipes, 5, 1, 1, 1)
+
+        self.sb_depth_boreholes = QSpinBox(self.frame_7)
+        self.sb_depth_boreholes.setObjectName(u"sb_depth_boreholes")
+        self.sb_depth_boreholes.setMinimumSize(QSize(130, 0))
+        self.sb_depth_boreholes.setMaximumSize(QSize(16777215, 16777215))
+        self.sb_depth_boreholes.setFont(font1)
+        self.sb_depth_boreholes.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_depth_boreholes.setMinimum(1)
+        self.sb_depth_boreholes.setMaximum(1000)
+        self.sb_depth_boreholes.setValue(50)
+
+        self.gridLayout_7.addWidget(self.sb_depth_boreholes, 1, 1, 1, 1)
+
+        self.rb_depth = QRadioButton(self.frame_7)
+        self.rb_depth.setObjectName(u"rb_depth")
+        self.rb_depth.setFont(font7)
+        self.rb_depth.setStyleSheet(u"")
+
+        self.gridLayout_7.addWidget(self.rb_depth, 0, 0, 1, 2)
+
+
+        self.gridLayout_8.addWidget(self.frame_7, 0, 0, 2, 1)
+
+        self.frame_9 = QFrame(self.frame_6)
+        self.frame_9.setObjectName(u"frame_9")
+        self.frame_9.setMinimumSize(QSize(2, 0))
+        self.frame_9.setMaximumSize(QSize(2, 16777215))
+        self.frame_9.setStyleSheet(u"background-color: rgb(221, 221, 221);\n"
+"")
+        self.frame_9.setFrameShape(QFrame.StyledPanel)
+        self.frame_9.setFrameShadow(QFrame.Raised)
+
+        self.gridLayout_8.addWidget(self.frame_9, 0, 1, 2, 1)
+
+        self.frame_8 = QFrame(self.frame_6)
+        self.frame_8.setObjectName(u"frame_8")
+        self.frame_8.setFrameShape(QFrame.StyledPanel)
+        self.frame_8.setFrameShadow(QFrame.Raised)
+        self.gridLayout_6 = QGridLayout(self.frame_8)
+        self.gridLayout_6.setObjectName(u"gridLayout_6")
+        self.sb_radius_w = QDoubleSpinBox(self.frame_8)
+        self.sb_radius_w.setObjectName(u"sb_radius_w")
+        self.sb_radius_w.setMinimumSize(QSize(150, 0))
+        self.sb_radius_w.setFont(font1)
+        self.sb_radius_w.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_radius_w.setDecimals(2)
+        self.sb_radius_w.setMaximum(10.000000000000000)
+        self.sb_radius_w.setSingleStep(0.010000000000000)
+        self.sb_radius_w.setValue(0.120000000000000)
+
+        self.gridLayout_6.addWidget(self.sb_radius_w, 1, 1, 1, 1)
+
+        self.label_19 = QLabel(self.frame_8)
+        self.label_19.setObjectName(u"label_19")
+        self.label_19.setMinimumSize(QSize(290, 0))
+        self.label_19.setMaximumSize(QSize(16777215, 16777215))
+        self.label_19.setFont(font7)
+
+        self.gridLayout_6.addWidget(self.label_19, 2, 0, 1, 1)
+
+        self.sb_radius_pa = QDoubleSpinBox(self.frame_8)
+        self.sb_radius_pa.setObjectName(u"sb_radius_pa")
+        self.sb_radius_pa.setFont(font1)
+        self.sb_radius_pa.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_radius_pa.setDecimals(3)
+        self.sb_radius_pa.setMaximum(1.000000000000000)
+        self.sb_radius_pa.setSingleStep(0.001000000000000)
+        self.sb_radius_pa.setValue(0.016000000000000)
+
+        self.gridLayout_6.addWidget(self.sb_radius_pa, 2, 1, 1, 1)
+
+        self.label_21 = QLabel(self.frame_8)
+        self.label_21.setObjectName(u"label_21")
+        self.label_21.setFont(font7)
+
+        self.gridLayout_6.addWidget(self.label_21, 3, 0, 1, 1)
+
+        self.sb_radius_iso = QDoubleSpinBox(self.frame_8)
+        self.sb_radius_iso.setObjectName(u"sb_radius_iso")
+        self.sb_radius_iso.setFont(font1)
+        self.sb_radius_iso.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_radius_iso.setDecimals(3)
+        self.sb_radius_iso.setMaximum(1.000000000000000)
+        self.sb_radius_iso.setSingleStep(0.001000000000000)
+        self.sb_radius_iso.setValue(0.016000000000000)
+
+        self.gridLayout_6.addWidget(self.sb_radius_iso, 3, 1, 1, 1)
+
+        self.label_22 = QLabel(self.frame_8)
+        self.label_22.setObjectName(u"label_22")
+        self.label_22.setFont(font7)
+
+        self.gridLayout_6.addWidget(self.label_22, 4, 0, 1, 1)
+
+        self.sb_radius_pi = QDoubleSpinBox(self.frame_8)
+        self.sb_radius_pi.setObjectName(u"sb_radius_pi")
+        self.sb_radius_pi.setFont(font1)
+        self.sb_radius_pi.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_radius_pi.setDecimals(3)
+        self.sb_radius_pi.setMaximum(1.000000000000000)
+        self.sb_radius_pi.setSingleStep(0.001000000000000)
+        self.sb_radius_pi.setValue(0.015000000000000)
+
+        self.gridLayout_6.addWidget(self.sb_radius_pi, 4, 1, 1, 1)
+
+        self.label_20 = QLabel(self.frame_8)
+        self.label_20.setObjectName(u"label_20")
+        self.label_20.setFont(font7)
+
+        self.gridLayout_6.addWidget(self.label_20, 1, 0, 1, 1)
+
+
+        self.gridLayout_8.addWidget(self.frame_8, 1, 2, 1, 1)
+
+        self.widget_borehole = QWidget(self.frame_6)
+        self.widget_borehole.setObjectName(u"widget_borehole")
+        self.widget_borehole.setStyleSheet(u"image: url(:/images/images/images/ZAE-Logo_klein.png);")
+
+        self.gridLayout_8.addWidget(self.widget_borehole, 0, 2, 1, 1)
+
+
+        self.verticalLayout_22.addWidget(self.frame_6)
+
+        self.stackedWidget.addWidget(self.boreholes)
+        self.borefield_sim = QWidget()
+        self.borefield_sim.setObjectName(u"borefield_sim")
+        self.gridLayout_16 = QGridLayout(self.borefield_sim)
+        self.gridLayout_16.setObjectName(u"gridLayout_16")
+        self.frame_4 = QFrame(self.borefield_sim)
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setMaximumSize(QSize(16777215, 60))
         font8 = QFont()
@@ -1169,11 +1545,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_13.addWidget(self.label)
 
 
-        self.verticalLayout_12.addWidget(self.frame_4)
+        self.gridLayout_16.addWidget(self.frame_4, 0, 0, 1, 1)
 
-        self.frame_5 = QFrame(self.borefield)
+        self.frame_5 = QFrame(self.borefield_sim)
         self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setMaximumSize(QSize(16777215, 150))
+        self.frame_5.setMaximumSize(QSize(16777215, 160))
         self.frame_5.setFrameShape(QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QFrame.Raised)
         self.gridLayout_5 = QGridLayout(self.frame_5)
@@ -1210,424 +1586,175 @@ class Ui_MainWindow(object):
         self.gridLayout_5.addWidget(self.btn_browse_borefield, 2, 1, 1, 1)
 
 
-        self.verticalLayout_12.addWidget(self.frame_5)
+        self.gridLayout_16.addWidget(self.frame_5, 1, 0, 1, 1)
 
-        self.frame_6 = QFrame(self.borefield)
-        self.frame_6.setObjectName(u"frame_6")
-        self.frame_6.setFrameShape(QFrame.StyledPanel)
-        self.frame_6.setFrameShadow(QFrame.Raised)
-        self.gridLayout_6 = QGridLayout(self.frame_6)
-        self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.gridLayout_6.setHorizontalSpacing(15)
-        self.label_14 = QLabel(self.frame_6)
-        self.label_14.setObjectName(u"label_14")
-        self.label_14.setMaximumSize(QSize(16777215, 35))
-        self.label_14.setFont(font6)
-        self.label_14.setStyleSheet(u"color: #f9b200;")
-
-        self.gridLayout_6.addWidget(self.label_14, 0, 0, 1, 3)
-
-        self.frame_7 = QFrame(self.frame_6)
-        self.frame_7.setObjectName(u"frame_7")
-        self.frame_7.setFrameShape(QFrame.StyledPanel)
-        self.frame_7.setFrameShadow(QFrame.Raised)
-        self.gridLayout_7 = QGridLayout(self.frame_7)
-        self.gridLayout_7.setObjectName(u"gridLayout_7")
-        self.gridLayout_7.setHorizontalSpacing(15)
-        self.gridLayout_7.setVerticalSpacing(0)
-        self.gridLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.label_15 = QLabel(self.frame_7)
-        self.label_15.setObjectName(u"label_15")
-        self.label_15.setFont(font7)
-
-        self.gridLayout_7.addWidget(self.label_15, 0, 0, 1, 1)
-
-        self.sb_number_boreholes = QSpinBox(self.frame_7)
-        self.sb_number_boreholes.setObjectName(u"sb_number_boreholes")
-        self.sb_number_boreholes.setMinimumSize(QSize(130, 0))
-        self.sb_number_boreholes.setMaximumSize(QSize(16777215, 16777215))
-        self.sb_number_boreholes.setFont(font1)
-        self.sb_number_boreholes.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_number_boreholes.setMinimum(1)
-        self.sb_number_boreholes.setMaximum(1000)
-
-        self.gridLayout_7.addWidget(self.sb_number_boreholes, 0, 1, 1, 1)
-
-        self.label_16 = QLabel(self.frame_7)
-        self.label_16.setObjectName(u"label_16")
-        self.label_16.setFont(font7)
-
-        self.gridLayout_7.addWidget(self.label_16, 1, 0, 1, 1)
-
-        self.sb_lambda_b = QDoubleSpinBox(self.frame_7)
-        self.sb_lambda_b.setObjectName(u"sb_lambda_b")
-        self.sb_lambda_b.setFont(font1)
-        self.sb_lambda_b.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_lambda_b.setDecimals(1)
-        self.sb_lambda_b.setSingleStep(0.100000000000000)
-        self.sb_lambda_b.setValue(2.000000000000000)
-
-        self.gridLayout_7.addWidget(self.sb_lambda_b, 1, 1, 1, 1)
-
-        self.label_17 = QLabel(self.frame_7)
-        self.label_17.setObjectName(u"label_17")
-        self.label_17.setMinimumSize(QSize(400, 0))
-        self.label_17.setMaximumSize(QSize(16777215, 16777215))
-        self.label_17.setFont(font7)
-
-        self.gridLayout_7.addWidget(self.label_17, 2, 0, 1, 1)
-
-        self.sb_lambda_iso = QDoubleSpinBox(self.frame_7)
-        self.sb_lambda_iso.setObjectName(u"sb_lambda_iso")
-        self.sb_lambda_iso.setFont(font1)
-        self.sb_lambda_iso.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_lambda_iso.setDecimals(1)
-        self.sb_lambda_iso.setSingleStep(0.100000000000000)
-        self.sb_lambda_iso.setValue(0.300000000000000)
-
-        self.gridLayout_7.addWidget(self.sb_lambda_iso, 2, 1, 1, 1)
-
-        self.label_18 = QLabel(self.frame_7)
-        self.label_18.setObjectName(u"label_18")
-        self.label_18.setFont(font7)
-
-        self.gridLayout_7.addWidget(self.label_18, 3, 0, 1, 1)
-
-        self.sb_lambda_p = QDoubleSpinBox(self.frame_7)
-        self.sb_lambda_p.setObjectName(u"sb_lambda_p")
-        self.sb_lambda_p.setFont(font1)
-        self.sb_lambda_p.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_lambda_p.setDecimals(1)
-        self.sb_lambda_p.setValue(14.000000000000000)
-
-        self.gridLayout_7.addWidget(self.sb_lambda_p, 3, 1, 1, 1)
-
-
-        self.gridLayout_6.addWidget(self.frame_7, 1, 0, 1, 1)
-
-        self.frame_9 = QFrame(self.frame_6)
-        self.frame_9.setObjectName(u"frame_9")
-        self.frame_9.setMinimumSize(QSize(2, 0))
-        self.frame_9.setMaximumSize(QSize(2, 16777215))
-        self.frame_9.setStyleSheet(u"background-color: rgb(221, 221, 221);\n"
-"")
-        self.frame_9.setFrameShape(QFrame.StyledPanel)
-        self.frame_9.setFrameShadow(QFrame.Raised)
-
-        self.gridLayout_6.addWidget(self.frame_9, 1, 1, 1, 1)
-
-        self.frame_8 = QFrame(self.frame_6)
-        self.frame_8.setObjectName(u"frame_8")
-        self.frame_8.setFrameShape(QFrame.StyledPanel)
-        self.frame_8.setFrameShadow(QFrame.Raised)
-        self.gridLayout_8 = QGridLayout(self.frame_8)
-        self.gridLayout_8.setObjectName(u"gridLayout_8")
-        self.gridLayout_8.setHorizontalSpacing(15)
-        self.gridLayout_8.setVerticalSpacing(0)
-        self.gridLayout_8.setContentsMargins(0, 0, 0, 0)
-        self.label_20 = QLabel(self.frame_8)
-        self.label_20.setObjectName(u"label_20")
-        self.label_20.setFont(font7)
-
-        self.gridLayout_8.addWidget(self.label_20, 0, 0, 1, 1)
-
-        self.sb_radius_w = QDoubleSpinBox(self.frame_8)
-        self.sb_radius_w.setObjectName(u"sb_radius_w")
-        self.sb_radius_w.setMinimumSize(QSize(150, 0))
-        self.sb_radius_w.setFont(font1)
-        self.sb_radius_w.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_radius_w.setDecimals(2)
-        self.sb_radius_w.setMaximum(10.000000000000000)
-        self.sb_radius_w.setSingleStep(0.010000000000000)
-        self.sb_radius_w.setValue(0.120000000000000)
-
-        self.gridLayout_8.addWidget(self.sb_radius_w, 0, 1, 1, 1)
-
-        self.label_19 = QLabel(self.frame_8)
-        self.label_19.setObjectName(u"label_19")
-        self.label_19.setMinimumSize(QSize(290, 0))
-        self.label_19.setMaximumSize(QSize(16777215, 16777215))
-        self.label_19.setFont(font7)
-
-        self.gridLayout_8.addWidget(self.label_19, 1, 0, 1, 1)
-
-        self.sb_radius_pa = QDoubleSpinBox(self.frame_8)
-        self.sb_radius_pa.setObjectName(u"sb_radius_pa")
-        self.sb_radius_pa.setFont(font1)
-        self.sb_radius_pa.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_radius_pa.setDecimals(3)
-        self.sb_radius_pa.setMaximum(1.000000000000000)
-        self.sb_radius_pa.setSingleStep(0.001000000000000)
-        self.sb_radius_pa.setValue(0.016000000000000)
-
-        self.gridLayout_8.addWidget(self.sb_radius_pa, 1, 1, 1, 1)
-
-        self.label_21 = QLabel(self.frame_8)
-        self.label_21.setObjectName(u"label_21")
-        self.label_21.setFont(font7)
-
-        self.gridLayout_8.addWidget(self.label_21, 2, 0, 1, 1)
-
-        self.sb_radius_iso = QDoubleSpinBox(self.frame_8)
-        self.sb_radius_iso.setObjectName(u"sb_radius_iso")
-        self.sb_radius_iso.setFont(font1)
-        self.sb_radius_iso.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_radius_iso.setDecimals(3)
-        self.sb_radius_iso.setMaximum(1.000000000000000)
-        self.sb_radius_iso.setSingleStep(0.001000000000000)
-        self.sb_radius_iso.setValue(0.016000000000000)
-
-        self.gridLayout_8.addWidget(self.sb_radius_iso, 2, 1, 1, 1)
-
-        self.label_22 = QLabel(self.frame_8)
-        self.label_22.setObjectName(u"label_22")
-        self.label_22.setFont(font7)
-
-        self.gridLayout_8.addWidget(self.label_22, 3, 0, 1, 1)
-
-        self.sb_radius_pi = QDoubleSpinBox(self.frame_8)
-        self.sb_radius_pi.setObjectName(u"sb_radius_pi")
-        self.sb_radius_pi.setFont(font1)
-        self.sb_radius_pi.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_radius_pi.setDecimals(3)
-        self.sb_radius_pi.setMaximum(1.000000000000000)
-        self.sb_radius_pi.setSingleStep(0.001000000000000)
-        self.sb_radius_pi.setValue(0.015000000000000)
-
-        self.gridLayout_8.addWidget(self.sb_radius_pi, 3, 1, 1, 1)
-
-
-        self.gridLayout_6.addWidget(self.frame_8, 1, 2, 1, 1)
-
-
-        self.verticalLayout_12.addWidget(self.frame_6)
-
-        self.stackedWidget.addWidget(self.borefield)
-        self.surface = QWidget()
-        self.surface.setObjectName(u"surface")
-        self.horizontalLayout_6 = QHBoxLayout(self.surface)
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.frame_10 = QFrame(self.surface)
-        self.frame_10.setObjectName(u"frame_10")
-        self.frame_10.setFrameShape(QFrame.StyledPanel)
-        self.frame_10.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_20 = QVBoxLayout(self.frame_10)
-        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
-        self.frame_13 = QFrame(self.frame_10)
-        self.frame_13.setObjectName(u"frame_13")
-        self.frame_13.setMaximumSize(QSize(16777215, 50))
-        self.frame_13.setFrameShape(QFrame.StyledPanel)
-        self.frame_13.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_14 = QVBoxLayout(self.frame_13)
-        self.verticalLayout_14.setSpacing(0)
-        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
-        self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
-        self.label_4 = QLabel(self.frame_13)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setFont(font5)
-        self.label_4.setStyleSheet(u"color: #e75113;")
-
-        self.verticalLayout_14.addWidget(self.label_4)
-
-
-        self.verticalLayout_20.addWidget(self.frame_13)
-
-        self.frame_14 = QFrame(self.frame_10)
-        self.frame_14.setObjectName(u"frame_14")
-        self.frame_14.setFrameShape(QFrame.StyledPanel)
-        self.frame_14.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_7 = QVBoxLayout(self.frame_14)
-        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
-        self.label_23 = QLabel(self.frame_14)
-        self.label_23.setObjectName(u"label_23")
-        self.label_23.setFont(font7)
-
-        self.verticalLayout_7.addWidget(self.label_23)
-
-        self.sb_A_he = QSpinBox(self.frame_14)
-        self.sb_A_he.setObjectName(u"sb_A_he")
-        self.sb_A_he.setFont(font1)
-        self.sb_A_he.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_A_he.setMinimum(1)
-        self.sb_A_he.setMaximum(1000000)
-        self.sb_A_he.setSingleStep(10)
-
-        self.verticalLayout_7.addWidget(self.sb_A_he)
-
-        self.label_24 = QLabel(self.frame_14)
-        self.label_24.setObjectName(u"label_24")
-        self.label_24.setFont(font7)
-
-        self.verticalLayout_7.addWidget(self.label_24)
-
-        self.sb_x_min = QSpinBox(self.frame_14)
-        self.sb_x_min.setObjectName(u"sb_x_min")
-        self.sb_x_min.setFont(font1)
-        self.sb_x_min.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_x_min.setMinimum(1)
-        self.sb_x_min.setMaximum(500)
-
-        self.verticalLayout_7.addWidget(self.sb_x_min)
-
-        self.label_25 = QLabel(self.frame_14)
-        self.label_25.setObjectName(u"label_25")
-        self.label_25.setFont(font7)
-
-        self.verticalLayout_7.addWidget(self.label_25)
-
-        self.sb_lambda_pavement = QDoubleSpinBox(self.frame_14)
-        self.sb_lambda_pavement.setObjectName(u"sb_lambda_pavement")
-        self.sb_lambda_pavement.setFont(font1)
-        self.sb_lambda_pavement.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_lambda_pavement.setDecimals(1)
-        self.sb_lambda_pavement.setSingleStep(0.100000000000000)
-        self.sb_lambda_pavement.setValue(2.300000000000000)
-
-        self.verticalLayout_7.addWidget(self.sb_lambda_pavement)
-
-
-        self.verticalLayout_20.addWidget(self.frame_14)
-
-
-        self.horizontalLayout_6.addWidget(self.frame_10)
-
-        self.frame_11 = QFrame(self.surface)
+        self.frame_11 = QFrame(self.borefield_sim)
         self.frame_11.setObjectName(u"frame_11")
-        self.frame_11.setMaximumSize(QSize(2, 16777215))
-        self.frame_11.setStyleSheet(u"background-color: rgb(221, 221, 221);")
+        self.frame_11.setMaximumSize(QSize(16777215, 16777215))
         self.frame_11.setFrameShape(QFrame.StyledPanel)
         self.frame_11.setFrameShadow(QFrame.Raised)
+        self.gridLayout_14 = QGridLayout(self.frame_11)
+        self.gridLayout_14.setObjectName(u"gridLayout_14")
+        self.label_26 = QLabel(self.frame_11)
+        self.label_26.setObjectName(u"label_26")
+        self.label_26.setMaximumSize(QSize(16777215, 60))
+        self.label_26.setFont(font6)
+        self.label_26.setStyleSheet(u"color: #f9b200;")
 
-        self.horizontalLayout_6.addWidget(self.frame_11)
+        self.gridLayout_14.addWidget(self.label_26, 0, 0, 1, 3)
 
-        self.frame_12 = QFrame(self.surface)
-        self.frame_12.setObjectName(u"frame_12")
-        self.frame_12.setFrameShape(QFrame.StyledPanel)
-        self.frame_12.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_23 = QVBoxLayout(self.frame_12)
-        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
-        self.frame_15 = QFrame(self.frame_12)
+        self.frame_15 = QFrame(self.frame_11)
         self.frame_15.setObjectName(u"frame_15")
-        self.frame_15.setMaximumSize(QSize(16777215, 50))
+        self.frame_15.setMinimumSize(QSize(2, 0))
+        self.frame_15.setMaximumSize(QSize(2, 16777215))
+        self.frame_15.setStyleSheet(u"background-color: rgb(221, 221, 221);\n"
+"")
         self.frame_15.setFrameShape(QFrame.StyledPanel)
         self.frame_15.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_22 = QVBoxLayout(self.frame_15)
-        self.verticalLayout_22.setSpacing(0)
-        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
-        self.verticalLayout_22.setContentsMargins(0, 0, 0, 0)
-        self.label_26 = QLabel(self.frame_15)
-        self.label_26.setObjectName(u"label_26")
-        self.label_26.setFont(font5)
-        self.label_26.setStyleSheet(u"color: #e75113;")
 
-        self.verticalLayout_22.addWidget(self.label_26)
+        self.gridLayout_14.addWidget(self.frame_15, 2, 1, 1, 1)
+
+        self.frame_29 = QFrame(self.frame_11)
+        self.frame_29.setObjectName(u"frame_29")
+        self.frame_29.setFrameShape(QFrame.StyledPanel)
+        self.frame_29.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_28 = QVBoxLayout(self.frame_29)
+        self.verticalLayout_28.setObjectName(u"verticalLayout_28")
+        self.frame_31 = QFrame(self.frame_29)
+        self.frame_31.setObjectName(u"frame_31")
+        self.frame_31.setMaximumSize(QSize(16777215, 60))
+        self.frame_31.setFrameShape(QFrame.StyledPanel)
+        self.frame_31.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_30 = QVBoxLayout(self.frame_31)
+        self.verticalLayout_30.setSpacing(0)
+        self.verticalLayout_30.setObjectName(u"verticalLayout_30")
+        self.verticalLayout_30.setContentsMargins(0, 0, 0, 0)
+        self.label_32 = QLabel(self.frame_31)
+        self.label_32.setObjectName(u"label_32")
+        self.label_32.setMaximumSize(QSize(16777215, 50))
+        self.label_32.setFont(font6)
+        self.label_32.setStyleSheet(u"")
+
+        self.verticalLayout_30.addWidget(self.label_32)
 
 
-        self.verticalLayout_23.addWidget(self.frame_15)
+        self.verticalLayout_28.addWidget(self.frame_31)
 
-        self.frame_16 = QFrame(self.frame_12)
+        self.frame_32 = QFrame(self.frame_29)
+        self.frame_32.setObjectName(u"frame_32")
+        self.frame_32.setFrameShape(QFrame.StyledPanel)
+        self.frame_32.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_6 = QHBoxLayout(self.frame_32)
+        self.horizontalLayout_6.setSpacing(0)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.label_29 = QLabel(self.frame_32)
+        self.label_29.setObjectName(u"label_29")
+        self.label_29.setFont(font7)
+
+        self.horizontalLayout_6.addWidget(self.label_29)
+
+        self.sb_years = QSpinBox(self.frame_32)
+        self.sb_years.setObjectName(u"sb_years")
+        self.sb_years.setFont(font1)
+        self.sb_years.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_years.setMinimum(1)
+        self.sb_years.setMaximum(500)
+        self.sb_years.setValue(1)
+        self.sb_years.setDisplayIntegerBase(10)
+
+        self.horizontalLayout_6.addWidget(self.sb_years)
+
+
+        self.verticalLayout_28.addWidget(self.frame_32)
+
+
+        self.gridLayout_14.addWidget(self.frame_29, 2, 2, 1, 1)
+
+        self.frame_16 = QFrame(self.frame_11)
         self.frame_16.setObjectName(u"frame_16")
         self.frame_16.setFrameShape(QFrame.StyledPanel)
         self.frame_16.setFrameShadow(QFrame.Raised)
-        self.gridLayout_9 = QGridLayout(self.frame_16)
-        self.gridLayout_9.setObjectName(u"gridLayout_9")
-        self.label_31 = QLabel(self.frame_16)
+        self.verticalLayout_32 = QVBoxLayout(self.frame_16)
+        self.verticalLayout_32.setObjectName(u"verticalLayout_32")
+        self.frame_33 = QFrame(self.frame_16)
+        self.frame_33.setObjectName(u"frame_33")
+        self.frame_33.setMaximumSize(QSize(16777215, 60))
+        self.frame_33.setFrameShape(QFrame.StyledPanel)
+        self.frame_33.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_31 = QVBoxLayout(self.frame_33)
+        self.verticalLayout_31.setSpacing(0)
+        self.verticalLayout_31.setObjectName(u"verticalLayout_31")
+        self.verticalLayout_31.setContentsMargins(0, 0, 0, 0)
+        self.label_31 = QLabel(self.frame_33)
         self.label_31.setObjectName(u"label_31")
         self.label_31.setMaximumSize(QSize(16777215, 50))
         self.label_31.setFont(font6)
-        self.label_31.setStyleSheet(u"color: #f9b200;")
+        self.label_31.setStyleSheet(u"")
 
-        self.gridLayout_9.addWidget(self.label_31, 0, 0, 1, 2)
+        self.verticalLayout_31.addWidget(self.label_31)
 
-        self.label_27 = QLabel(self.frame_16)
+
+        self.verticalLayout_32.addWidget(self.frame_33)
+
+        self.frame_34 = QFrame(self.frame_16)
+        self.frame_34.setObjectName(u"frame_34")
+        self.frame_34.setFrameShape(QFrame.StyledPanel)
+        self.frame_34.setFrameShadow(QFrame.Raised)
+        self.gridLayout_9 = QGridLayout(self.frame_34)
+        self.gridLayout_9.setObjectName(u"gridLayout_9")
+        self.gridLayout_9.setHorizontalSpacing(0)
+        self.gridLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.label_27 = QLabel(self.frame_34)
         self.label_27.setObjectName(u"label_27")
         self.label_27.setFont(font7)
 
-        self.gridLayout_9.addWidget(self.label_27, 1, 0, 1, 1)
+        self.gridLayout_9.addWidget(self.label_27, 0, 0, 1, 1)
 
-        self.cb_month = QComboBox(self.frame_16)
+        self.cb_month = QComboBox(self.frame_34)
         self.cb_month.setObjectName(u"cb_month")
         self.cb_month.setFont(font1)
         self.cb_month.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.cb_month.setMaxVisibleItems(12)
 
-        self.gridLayout_9.addWidget(self.cb_month, 1, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.cb_month, 0, 1, 1, 1)
 
-        self.label_28 = QLabel(self.frame_16)
+        self.label_28 = QLabel(self.frame_34)
         self.label_28.setObjectName(u"label_28")
         self.label_28.setFont(font7)
 
-        self.gridLayout_9.addWidget(self.label_28, 2, 0, 1, 1)
+        self.gridLayout_9.addWidget(self.label_28, 1, 0, 1, 1)
 
-        self.sb_day = QSpinBox(self.frame_16)
+        self.sb_day = QSpinBox(self.frame_34)
         self.sb_day.setObjectName(u"sb_day")
         self.sb_day.setFont(font1)
         self.sb_day.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_day.setMinimum(1)
         self.sb_day.setMaximum(31)
 
-        self.gridLayout_9.addWidget(self.sb_day, 2, 1, 1, 1)
-
-        self.label_32 = QLabel(self.frame_16)
-        self.label_32.setObjectName(u"label_32")
-        self.label_32.setMaximumSize(QSize(16777215, 50))
-        self.label_32.setFont(font6)
-        self.label_32.setStyleSheet(u"color: #f9b200;")
-
-        self.gridLayout_9.addWidget(self.label_32, 3, 0, 1, 2)
-
-        self.label_29 = QLabel(self.frame_16)
-        self.label_29.setObjectName(u"label_29")
-        self.label_29.setFont(font7)
-
-        self.gridLayout_9.addWidget(self.label_29, 4, 0, 1, 1)
-
-        self.sb_years = QSpinBox(self.frame_16)
-        self.sb_years.setObjectName(u"sb_years")
-        self.sb_years.setFont(font1)
-        self.sb_years.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_years.setMinimum(1)
-        self.sb_years.setMaximum(500)
-        self.sb_years.setValue(10)
-        self.sb_years.setDisplayIntegerBase(10)
-
-        self.gridLayout_9.addWidget(self.sb_years, 4, 1, 1, 1)
-
-        self.label_30 = QLabel(self.frame_16)
-        self.label_30.setObjectName(u"label_30")
-        self.label_30.setFont(font7)
-
-        self.gridLayout_9.addWidget(self.label_30, 5, 0, 1, 1)
-
-        self.sb_dt = QSpinBox(self.frame_16)
-        self.sb_dt.setObjectName(u"sb_dt")
-        self.sb_dt.setFont(font1)
-        self.sb_dt.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_dt.setMinimum(1)
-        self.sb_dt.setMaximum(1000000)
-
-        self.gridLayout_9.addWidget(self.sb_dt, 5, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.sb_day, 1, 1, 1, 1)
 
 
-        self.verticalLayout_23.addWidget(self.frame_16)
+        self.verticalLayout_32.addWidget(self.frame_34)
 
 
-        self.horizontalLayout_6.addWidget(self.frame_12)
+        self.gridLayout_14.addWidget(self.frame_16, 2, 0, 1, 1)
 
-        self.stackedWidget.addWidget(self.surface)
+
+        self.gridLayout_16.addWidget(self.frame_11, 2, 0, 1, 1)
+
+        self.stackedWidget.addWidget(self.borefield_sim)
         self.simulation = QWidget()
         self.simulation.setObjectName(u"simulation")
-        self.verticalLayout_10 = QVBoxLayout(self.simulation)
-        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.gridLayout_10 = QGridLayout(self.simulation)
+        self.gridLayout_10.setObjectName(u"gridLayout_10")
         self.frame_17 = QFrame(self.simulation)
         self.frame_17.setObjectName(u"frame_17")
         self.frame_17.setMaximumSize(QSize(16777215, 60))
         self.frame_17.setFrameShape(QFrame.StyledPanel)
         self.frame_17.setFrameShadow(QFrame.Raised)
         self.verticalLayout_24 = QVBoxLayout(self.frame_17)
-        self.verticalLayout_24.setSpacing(0)
         self.verticalLayout_24.setObjectName(u"verticalLayout_24")
-        self.verticalLayout_24.setContentsMargins(0, 0, 0, 0)
         self.label_33 = QLabel(self.frame_17)
         self.label_33.setObjectName(u"label_33")
         self.label_33.setMaximumSize(QSize(16777215, 50))
@@ -1637,32 +1764,35 @@ class Ui_MainWindow(object):
         self.verticalLayout_24.addWidget(self.label_33)
 
 
-        self.verticalLayout_10.addWidget(self.frame_17)
+        self.gridLayout_10.addWidget(self.frame_17, 0, 0, 1, 2)
 
-        self.frame_19 = QFrame(self.simulation)
-        self.frame_19.setObjectName(u"frame_19")
-        self.frame_19.setFrameShape(QFrame.StyledPanel)
-        self.frame_19.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_25 = QVBoxLayout(self.frame_19)
-        self.verticalLayout_25.setObjectName(u"verticalLayout_25")
-        self.label_34 = QLabel(self.frame_19)
+        self.frame_23 = QFrame(self.simulation)
+        self.frame_23.setObjectName(u"frame_23")
+        self.frame_23.setMinimumSize(QSize(550, 0))
+        self.frame_23.setFrameShape(QFrame.StyledPanel)
+        self.frame_23.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_26 = QVBoxLayout(self.frame_23)
+        self.verticalLayout_26.setObjectName(u"verticalLayout_26")
+        self.label_34 = QLabel(self.frame_23)
         self.label_34.setObjectName(u"label_34")
+        self.label_34.setMinimumSize(QSize(500, 0))
+        self.label_34.setMaximumSize(QSize(16777215, 16777215))
         self.label_34.setFont(font7)
         self.label_34.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
-        self.verticalLayout_25.addWidget(self.label_34)
+        self.verticalLayout_26.addWidget(self.label_34)
 
-
-        self.verticalLayout_10.addWidget(self.frame_19)
-
-        self.frame_18 = QFrame(self.simulation)
+        self.frame_18 = QFrame(self.frame_23)
         self.frame_18.setObjectName(u"frame_18")
+        self.frame_18.setMinimumSize(QSize(0, 150))
+        self.frame_18.setMaximumSize(QSize(16777215, 200))
         self.frame_18.setFrameShape(QFrame.StyledPanel)
         self.frame_18.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_7 = QHBoxLayout(self.frame_18)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.frame_20 = QFrame(self.frame_18)
         self.frame_20.setObjectName(u"frame_20")
+        self.frame_20.setMaximumSize(QSize(100, 16777215))
         self.frame_20.setFrameShape(QFrame.StyledPanel)
         self.frame_20.setFrameShadow(QFrame.Raised)
 
@@ -1694,15 +1824,80 @@ class Ui_MainWindow(object):
 
         self.frame_21 = QFrame(self.frame_18)
         self.frame_21.setObjectName(u"frame_21")
+        self.frame_21.setMaximumSize(QSize(100, 16777215))
         self.frame_21.setFrameShape(QFrame.StyledPanel)
         self.frame_21.setFrameShadow(QFrame.Raised)
 
         self.horizontalLayout_7.addWidget(self.frame_21)
 
 
-        self.verticalLayout_10.addWidget(self.frame_18)
+        self.verticalLayout_26.addWidget(self.frame_18)
+
+
+        self.gridLayout_10.addWidget(self.frame_23, 1, 0, 1, 1)
+
+        self.frame_22 = QFrame(self.simulation)
+        self.frame_22.setObjectName(u"frame_22")
+        self.frame_22.setMinimumSize(QSize(500, 0))
+        self.frame_22.setMaximumSize(QSize(16777215, 16777215))
+        self.frame_22.setFrameShape(QFrame.StyledPanel)
+        self.frame_22.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_10 = QVBoxLayout(self.frame_22)
+        self.verticalLayout_10.setSpacing(6)
+        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.label_36 = QLabel(self.frame_22)
+        self.label_36.setObjectName(u"label_36")
+        self.label_36.setMaximumSize(QSize(16777215, 50))
+        self.label_36.setFont(font6)
+        self.label_36.setStyleSheet(u"color: #f9b200;")
+
+        self.verticalLayout_10.addWidget(self.label_36)
+
+        self.text_console = QPlainTextEdit(self.frame_22)
+        self.text_console.setObjectName(u"text_console")
+        self.text_console.setMinimumSize(QSize(200, 200))
+        self.text_console.setFont(font1)
+        self.text_console.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.text_console.setReadOnly(True)
+
+        self.verticalLayout_10.addWidget(self.text_console)
+
+
+        self.gridLayout_10.addWidget(self.frame_22, 1, 1, 1, 1)
 
         self.stackedWidget.addWidget(self.simulation)
+        self.results = QWidget()
+        self.results.setObjectName(u"results")
+        self.verticalLayout_27 = QVBoxLayout(self.results)
+        self.verticalLayout_27.setObjectName(u"verticalLayout_27")
+        self.frame_24 = QFrame(self.results)
+        self.frame_24.setObjectName(u"frame_24")
+        self.frame_24.setMaximumSize(QSize(16777215, 60))
+        self.frame_24.setFrameShape(QFrame.StyledPanel)
+        self.frame_24.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_15 = QVBoxLayout(self.frame_24)
+        self.verticalLayout_15.setSpacing(0)
+        self.verticalLayout_15.setObjectName(u"verticalLayout_15")
+        self.verticalLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.label_5 = QLabel(self.frame_24)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setFont(font5)
+        self.label_5.setStyleSheet(u"color: #e75113;")
+
+        self.verticalLayout_15.addWidget(self.label_5)
+
+
+        self.verticalLayout_27.addWidget(self.frame_24)
+
+        self.frame_19 = QFrame(self.results)
+        self.frame_19.setObjectName(u"frame_19")
+        self.frame_19.setFrameShape(QFrame.StyledPanel)
+        self.frame_19.setFrameShadow(QFrame.Raised)
+
+        self.verticalLayout_27.addWidget(self.frame_19)
+
+        self.stackedWidget.addWidget(self.results)
         self.widgets = QWidget()
         self.widgets.setObjectName(u"widgets")
         self.widgets.setStyleSheet(u"b")
@@ -1842,7 +2037,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 333, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 351, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -2043,7 +2238,7 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.addWidget(self.widgets)
 
-        self.verticalLayout_15.addWidget(self.stackedWidget)
+        self.verticalLayout_23.addWidget(self.stackedWidget)
 
 
         self.horizontalLayout_4.addWidget(self.pagesContainer)
@@ -2119,6 +2314,7 @@ class Ui_MainWindow(object):
         self.btn_borefield.setText(QCoreApplication.translate("MainWindow", u"Ground data", None))
         self.btn_surface.setText(QCoreApplication.translate("MainWindow", u"Surface data", None))
         self.btn_sim.setText(QCoreApplication.translate("MainWindow", u"Simulation parameters", None))
+        self.btn_results.setText(QCoreApplication.translate("MainWindow", u"Results", None))
         self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"PyDracula APP - Theme with colors based on Dracula for Python.", None))
 #if QT_CONFIG(tooltip)
         self.minimizeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))
@@ -2132,48 +2328,51 @@ class Ui_MainWindow(object):
         self.closeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close", None))
 #endif // QT_CONFIG(tooltip)
         self.closeAppBtn.setText("")
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Welcome to GerdPy", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Welcome to GERDPy", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Weather & local parameters", None))
         self.line_weather_file.setText("")
         self.line_weather_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Weather", None))
         self.btn_browse_weather.setText(QCoreApplication.translate("MainWindow", u" Browse", None))
-        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Enter weather data file:", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"Enter weather data file path:", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"Local ground parameters", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Thermal diffusivity [1e-6 m2/s]:", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity [W/mK]:", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Undisturbed soil temperature [\u00b0C]:", None))
-        self.label_35.setText(QCoreApplication.translate("MainWindow", u"H\u00f6he \u00fcber Normal-Null [m]:", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Borefield parameters", None))
-        self.label_12.setText(QCoreApplication.translate("MainWindow", u"Geometry import", None))
-        self.label_13.setText(QCoreApplication.translate("MainWindow", u"Enter borefield geometry file:", None))
-        self.line_borefield_file.setText("")
-        self.line_borefield_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
-        self.btn_browse_borefield.setText(QCoreApplication.translate("MainWindow", u" Browse", None))
-        self.label_14.setText(QCoreApplication.translate("MainWindow", u"Borefield parameters", None))
-        self.label_15.setText(QCoreApplication.translate("MainWindow", u"Number of boreholes:", None))
-        self.label_16.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity backfill [W/mK]:", None))
-        self.label_17.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity insulating layer [W/mK]:", None))
-        self.label_18.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity heatpipe [W/mK]:", None))
-        self.label_20.setText(QCoreApplication.translate("MainWindow", u"Radius heatpipe-epicenters [m]:", None))
-        self.label_19.setText(QCoreApplication.translate("MainWindow", u"Outer radius insulating layer [m]:", None))
-        self.label_21.setText(QCoreApplication.translate("MainWindow", u"Fillet insulating layer [m]:", None))
-        self.label_22.setText(QCoreApplication.translate("MainWindow", u"Fillet heatpipe [m]:", None))
+        self.label_35.setText(QCoreApplication.translate("MainWindow", u"Altitude above sea level [m]:", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Surface & heating element", None))
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"Surface area [m2]:", None))
         self.label_24.setText(QCoreApplication.translate("MainWindow", u"Minimal surface distance [mm]:", None))
-        self.label_25.setText(QCoreApplication.translate("MainWindow", u"Pavement thermal conductivity [W/mK]:", None))
+        self.label_14.setText(QCoreApplication.translate("MainWindow", u"Borehole parameters", None))
+        self.label_30.setText(QCoreApplication.translate("MainWindow", u"Borehole depth [m]:", None))
+        self.label_16.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity backfill [W/mK]:", None))
+        self.label_25.setText(QCoreApplication.translate("MainWindow", u"Borehole radius [m]:", None))
+        self.label_15.setText(QCoreApplication.translate("MainWindow", u"Number of heatpipes per borehole:", None))
+        self.label_17.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity insulating layer [W/mK]:", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity heatpipe [W/mK]:", None))
+        self.rb_depth.setText(QCoreApplication.translate("MainWindow", u"Activate varying borehole depths", None))
+        self.label_19.setText(QCoreApplication.translate("MainWindow", u"Outer radius insulating layer [m]:", None))
+        self.label_21.setText(QCoreApplication.translate("MainWindow", u"Fillet insulating layer [m]:", None))
+        self.label_22.setText(QCoreApplication.translate("MainWindow", u"Fillet heatpipe [m]:", None))
+        self.label_20.setText(QCoreApplication.translate("MainWindow", u"Radius heatpipe-epicenters [m]:", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Borefield  geometry & Simulation parameters", None))
+        self.label_12.setText(QCoreApplication.translate("MainWindow", u"Borefield geometry import", None))
+        self.label_13.setText(QCoreApplication.translate("MainWindow", u"Enter borefield geometry file path:", None))
+        self.line_borefield_file.setText("")
+        self.line_borefield_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
+        self.btn_browse_borefield.setText(QCoreApplication.translate("MainWindow", u" Browse", None))
         self.label_26.setText(QCoreApplication.translate("MainWindow", u"Simulation parameters", None))
+        self.label_32.setText(QCoreApplication.translate("MainWindow", u"Simulation time", None))
+        self.label_29.setText(QCoreApplication.translate("MainWindow", u"Years:", None))
         self.label_31.setText(QCoreApplication.translate("MainWindow", u"Startdate", None))
         self.label_27.setText(QCoreApplication.translate("MainWindow", u"Month:", None))
         self.cb_month.setCurrentText("")
         self.label_28.setText(QCoreApplication.translate("MainWindow", u"Day:", None))
-        self.label_32.setText(QCoreApplication.translate("MainWindow", u"Simulation time parameters", None))
-        self.label_29.setText(QCoreApplication.translate("MainWindow", u"Years:", None))
-        self.label_30.setText(QCoreApplication.translate("MainWindow", u"Time step [h]:", None))
         self.label_33.setText(QCoreApplication.translate("MainWindow", u"Simulation", None))
         self.label_34.setText(QCoreApplication.translate("MainWindow", u"Please make sure that all parameters are correctly filled.", None))
         self.btn_startsim.setText(QCoreApplication.translate("MainWindow", u"START SIMULATION", None))
+        self.label_36.setText(QCoreApplication.translate("MainWindow", u"Console", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Results", None))
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"FILE BOX", None))
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))

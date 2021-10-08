@@ -16,7 +16,11 @@ from matplotlib.ticker import AutoMinorLocator
 from scipy.constants import pi
 
 # import GERDPy-modules
-import GerdPy.boreholes, GerdPy.heatpipes, GerdPy.heating_element, GerdPy.gfunction, GerdPy.load_aggregation
+import GerdPy.boreholes as boreholes
+import GerdPy.heatpipes as heatpipes
+import GerdPy.heating_element as heating_element
+import GerdPy.gfunction as gfunction
+import GerdPy.load_aggregation as load_aggregation
 from .load_generator_synthetic import synthetic_load
 from .load_generator import *
 from .weather_data import *
@@ -30,18 +34,18 @@ def main(self):
     # -------------------------------------------------------------------------
 
     # 1.0) Standort
-    h_NHN = self.ui.sb_h_NHN.value()      # Höhe über Normal-Null des Standorts (default: 520)
-    print(h_NHN)
+    h_NHN = self.ui.sb_h_NHN.value()    # Höhe über Normal-Null des Standorts (default: 520)
+    # print(h_NHN)
 
     # 1.1) Erdboden
-    a = 1.0e-6                  # Temperaturleitfähigkeit [m2/s]
-    lambda_g = 2.0              # Wärmeleitfähigkeit [W/mK]
-    T_g = 8.0                  # ungestörte Bodentemperatur [degC]
+    a = self.ui.sb_therm_diffu.value()*1.0e-6   # Temperaturleitfähigkeit [m2/s] (default: 1)
+    lambda_g = self.ui.sb_therm_cond.value()    # Wärmeleitfähigkeit [W/mK] (default: 2.0)
+    T_g = self.ui.sb_undis_soil_temp.value()    # ungestörte Bodentemperatur [degC] (default: 10.0)
 
     # 1.2) Erdwärmesondenfeld
 
     # Geometrie-Import (.txt-Datei)
-    boreField = boreholes.field_from_file('./data/custom_field.txt')
+    boreField = boreholes.field_from_file(self.ui.line_borefield_file.text())     # './data/custom_field.txt'
 
     # Sondenmeter (gesamt)
     H_field = boreholes.length_field(boreField)
@@ -52,17 +56,17 @@ def main(self):
     # 1.3) Bohrloch
 
     # Geometrie
-    N = 6                        # Anzahl Heatpipes pro Bohrloch [-]
-    r_b = boreField[0].r_b  # Radius der Erdwärmesondenbohrung [m]
-    r_w = 0.12                # Radius der Wärmerohr-Mittelpunkte [m]
-    r_pa = 0.016                 # Außenradius der Isolationsschicht [m]
-    r_iso = 0.016                # Innenradius der Isolationsschicht [m]
-    r_pi = 0.015                 # Innenradius des Wärmerohrs [m]
+    N = self.ui.sb_number_heatpipes.value()     # Anzahl Heatpipes pro Bohrloch [-] (default: 6)
+    r_b = self.ui.sb_r_borehole.value()         # Radius der Erdwärmesondenbohrung [m] # boreField[0].r_b
+    r_w = self.ui.sb_radius_w.value()           # Radius der Wärmerohr-Mittelpunkte [m] (default: 0.12)
+    r_pa = self.ui.sb_radius_pa.value()         # Außenradius der Isolationsschicht [m] (default: 0.016)
+    r_iso = self.ui.sb_radius_iso.value()       # Innenradius der Isolationsschicht [m] (default: 0.016)
+    r_pi = self.ui.sb_radius_pi.value()         # Innenradius des Wärmerohrs [m] (default: 0.015)
 
     # Wärmeleitfähigkeiten
-    lambda_b = 2                # lambda der Hinterfüllung [W/mK]
-    lambda_iso = 0.3            # lambda der Isolationsschicht [W/mK]
-    lambda_p = 14               # lambda der Heatpipe [W/mK]
+    lambda_b = self.ui.sb_lambda_b.value()        # lambda der Hinterfüllung [W/mK] (default: 2)
+    lambda_iso = self.ui.sb_lambda_iso.value()    # lambda der Isolationsschicht [W/mK] (default: 0.3)
+    lambda_p = self.ui.sb_lambda_p.value()        # lambda der Heatpipe [W/mK] (default: 14.0)
 
     # Geometrie-Erstellung
     hp = heatpipes.Heatpipes(N, r_b, r_w, r_pa, r_iso, r_pi, lambda_b,
@@ -73,10 +77,10 @@ def main(self):
     # 1.4) Heizelement
 
     # Fläche Heizelement [m2]
-    A_he = 10
+    A_he = self.ui.sb_A_he.value()      # (default: 35)
 
     # minimaler Oberflächenabstand [mm]
-    x_min = 25
+    x_min = self.ui.sb_x_min.value()    # (default: 25)
 
     # Wärmeleitfähigkeit des Betonelements [W/mk]
     lambda_Bet = 2.3
@@ -88,7 +92,7 @@ def main(self):
 
     # Simulationsparameter
     dt = 3600.                           # Zeitschrittweite [s]
-    tmax = 0.25 * 1 * (8760./12) * 3600.    # Gesamt-Simulationsdauer [s]
+    tmax = self.ui.sb_years.value() * 365 * 86400      # 0.25 * 1 * (8760./12) * 3600.    # Gesamt-Simulationsdauer [s]
     # tmax = 100 * 3600.
     Nt = int(np.ceil(tmax/dt))           # Anzahl Zeitschritte [-]
 
@@ -97,14 +101,20 @@ def main(self):
     # -------------------------------------------------------------------------
 
     if check_geometry(boreField, hp):
-        print(50*'-')
-        print('Geometry-Check: not OK! - Simulation aborted')
-        print(50*'-')
+        self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        self.ui.text_console.insertPlainText('Geometry-Check: not OK! - Simulation aborted\n')
+        self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        # print(50*'-')
+        # print('Geometry-Check: not OK! - Simulation aborted')
+        # print(50*'-')
         sys.exit()
     else:
-        print(50*'-')
-        print('Geometry-Check: OK!')
-        print(50*'-')
+        self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        self.ui.text_console.insertPlainText('Geometry-Check: OK!\n')
+        self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        # print(50*'-')
+        # print('Geometry-Check: OK!')
+        # print(50*'-')
 
     # -------------------------------------------------------------------------
     # 3.) Ermittlung thermischer Widerstand Bohrlochrand bis Oberfläche

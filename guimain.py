@@ -87,6 +87,7 @@ class MainWindow(QMainWindow):
         widgets.btn_borefield.clicked.connect(self.buttonClick)
         widgets.btn_surface.clicked.connect(self.buttonClick)
         widgets.btn_sim.clicked.connect(self.buttonClick)
+        widgets.btn_results.clicked.connect(self.buttonClick)
 
         # WEATHER SHEET
         widgets.btn_browse_weather.clicked.connect(self.buttonClick)
@@ -136,25 +137,31 @@ class MainWindow(QMainWindow):
 
         # SHOW WEATHER PAGE
         if btnName == "btn_weather":
-            widgets.stackedWidget.setCurrentWidget(widgets.weather)
+            widgets.stackedWidget.setCurrentWidget(widgets.weather_local)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         # SHOW GROUND PAGE
         if btnName == "btn_borefield":
-           widgets.stackedWidget.setCurrentWidget(widgets.borefield)
+           widgets.stackedWidget.setCurrentWidget(widgets.boreholes)
            UIFunctions.resetStyle(self, btnName)
            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         # SHOW SURFACE PAGE
         if btnName == "btn_surface":
-           widgets.stackedWidget.setCurrentWidget(widgets.surface)
+           widgets.stackedWidget.setCurrentWidget(widgets.borefield_sim)
            UIFunctions.resetStyle(self, btnName)
            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         # SHOW SIMULATION PAGE
         if btnName == "btn_sim":
            widgets.stackedWidget.setCurrentWidget(widgets.simulation)
+           UIFunctions.resetStyle(self, btnName)
+           btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+
+       # SHOW RESULTS PAGE
+        if btnName == "btn_results":
+           widgets.stackedWidget.setCurrentWidget(widgets.results)
            UIFunctions.resetStyle(self, btnName)
            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 

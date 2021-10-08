@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1234</width>
+    <width>1267</width>
     <height>670</height>
    </rect>
   </property>
@@ -415,7 +415,7 @@ QRadioButton::indicator:hover {
     border: 3px solid rgb(58, 66, 81);
 }
 QRadioButton::indicator:checked {
-    background: 3px solid rgb(94, 106, 130);
+    background: 3px solid rgba(249, 178, 0, 130);
 	border: 3px solid rgb(52, 59, 72);	
 }
 
@@ -817,7 +817,7 @@ Button */
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QVBoxLayout" name="verticalMenuLayout">
+            <layout class="QVBoxLayout" name="verticalLayout_25">
              <property name="spacing">
               <number>0</number>
              </property>
@@ -901,7 +901,7 @@ Button */
                </layout>
               </widget>
              </item>
-             <item alignment="Qt::AlignTop">
+             <item>
               <widget class="QFrame" name="topMenu">
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -1100,10 +1100,45 @@ Button */
                   </property>
                  </widget>
                 </item>
+                <item>
+                 <widget class="QPushButton" name="btn_results">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>45</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <pointsize>10</pointsize>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="layoutDirection">
+                   <enum>Qt::LeftToRight</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-image: url(:/icons/images/icons/cil-chart.png);</string>
+                  </property>
+                  <property name="text">
+                   <string>Results</string>
+                  </property>
+                 </widget>
+                </item>
                </layout>
               </widget>
              </item>
-             <item alignment="Qt::AlignBottom">
+             <item>
               <widget class="QFrame" name="bottomMenu">
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -1466,29 +1501,14 @@ Button */
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_15">
-                   <property name="spacing">
-                    <number>0</number>
-                   </property>
-                   <property name="leftMargin">
-                    <number>10</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>10</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>10</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>10</number>
-                   </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_23">
                    <item>
                     <widget class="QStackedWidget" name="stackedWidget">
                      <property name="styleSheet">
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>5</number>
+                      <number>3</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -1520,18 +1540,9 @@ color: rgb(231, 81, 19);</string>
                        </item>
                       </layout>
                      </widget>
-                     <widget class="QWidget" name="weather">
-                      <layout class="QVBoxLayout" name="verticalLayout_5">
-                       <property name="topMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>9</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>0</number>
-                       </property>
-                       <item>
+                     <widget class="QWidget" name="weather_local">
+                      <layout class="QGridLayout" name="gridLayout_11">
+                       <item row="0" column="0">
                         <widget class="QFrame" name="frame">
                          <property name="maximumSize">
                           <size>
@@ -1581,7 +1592,7 @@ color: rgb(231, 81, 19);</string>
                          </layout>
                         </widget>
                        </item>
-                       <item>
+                       <item row="1" column="0">
                         <widget class="QFrame" name="frame_2">
                          <property name="maximumSize">
                           <size>
@@ -1697,7 +1708,505 @@ color: rgb(231, 81, 19);</string>
                              </font>
                             </property>
                             <property name="text">
-                             <string>Enter weather data file:</string>
+                             <string>Enter weather data file path:</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item row="2" column="0">
+                        <widget class="QFrame" name="frame_25">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_8">
+                          <item>
+                           <widget class="QFrame" name="frame_3">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_29">
+                             <property name="leftMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <widget class="QFrame" name="frame_26">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>50</height>
+                                </size>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_5">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QLabel" name="label_8">
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>16777215</width>
+                                    <height>50</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>20</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">color: #f9b200;</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>Local ground parameters</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_28">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QGridLayout" name="gridLayout_12">
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <item row="0" column="0">
+                                 <widget class="QLabel" name="label_9">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>15</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Thermal diffusivity [1e-6 m2/s]:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="0" column="1">
+                                 <widget class="QDoubleSpinBox" name="sb_therm_diffu">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>12</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                  </property>
+                                  <property name="decimals">
+                                   <number>1</number>
+                                  </property>
+                                  <property name="singleStep">
+                                   <double>0.100000000000000</double>
+                                  </property>
+                                  <property name="value">
+                                   <double>1.000000000000000</double>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="1" column="0">
+                                 <widget class="QLabel" name="label_10">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>15</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Thermal conductivity [W/mK]:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="1" column="1">
+                                 <widget class="QDoubleSpinBox" name="sb_therm_cond">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>12</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                  </property>
+                                  <property name="decimals">
+                                   <number>1</number>
+                                  </property>
+                                  <property name="value">
+                                   <double>2.000000000000000</double>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="2" column="0">
+                                 <widget class="QLabel" name="label_11">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>15</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Undisturbed soil temperature [°C]:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="2" column="1">
+                                 <widget class="QDoubleSpinBox" name="sb_undis_soil_temp">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>12</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                  </property>
+                                  <property name="decimals">
+                                   <number>1</number>
+                                  </property>
+                                  <property name="minimum">
+                                   <double>-50.000000000000000</double>
+                                  </property>
+                                  <property name="maximum">
+                                   <double>50.000000000000000</double>
+                                  </property>
+                                  <property name="singleStep">
+                                   <double>1.000000000000000</double>
+                                  </property>
+                                  <property name="value">
+                                   <double>10.000000000000000</double>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="3" column="0">
+                                 <widget class="QLabel" name="label_35">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>15</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Altitude above sea level [m]:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="3" column="1">
+                                 <widget class="QSpinBox" name="sb_h_NHN">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>0</width>
+                                    <height>0</height>
+                                   </size>
+                                  </property>
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>16777215</width>
+                                    <height>16777215</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>12</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                  </property>
+                                  <property name="minimum">
+                                   <number>0</number>
+                                  </property>
+                                  <property name="maximum">
+                                   <number>9000</number>
+                                  </property>
+                                  <property name="singleStep">
+                                   <number>10</number>
+                                  </property>
+                                  <property name="value">
+                                   <number>520</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_27">
+                            <property name="minimumSize">
+                             <size>
+                              <width>2</width>
+                              <height>0</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>2</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: rgb(221, 221, 221);
+</string>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_10">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_20">
+                             <item>
+                              <widget class="QFrame" name="frame_13">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>50</height>
+                                </size>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_14">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QLabel" name="label_4">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>20</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">color: #f9b200;</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>Surface &amp; heating element</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_14">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_7">
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QLabel" name="label_23">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>15</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Surface area [m2]:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QSpinBox" name="sb_A_he">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>12</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                  </property>
+                                  <property name="minimum">
+                                   <number>1</number>
+                                  </property>
+                                  <property name="maximum">
+                                   <number>1000000</number>
+                                  </property>
+                                  <property name="singleStep">
+                                   <number>10</number>
+                                  </property>
+                                  <property name="value">
+                                   <number>35</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QLabel" name="label_24">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>15</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Minimal surface distance [mm]:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QSpinBox" name="sb_x_min">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>12</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                  </property>
+                                  <property name="minimum">
+                                   <number>1</number>
+                                  </property>
+                                  <property name="maximum">
+                                   <number>500</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="boreholes">
+                      <layout class="QVBoxLayout" name="verticalLayout_22">
+                       <item>
+                        <widget class="QFrame" name="frame_30">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>60</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">background: transparent;</string>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_12">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_14">
+                            <property name="font">
+                             <font>
+                              <pointsize>25</pointsize>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #e75113;background: transparent;</string>
+                            </property>
+                            <property name="text">
+                             <string>Borehole parameters</string>
                             </property>
                            </widget>
                           </item>
@@ -1705,200 +2214,539 @@ color: rgb(231, 81, 19);</string>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QFrame" name="frame_3">
+                        <widget class="QFrame" name="frame_6">
                          <property name="frameShape">
                           <enum>QFrame::StyledPanel</enum>
                          </property>
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                         <layout class="QGridLayout" name="gridLayout_4">
-                          <item row="0" column="0">
-                           <widget class="QLabel" name="label_8">
-                            <property name="maximumSize">
-                             <size>
-                              <width>16777215</width>
-                              <height>50</height>
-                             </size>
+                         <layout class="QGridLayout" name="gridLayout_8">
+                          <item row="0" column="0" rowspan="2">
+                           <widget class="QFrame" name="frame_7">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
                             </property>
-                            <property name="font">
-                             <font>
-                              <pointsize>20</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: #f9b200;</string>
-                            </property>
-                            <property name="text">
-                             <string>Local ground parameters</string>
-                            </property>
+                            <layout class="QGridLayout" name="gridLayout_7">
+                             <property name="leftMargin">
+                              <number>9</number>
+                             </property>
+                             <property name="topMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>9</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="horizontalSpacing">
+                              <number>15</number>
+                             </property>
+                             <property name="verticalSpacing">
+                              <number>0</number>
+                             </property>
+                             <item row="1" column="0">
+                              <widget class="QLabel" name="label_30">
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Borehole depth [m]:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="6" column="1">
+                              <widget class="QDoubleSpinBox" name="sb_lambda_b">
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               </property>
+                               <property name="decimals">
+                                <number>1</number>
+                               </property>
+                               <property name="singleStep">
+                                <double>0.100000000000000</double>
+                               </property>
+                               <property name="value">
+                                <double>2.000000000000000</double>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="3" column="1">
+                              <widget class="QDoubleSpinBox" name="sb_r_borehole">
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               </property>
+                               <property name="decimals">
+                                <number>2</number>
+                               </property>
+                               <property name="maximum">
+                                <double>2.000000000000000</double>
+                               </property>
+                               <property name="singleStep">
+                                <double>0.050000000000000</double>
+                               </property>
+                               <property name="value">
+                                <double>0.150000000000000</double>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="6" column="0">
+                              <widget class="QLabel" name="label_16">
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Thermal conductivity backfill [W/mK]:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="3" column="0">
+                              <widget class="QLabel" name="label_25">
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Borehole radius [m]:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="5" column="0">
+                              <widget class="QLabel" name="label_15">
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Number of heatpipes per borehole:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="7" column="0">
+                              <widget class="QLabel" name="label_17">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>400</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Thermal conductivity insulating layer [W/mK]:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="7" column="1">
+                              <widget class="QDoubleSpinBox" name="sb_lambda_iso">
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               </property>
+                               <property name="decimals">
+                                <number>1</number>
+                               </property>
+                               <property name="singleStep">
+                                <double>0.100000000000000</double>
+                               </property>
+                               <property name="value">
+                                <double>0.300000000000000</double>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="8" column="0">
+                              <widget class="QLabel" name="label_18">
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Thermal conductivity heatpipe [W/mK]:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="8" column="1">
+                              <widget class="QDoubleSpinBox" name="sb_lambda_p">
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               </property>
+                               <property name="decimals">
+                                <number>1</number>
+                               </property>
+                               <property name="value">
+                                <double>14.000000000000000</double>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="5" column="1">
+                              <widget class="QSpinBox" name="sb_number_heatpipes">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>130</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               </property>
+                               <property name="minimum">
+                                <number>1</number>
+                               </property>
+                               <property name="maximum">
+                                <number>1000</number>
+                               </property>
+                               <property name="value">
+                                <number>6</number>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="1" column="1">
+                              <widget class="QSpinBox" name="sb_depth_boreholes">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>130</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               </property>
+                               <property name="minimum">
+                                <number>1</number>
+                               </property>
+                               <property name="maximum">
+                                <number>1000</number>
+                               </property>
+                               <property name="value">
+                                <number>50</number>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="0" column="0" colspan="2">
+                              <widget class="QRadioButton" name="rb_depth">
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true"/>
+                               </property>
+                               <property name="text">
+                                <string>Activate varying borehole depths</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
                            </widget>
                           </item>
-                          <item row="1" column="0">
-                           <widget class="QLabel" name="label_9">
-                            <property name="font">
-                             <font>
-                              <pointsize>15</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
-                            </property>
-                            <property name="text">
-                             <string>Thermal diffusivity [1e-6 m2/s]:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="1" column="1">
-                           <widget class="QDoubleSpinBox" name="sb_therm_diffu">
-                            <property name="font">
-                             <font>
-                              <pointsize>12</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">background-color: rgb(33, 37, 43);</string>
-                            </property>
-                            <property name="decimals">
-                             <number>1</number>
-                            </property>
-                            <property name="singleStep">
-                             <double>0.100000000000000</double>
-                            </property>
-                            <property name="value">
-                             <double>1.000000000000000</double>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="2" column="0">
-                           <widget class="QLabel" name="label_10">
-                            <property name="font">
-                             <font>
-                              <pointsize>15</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
-                            </property>
-                            <property name="text">
-                             <string>Thermal conductivity [W/mK]:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="2" column="1">
-                           <widget class="QDoubleSpinBox" name="sb_therm_cond">
-                            <property name="font">
-                             <font>
-                              <pointsize>12</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">background-color: rgb(33, 37, 43);</string>
-                            </property>
-                            <property name="decimals">
-                             <number>1</number>
-                            </property>
-                            <property name="value">
-                             <double>2.000000000000000</double>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="3" column="0">
-                           <widget class="QLabel" name="label_11">
-                            <property name="font">
-                             <font>
-                              <pointsize>15</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
-                            </property>
-                            <property name="text">
-                             <string>Undisturbed soil temperature [°C]:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="3" column="1">
-                           <widget class="QDoubleSpinBox" name="sb_undis_soil_temp">
-                            <property name="font">
-                             <font>
-                              <pointsize>12</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">background-color: rgb(33, 37, 43);</string>
-                            </property>
-                            <property name="decimals">
-                             <number>1</number>
-                            </property>
-                            <property name="minimum">
-                             <double>-50.000000000000000</double>
-                            </property>
-                            <property name="maximum">
-                             <double>50.000000000000000</double>
-                            </property>
-                            <property name="singleStep">
-                             <double>1.000000000000000</double>
-                            </property>
-                            <property name="value">
-                             <double>10.000000000000000</double>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="4" column="0">
-                           <widget class="QLabel" name="label_35">
-                            <property name="font">
-                             <font>
-                              <pointsize>15</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
-                            </property>
-                            <property name="text">
-                             <string>Altitude above sea level [m]:</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="4" column="1">
-                           <widget class="QSpinBox" name="sb_h_NHN">
+                          <item row="0" column="1" rowspan="2">
+                           <widget class="QFrame" name="frame_9">
                             <property name="minimumSize">
                              <size>
-                              <width>0</width>
+                              <width>2</width>
                               <height>0</height>
                              </size>
                             </property>
                             <property name="maximumSize">
                              <size>
-                              <width>16777215</width>
+                              <width>2</width>
                               <height>16777215</height>
                              </size>
                             </property>
-                            <property name="font">
-                             <font>
-                              <pointsize>12</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
-                            </property>
                             <property name="styleSheet">
-                             <string notr="true">background-color: rgb(33, 37, 43);</string>
+                             <string notr="true">background-color: rgb(221, 221, 221);
+</string>
                             </property>
-                            <property name="minimum">
-                             <number>0</number>
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
                             </property>
-                            <property name="maximum">
-                             <number>9000</number>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
                             </property>
-                            <property name="singleStep">
-                             <number>10</number>
+                           </widget>
+                          </item>
+                          <item row="1" column="2">
+                           <widget class="QFrame" name="frame_8">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
                             </property>
-                            <property name="value">
-                             <number>520</number>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QGridLayout" name="gridLayout_6">
+                             <item row="1" column="1">
+                              <widget class="QDoubleSpinBox" name="sb_radius_w">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>150</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               </property>
+                               <property name="decimals">
+                                <number>2</number>
+                               </property>
+                               <property name="maximum">
+                                <double>10.000000000000000</double>
+                               </property>
+                               <property name="singleStep">
+                                <double>0.010000000000000</double>
+                               </property>
+                               <property name="value">
+                                <double>0.120000000000000</double>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="2" column="0">
+                              <widget class="QLabel" name="label_19">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>290</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Outer radius insulating layer [m]:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="2" column="1">
+                              <widget class="QDoubleSpinBox" name="sb_radius_pa">
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               </property>
+                               <property name="decimals">
+                                <number>3</number>
+                               </property>
+                               <property name="maximum">
+                                <double>1.000000000000000</double>
+                               </property>
+                               <property name="singleStep">
+                                <double>0.001000000000000</double>
+                               </property>
+                               <property name="value">
+                                <double>0.016000000000000</double>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="3" column="0">
+                              <widget class="QLabel" name="label_21">
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Fillet insulating layer [m]:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="3" column="1">
+                              <widget class="QDoubleSpinBox" name="sb_radius_iso">
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               </property>
+                               <property name="decimals">
+                                <number>3</number>
+                               </property>
+                               <property name="maximum">
+                                <double>1.000000000000000</double>
+                               </property>
+                               <property name="singleStep">
+                                <double>0.001000000000000</double>
+                               </property>
+                               <property name="value">
+                                <double>0.016000000000000</double>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="4" column="0">
+                              <widget class="QLabel" name="label_22">
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Fillet heatpipe [m]:</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="4" column="1">
+                              <widget class="QDoubleSpinBox" name="sb_radius_pi">
+                               <property name="font">
+                                <font>
+                                 <pointsize>12</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               </property>
+                               <property name="decimals">
+                                <number>3</number>
+                               </property>
+                               <property name="maximum">
+                                <double>1.000000000000000</double>
+                               </property>
+                               <property name="singleStep">
+                                <double>0.001000000000000</double>
+                               </property>
+                               <property name="value">
+                                <double>0.015000000000000</double>
+                               </property>
+                              </widget>
+                             </item>
+                             <item row="1" column="0">
+                              <widget class="QLabel" name="label_20">
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Radius heatpipe-epicenters [m]:</string>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item row="0" column="2">
+                           <widget class="QWidget" name="widget_borehole" native="true">
+                            <property name="styleSheet">
+                             <string notr="true">image: url(:/images/images/images/ZAE-Logo_klein.png);</string>
                             </property>
                            </widget>
                           </item>
@@ -1907,9 +2755,9 @@ color: rgb(231, 81, 19);</string>
                        </item>
                       </layout>
                      </widget>
-                     <widget class="QWidget" name="borefield">
-                      <layout class="QVBoxLayout" name="verticalLayout_12">
-                       <item>
+                     <widget class="QWidget" name="borefield_sim">
+                      <layout class="QGridLayout" name="gridLayout_16">
+                       <item row="0" column="0">
                         <widget class="QFrame" name="frame_4">
                          <property name="maximumSize">
                           <size>
@@ -1959,19 +2807,19 @@ color: rgb(231, 81, 19);</string>
                              <string notr="true">color: #e75113;</string>
                             </property>
                             <property name="text">
-                             <string>Borefield  &amp; borehole parameters</string>
+                             <string>Borefield  geometry &amp; Simulation parameters</string>
                             </property>
                            </widget>
                           </item>
                          </layout>
                         </widget>
                        </item>
-                       <item>
+                       <item row="1" column="0">
                         <widget class="QFrame" name="frame_5">
                          <property name="maximumSize">
                           <size>
                            <width>16777215</width>
-                           <height>150</height>
+                           <height>160</height>
                           </size>
                          </property>
                          <property name="frameShape">
@@ -1994,7 +2842,7 @@ color: rgb(231, 81, 19);</string>
                              <string notr="true">color: #f9b200;</string>
                             </property>
                             <property name="text">
-                             <string>Borefiled geometry import</string>
+                             <string>Borefield geometry import</string>
                             </property>
                            </widget>
                           </item>
@@ -2008,7 +2856,7 @@ color: rgb(231, 81, 19);</string>
                              </font>
                             </property>
                             <property name="text">
-                             <string>Enter borefield geometry file:</string>
+                             <string>Enter borefield geometry file path:</string>
                             </property>
                            </widget>
                           </item>
@@ -2071,24 +2919,27 @@ color: rgb(231, 81, 19);</string>
                          </layout>
                         </widget>
                        </item>
-                       <item>
-                        <widget class="QFrame" name="frame_6">
+                       <item row="2" column="0">
+                        <widget class="QFrame" name="frame_11">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
                          <property name="frameShape">
                           <enum>QFrame::StyledPanel</enum>
                          </property>
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                         <layout class="QGridLayout" name="gridLayout_6">
-                          <property name="horizontalSpacing">
-                           <number>15</number>
-                          </property>
+                         <layout class="QGridLayout" name="gridLayout_14">
                           <item row="0" column="0" colspan="3">
-                           <widget class="QLabel" name="label_14">
+                           <widget class="QLabel" name="label_26">
                             <property name="maximumSize">
                              <size>
                               <width>16777215</width>
-                              <height>35</height>
+                              <height>60</height>
                              </size>
                             </property>
                             <property name="font">
@@ -2102,208 +2953,12 @@ color: rgb(231, 81, 19);</string>
                              <string notr="true">color: #f9b200;</string>
                             </property>
                             <property name="text">
-                             <string>Borehole parameters</string>
+                             <string>Simulation parameters</string>
                             </property>
                            </widget>
                           </item>
-                          <item row="1" column="0">
-                           <widget class="QFrame" name="frame_7">
-                            <property name="frameShape">
-                             <enum>QFrame::StyledPanel</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
-                            <layout class="QGridLayout" name="gridLayout_7">
-                             <property name="leftMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="topMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="rightMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="bottomMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="horizontalSpacing">
-                              <number>15</number>
-                             </property>
-                             <property name="verticalSpacing">
-                              <number>0</number>
-                             </property>
-                             <item row="0" column="0">
-                              <widget class="QLabel" name="label_15">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Number of boreholes:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="0" column="1">
-                              <widget class="QSpinBox" name="sb_number_boreholes">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>130</width>
-                                 <height>0</height>
-                                </size>
-                               </property>
-                               <property name="maximumSize">
-                                <size>
-                                 <width>16777215</width>
-                                 <height>16777215</height>
-                                </size>
-                               </property>
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="minimum">
-                                <number>1</number>
-                               </property>
-                               <property name="maximum">
-                                <number>1000</number>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="1" column="0">
-                              <widget class="QLabel" name="label_16">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Thermal conductivity backfill [W/mK]:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="1" column="1">
-                              <widget class="QDoubleSpinBox" name="sb_lambda_b">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="decimals">
-                                <number>1</number>
-                               </property>
-                               <property name="singleStep">
-                                <double>0.100000000000000</double>
-                               </property>
-                               <property name="value">
-                                <double>2.000000000000000</double>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="2" column="0">
-                              <widget class="QLabel" name="label_17">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>400</width>
-                                 <height>0</height>
-                                </size>
-                               </property>
-                               <property name="maximumSize">
-                                <size>
-                                 <width>16777215</width>
-                                 <height>16777215</height>
-                                </size>
-                               </property>
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Thermal conductivity insulating layer [W/mK]:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="2" column="1">
-                              <widget class="QDoubleSpinBox" name="sb_lambda_iso">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="decimals">
-                                <number>1</number>
-                               </property>
-                               <property name="singleStep">
-                                <double>0.100000000000000</double>
-                               </property>
-                               <property name="value">
-                                <double>0.300000000000000</double>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="3" column="0">
-                              <widget class="QLabel" name="label_18">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Thermal conductivity heatpipe [W/mK]:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="3" column="1">
-                              <widget class="QDoubleSpinBox" name="sb_lambda_p">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="decimals">
-                                <number>1</number>
-                               </property>
-                               <property name="value">
-                                <double>14.000000000000000</double>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </widget>
-                          </item>
-                          <item row="1" column="1">
-                           <widget class="QFrame" name="frame_9">
+                          <item row="2" column="1">
+                           <widget class="QFrame" name="frame_15">
                             <property name="minimumSize">
                              <size>
                               <width>2</width>
@@ -2328,485 +2983,142 @@ color: rgb(231, 81, 19);</string>
                             </property>
                            </widget>
                           </item>
-                          <item row="1" column="2">
-                           <widget class="QFrame" name="frame_8">
+                          <item row="2" column="2">
+                           <widget class="QFrame" name="frame_29">
                             <property name="frameShape">
                              <enum>QFrame::StyledPanel</enum>
                             </property>
                             <property name="frameShadow">
                              <enum>QFrame::Raised</enum>
                             </property>
-                            <layout class="QGridLayout" name="gridLayout_8">
-                             <property name="leftMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="topMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="rightMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="bottomMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="horizontalSpacing">
-                              <number>15</number>
-                             </property>
-                             <property name="verticalSpacing">
-                              <number>0</number>
-                             </property>
-                             <item row="0" column="0">
-                              <widget class="QLabel" name="label_20">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Radius heatpipe-epicenters [m]:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="0" column="1">
-                              <widget class="QDoubleSpinBox" name="sb_radius_w">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>150</width>
-                                 <height>0</height>
-                                </size>
-                               </property>
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="decimals">
-                                <number>2</number>
-                               </property>
-                               <property name="maximum">
-                                <double>10.000000000000000</double>
-                               </property>
-                               <property name="singleStep">
-                                <double>0.010000000000000</double>
-                               </property>
-                               <property name="value">
-                                <double>0.120000000000000</double>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="1" column="0">
-                              <widget class="QLabel" name="label_19">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>290</width>
-                                 <height>0</height>
-                                </size>
-                               </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_28">
+                             <item>
+                              <widget class="QFrame" name="frame_31">
                                <property name="maximumSize">
                                 <size>
                                  <width>16777215</width>
-                                 <height>16777215</height>
+                                 <height>60</height>
                                 </size>
                                </property>
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
                                </property>
-                               <property name="text">
-                                <string>Outer radius insulating layer [m]:</string>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
                                </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_30">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QLabel" name="label_32">
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>16777215</width>
+                                    <height>50</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>20</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"/>
+                                  </property>
+                                  <property name="text">
+                                   <string>Simulation time</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
                               </widget>
                              </item>
-                             <item row="1" column="1">
-                              <widget class="QDoubleSpinBox" name="sb_radius_pa">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
+                             <item>
+                              <widget class="QFrame" name="frame_32">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
                                </property>
-                               <property name="decimals">
-                                <number>3</number>
-                               </property>
-                               <property name="maximum">
-                                <double>1.000000000000000</double>
-                               </property>
-                               <property name="singleStep">
-                                <double>0.001000000000000</double>
-                               </property>
-                               <property name="value">
-                                <double>0.016000000000000</double>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="2" column="0">
-                              <widget class="QLabel" name="label_21">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Fillet insulating layer [m]:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="2" column="1">
-                              <widget class="QDoubleSpinBox" name="sb_radius_iso">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="decimals">
-                                <number>3</number>
-                               </property>
-                               <property name="maximum">
-                                <double>1.000000000000000</double>
-                               </property>
-                               <property name="singleStep">
-                                <double>0.001000000000000</double>
-                               </property>
-                               <property name="value">
-                                <double>0.016000000000000</double>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="3" column="0">
-                              <widget class="QLabel" name="label_22">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Fillet heatpipe [m]:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="3" column="1">
-                              <widget class="QDoubleSpinBox" name="sb_radius_pi">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="decimals">
-                                <number>3</number>
-                               </property>
-                               <property name="maximum">
-                                <double>1.000000000000000</double>
-                               </property>
-                               <property name="singleStep">
-                                <double>0.001000000000000</double>
-                               </property>
-                               <property name="value">
-                                <double>0.015000000000000</double>
-                               </property>
+                               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QLabel" name="label_29">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>15</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Years:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QSpinBox" name="sb_years">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>12</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                  </property>
+                                  <property name="minimum">
+                                   <number>1</number>
+                                  </property>
+                                  <property name="maximum">
+                                   <number>500</number>
+                                  </property>
+                                  <property name="value">
+                                   <number>1</number>
+                                  </property>
+                                  <property name="displayIntegerBase">
+                                   <number>10</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
                               </widget>
                              </item>
                             </layout>
                            </widget>
                           </item>
-                         </layout>
-                        </widget>
-                       </item>
-                      </layout>
-                     </widget>
-                     <widget class="QWidget" name="surface">
-                      <layout class="QHBoxLayout" name="horizontalLayout_6">
-                       <item>
-                        <widget class="QFrame" name="frame_10">
-                         <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
-                         </property>
-                         <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
-                         </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_20">
-                          <item>
-                           <widget class="QFrame" name="frame_13">
-                            <property name="maximumSize">
-                             <size>
-                              <width>16777215</width>
-                              <height>50</height>
-                             </size>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::StyledPanel</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
-                            <layout class="QVBoxLayout" name="verticalLayout_14">
-                             <property name="spacing">
-                              <number>0</number>
-                             </property>
-                             <property name="leftMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="topMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="rightMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="bottomMargin">
-                              <number>0</number>
-                             </property>
-                             <item>
-                              <widget class="QLabel" name="label_4">
-                               <property name="font">
-                                <font>
-                                 <pointsize>25</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">color: #e75113;</string>
-                               </property>
-                               <property name="text">
-                                <string>Surface &amp; heating element</string>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QFrame" name="frame_14">
-                            <property name="frameShape">
-                             <enum>QFrame::StyledPanel</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
-                            <layout class="QVBoxLayout" name="verticalLayout_7">
-                             <item>
-                              <widget class="QLabel" name="label_23">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Surface area [m2]:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QSpinBox" name="sb_A_he">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="minimum">
-                                <number>1</number>
-                               </property>
-                               <property name="maximum">
-                                <number>1000000</number>
-                               </property>
-                               <property name="singleStep">
-                                <number>10</number>
-                               </property>
-                               <property name="value">
-                                <number>35</number>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_24">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Minimal surface distance [mm]:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QSpinBox" name="sb_x_min">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="minimum">
-                                <number>1</number>
-                               </property>
-                               <property name="maximum">
-                                <number>500</number>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_25">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Pavement thermal conductivity [W/mK]:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QDoubleSpinBox" name="sb_lambda_pavement">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="decimals">
-                                <number>1</number>
-                               </property>
-                               <property name="singleStep">
-                                <double>0.100000000000000</double>
-                               </property>
-                               <property name="value">
-                                <double>2.300000000000000</double>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QFrame" name="frame_11">
-                         <property name="maximumSize">
-                          <size>
-                           <width>2</width>
-                           <height>16777215</height>
-                          </size>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">background-color: rgb(221, 221, 221);</string>
-                         </property>
-                         <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
-                         </property>
-                         <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QFrame" name="frame_12">
-                         <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
-                         </property>
-                         <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
-                         </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_23">
-                          <item>
-                           <widget class="QFrame" name="frame_15">
-                            <property name="maximumSize">
-                             <size>
-                              <width>16777215</width>
-                              <height>50</height>
-                             </size>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::StyledPanel</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
-                            <layout class="QVBoxLayout" name="verticalLayout_22">
-                             <property name="spacing">
-                              <number>0</number>
-                             </property>
-                             <property name="leftMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="topMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="rightMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="bottomMargin">
-                              <number>0</number>
-                             </property>
-                             <item>
-                              <widget class="QLabel" name="label_26">
-                               <property name="font">
-                                <font>
-                                 <pointsize>25</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">color: #e75113;</string>
-                               </property>
-                               <property name="text">
-                                <string>Simulation parameters</string>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </widget>
-                          </item>
-                          <item>
+                          <item row="2" column="0">
                            <widget class="QFrame" name="frame_16">
                             <property name="frameShape">
                              <enum>QFrame::StyledPanel</enum>
@@ -2814,193 +3126,156 @@ color: rgb(231, 81, 19);</string>
                             <property name="frameShadow">
                              <enum>QFrame::Raised</enum>
                             </property>
-                            <layout class="QGridLayout" name="gridLayout_9">
-                             <item row="0" column="0" colspan="2">
-                              <widget class="QLabel" name="label_31">
+                            <layout class="QVBoxLayout" name="verticalLayout_32">
+                             <item>
+                              <widget class="QFrame" name="frame_33">
                                <property name="maximumSize">
                                 <size>
                                  <width>16777215</width>
-                                 <height>50</height>
+                                 <height>60</height>
                                 </size>
                                </property>
-                               <property name="font">
-                                <font>
-                                 <pointsize>20</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">color: #f9b200;</string>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
                                </property>
-                               <property name="text">
-                                <string>Startdate</string>
-                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_31">
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QLabel" name="label_31">
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>16777215</width>
+                                    <height>50</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>20</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"/>
+                                  </property>
+                                  <property name="text">
+                                   <string>Startdate</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
                               </widget>
                              </item>
-                             <item row="1" column="0">
-                              <widget class="QLabel" name="label_27">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
+                             <item>
+                              <widget class="QFrame" name="frame_34">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
                                </property>
-                               <property name="text">
-                                <string>Month:</string>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
                                </property>
-                              </widget>
-                             </item>
-                             <item row="1" column="1">
-                              <widget class="QComboBox" name="cb_month">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="currentText">
-                                <string/>
-                               </property>
-                               <property name="maxVisibleItems">
-                                <number>12</number>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="2" column="0">
-                              <widget class="QLabel" name="label_28">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Day:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="2" column="1">
-                              <widget class="QSpinBox" name="sb_day">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="minimum">
-                                <number>1</number>
-                               </property>
-                               <property name="maximum">
-                                <number>31</number>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="3" column="0" colspan="2">
-                              <widget class="QLabel" name="label_32">
-                               <property name="maximumSize">
-                                <size>
-                                 <width>16777215</width>
-                                 <height>50</height>
-                                </size>
-                               </property>
-                               <property name="font">
-                                <font>
-                                 <pointsize>20</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">color: #f9b200;</string>
-                               </property>
-                               <property name="text">
-                                <string>Simulation time parameters</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="4" column="0">
-                              <widget class="QLabel" name="label_29">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Years:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="4" column="1">
-                              <widget class="QSpinBox" name="sb_years">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="minimum">
-                                <number>1</number>
-                               </property>
-                               <property name="maximum">
-                                <number>500</number>
-                               </property>
-                               <property name="value">
-                                <number>1</number>
-                               </property>
-                               <property name="displayIntegerBase">
-                                <number>10</number>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="5" column="0">
-                              <widget class="QLabel" name="label_30">
-                               <property name="font">
-                                <font>
-                                 <pointsize>15</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="text">
-                                <string>Time step [h]:</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item row="5" column="1">
-                              <widget class="QSpinBox" name="sb_dt">
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="minimum">
-                                <number>1</number>
-                               </property>
-                               <property name="maximum">
-                                <number>1000000</number>
-                               </property>
+                               <layout class="QGridLayout" name="gridLayout_9">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="horizontalSpacing">
+                                 <number>0</number>
+                                </property>
+                                <item row="0" column="0">
+                                 <widget class="QLabel" name="label_27">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>15</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Month:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="0" column="1">
+                                 <widget class="QComboBox" name="cb_month">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>12</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                  </property>
+                                  <property name="currentText">
+                                   <string/>
+                                  </property>
+                                  <property name="maxVisibleItems">
+                                   <number>12</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="1" column="0">
+                                 <widget class="QLabel" name="label_28">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>15</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Day:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="1" column="1">
+                                 <widget class="QSpinBox" name="sb_day">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>12</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                  </property>
+                                  <property name="minimum">
+                                   <number>1</number>
+                                  </property>
+                                  <property name="maximum">
+                                   <number>31</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
                               </widget>
                              </item>
                             </layout>
@@ -3012,8 +3287,8 @@ color: rgb(231, 81, 19);</string>
                       </layout>
                      </widget>
                      <widget class="QWidget" name="simulation">
-                      <layout class="QVBoxLayout" name="verticalLayout_10">
-                       <item>
+                      <layout class="QGridLayout" name="gridLayout_10">
+                       <item row="0" column="0" colspan="2">
                         <widget class="QFrame" name="frame_17">
                          <property name="maximumSize">
                           <size>
@@ -3028,21 +3303,6 @@ color: rgb(231, 81, 19);</string>
                           <enum>QFrame::Raised</enum>
                          </property>
                          <layout class="QVBoxLayout" name="verticalLayout_24">
-                          <property name="spacing">
-                           <number>0</number>
-                          </property>
-                          <property name="leftMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>0</number>
-                          </property>
                           <item>
                            <widget class="QLabel" name="label_33">
                             <property name="maximumSize">
@@ -3069,15 +3329,21 @@ color: rgb(231, 81, 19);</string>
                          </layout>
                         </widget>
                        </item>
-                       <item>
-                        <widget class="QFrame" name="frame_19">
+                       <item row="1" column="0">
+                        <widget class="QFrame" name="frame_23">
+                         <property name="minimumSize">
+                          <size>
+                           <width>550</width>
+                           <height>0</height>
+                          </size>
+                         </property>
                          <property name="frameShape">
                           <enum>QFrame::StyledPanel</enum>
                          </property>
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_25">
+                         <layout class="QVBoxLayout" name="verticalLayout_26">
                           <item>
                            <widget class="QLabel" name="label_34">
                             <property name="font">
@@ -3095,48 +3361,57 @@ color: rgb(231, 81, 19);</string>
                             </property>
                            </widget>
                           </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QFrame" name="frame_18">
-                         <property name="frameShape">
-                          <enum>QFrame::StyledPanel</enum>
-                         </property>
-                         <property name="frameShadow">
-                          <enum>QFrame::Raised</enum>
-                         </property>
-                         <layout class="QHBoxLayout" name="horizontalLayout_7">
                           <item>
-                           <widget class="QFrame" name="frame_20">
+                           <widget class="QFrame" name="frame_18">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>150</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>200</height>
+                             </size>
+                            </property>
                             <property name="frameShape">
                              <enum>QFrame::StyledPanel</enum>
                             </property>
                             <property name="frameShadow">
                              <enum>QFrame::Raised</enum>
                             </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QPushButton" name="btn_startsim">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>100</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <pointsize>16</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
-                            </property>
-                            <property name="cursor">
-                             <cursorShape>PointingHandCursor</cursorShape>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">QPushButton{
+                            <layout class="QHBoxLayout" name="horizontalLayout_7">
+                             <item>
+                              <widget class="QFrame" name="frame_20">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="btn_startsim">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>100</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>16</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="cursor">
+                                <cursorShape>PointingHandCursor</cursorShape>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton{
 background-color: rgb(52, 59, 72);
 }
 QPushButton:hover{
@@ -3145,27 +3420,157 @@ QPushButton:hover{
 QPushButton:pressed{
 	background-color: rgba(228, 38, 24, 130);
 }</string>
+                               </property>
+                               <property name="text">
+                                <string>START SIMULATION</string>
+                               </property>
+                               <property name="icon">
+                                <iconset>
+                                 <normaloff>images/icons/cil-media-play.png</normaloff>images/icons/cil-media-play.png</iconset>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_21">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item row="1" column="1">
+                        <widget class="QFrame" name="frame_22">
+                         <property name="minimumSize">
+                          <size>
+                           <width>500</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_10">
+                          <item>
+                           <widget class="QLabel" name="label_36">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>50</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>20</pointsize>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #f9b200;</string>
                             </property>
                             <property name="text">
-                             <string>START SIMULATION</string>
-                            </property>
-                            <property name="icon">
-                             <iconset>
-                              <normaloff>images/icons/cil-media-play.png</normaloff>images/icons/cil-media-play.png</iconset>
+                             <string>Console</string>
                             </property>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QFrame" name="frame_21">
-                            <property name="frameShape">
-                             <enum>QFrame::StyledPanel</enum>
+                           <widget class="QPlainTextEdit" name="line_console">
+                            <property name="minimumSize">
+                             <size>
+                              <width>200</width>
+                              <height>200</height>
+                             </size>
                             </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: rgb(33, 37, 43);</string>
+                            </property>
+                            <property name="readOnly">
+                             <bool>true</bool>
                             </property>
                            </widget>
                           </item>
                          </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="results">
+                      <layout class="QVBoxLayout" name="verticalLayout_27">
+                       <item>
+                        <widget class="QFrame" name="frame_24">
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>60</height>
+                          </size>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_15">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QLabel" name="label_5">
+                            <property name="font">
+                             <font>
+                              <pointsize>25</pointsize>
+                              <italic>false</italic>
+                              <bold>false</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: #e75113;</string>
+                            </property>
+                            <property name="text">
+                             <string>Results</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="frame_19">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
                         </widget>
                        </item>
                       </layout>
@@ -3463,7 +3868,7 @@ QPushButton:pressed{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>333</width>
+                                 <width>218</width>
                                  <height>218</height>
                                 </rect>
                                </property>
