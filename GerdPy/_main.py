@@ -35,7 +35,6 @@ def main(self):
 
     # 1.0) Standort
     h_NHN = self.ui.sb_h_NHN.value()    # Höhe über Normal-Null des Standorts (default: 520)
-    # print(h_NHN)
 
     # 1.1) Erdboden
     a = self.ui.sb_therm_diffu.value()*1.0e-6   # Temperaturleitfähigkeit [m2/s] (default: 1)
@@ -100,21 +99,15 @@ def main(self):
     # 2.) Überprüfung der geometrischen Verträglichkeit (Sonden & Heatpipes)
     # -------------------------------------------------------------------------
 
-    if check_geometry(boreField, hp):
+    if check_geometry(boreField, hp, self):
         self.ui.text_console.insertPlainText(50 * '-' + '\n')
         self.ui.text_console.insertPlainText('Geometry-Check: not OK! - Simulation aborted\n')
         self.ui.text_console.insertPlainText(50 * '-' + '\n')
-        # print(50*'-')
-        # print('Geometry-Check: not OK! - Simulation aborted')
-        # print(50*'-')
         sys.exit()
     else:
         self.ui.text_console.insertPlainText(50 * '-' + '\n')
         self.ui.text_console.insertPlainText('Geometry-Check: OK!\n')
         self.ui.text_console.insertPlainText(50 * '-' + '\n')
-        # print(50*'-')
-        # print('Geometry-Check: OK!')
-        # print(50*'-')
 
     # -------------------------------------------------------------------------
     # 3.) Ermittlung thermischer Widerstand Bohrlochrand bis Oberfläche
@@ -134,7 +127,7 @@ def main(self):
     time_req = LoadAgg.get_times_for_simulation()
 
     # Berechnung der G-Function mit 'gfunction.py'
-    gFunc = gfunction.uniform_temperature(boreField, time_req, a,
+    gFunc = gfunction.uniform_temperature(boreField, time_req, a, self,
                                           nSegments=12)
 
     # Initialisierung der Simulation mit 'load_aggregation.py'
@@ -164,7 +157,7 @@ def main(self):
 
     Q = np.zeros(Nt)
 
-    print('Simulating...')
+    self.ui.text_console.insertPlainText('Simulating...\n')
 
     while time < tmax:  # Iterationsschleife (ein Durchlauf pro Zeitschritt)
 
@@ -199,7 +192,8 @@ def main(self):
 
     # Zeitstempel (Simulationsdauer)
     toc = tim.time()
-    print('Total simulation time: {} sec'.format(toc - tic))
+
+    self.ui.text_console.insertPlainText('Total simulation time: {} sec'.format(toc - tic) + '\n')
 
     plt.rc('figure')
     fig = plt.figure()
