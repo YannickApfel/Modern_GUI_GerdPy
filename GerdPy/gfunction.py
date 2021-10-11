@@ -99,7 +99,7 @@ def uniform_temperature(boreholes, time, alpha, self, nSegments=12, method='line
     t = np.atleast_1d(time).flatten()
     # Calculate segment to segment thermal response factors
     h_ij = thermal_response_factors(
-        boreSegments, t, alpha, use_similarities=use_similarities,
+        boreSegments, t, alpha, self, use_similarities=use_similarities,
         splitRealAndImage=True, disTol=disTol, tol=tol, processes=processes,
         disp=disp)
     toc1 = tim.time()

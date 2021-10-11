@@ -175,8 +175,9 @@ class MainWindow(QMainWindow):
             b_file = USEFunctions.fcn_browse(self)
             widgets.line_borefield_file.setText(b_file[0])
 
+        # START SIMULATION
         if btnName == "btn_startsim":
-           simulation(self)
+            simulation(self)
 
         # PRINT BTN NAME
         # print(f'Button "{btnName}" pressed!')

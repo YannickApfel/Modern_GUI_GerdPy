@@ -32,7 +32,9 @@ def main(self):
     # -------------------------------------------------------------------------
     # 1.) Parametrierung der Simulation (Geometrien, Stoffwerte, etc.)
     # -------------------------------------------------------------------------
-
+    self.ui.text_console.insertPlainText(50 * '-' + '\n')
+    self.ui.text_console.insertPlainText('Initializing simulation...\n')
+    self.ui.text_console.insertPlainText(50 * '-' + '\n')
     # 1.0) Standort
     h_NHN = self.ui.sb_h_NHN.value()    # Höhe über Normal-Null des Standorts (default: 520)
 
