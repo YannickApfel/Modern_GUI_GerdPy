@@ -52,7 +52,7 @@ def main(self):
     H_field = boreholes.length_field(boreField)
 
     # Layout-Plot des Erdwärmesondenfelds
-    boreholes.visualize_field(boreField)
+    fig = boreholes.visualize_field(boreField)
 
     # 1.3) Bohrloch
 
@@ -230,7 +230,7 @@ def main(self):
     # Fenstergröße anpassen
     # plt.tight_layout()
 
-    return
+    return fig
 
 
 # Main function
