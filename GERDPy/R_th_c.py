@@ -6,9 +6,9 @@
 """
 def R_th_c(borefield):
 
-    import math, boreholes
+    import math, GERDPy.boreholes
     from scipy.constants import pi, R, Stefan_Boltzmann
-    from boreholes import length_field
+    from .boreholes import length_field
 
     # %% 1.) Stoffwerte und Parameter
 

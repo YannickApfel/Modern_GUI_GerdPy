@@ -4,11 +4,11 @@ import numpy as np
 from scipy.constants import pi
 from scipy.interpolate import interp1d as interp1d
 
-from boreholes import Borehole
-from heat_transfer import thermal_response_factors
+from .boreholes import Borehole
+from .heat_transfer import thermal_response_factors
 
 
-def uniform_temperature(boreholes, time, alpha, nSegments=12, method='linear',
+def uniform_temperature(boreholes, time, alpha, self, nSegments=12, method='linear',
                         use_similarities=True, disTol=0.01, tol=1.0e-6,
                         processes=None, disp=True):
     """
@@ -80,6 +80,9 @@ def uniform_temperature(boreholes, time, alpha, nSegments=12, method='linear',
         print(60*'-')
         print('Calculating g-function for uniform borehole wall temperature')
         print(60*'-')
+        self.ui.text_console.insertPlainText(60 * '-' + '\n')
+        self.ui.text_console.insertPlainText('Calculating g-function for uniform borehole wall temperature\n')
+        self.ui.text_console.insertPlainText(60 * '-' + '\n')
     # Initialize chrono
     tic = tim.time()
     # Number of boreholes
@@ -99,13 +102,14 @@ def uniform_temperature(boreholes, time, alpha, nSegments=12, method='linear',
     t = np.atleast_1d(time).flatten()
     # Calculate segment to segment thermal response factors
     h_ij = thermal_response_factors(
-        boreSegments, t, alpha, use_similarities=use_similarities,
+        boreSegments, t, alpha, self, use_similarities=use_similarities,
         splitRealAndImage=True, disTol=disTol, tol=tol, processes=processes,
         disp=disp)
     toc1 = tim.time()
 
     if disp:
         print('Building and solving system of equations ...')
+        self.ui.text_console.insertPlainText('Building and solving system of equations ...\n')
     # -------------------------------------------------------------------------
     # Build a system of equation [A]*[X] = [B] for the evaluation of the
     # g-function. [A] is a coefficient matrix, [X] = [Qb,Tb] is a state
@@ -161,6 +165,9 @@ def uniform_temperature(boreholes, time, alpha, nSegments=12, method='linear',
         print('Total time for g-function evaluation: {} sec'.format(
                 toc2 - tic))
         print(60*'-')
+        self.ui.text_console.insertPlainText('{} sec\n'.format(toc2 - toc1))
+        self.ui.text_console.insertPlainText('Total time for g-function evaluation: {} sec\n'.format(toc2 - tic))
+        self.ui.text_console.insertPlainText(60 * '-' + '\n')
 
     # Return float if time is a scalar
     if np.isscalar(time):

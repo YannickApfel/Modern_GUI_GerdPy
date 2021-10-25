@@ -39,9 +39,9 @@ def main(self):
     print(50 * '-')
     print('Initializing simulation...')
     print(50 * '-')
-    # self.ui.text_console.insertPlainText(50 * '-' + '\n')
-    # self.ui.text_console.insertPlainText('Initializing simulation...\n')
-    # self.ui.text_console.insertPlainText(50 * '-' + '\n')
+    self.ui.text_console.insertPlainText(50 * '-' + '\n')
+    self.ui.text_console.insertPlainText('Initializing simulation...\n')
+    self.ui.text_console.insertPlainText(50 * '-' + '\n')
 
     # 1.0) Standort
     h_NHN = self.ui.sb_h_NHN.value()                # Höhe über Normal-Null des Standorts
@@ -49,7 +49,7 @@ def main(self):
     # 1.1) Erdboden
     a = self.ui.sb_therm_diffu.value() * 1.0e-6  # Temperaturleitfähigkeit [m2/s] (default: 1)
     lambda_g = self.ui.sb_therm_cond.value()  # Wärmeleitfähigkeit [W/mK] (default: 2.0)
-    T_g = self.ui.sb_undis_soil_temp.value()  # ungestörte Bodentemperatur [°C] (default: 10.0)
+    Theta_g = self.ui.sb_undis_soil_temp.value()  # ungestörte Bodentemperatur [°C] (default: 10.0)
 
     # 1.2) Erdwärmesondenfeld
 
@@ -109,21 +109,21 @@ def main(self):
     # 2.) Überprüfung der geometrischen Verträglichkeit (Sonden & Heatpipes)
     # -------------------------------------------------------------------------
 
-    if check_geometry(boreField, hp):
+    if check_geometry(boreField, hp, self):
         print(50*'-')
         print('Geometry-Check: not OK! - Simulation aborted')
         print(50*'-')
-        # self.ui.text_console.insertPlainText(50 * '-' + '\n')
-        # self.ui.text_console.insertPlainText('Geometry-Check: not OK! - Simulation aborted\n')
-        # self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        self.ui.text_console.insertPlainText('Geometry-Check: not OK! - Simulation aborted\n')
+        self.ui.text_console.insertPlainText(50 * '-' + '\n')
         sys.exit()
     else:
         print(50*'-')
         print('Geometry-Check: OK!')
         print(50*'-')
-        # self.ui.text_console.insertPlainText(50 * '-' + '\n')
-        # self.ui.text_console.insertPlainText('Geometry-Check: OK!\n')
-        # self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        self.ui.text_console.insertPlainText('Geometry-Check: OK!\n')
+        self.ui.text_console.insertPlainText(50 * '-' + '\n')
 
     # -------------------------------------------------------------------------
     # 3.) Ermittlung thermischer Widerstand Bohrlochrand bis Oberfläche
@@ -143,7 +143,7 @@ def main(self):
     time_req = LoadAgg.get_times_for_simulation()
 
     # Berechnung der G-Function mit 'gfunction.py'
-    gFunc = gfunction.uniform_temperature(boreField, time_req, a,
+    gFunc = gfunction.uniform_temperature(boreField, time_req, a, self,
                                           nSegments=12)
 
     # Initialisierung der Simulation mit 'load_aggregation.py'
@@ -180,7 +180,7 @@ def main(self):
     Q = np.zeros(Nt)
 
     print('Simulating...')
-    # self.ui.text_console.insertPlainText('Simulating...\n')
+    self.ui.text_console.insertPlainText('Simulating...\n')
 
     while time < tmax:  # Iterationsschleife (ein Durchlauf pro Zeitschritt)
 
@@ -191,10 +191,10 @@ def main(self):
 
         # Ermittlung der Entzugsleistung im 1. Zeitschritt
         if i == 0:  # Annahme Theta_b = Theta_surf = Theta_g, Heizelementoberfläche trocken
-            Q[i], net_neg, Theta_surf[i], m_Rw[i] = load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], A_he, Theta_g, R_th, Theta_g, B[i], Phi[i], RR[i], 0)
+            Q[i], net_neg, Theta_surf[i], m_Rw[i] = load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], A_he, Theta_g, R_th, Theta_g, B[i], Phi[i], RR[i], 0, self)
 
         if i > 0:  # alle weiteren Zeitschritte (ermittelte Bodentemperatur)
-            Q[i], net_neg, Theta_surf[i], m_Rw[i] = load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], A_he, Theta_b[i-1], R_th, Theta_surf[i-1], B[i], Phi[i], RR[i], m_Rw[i-1])
+            Q[i], net_neg, Theta_surf[i], m_Rw[i] = load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], A_he, Theta_b[i-1], R_th, Theta_surf[i-1], B[i], Phi[i], RR[i], m_Rw[i-1], self)
 
         # Aufprägung der ermittelten Entzugsleistung mit 'load_aggregation.py'
         LoadAgg.set_current_load(Q[i]/H_field)
@@ -214,7 +214,7 @@ def main(self):
     # Zeitstempel (Simulationsdauer)
     toc = tim.time()
     print('Total simulation time: {} sec'.format(toc - tic))
-    # self.ui.text_console.insertPlainText('Total simulation time: {} sec'.format(toc - tic) + '\n')
+    self.ui.text_console.insertPlainText('Total simulation time: {} sec\n'.format(toc - tic))
 
     plt.rc('figure')
     fig = plt.figure()

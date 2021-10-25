@@ -52,7 +52,7 @@ def p_inf(h_NHN):
     return 101325 * (1 - 0.0065 * h_NHN / 288.2) ** 5.265
 
 # Sättigungs-Dampfdruck nach ASHRAE2013 [Pa]
-def p_s(T):  # Input in [K]
+def p_s(T, self):  # Input in [K]
     C_1 = -5.6745359e3
     C_2 = 6.3925247e0
     C_3 = -9.6778430e-3
@@ -73,6 +73,7 @@ def p_s(T):  # Input in [K]
         return math.exp(C_8 / T + C_9 + C_10 * T + C_11 * T ** 2 + C_12 * T ** 3 + C_13 * math.log(T))
     else:
         print('Interner Fehler: erlaubter T-Bereich für Sättigungs-Dampfdruckformel nach ASHRAE2013 unter-/überschritten!')
+        self.ui.text_console.insertPlainText('Interner Fehler: erlaubter T-Bereich für Sättigungs-Dampfdruckformel nach ASHRAE2013 unter-/überschritten!\n')
         sys.exit()
 
 
@@ -146,24 +147,24 @@ def beta_c(Theta_inf, u, h_NHN):
 
 
 # Wasserdampfbeladung der gesättigten Luft bei Theta_inf [kg Dampf / kg Luft]
-def X_D_inf(Theta_inf, Phi, h_NHN):
+def X_D_inf(Theta_inf, Phi, h_NHN, self):
     # Sättigungsdampfdruck in der Umgebung bei Taupunkttemperatur: p_D = p_s(T_tau(Theta_inf, Phi))
     T_tau = CP.HAPropsSI('DewPoint', 'T', (Theta_inf + 273.15), 'P', 101325, 'R', Phi)  # Input in [K]
-    p_D = p_s(T_tau)  # Input in [K]
+    p_D = p_s(T_tau, self)  # Input in [K]
     
     return 0.622 * p_D / (p_inf(h_NHN) - p_D)
 
 
 # Wasserdampfbeladung der gesättigten Luft bei Theta_surf [kg Dampf / kg Luft]
-def X_D_sat_surf(Theta_surf, h_NHN):
+def X_D_sat_surf(Theta_surf, h_NHN, self):
     # Sättigungsdampfdruck an der Heizelementoberfläche bei Theta_surf: p_D = p_s(Theta_surf)
-    p_D = p_s(Theta_surf + 273.15)  # Input in [K]
+    p_D = p_s(Theta_surf + 273.15, self)  # Input in [K]
 
     return 0.622 * p_D / (p_inf(h_NHN) - p_D)
 
 
 # Definition & Bilanzierung der Einzellasten
-def load(h_NHN, v, Theta_inf, S_w, A_he, Theta_b_0, R_th, Theta_surf_0, B, Phi, RR, m_Rw_0):  # Theta_x_0: Temp. des vorhergehenden Zeitschritts
+def load(h_NHN, v, Theta_inf, S_w, A_he, Theta_b_0, R_th, Theta_surf_0, B, Phi, RR, m_Rw_0, self):  # Theta_x_0: Temp. des vorhergehenden Zeitschritts
                                                                    # Input-Temperaturen in [°C]
         
     # 0.) Preprocessing
@@ -212,7 +213,7 @@ def load(h_NHN, v, Theta_inf, S_w, A_he, Theta_b_0, R_th, Theta_surf_0, B, Phi, 
             - Oberfläche ist nass (Abfrage der Restwassermenge m_Rw)
     '''    
     if (eva is True and Theta_surf_0 >= 0 and m_Rw_0 > 0):
-        Q_eva = rho_l * beta_c(Theta_inf, u_inf, h_NHN) * (X_D_sat_surf(Theta_surf_0, h_NHN) - X_D_inf(Theta_inf, Phi, h_NHN)) * h_Ph_lg * A_he
+        Q_eva = rho_l * beta_c(Theta_inf, u_inf, h_NHN) * (X_D_sat_surf(Theta_surf_0, h_NHN, self) - X_D_inf(Theta_inf, Phi, h_NHN, self)) * h_Ph_lg * A_he
     else:
         Q_eva = 0
         
