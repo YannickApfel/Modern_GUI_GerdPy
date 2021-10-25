@@ -9,7 +9,7 @@
 import numpy as np
 
 
-def check_geometry(borefield, heatpipes, self):
+def check_geometry(borefield, heatpipes):
     # errors_exist mit 0 initialisieren
     errors_exist = 0
     
@@ -26,16 +26,16 @@ def check_geometry(borefield, heatpipes, self):
             if abs(dist - borehole_1.r_b) < borehole_1.r_b:
                 duplicate_pairs.append((i+1, j+1))
     if duplicate_pairs:
-        self.ui.text_console.insertPlainText(f'Geometric conflict between the following borehole pairs:\n')
-        self.ui.text_console.insertPlainText(*duplicate_pairs, sep = ", " + '\n')
-        self.ui.text_console.insertPlainText('Please adjust!\n')
+        print(f'Geometric conflict between the following borehole pairs:')
+        print(*duplicate_pairs, sep = ", ")
+        print('Please adjust!')
         errors_exist = 1
 
     # Test: Bohrlochradien müssen identisch sein
     for i in range(len(borefield) - 1):
         if borefield[i].r_b != borefield[i+1].r_b:
-            self.ui.text_console.insertPlainText('Borehole radii must be identical!\n')
-            self.ui.text_console.insertPlainText('Please adjust!\n')
+            print('Borehole radii must be identical!')
+            print('Please adjust!')
             errors_exist = 1
             break
 
@@ -43,10 +43,10 @@ def check_geometry(borefield, heatpipes, self):
     xy = heatpipes.xy_mat()
     heatpipe_distance = np.sqrt((xy[1, 0] - xy[2, 0])**2 + (xy[1, 1] - xy[2, 1])**2)
     if ((heatpipes.r_pa + heatpipes.r_w) >= heatpipes.r_b):
-        self.ui.text_console.insertPlainText('Heatpipe circle too big!\n')
+        print("Heatpipe circle too big!")
         errors_exist = 1
     elif heatpipe_distance <= (2 * heatpipes.r_pa):
-        self.ui.text_console.insertPlainText('Too many heat pipes!\n')
+        print("Too many heat pipes!")
         errors_exist = 1
 
     return errors_exist

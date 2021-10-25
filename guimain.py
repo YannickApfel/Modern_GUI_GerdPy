@@ -20,7 +20,7 @@ import platform
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
-from GerdPy._main import main as simulation
+from GERDPy._main import main as simulation
 from modules import *
 from widgets import *
 os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%

@@ -116,7 +116,7 @@ def finite_line_source(
 
 
 def thermal_response_factors(
-        boreSegments, time, alpha, self, use_similarities=True,
+        boreSegments, time, alpha, use_similarities=True,
         splitRealAndImage=True, disTol=0.01, tol=1.0e-6, processes=None,
         disp=True):
     """
@@ -179,7 +179,7 @@ def thermal_response_factors(
     if use_similarities:
         # Calculations with similarities
         if disp:
-            self.ui.text_console.insertPlainText('Identifying similarities ...\n')
+            print('Identifying similarities ...')
         (nSimPos, simPos, disSimPos, HSimPos, DSimPos,
          nSimNeg, simNeg, disSimNeg, HSimNeg, DSimNeg) = \
             similarities(boreSegments,
@@ -190,8 +190,8 @@ def thermal_response_factors(
 
         toc1 = tim.time()
         if disp:
-            self.ui.text_console.insertPlainText('{} sec\n'.format(toc1 - tic))
-            self.ui.text_console.insertPlainText('Calculating segment to segment response factors ...\n')
+            print('{} sec'.format(toc1 - tic))
+            print('Calculating segment to segment response factors ...')
 
         # Similarities for real sources
         for s in range(nSimPos):
@@ -237,7 +237,7 @@ def thermal_response_factors(
     else:
         # Calculations without similarities
         if disp:
-            self.ui.text_console.insertPlainText('Calculating segment to segment response factors ...\n')
+            print('Calculating segment to segment response factors ...')
         for i in range(nSources):
             # Segment to same-segment thermal response factor
             # FLS solution for combined real and image sources
@@ -260,7 +260,7 @@ def thermal_response_factors(
 
     toc2 = tim.time()
     if disp:
-        self.ui.text_console.insertPlainText('{} sec\n'.format(toc2 - tic))
+        print('{} sec'.format(toc2 - tic))
 
     # Close pool of workers
     pool.close()

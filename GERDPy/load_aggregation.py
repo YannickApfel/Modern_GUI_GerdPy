@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 
-import GerdPy.utilities
+import utilities
 
 
 class _LoadAggregation(object):
@@ -218,7 +218,7 @@ class ClaessonJaved(_LoadAggregation):
             widths double every cells_per_level cells.
 
         """
-        self._time = GerdPy.utilities.time_ClaessonJaved(
+        self._time = utilities.time_ClaessonJaved(
                 dt, tmax, cells_per_level=cells_per_level)
         self._width = np.hstack((1,
                                  (self._time[1:] - self._time[:-1])/dt))

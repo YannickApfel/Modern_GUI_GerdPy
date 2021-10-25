@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'maintuiyuh.ui'
+## Form generated from reading UI file 'mainZjoCpz.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -12,7 +12,7 @@ from PySide6.QtCore import *  # type: ignore
 from PySide6.QtGui import *  # type: ignore
 from PySide6.QtWidgets import *  # type: ignore
 
-from .resources_rc import *
+from resources_rc import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -1654,16 +1654,16 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_6.addWidget(self.label_29)
 
-        self.sb_years = QSpinBox(self.frame_32)
-        self.sb_years.setObjectName(u"sb_years")
-        self.sb_years.setFont(font1)
-        self.sb_years.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_years.setMinimum(1)
-        self.sb_years.setMaximum(500)
-        self.sb_years.setValue(1)
-        self.sb_years.setDisplayIntegerBase(10)
+        self.sb_simtime = QSpinBox(self.frame_32)
+        self.sb_simtime.setObjectName(u"sb_simtime")
+        self.sb_simtime.setFont(font1)
+        self.sb_simtime.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.sb_simtime.setMinimum(1)
+        self.sb_simtime.setMaximum(999999999)
+        self.sb_simtime.setValue(730)
+        self.sb_simtime.setDisplayIntegerBase(10)
 
-        self.horizontalLayout_6.addWidget(self.sb_years)
+        self.horizontalLayout_6.addWidget(self.sb_simtime)
 
 
         self.verticalLayout_28.addWidget(self.frame_32)
@@ -2037,7 +2037,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 351, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -2298,7 +2298,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2363,7 +2363,7 @@ class Ui_MainWindow(object):
         self.btn_browse_borefield.setText(QCoreApplication.translate("MainWindow", u" Browse", None))
         self.label_26.setText(QCoreApplication.translate("MainWindow", u"Simulation parameters", None))
         self.label_32.setText(QCoreApplication.translate("MainWindow", u"Simulation time", None))
-        self.label_29.setText(QCoreApplication.translate("MainWindow", u"Years:", None))
+        self.label_29.setText(QCoreApplication.translate("MainWindow", u"Hours:", None))
         self.label_31.setText(QCoreApplication.translate("MainWindow", u"Startdate", None))
         self.label_27.setText(QCoreApplication.translate("MainWindow", u"Month:", None))
         self.cb_month.setCurrentText("")
