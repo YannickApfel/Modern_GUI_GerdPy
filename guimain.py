@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
         # APP NAME
         # ///////////////////////////////////////////////////////////////
         title = "GERDPy"
-        description = "GERDPy - Simulation tool for dimensioning heatpipe systems"
+        description = "GERDPy - Simulation Tool for Geothermal Heat Pipe Surface Heating Systems"
         # APPLY TEXTS
         self.setWindowTitle(title)
         widgets.titleRightInfo.setText(description)
