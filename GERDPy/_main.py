@@ -320,11 +320,11 @@ def main(self):
                                          f'Der Rest sind Verluste an der Ober-, Unterseite und Anbindungsleitungen.')
 
     # -------------------------------------------------------------------------
-    # 8.) Plots
+    # 8.) Plot
     # -------------------------------------------------------------------------
 
     # x-Achse aller Plots (Simulationsstunden) [h]
-    hours = np.array([(j + 1) * dt / 3600. for j in range(Nt)])
+    hours = np.array([(j+1)*dt/3600. for j in range(Nt)])
 
     # -------------------------------------------------------------------------
     # 8.1) Figure 1 (Plots für End-User)
@@ -385,11 +385,11 @@ def main(self):
     ax4.plot(hours, start_sb_counter, 'k--', lw=1.5)
     ax4.plot(hours, sb_active, 'g-', lw=1.3)
     ax4.plot(hours, sim_mod, 'y-', lw=1.3)
-    ax4.plot(hours, sim_mod, 'y-', lw=1.3)
+    ax4.plot(hours, sim_mod, 'y-', lw=1.3)    
     ax4.legend(['sb_active', 'sim_mod'],
                prop={'size': font['size'] - 5}, loc='upper right')
     ax4.grid('major')
-
+    
     # Wasser- und Schneebilanzlinie (Wasserequivalent)
     ax5 = fig2.add_subplot(312)
     ax5.set_ylabel('[mm]')
@@ -425,7 +425,7 @@ def main(self):
 
     # plt.tight_layout()
     plt.show()
-
+    
     return
 
 

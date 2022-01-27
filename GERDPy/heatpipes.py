@@ -19,7 +19,7 @@ class Heatpipes(object):
                 Radius der Erdwärmesondenbohrung
     r_w:        float [m]
                 Radius der Wärmerohr-Mittelpunkte.
-    r_iso:    float [m]
+    r_iso_a:    float [m]
                 Außenradius der Isolationsschicht.
     r_pa:       float [m]
                 Außenradius des Wärmerohrs.
@@ -34,11 +34,11 @@ class Heatpipes(object):
 
     """
 
-    def __init__(self, N, r_b, r_w, r_iso, r_pa, r_pi, lambda_b, lambda_iso, lambda_p):
+    def __init__(self, N, r_b, r_w, r_iso_a, r_pa, r_pi, lambda_b, lambda_iso, lambda_p):
         self.N = int(N)
         self.r_b = float(r_b)
         self.r_w = float(r_w)
-        self.r_iso = float(r_iso)
+        self.r_iso_a = float(r_iso_a)
         self.r_pa = float(r_pa)
         self.r_pi = float(r_pi)
         self.lambda_b = float(lambda_b)
@@ -46,7 +46,7 @@ class Heatpipes(object):
         self.lambda_p = float(lambda_p)
 
     def __repr__(self):
-        s = ('Heatpipes(N={self.N}, r_w={self.r_w}, r_iso={self.r_iso}, r_pa={self.r_pa},'
+        s = ('Heatpipes(N={self.N}, r_w={self.r_w}, r_iso_a={self.r_iso_a}, r_pa={self.r_pa},'
              ' r_pi={self.r_pi}, lambda_iso={self.lambda_iso},'
              ' lambda_p={self.lambda_p})').format(self=self)
         return s
@@ -101,7 +101,7 @@ class Heatpipes(object):
             (x, y) = (xy[i, 0], xy[i, 1])
 
             # Plot der Ummantellung und der Heatpipes
-            hp_iso = plt.Circle((x, y), radius=self.r_iso,
+            hp_iso = plt.Circle((x, y), radius=self.r_iso_a,
                                 fill=False, linestyle='-', linewidth=LW)
             hp_itself_outer = plt.Circle((x, y), radius=self.r_pa,
                                 fill=False, linestyle='-', linewidth=LW)
