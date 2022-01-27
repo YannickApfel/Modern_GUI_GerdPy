@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainZjoCpz.ui'
+## Form generated from reading UI file 'mainipWbAM.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -1246,13 +1246,15 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addWidget(self.label_24)
 
-        self.sb_x_min = QSpinBox(self.frame_14)
+        self.sb_x_min = QDoubleSpinBox(self.frame_14)
         self.sb_x_min.setObjectName(u"sb_x_min")
         self.sb_x_min.setFont(font1)
         self.sb_x_min.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_x_min.setMinimum(1)
-        self.sb_x_min.setMaximum(500)
-        self.sb_x_min.setValue(25)
+        self.sb_x_min.setDecimals(3)
+        self.sb_x_min.setMinimum(0.010000000000000)
+        self.sb_x_min.setMaximum(0.050000000000000)
+        self.sb_x_min.setSingleStep(0.001000000000000)
+        self.sb_x_min.setValue(0.025000000000000)
 
         self.verticalLayout_7.addWidget(self.sb_x_min)
 
@@ -2037,7 +2039,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 353, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -2299,6 +2301,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.stackedWidget.setCurrentIndex(3)
+        self.cb_month.setCurrentIndex(-1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2342,7 +2345,7 @@ class Ui_MainWindow(object):
         self.label_35.setText(QCoreApplication.translate("MainWindow", u"Altitude above sea level [m]:", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Surface & heating element", None))
         self.label_23.setText(QCoreApplication.translate("MainWindow", u"Surface area [m2]:", None))
-        self.label_24.setText(QCoreApplication.translate("MainWindow", u"Minimal surface distance [mm]:", None))
+        self.label_24.setText(QCoreApplication.translate("MainWindow", u"Minimal surface distance [m]:", None))
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Borehole parameters", None))
         self.label_30.setText(QCoreApplication.translate("MainWindow", u"Borehole depth [m]:", None))
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity backfill [W/mK]:", None))

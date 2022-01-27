@@ -177,6 +177,8 @@ class MainWindow(QMainWindow):
 
         # START SIMULATION
         if btnName == "btn_startsim":
+            self.ui.text_console.insertPlainText('SIMULATION RUNNING...\n')
+            USEFunctions.datecheck(self)
             simulation(self)
 
         # PRINT BTN NAME

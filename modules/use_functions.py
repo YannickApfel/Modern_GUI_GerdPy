@@ -65,4 +65,23 @@ class USEFunctions(MainWindow):
       print(i_years)
       print(i_dt)
 
+    def datecheck(self):
+
+      day = self.ui.sb_day.value()
+      month = int(self.ui.cb_month.currentData())
+
+      # error handling
+      if month == 2 and day > 28:
+        print('February only has 28 days maximum.')
+        print('Please adjust!')
+        self.ui.text_console.insertPlainText('February only has 28 days maximum.\n')
+        self.ui.text_console.insertPlainText('Please adjust!\n')
+      elif month in [4, 6, 9, 11] and day > 30:
+        print(self.ui.cb_month.currentText() + ' only has 30 days maximum!')
+        print('Please adjust!')
+        self.ui.text_console.insertPlainText(self.ui.cb_month.currentText() + ' only has 30 days maximum.\n')
+        self.ui.text_console.insertPlainText('Please adjust!\n')
+
+
+
 

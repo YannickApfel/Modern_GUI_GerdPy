@@ -2123,12 +2123,12 @@ color: rgb(231, 81, 19);</string>
                                    </font>
                                   </property>
                                   <property name="text">
-                                   <string>Minimal surface distance [mm]:</string>
+                                   <string>Minimal surface distance [m]:</string>
                                   </property>
                                  </widget>
                                 </item>
                                 <item>
-                                 <widget class="QSpinBox" name="sb_x_min">
+                                 <widget class="QDoubleSpinBox" name="sb_x_min">
                                   <property name="font">
                                    <font>
                                     <pointsize>12</pointsize>
@@ -2139,14 +2139,20 @@ color: rgb(231, 81, 19);</string>
                                   <property name="styleSheet">
                                    <string notr="true">background-color: rgb(33, 37, 43);</string>
                                   </property>
+                                  <property name="decimals">
+                                   <number>3</number>
+                                  </property>
                                   <property name="minimum">
-                                   <number>1</number>
+                                   <double>0.010000000000000</double>
                                   </property>
                                   <property name="maximum">
-                                   <number>500</number>
+                                   <double>0.050000000000000</double>
+                                  </property>
+                                  <property name="singleStep">
+                                   <double>0.001000000000000</double>
                                   </property>
                                   <property name="value">
-                                   <number>25</number>
+                                   <double>0.025000000000000</double>
                                   </property>
                                  </widget>
                                 </item>
@@ -3251,6 +3257,9 @@ color: rgb(231, 81, 19);</string>
                                   <property name="currentText">
                                    <string/>
                                   </property>
+                                  <property name="currentIndex">
+                                   <number>-1</number>
+                                  </property>
                                   <property name="maxVisibleItems">
                                    <number>12</number>
                                   </property>
@@ -3929,7 +3938,7 @@ QPushButton:pressed{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>353</width>
                                  <height>218</height>
                                 </rect>
                                </property>
