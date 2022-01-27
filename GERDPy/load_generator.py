@@ -1,273 +1,472 @@
 # -*- coding: utf-8 -*-
-""" Ermittlung der Systemleistung anhand einer Leistungsbilanz an der Oberfläche
+""" Ermittlung der Systemleistung anhand einer stationären Leistungsbilanz an der Oberfläche
     des Heizelements für jeden Zeitschritt
 
-    Q. = (T_g - Theta_surf) / R_th_tot = Summe Wärmeströme am Heizelement
-    Nullstellenproblem:
-        F(Q.) = Summe Wärmeströme am Heizelement - Q. = 0
-        
+    Q. = (Theta_b - Theta_surf) / R_th_tot 
+       = Q._lat + Q._sen + R_f * (Q._con + Q._rad + Q._eva)
+    
+    Leistungsbilanzen: (ohne Betrachtung der Verluste)
+        - F_Q = Q._lat + Q._sen + R_f * (Q._con + Q._rad + Q._eva) - Q.
+        - F_T = Q._lat + Q._sen + R_f * (Q._con + Q._rad + Q._eva)
+
+    Fallunterscheidung:
+        - Theta_b >= Theta_surf: Lösung der vollen Leistungsbilanz 
+            F_Q = 0, Q. >= 0 (positiver Wärmeentzug aus dem Boden)
+
+            {Erdboden + Oberfläche + Umgebung} -> Auflösung nach Q.
+
+        - Theta_b < Theta_surf: Lösung der reduzierten Leistungsbilanz 
+            F_T = 0, Q. := 0 (kein Wärmeentzug aus dem Boden)
+
+            {Oberfläche + Umgebung} -> Auflösung nach Theta_surf (Oberflächentemperatur)
+
+    Definition der Einzellasten:
+
+        lat - latent
+        sen - sensibel
+        con - konvektiv
+        rad - Strahlung
+        eva - Verdunstung
+
+    &
+
+    Lösung der Leistungsbilanz - Verfahren: iterative Nullstellensuche
+
     Legende:
         - Temperaturen:
             - T in Kelvin [K] - für (kalorische) Gleichungen
             - Theta in Grad Celsius [°C] - Input aus dem Wetterdatenfile
 
+    Algorithmus basierend in Teilen auf [Konrad2009]
+    
+    Anmerkungen zu Variablen:
+        - calc_T_surf:
+            - "False": Leistungsentzug aus dem Boden Q >= 0 (positiv), Oberflächentemp. Theta_surf wird in "main.py" ermittelt
+            (Simulationsmodi 2 und 4)
+            - "True": kein Leistungsentzug aus dem Boden, Oberflächentemp. Theta_surf wird in "load_generator.py" ermittelt
+        - sb_active:
+            - "True": Schneeschichtbilanzierung aktiv (es kann sich eine Schneeschicht bilden)
+            - "False": Schneeschichtbilanzierung inaktiv (die Schneelast wird in jedem Zeitschritt abgeschmolzen, keine Bildung einer Schneedecke)
+
     Autor: Yannick Apfel
 """
-import math, sys
-import sympy as sp
-import numpy as np
-import CoolProp.CoolProp as CP  # verwendete Unterfunktionen: PropsSI, HAPropsSI (humid air)
+import math
 from scipy.constants import sigma
 
-
-# Definitionen
-
-# a) Stoffwerte
-lambda_l = 0.0262  # Wärmeleitfähigkeit von Luft (Normbedingungen) [W/m*K]
-a_l = lambda_l / (1.293 * 1005)  # T-Leitfähigkeit von Luft (Normbedingungen) [m²/s]
-beta = lambda Theta_inf: 1 / (Theta_inf + 273.15)  # isobarer therm. Ausdehnungskoeffizient f. ideale Gase [1/K]
-theta_l = 13.3e-6   # kin. Vis. von Luft [m²/s]
-rho_w = 997  # Dichte von Wasser (bei 25 °C) [kg/m³]
-rho_l = 1.276  # Dichte trockener Luft (bei 0 °C, 1 bar) [kg/m³]
-h_Ph_sl = 333e3  # Phasenwechselenthalpie Schnee <=> Wasser [J/kg]
-h_Ph_lg = 2256.6e3  # Phasenwechselenthalpie Wasser <=> Dampf [J/kg]
-c_p_s = 2.04e3  # spez. Wärmekapazität Eis / Schnee (bei 0 °C) [J/kgK]
-c_p_w = 4212  # spez. Wärmekapazität Wasser (bei 0 °C) [J/kgK]
-c_p_l = 1006  # spez. Wärmekapazität Luft (bei 0 °C, 1 bar) [J/kgK]
-Theta_Schm = 0  # Schmelztemperatur von Eis / Schnee [°C]
-H_max = 1  # maximal erlaubte Wasserhöhe auf dem Heizelement [mm]
+# Import der physikalischen Modellgleichungen
+from load_generator_utils import *
+from heating_element_utils import *
 
 
-# korrigierte Windgeschwindigkeit (Wind-Shear) [m/s]
-def u_eff(v):
-    z_1 = 10  # Höhe, für die die Windgeschwindigkeit bekannt ist (Wetterdaten) [m]
-    z_n = 1  # Bezugshöhe (liegt für das Problem definitorisch bei 1 m)
-    z_0 = 0.005  # Rauhigkeitshöhe
+# Q_Konvektion = fkt(Q.) - Input für Leistungsbilanz F_Q = 0
+def Q_con_Q(Q, con, u_inf, Theta_b_0, R_th, Theta_inf, A_he):  # [W]
+    Q_con = 0
+    if con:
+        Q_con = alpha_kon_Bentz(u_inf) * (Theta_b_0 - Q * R_th - Theta_inf) * A_he
+
+    return Q_con
+
+
+# Q_Konvektion = fkt(Theta_surf) - Input für vereinfachte Leistungsbilanz F_T = 0
+def Q_con_T(Theta_surf, con, u_inf, Theta_inf, A_he):  # [W]
+    Q_con = 0
+    if con:
+        Q_con = alpha_kon_Bentz(u_inf) * (Theta_surf - Theta_inf) * A_he
+
+    return Q_con
+
+
+# Q_Strahlung = fkt(Q.) - Input für Leistungsbilanz F_Q = 0
+def Q_rad_Q(Q, rad, Theta_b_0, R_th, S_w, Theta_inf, B, Phi, A_he):  # [W]
+    Q_rad = 0
+    if rad:
+        Q_rad = sigma * epsilon_surf('Beton') * ((Theta_b_0 - Q * R_th + 273.15) ** 4 - T_MS(S_w, Theta_inf, B, Phi) ** 4) * A_he
+
+    return Q_rad
+
+
+# Q_Strahlung = fkt(Theta_surf) - Input für vereinfachte Leistungsbilanz F_T = 0
+def Q_rad_T(Theta_surf, rad, S_w, Theta_inf, B, Phi, A_he):  # [W]
+    Q_rad = 0
+    if rad:
+        Q_rad = sigma * epsilon_surf('Beton') * ((Theta_surf + 273.15) ** 4 - T_MS(S_w, Theta_inf, B, Phi) ** 4) * A_he
+
+    return Q_rad
+
+
+# Q_Verdunstung = fkt(Q.) - Input für Leistungsbilanz F_Q = 0
+def Q_eva_Q(Q, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Theta_b_0, R_th, Phi, A_he):  # [W]
+    ''' Voraussetzungen:
+        - Theta_surf >= 0 °C
+        - Oberfläche ist nass (Abfrage der Restwassermenge m_Rw)
+    '''
+    Q_eva = 0
+    if (eva and Theta_surf_0 >= 0 and m_Rw_0 > 0):
+        Q_eva = rho_l * beta_c(Theta_inf, u_inf, h_NHN) * (X_D_sat_surf(Theta_b_0 - Q * R_th, h_NHN) - X_D_inf(Theta_inf, Phi, h_NHN)) * h_Ph_lg * A_he
+
+    if Q_eva < 0:  # Verdunstungswärmestrom ist definitorisch positiv!
+        Q_eva = 0
+
+    return Q_eva
+
+
+# Q_Verdunstung = fkt(Theta_surf) - Input für vereinfachte Leistungsbilanz F_T = 0
+def Q_eva_T(Theta_surf, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Phi, A_he):  # [W]
+    ''' Voraussetzungen:
+        - Theta_surf >= 0 °C
+        - Oberfläche ist nass (Abfrage der Restwassermenge m_Rw)
+    '''
+    Q_eva = 0
+    if (eva and Theta_surf_0 >= 0 and m_Rw_0 > 0):
+        Q_eva = rho_l * beta_c(Theta_inf, u_inf, h_NHN) * (X_D_sat_surf(Theta_surf, h_NHN) - X_D_inf(Theta_inf, Phi, h_NHN)) * h_Ph_lg * A_he
+
+    if Q_eva < 0:  # Verdunstungswärmestrom ist definitorisch positiv!
+        Q_eva = 0
+
+    return Q_eva
+
+
+# Q_sensibel = fkt(Q.) - Input für Leistungsbilanz F_Q = 0
+def Q_sen_Q(Q, sen, S_w, Theta_inf, Theta_b_0, R_th, A_he):  # [W]
+    Q_sen = 0
+    if sen:
+        Q_sen = rho_w * S_w * (c_p_s * (Theta_Schm - Theta_inf) + c_p_w * (Theta_b_0 - Q * R_th - Theta_Schm)) * (3.6e6)**-1 * A_he
+
+    return Q_sen
+
+
+# Q_sensibel = fkt(Theta_surf) - Input für vereinfachte Leistungsbilanz F_T = 0
+def Q_sen_T(Theta_surf, sen, S_w, Theta_inf, A_he):  # [W]
+    Q_sen = 0
+    if sen:
+        Q_sen = rho_w * S_w * (c_p_s * (Theta_Schm - Theta_inf) + c_p_w * (Theta_surf - Theta_Schm)) * (3.6e6)**-1 * A_he
+
+    return Q_sen
+
+
+# Q_latent - identisch für beide Leistungsbilanzen F_Q = 0 sowie F_T = 0
+def Q_lat(lat, S_w, A_he):  # [W]
+    Q_lat = 0
+    if lat:
+        Q_lat = rho_w * S_w * h_Ph_sl * (3.6e6)**-1 * A_he
+
+    return Q_lat
+
+
+""" Thermische Verluste (exkl. Oberfläche des Heizelements) Q_V = Q_V_An + Q_V_He
+
+    Q_V_An: thermische Verluste der Anbindung zwischen Erdwärmesonden und Heizelement
+        - Modellierung mittels Péclet-Gleichung für Zylinderschalen (Rohr + Isolierung) mit der Gesamtlänge aller Heatpipes
+          im Bereich der Anbindung
+        - Ermittlung der Rohrinnentemperatur über die Bohrlochtemperatur Theta_b und den therm. Widerstand R_th_g_hp
+        - Annahme Theta_inf (Umgebungstemperatur) als Rohraußentemperatur
+
+    Q_V_He: thermische Verluste an der Unterseite des Heizelements
+        - "R_th_he_u": Verrohrung (Heatpipe-Innenseite) bis Heizelement-Unterseite (ohne Isolierung)
+        - "R_th_he_iso": Isolationsschicht an Unterseite des Heizelements
+"""
+def Q_V(Theta_R, Theta_inf, lambda_p, lambda_iso, l_R_An, r_iso, r_pa, r_pi, he):
     
-    return v * (math.log10(z_n) - math.log10(z_0)) / (math.log10(z_1) - math.log10(z_0))
+    def Q_V_An(Theta_R, Theta_inf, lambda_p, lambda_iso, l_R_An, r_iso, r_pa, r_pi):  # [W]
 
-
-# höhenkorrigierter Umgebungsdruck [Pa]
-def p_inf(h_NHN):
-    return 101325 * (1 - 0.0065 * h_NHN / 288.2) ** 5.265
-
-# Sättigungs-Dampfdruck nach ASHRAE2013 [Pa]
-def p_s(T, self):  # Input in [K]
-    C_1 = -5.6745359e3
-    C_2 = 6.3925247e0
-    C_3 = -9.6778430e-3
-    C_4 = 6.2215701e-7
-    C_5 = 2.0747825e-9
-    C_6 = -9.4840240e-13
-    C_7 = 4.1635019e0
-    C_8 = -5.8002206e3
-    C_9 = 1.3914993e0
-    C_10 = -4.8640239e-2
-    C_11 = 4.1764768e-5
-    C_12 = -1.4452093e-8
-    C_13 = 6.5459673e0
+        Q_V_an = (Theta_R - Theta_inf) * (2 * math.pi * l_R_An) \
+                * (math.log(r_pa / r_pi) / lambda_p + math.log(r_iso / r_pa) / lambda_iso) ** -1
+        if Q_V_an < 0:  # Q. < 0 bei Gravitationswärmerohren nicht möglich
+            Q_V_an = 0
+            
+        return Q_V_an
     
-    if ((T - 273.15) > -100) and ((T - 273.15) < 0):  # "over ice"
-        return math.exp(C_1 / T + C_2 + C_3 * T + C_4 * T ** 2 + C_5 * T ** 3 + C_6 * T ** 4 + C_7 * math.log(T))
-    elif ((T - 273.15) >= 0) and ((T - 273.15) <= 200):  # "over liquid water"
-        return math.exp(C_8 / T + C_9 + C_10 * T + C_11 * T ** 2 + C_12 * T ** 3 + C_13 * math.log(T))
-    else:
-        print('Interner Fehler: erlaubter T-Bereich für Sättigungs-Dampfdruckformel nach ASHRAE2013 unter-/überschritten!')
-        self.ui.text_console.insertPlainText('Interner Fehler: erlaubter T-Bereich für Sättigungs-Dampfdruckformel nach ASHRAE2013 unter-/überschritten!\n')
-        sys.exit()
-
-
-# Wärmeübergangskoeffizient [W/m²K]
-# nach [Bentz D. P. 2000] (nur erzwungene Konvektion)
-# alpha = alpha(u_air)
-def alpha_kon_Bentz(u):
-
-    if u <= 5:
-        alpha = 5.6 + 4 * u
-    else:
-        alpha = 7.2 * u ** 0.78
-
-    return alpha
-
-
-# Wassermengen-Bilanz an Heizelement-Oberfläche (für Verdunstung)
-def m_Restwasser(m_Rw, RR, Q_eva, A_he):
-    if m_Rw < 0:  # Restwassermenge kann nicht geringer werden als 0
-        m_Rw_sol = 0
-    else:
-        m_Rw_sol = m_Rw + (RR * rho_w * 1) / 1000 - (Q_eva / h_Ph_lg) * 3600
-    
-    if (m_Rw_sol / (rho_w * A_he)) > (H_max / 1000):  # H_max deckelt die max. mögl. Wasserhöhe
-        m_Rw_sol = (H_max / 1000) * rho_w * A_he
-    
-    return m_Rw_sol
-
-
-# Emissionskoeffizient des Heizelements [-]
-def epsilon_surf(material):
-    if material == 'Beton':
-        return 0.94
-    else:
-        return 0.94
-    
-
-# mittlere Strahlungstemperatur der Umgebung [K]
-def T_MS(S_w, Theta_inf, B, Phi):
-    if S_w > 0:  # entspricht bei Schneefall der Umgebungstemperatur
-        return (Theta_inf + 273.15)
-    else:  # ohne Schneefall: als Funtion von Umgebungstemp. und rel. Luftfeuchte
-        T_H = (Theta_inf + 273.15) - (1.1058e3 - 7.562 * (Theta_inf + 273.15) +
-                                  1.333e-2 * (Theta_inf + 273.15) ** 2 - 31.292 *
-                                  Phi + 14.58 * Phi ** 2)
-        T_W = (Theta_inf + 273.15) - 19.2
-
-        if T_H > T_W:
-            T_H = T_W
-
-        T_MS = (T_W ** 4 * B + T_H ** 4 * (1 - B)) ** 0.25
-
-        return T_MS
-    
-    
-# binärer Diffusionskoeffizient [-]
-def delta(Theta_inf, h_NHN):
-
-    return (2.252 / p_inf(h_NHN)) * ((Theta_inf + 273.15) / 273.15) ** 1.81
-
-
-# Stoffübergangskoeffizient [m/s]
-def beta_c(Theta_inf, u, h_NHN):
-    Pr = theta_l / a_l  # Prandtl-Zahl für Luft
-    Sc = theta_l / delta(Theta_inf, h_NHN)  # Schmidt-Zahl
-    alpha = alpha_kon_Bentz(u)  # Verwendung der einfachen Korrelation f alpha
-
-    beta_c = (Pr / Sc) ** (2/3) * alpha / (rho_l * c_p_l)
-    
-    return beta_c
-
-
-# Wasserdampfbeladung der gesättigten Luft bei Theta_inf [kg Dampf / kg Luft]
-def X_D_inf(Theta_inf, Phi, h_NHN, self):
-    # Sättigungsdampfdruck in der Umgebung bei Taupunkttemperatur: p_D = p_s(T_tau(Theta_inf, Phi))
-    T_tau = CP.HAPropsSI('DewPoint', 'T', (Theta_inf + 273.15), 'P', 101325, 'R', Phi)  # Input in [K]
-    p_D = p_s(T_tau, self)  # Input in [K]
-    
-    return 0.622 * p_D / (p_inf(h_NHN) - p_D)
-
-
-# Wasserdampfbeladung der gesättigten Luft bei Theta_surf [kg Dampf / kg Luft]
-def X_D_sat_surf(Theta_surf, h_NHN, self):
-    # Sättigungsdampfdruck an der Heizelementoberfläche bei Theta_surf: p_D = p_s(Theta_surf)
-    p_D = p_s(Theta_surf + 273.15, self)  # Input in [K]
-
-    return 0.622 * p_D / (p_inf(h_NHN) - p_D)
-
-
-# Definition & Bilanzierung der Einzellasten
-def load(h_NHN, v, Theta_inf, S_w, A_he, Theta_b_0, R_th, Theta_surf_0, B, Phi, RR, m_Rw_0, self):  # Theta_x_0: Temp. des vorhergehenden Zeitschritts
-                                                                   # Input-Temperaturen in [°C]
+    def Q_V_He(he, lambda_iso, Theta_R, Theta_inf):  # [W]
         
+        # therm. Widerstand Innenseite Verrohrung bis Unterseite Heizelement (ohne Isolierung)
+        R_th_he_u = (he.l_R * q_l(he.D - (he.x_min + 0.5 * he.d_R_a), (he.x_min + 0.5 * he.d_R_a), he.d_R_a, he.d_R_i, he.lambda_B, he.lambda_R, he.s_R, 1, 0, state_u_insul=True)) ** -1
+        
+        # thermischer Widerstand der Isolierung
+        R_th_he_iso = 1 / lambda_iso * he.D_iso / he.A_he
+        
+        Q_V_he = (Theta_R - Theta_inf) * (R_th_he_u + R_th_he_iso) ** -1
+        if Q_V_he < 0:  # Q. < 0 bei Gravitationswärmerohren nicht möglich
+            Q_V_he = 0
+    
+        return Q_V_he
+    
+    Q_V = Q_V_An(Theta_R, Theta_inf, lambda_p, lambda_iso, l_R_An, r_iso, r_pa, r_pi) + Q_V_He(he, lambda_iso, Theta_R, Theta_inf)
+    
+    return Q_V
+
+
+# Leistungsbilanz F_Q {Erdboden, Oberfläche, Umgebung}, Fall Q >= 0
+def F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he):
+
+    F_Q = Q_lat(lat, S_w, A_he) \
+        + Q_sen_Q(Q, sen, S_w, Theta_inf, Theta_b_0, R_th, A_he) \
+        + R_f \
+        * (Q_con_Q(Q, con, u_inf, Theta_b_0, R_th, Theta_inf, A_he)
+        + Q_rad_Q(Q, rad, Theta_b_0, R_th, S_w, Theta_inf, B, Phi, A_he)
+        + Q_eva_Q(Q, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Theta_b_0, R_th, Phi, A_he)) \
+        - Q
+
+    return F_Q
+
+
+# Leistungsbilanz F_T {Oberfläche, Umgebung}, Fall Q < 0
+def F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he):
+    F_T = Q_lat(lat, S_w, A_he) \
+        + Q_sen_T(Theta_surf, sen, S_w, Theta_inf, A_he) \
+        + R_f \
+        * (Q_con_T(Theta_surf, con, u_inf, Theta_inf, A_he)
+        + Q_rad_T(Theta_surf, rad, S_w, Theta_inf, B, Phi, A_he)
+        + Q_eva_T(Theta_surf, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Phi, A_he))
+
+    return F_T
+
+
+# Solver für die Lösung der Leistungsbilanz F_Q := 0 nach Q
+def solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he):
+    step_refine = 0  # Hilfsvariable zur Verfeinerung der Schrittweite
+    step = 30  # doppelter Startwert als Iterationsschrittweite für Q
+    res = 0.001  # zulässiges Residuum für F_Q (Restfehler)
+
+    Q = 0  # Startwert für Q
+
+    error = abs(F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
+
+    # Ermittlung von Q für F_Q = 0 (stationäres System)
+    while error > res:
+        if F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
+            step_refine += 1
+            while F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
+                Q += (step / (2 * step_refine))  # Halbierung der Schrittweite für eine weitere Überschreitung/Unter- des Zielwerts
+        elif F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
+            step_refine += 1
+            while F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
+                Q -= (step / (2 * step_refine))  # Halbierung der Schrittweite für eine weitere Überschreitung/Unter- des Zielwerts
+
+        error = abs(F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
+
+    # Einsetzen des ermittelten Q in die für Schneeschmelze und Verdunstung relevanten Terme
+    Q_lat_sol = Q_lat(lat, S_w, A_he)
+    Q_sen_sol = Q_sen_Q(Q, sen, S_w, Theta_inf, Theta_b_0, R_th, A_he)
+    Q_eva_sol = Q_eva_Q(Q, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Theta_b_0, R_th, Phi, A_he)
+    Q_load = Q
+
+    return Q_load, Q_lat_sol, Q_sen_sol, Q_eva_sol
+
+
+# Solver für die Lösung der Leistungsbilanz F_T := 0 nach Theta_surf
+def solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he):
+    step_refine = 0  # Hilfsvariable zur Verfeinerung der Schrittweite
+    step = 10  # doppelter Startwert als Iterationsschrittweite für T
+    res = 0.01  # zulässiges Residuum für F_T (Restfehler)
+
+    Theta_surf = 0  # Startwert für Q
+
+    error = abs(F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
+
+    # Ermittlung von Theta_surf für F_T = 0 (stationäres System)
+    while error > res:
+        if F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
+            step_refine += 1
+            while F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
+                Theta_surf -= (step / (2 * step_refine))  # Halbierung der Schrittweite für eine weitere Überschreitung/Unter- des Zielwerts
+        elif F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
+            step_refine += 1
+            while F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
+                Theta_surf += (step / (2 * step_refine))  # Halbierung der Schrittweite für eine weitere Überschreitung/Unter- des Zielwerts
+
+        error = abs(F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
+
+    # Einsetzen des ermittelten Theta_surf in die für Schneeschmelze und Verdunstung relevanten Terme
+    Q_lat_sol = Q_lat(lat, S_w, A_he)
+    Q_sen_sol = Q_sen_T(Theta_surf, sen, S_w, Theta_inf, A_he)
+    Q_eva_sol = Q_eva_T(Theta_surf, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Phi, A_he)
+    Theta_surf_sol = Theta_surf
+
+    return Theta_surf_sol, Q_lat_sol, Q_sen_sol, Q_eva_sol
+
+
+def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, B, Phi, RR, m_Rw_0, m_Rs_0, start_sb, 
+         l_R_An, lambda_p, lambda_iso, r_iso, r_pa, r_pi):
+    ''' Hauptfunktion zur Ermittlung der Entzugsleistung pro Zeitschritt, Aufteilung in:
+        - Q_load: aus Oberflächenbilanzen ermittelte thermische Leistung der Oberfläche
+        - Q_N: Anteil von Q_load, der tatsächlich zur Schneeschmelze benutzt wird - also Q_load abzügl. Oberflächenverlusten Q_con, Q_rad, Q_eva
+        - Q_V: Verlustleistungen (gehen nicht in Leistungsbilanzen mit ein)
+            - Anbindung (An) zwischen Bohrloch und Heizelement (Heatpipes)
+            - Unterseite Heizelement (He)
+    '''
+    # Theta_x_0: Temp. des vorhergehenden Zeitschritts
+
     # 0.) Preprocessing
     u_inf = u_eff(v)  # Reduzierte Windgeschwindigkeit (logarithmisches Windprofil)
-    Q = sp.symbols('Q')  # thermische Leistung Q als Variable definieren
-    
-    if Theta_surf_0 < 0 and S_w > 0:  # snow-free area ratio dynamisch
-        R_f = 0.25  # Schneedecke bildet sich, Schnee nicht ganz "ideal isolierend"
-    else:
-        R_f = 1  # Oberfläche ist schnee-frei (alle Verlustmechanismen treffen maximal ein)
-    
-    # 1.) Teil-Wärmeströme aktivieren oder deaktivieren (für unit-testing))
-    lat = False
-    sen = False
-    con = False
-    rad = False
+
+    # Hilfsvariablen
+    calc_T_surf = False  # "True" falls Oberlächentemp. bereits in diesem Modul ermittelt wird
+    Theta_surf_sol = None
+
+    ''' Simulationsmodi 1-3: Schnee wird verzögert abgeschmolzen (Bildung einer Schneedecke ist möglich)
+        Simulationsmodi 4-5: Schnee wird instantan (=innerhalb des Zeitschritts) abgeschmolzen
+    '''
+    # Simulationsmodus ermitteln:
+    if (m_Rs_0 > 0 or start_sb is True):  # Schneedecke bildet sich
+        sb_active = 1  # snow-balancing aktivieren
+    else:  # Oberfläche ist schnee-frei
+        sb_active = 0
+
+    # 1.) Teil-Wärmeströme
+    con = True  # aktivieren oder deaktivieren (für unit-testing)
+    rad = True
     eva = True
+    sen = True
+    lat = True
 
-    # Q_latent
-    if lat is True:
-        Q_lat = rho_w * S_w * h_Ph_sl * (3.6e6)**-1 * A_he
-    else:
-        Q_lat = 0
+    # 2.) Ermittlung Entzugsleistung Q_load und Oberflächentemperatur Theta_surf_sol
+    ''' Simulationsmodi 1-3'''
+    if (sb_active == 1):  # "Schnee wird verzögert abgeschmolzen" (Bildung einer Schneedecke)
 
-    # Q_sensibel
-    if sen is True:
-        Q_sen = rho_w * S_w * (c_p_s * (Theta_Schm - Theta_inf) + c_p_w * (Theta_b_0 - Q * R_th - Theta_Schm)) * (3.6e6)**-1 * A_he
-    else:
-        Q_sen = 0
+        ''' Erdboden, Heizelement-Oberfläche und Umgebung bilden ein stationäres System, wobei
+            sich eine Schneedecke bildet, sodass T_surf = T_Schm (Schmelzwasser).
+            - Q._0 = (T_b - T_surf) / R_th definiert zur Verfügung stehende Leistung (delta-T)
+            - Q._R = Q._0 - (Q._con + Q._rad + Q._eva) ergibt die zur Schneeschmelze (= Q._lat + Q._sen) vor-
+            handene restliche Leistung
 
-    # Q_Konvektion
-    if con is True:
-        Q_con = alpha_kon_Bentz(u_inf) * (Theta_b_0 - Q * R_th - Theta_inf) * A_he
-    else:
-        Q_con = 0
+            - Simulationsmodus 1: Q._0 < 0, Lösung von F_T nach Theta_surf
+            (kein Wärmeentzug aus dem Boden möglich, da kein delta-T vorhanden - sibirische Verhältnisse)
+            
+            - Simulationsmodus 2: Q._R < 0, Lösung von F_Q nach Q.
+            (keine Restleistung zur Schneeschmelze vorhanden, Leistung geht für Konvektions- und Strahlungsverluste drauf)
+            
+            - Simulationsmodus 3: Q._R > 0, setze Theta_surf := Theta_Schmelz (Oberfläche mit Wasser benetzt)
+            (Q._R wird zur Schneeschmelze verwendet)
+            
+        '''
 
-    # Q_Strahlung
-    if rad is True:  # Theta_surf_0 statt Theta_b_0 - Q * R_th, da sonst 4 Nullstellen
-        Q_rad = sigma * epsilon_surf('Beton') * ((Theta_surf_0 + 273.15) ** 4 - T_MS(S_w, Theta_inf, B, Phi) ** 4) * A_he
-    else:
-        Q_rad = 0
+        # 2.1) Pre-Processing
+        R_f = 0.2  # free-area ratio
+        Theta_surf_0 = Theta_Schm  # Fixieren der Oberflächentemperatur
 
-    # Q_Verdunstung
-    ''' Voraussetzungen: 
-            - Theta_surf >= 0 °C
-            - Oberfläche ist nass (Abfrage der Restwassermenge m_Rw)
-    '''    
-    if (eva is True and Theta_surf_0 >= 0 and m_Rw_0 > 0):
-        Q_eva = rho_l * beta_c(Theta_inf, u_inf, h_NHN) * (X_D_sat_surf(Theta_surf_0, h_NHN, self) - X_D_inf(Theta_inf, Phi, h_NHN, self)) * h_Ph_lg * A_he
-    else:
-        Q_eva = 0
-        
-    if Q_eva < 0:  # Verdunstungswärmestrom ist definitorisch positiv! <--> Kondensation wird vernachlässigt
-        Q_eva = 0
+        # 2.2) verfügbare Entzugsleistung
+        Q_0 = (Theta_b_0 - Theta_surf_0) * R_th ** -1
+
+        # 2.3) Fallunterscheidung Entzugsleistung Q_0
+        ''' Simulationsmodus 1'''
+        if Q_0 < 0:  # keine nutzbare T-Differenz im Boden vorhanden (sibirische Verhältnisse)
+
+            sim_mod = 1  # Simulationsmodus aufzeichnen
+
+            calc_T_surf = True
+
+            # Q_sensibel, Q_latent, Q_Verdunstung = 0
+            sen, lat, eva = 0, 0, 0  # Energie zur Schneeschmelze kommt definitorisch aus dem Boden, nicht der Umgebung
+
+            # 2.4) iterative Lösung der stationären Leistungsbilanz F_T = 0 am Heizelement (Oberfläche + Umgebung) nach T
+            Theta_surf_sol, Q_lat, Q_sen, Q_eva = solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
+
+            Q_load = -1  # keine Entzugsleistung aus dem Boden
+
+        else:  # Q_0 >= 0, nutzbare T-Differenz im Boden vorhanden (Regelfall)
+            ''' Simulationsmodi 2 & 3'''
+            # 2.4) Oberflächenverluste (explizit für Theta_surf_0 = Theta_Schm formuliert)
+
+            # Q_Konvektion
+            Q_con = Q_con_T(Theta_surf_0, con, u_inf, Theta_inf, he.A_he)
+
+            # Q_Strahlung
+            Q_rad = Q_rad_T(Theta_surf_0, rad, S_w, Theta_inf, B, Phi, he.A_he)
+
+            # Q_Verdunstung
+            Q_eva = 0
+
+            # 2.5) Ermittlung vorhandene Restleistung (f. Schnee- und Eisschmelze)
+            Q_R = Q_0 - R_f * (Q_con + Q_rad + Q_eva)
+
+            # 2.6) Fallunterscheidung Restleistung Q_R
+            ''' Simulationsmodus 2'''
+            if Q_R < 0:  # keine Restleistung für Schneeschmelze vorhanden
+
+                sim_mod = 2  # Simulationsmodus aufzeichnen
+
+                # Q_sensibel, Q_latent, Q_Verdunstung = 0
+                sen, lat, eva = 0, 0, 0  # Energie zur Schneeschmelze kommt definitorisch aus dem Boden, nicht der Umgebung
+
+                # 2.7) iterative Lösung der stationären Leistungsbilanz F_Q = 0 am Heizelement (Erdboden + Oberfläche + Umgebung))
+                Q_load, Q_lat, Q_sen, Q_eva = solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
+
+            else:  # Q_R >= 0, Restleistung für Schneeschmelze vorhanden
+                ''' Simulationsmodus 3'''
+                sim_mod = 3  # Simulationsmodus aufzeichnen
+
+                calc_T_surf = True
+
+                # 2.7) Volumenstrom der Schneeschmelze
+                V_s = Q_R / (rho_w * (h_Ph_sl + c_p_s * (Theta_Schm - Theta_inf)))
+                if V_s < 0:  # Schmelz-Volumenstrom ist definitorisch positiv
+                    V_s = 0
+
+                # 2.8) Schmelzterme (explizit)
+
+                # Q_sensibel
+                Q_sen = 0
+                if sen:
+                    Q_sen = rho_w * c_p_s * (Theta_Schm - Theta_inf) * V_s
+
+                # Q_latent
+                Q_lat = 0
+                if lat:
+                    Q_lat = rho_w * h_Ph_sl * V_s
+
+                Theta_surf_sol = Theta_Schm
+                Q_load = Q_0
+
+                ''' Simulationsmodi 4 & 5'''
+                ''' Erdboden, Heizelement-Oberfläche und Umgebung bilden ein stationäres System, wobei sich
+                        die Oberflächentemp. Theta_surf entsprechend der Oberflächenlasten ergibt.
+                        Die Leistungsbilanz F_Q = Q._lat + Q._sen + R_f(Q._con + Q._rad + Q._eva) - Q. wird für
+                        - Fall Q. >= 0 (Leistungsentzug aus dem Boden) nach Q. aufgelöst - Simulationsmodus 4
+                        - Fall Q. < 0 : Lösung der vereinfachten Leistungsbilanz F_T = F_Q(Q.=0) nach Theta_surf
+                            (kein Leistungsentzug aus dem Boden, Umgebung erwärmt Heizelement) - Simulationsmodus 5
+                '''
+    else:  # Schnee wird instantan abgeschmolzen (keine Bildung einer Schneedecke)
+        ''' Simulationsmodus 4'''
+        sim_mod = 4  # Simulationsmodus aufzeichnen
+
+        # 2.1) Pre-Processing
+        R_f = 1  # free-area ratio
+
+        # 2.2) iterative Lösung der stationären Leistungsbilanz F_Q = 0 am Heizelement (Erdboden + Oberfläche + Umgebung) nach Q.
+        Q_load, Q_lat, Q_sen, Q_eva = solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
+
+        # 2.3) Fall Q. < 0
+        ''' Simulationsmodus 5'''
+        if Q_load < 0:  # kein Wärmeentzug aus Erdboden
+
+            sim_mod = 5  # Simulationsmodus aufzeichnen
+
+            calc_T_surf = True
+
+            # Q_sensibel, Q_latent = 0
+            sen, lat = 0, 0  # Energie zur Schneeschmelze kommt definitorisch aus dem Boden, nicht der Umgebung
+
+            # 2.4) iterative Lösung der stationären Leistungsbilanz F_T = 0 am Heizelement (Oberfläche + Umgebung) nach T
+            Theta_surf_sol, Q_lat, Q_sen, Q_eva = solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
+
+    # 3.) Wasser- und Schneehöhenbilanz auf Heizelement
 
     # Ermittlung Restwassermenge
-    m_Rw_1 = m_Restwasser(m_Rw_0, RR, Q_eva, A_he)
+    m_w_1 = m_Restwasser(m_Rw_0, RR, he.A_he, Q_eva)
 
-    # 2.) stationäre Leistungbilanz am Heizelement (Kopplung Oberfläche mit Erdboden)
-    F_Q = sp.Eq(Q_lat + Q_sen + R_f * (Q_con + Q_rad + Q_eva) - Q, 0)
+    # Ermittlung Restschneemenge
+    m_s_1 = m_Restschnee(m_Rs_0, S_w, he.A_he, Q_lat, sb_active)
 
-    # 3.) Auflösung der Leistungsbilanz nach Q
-    Q_sol = float(np.array(sp.solve(F_Q, Q)))
-    
-    # 4.) Neuermittlung der Oberflächentemperatur (reduzierte Leistungsbilanz), falls Leistung negativ (Umgebung erwärmt Heizelement)
-    net_neg = False  # Variable zur Übergabe an _main
-    Theta_surf_sol = 0  # Initialisierung der neuen Oberflächentemperatur
-    
-    if Q_sol < 0:
-        net_neg = True  # im Falle eines negativen Wärmestroms wahr
-        Theta_surf_ = sp.symbols('Theta_surf_')  # Oberflächentemperatur als Variable definieren
+    # 4.) Auswertung der Entzugsleistung Q_load, Nutzleistung Q_N und Verlustleistung Q_V (Anbindung und Unterseite Heizelement) [W]
 
-        # Q_latent
-        Q_lat_red = Q_lat
+    # 4.1) Q_load [W]
+    if Q_load < 0:  # Q. < 0 bei Gravitationswärmerohren nicht möglich
+        Q_load = 0
 
-        # Q_sensibel
-        if sen is True:
-            Q_sen_red = rho_w * S_w * (c_p_s * (Theta_Schm - Theta_inf) + c_p_w * (Theta_surf_ - Theta_Schm)) * (3.6e6)**-1 * A_he
-        else:
-            Q_sen_red = 0
+    # 4.2) Q_N [W]
+    Q_N = Q_lat + Q_sen
 
-        # Q_Konvektion
-        if con is True:
-            Q_con_red = alpha_kon_Bentz(u_inf) * (Theta_surf_ - Theta_inf) * A_he
-        else:
-            Q_con_red = 0
+    # 4.3) Q_V [W]
+    Q_V_sol = Q_V(Theta_b_0 - Q_load * R_th_ghp, Theta_inf, lambda_p, lambda_iso, l_R_An, r_iso, r_pa, r_pi, he)
 
-        # Q_Strahlung
-        if rad is True:  # Theta_surf_0 statt Theta_surf_, da sonst 4 Nullstellen
-            Q_rad_red = sigma * epsilon_surf('Beton') * ((Theta_surf_0 + 273.15) ** 4 - T_MS(S_w, Theta_inf, B, Phi) ** 4) * A_he
-        else:
-            Q_rad_red = 0
-
-        # Q_Verdunstung
-        Q_eva_red = Q_eva
-
-        # reduzierte Leistungsbilanz
-        F_Q_red = sp.Eq(Q_lat_red + Q_sen_red + R_f * (Q_con_red + Q_rad_red + Q_eva_red), 0)
-        
-        Theta_surf_sol = float(np.array(sp.solve(F_Q_red, Theta_surf_)))
-    
-    # 4.) return an _main
-    if Q_sol < 0:  # Q. < 0 bei Gravitationswärmerohren nicht möglich
-        Q_sol = 0
-
-    return Q_sol, net_neg, Theta_surf_sol, m_Rw_1
+    return Q_load, Q_N, Q_V_sol, calc_T_surf, Theta_surf_sol, m_w_1, m_s_1, sb_active, sim_mod

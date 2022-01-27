@@ -16,26 +16,28 @@ def get_weather_data(Nt, self):
     # Wetterdaten importieren
     data = pd.read_excel(path)
 
-    # 1.) Windgeschwindigkeit (Vektor mit Nt random floats zwischen 0 und 5) [m/s]
-    u_inf = np.array(data.iloc[4:(Nt+5), 6], dtype='float')
+    # 1.) Windgeschwindigkeit [m/s]
+    u_inf = np.array(data.iloc[4:(Nt+4), 6], dtype='float')
 
-    # 2.) Umgebungstemperatur (Vektor mit Nt random floats zwischen -2 und 3) [°C]
-    Theta_inf = np.array(data.iloc[4:(Nt+5), 4], dtype='float')
+    # 2.) Umgebungstemperatur [°C]
+    Theta_inf = np.array(data.iloc[4:(Nt+4), 4], dtype='float')
 
     # 3.) Schneefallrate [mm/h]
-    S_w = np.array(data.iloc[4:(Nt+5), 3], dtype='float')
+    S_w = np.array(data.iloc[4:(Nt + 4), 3], dtype='float')
     # Einträge zu null setzen, falls Theta_inf >= 1 °C (Niederschlag fällt als Regen)
-    for i,j in enumerate(Theta_inf):
+    for i, j in enumerate(Theta_inf):
         if j >= 1:
             S_w[i] = 0
 
-    # 4.) Bewölkungsgrad (int zwischen 0 und 8) [-]
-    B = np.array(data.iloc[4:(Nt+5), 7], dtype='int') / 8
+    # 4.) Bewölkungsgrad [-]
+    '''  zwischen 0/8 - wolkenlos und 8/8 - bedeckt
+    '''
+    B = np.array(data.iloc[4:(Nt + 4), 7], dtype='int') / 8
 
-    # 5.) rel. Luftfeuchte [%]
-    Phi = np.array(data.iloc[4:(Nt+5), 5], dtype='float') / 100
-    
+    # 5.) rel. Luftfeuchte [-]
+    Phi = np.array(data.iloc[4:(Nt + 4), 5], dtype='float') / 100
+
     # 6.) gesamte Niederschlagsmenge [mm/h]
-    RR = np.array(data.iloc[4:(Nt+5), 3], dtype='float')
+    RR = np.array(data.iloc[4:(Nt + 4), 3], dtype='float')
 
     return u_inf, Theta_inf, S_w, B, Phi, RR

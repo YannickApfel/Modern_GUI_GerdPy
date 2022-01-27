@@ -8,13 +8,13 @@
 """
 
 
-def R_th_b(lambda_inf, borefield, hp):
+def R_th_b(lambda_g, borefield, hp):
 
     import math
     import numpy as np
     from numpy.linalg import inv
     from scipy.constants import pi
-    from .boreholes import length_field
+    from boreholes import length_field
 
     # %% 1.) Parameter
 
@@ -24,12 +24,12 @@ def R_th_b(lambda_inf, borefield, hp):
 
     # Geometrie Heatpipes
     N = hp.N                            # Anzahl Heatpipes im Bohrloch [-]
-    r_pa = hp.r_pa                      # Außenradius Wärmerohr (mit Iso) [m]
-    r_iso = hp.r_iso                    # Innenradius Ummantelung [m]
+    r_iso_a = hp.r_iso_a                # Außenradius Ummantelung [m]
+    r_pa = hp.r_pa                      # Außenradius Wärmerohr [m]
     r_pi = hp.r_pi                      # Innenradius Wärmerohr [m]
 
     # Wärmeleitfähigkeiten [W/mK]:
-    # lambda_inf (importiert)
+    # lambda_g (importiert)
     lambda_b = hp.lambda_b              # Wärmeleitfähigkeit Verfüllung
     lambda_iso = hp.lambda_iso          # Wärmeleitfähigkeit Iso
     lambda_p = hp.lambda_p              # Wärmeleitfähigkeit Heatpipe
@@ -41,11 +41,11 @@ def R_th_b(lambda_inf, borefield, hp):
     # %% 2b.) Hilfsgrößen
 
     # Verhältnis der Wärmeleitfähigkeiten
-    sigma = (lambda_b - lambda_inf) / (lambda_b + lambda_inf)
+    sigma = (lambda_b - lambda_g) / (lambda_b + lambda_g)
 
     # Übergangswiderstand Wärmerohr + Isolationsschicht
-    r_pm = math.log(r_pa / r_iso) / (2 * pi * lambda_iso) + \
-        math.log(r_iso / r_pi) / (2 * pi * lambda_p)
+    r_pm = math.log(r_iso_a / r_pa) / (2 * pi * lambda_iso) + \
+        math.log(r_pa / r_pi) / (2 * pi * lambda_p)
     # r_pm = 0 (falls der thermische Widerstand von Iso und Rohr ignoriert werden soll)
 
     # koordinatenabhängige Hilfskoeffizienten
