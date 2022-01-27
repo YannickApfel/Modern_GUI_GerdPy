@@ -31,7 +31,7 @@
 
     Autor: Yannick Apfel
 """
-from heating_element_utils import *
+from .heating_element_utils import *
 
 
 def R_th_he_PS(he):  # thermischer Widerstand [K/W]

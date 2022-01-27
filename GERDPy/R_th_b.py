@@ -14,7 +14,7 @@ def R_th_b(lambda_g, borefield, hp):
     import numpy as np
     from numpy.linalg import inv
     from scipy.constants import pi
-    from boreholes import length_field
+    from .boreholes import length_field
 
     # %% 1.) Parameter
 

@@ -54,8 +54,8 @@ import math
 from scipy.constants import sigma
 
 # Import der physikalischen Modellgleichungen
-from load_generator_utils import *
-from heating_element_utils import *
+from .load_generator_utils import *
+from .heating_element_utils import *
 
 
 # Q_Konvektion = fkt(Q.) - Input für Leistungsbilanz F_Q = 0

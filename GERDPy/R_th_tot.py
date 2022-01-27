@@ -7,10 +7,10 @@
 
     Autor: Yannick Apfel
 """
-from R_th_c import R_th_c
-from R_th_b import R_th_b
-from R_th_hp import R_th_hp
-from R_th_he import *
+from .R_th_c import R_th_c
+from .R_th_b import R_th_b
+from .R_th_hp import R_th_hp
+from .R_th_he import *
 
 
 def R_th_tot(lambda_g, borefield, hp, he):  # [K/W]
