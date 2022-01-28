@@ -84,6 +84,7 @@ class MainWindow(QMainWindow):
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
         widgets.btn_weather.clicked.connect(self.buttonClick)
+        widgets.btn_heat.clicked.connect(self.buttonClick)
         widgets.btn_borefield.clicked.connect(self.buttonClick)
         widgets.btn_surface.clicked.connect(self.buttonClick)
         widgets.btn_sim.clicked.connect(self.buttonClick)
@@ -138,6 +139,12 @@ class MainWindow(QMainWindow):
         # SHOW WEATHER PAGE
         if btnName == "btn_weather":
             widgets.stackedWidget.setCurrentWidget(widgets.weather_local)
+            UIFunctions.resetStyle(self, btnName)
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+
+        # SHOW GROUND PAGE
+        if btnName == "btn_heat":
+            widgets.stackedWidget.setCurrentWidget(widgets.heating_element)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
