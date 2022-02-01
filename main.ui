@@ -626,6 +626,10 @@ Button */
 	border: 2px solid rgb(43, 50, 61);
 }
 
+/* /////////////////////////////////////////////////////////////////////////////////////////////////
+ToolTips */
+Qt::WA_AlwaysShowToolTips
+
 </string>
    </property>
    <layout class="QVBoxLayout" name="appMargins">
@@ -1532,7 +1536,7 @@ Button */
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>4</number>
+                      <number>3</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -2256,7 +2260,7 @@ color: rgb(231, 81, 19);</string>
                                 </font>
                                </property>
                                <property name="text">
-                                <string>Thermal Conductivity concrete [W/mK]:</string>
+                                <string>Thermal conductivity concrete [W/mK]:</string>
                                </property>
                               </widget>
                              </item>
@@ -2901,6 +2905,12 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string notr="true"/>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>-1</number>
+                               </property>
                                <property name="styleSheet">
                                 <string notr="true">background-color: rgb(33, 37, 43);</string>
                                </property>
@@ -2924,11 +2934,26 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>Define varying borehole depths and radii via borefield parameters file.</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>-1</number>
+                               </property>
+                               <property name="statusTip">
+                                <string/>
+                               </property>
+                               <property name="whatsThis">
+                                <string/>
+                               </property>
+                               <property name="accessibleDescription">
+                                <string/>
+                               </property>
                                <property name="styleSheet">
                                 <string notr="true"/>
                                </property>
                                <property name="text">
-                                <string>Activate varying borehole depths</string>
+                                <string>Activate varying borehole depths and radii</string>
                                </property>
                               </widget>
                              </item>
@@ -3451,10 +3476,10 @@ color: rgb(231, 81, 19);</string>
                                    <string notr="true">background-color: rgb(33, 37, 43);</string>
                                   </property>
                                   <property name="minimum">
-                                   <number>1</number>
+                                   <number>24</number>
                                   </property>
                                   <property name="maximum">
-                                   <number>999999999</number>
+                                   <number>8760</number>
                                   </property>
                                   <property name="value">
                                    <number>730</number>
@@ -4336,7 +4361,7 @@ QPushButton:pressed{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>351</width>
                                  <height>218</height>
                                 </rect>
                                </property>

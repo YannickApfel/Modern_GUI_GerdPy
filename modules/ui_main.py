@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainHLPhDf.ui'
+## Form generated from reading UI file 'mainoEbJFr.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -640,6 +640,10 @@ class Ui_MainWindow(object):
 "	background-color: rgb(35, 40, 49);\n"
 "	border: 2px solid rgb(43, 50, 61);\n"
 "}\n"
+"\n"
+"/* /////////////////////////////////////////////////////////////////////////////////////////////////\n"
+"ToolTips */\n"
+"Qt::WA_AlwaysShowToolTips\n"
 "\n"
 "")
         self.appMargins = QVBoxLayout(self.styleSheet)
@@ -1549,6 +1553,10 @@ class Ui_MainWindow(object):
         self.sb_depth_boreholes.setMinimumSize(QSize(130, 0))
         self.sb_depth_boreholes.setMaximumSize(QSize(16777215, 16777215))
         self.sb_depth_boreholes.setFont(font1)
+#if QT_CONFIG(tooltip)
+        self.sb_depth_boreholes.setToolTip(u"")
+#endif // QT_CONFIG(tooltip)
+        self.sb_depth_boreholes.setToolTipDuration(-1)
         self.sb_depth_boreholes.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_depth_boreholes.setMinimum(1)
         self.sb_depth_boreholes.setMaximum(1000)
@@ -1559,6 +1567,7 @@ class Ui_MainWindow(object):
         self.rb_depth = QRadioButton(self.frame_7)
         self.rb_depth.setObjectName(u"rb_depth")
         self.rb_depth.setFont(font7)
+        self.rb_depth.setToolTipDuration(10000)
         self.rb_depth.setStyleSheet(u"")
 
         self.gridLayout_7.addWidget(self.rb_depth, 0, 0, 1, 2)
@@ -1786,8 +1795,8 @@ class Ui_MainWindow(object):
         self.sb_simtime.setObjectName(u"sb_simtime")
         self.sb_simtime.setFont(font1)
         self.sb_simtime.setStyleSheet(u"background-color: rgb(33, 37, 43);")
-        self.sb_simtime.setMinimum(1)
-        self.sb_simtime.setMaximum(999999999)
+        self.sb_simtime.setMinimum(24)
+        self.sb_simtime.setMaximum(8760)
         self.sb_simtime.setValue(730)
         self.sb_simtime.setDisplayIntegerBase(10)
 
@@ -2193,7 +2202,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 351, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -2454,7 +2463,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
         self.cb_month.setCurrentIndex(-1)
 
 
@@ -2502,7 +2511,7 @@ class Ui_MainWindow(object):
         self.label_73.setText(QCoreApplication.translate("MainWindow", u"Overall connecting pipes length [m]:", None))
         self.label_77.setText(QCoreApplication.translate("MainWindow", u"Surface area heating element [m2]:", None))
         self.label_78.setText(QCoreApplication.translate("MainWindow", u"Minimal surface distance [m]:", None))
-        self.label_75.setText(QCoreApplication.translate("MainWindow", u"Thermal Conductivity concrete [W/mK]:", None))
+        self.label_75.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity concrete [W/mK]:", None))
         self.label_76.setText(QCoreApplication.translate("MainWindow", u"Centerline distance condensor pipes [m]:", None))
         self.label_74.setText(QCoreApplication.translate("MainWindow", u"Overall length condensor pipes [m]:", None))
         self.label_81.setText(QCoreApplication.translate("MainWindow", u"Thickness insulation connecting pipes [m]:", None))
@@ -2515,7 +2524,19 @@ class Ui_MainWindow(object):
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"Number of heatpipes per borehole:", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity insulating layer [W/mK]:", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity heatpipe [W/mK]:", None))
-        self.rb_depth.setText(QCoreApplication.translate("MainWindow", u"Activate varying borehole depths", None))
+#if QT_CONFIG(tooltip)
+        self.rb_depth.setToolTip(QCoreApplication.translate("MainWindow", u"Define varying borehole depths and radii via borefield parameters file.", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(statustip)
+        self.rb_depth.setStatusTip("")
+#endif // QT_CONFIG(statustip)
+#if QT_CONFIG(whatsthis)
+        self.rb_depth.setWhatsThis("")
+#endif // QT_CONFIG(whatsthis)
+#if QT_CONFIG(accessibility)
+        self.rb_depth.setAccessibleDescription("")
+#endif // QT_CONFIG(accessibility)
+        self.rb_depth.setText(QCoreApplication.translate("MainWindow", u"Activate varying borehole depths and radii", None))
         self.label_22.setText(QCoreApplication.translate("MainWindow", u"Inner radius heatpipes [m]:", None))
         self.label_20.setText(QCoreApplication.translate("MainWindow", u"Radius heatpipe-epicenters [m]:", None))
         self.label_21.setText(QCoreApplication.translate("MainWindow", u"Outer radius heatpipes [m]:", None))
