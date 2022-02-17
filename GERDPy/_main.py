@@ -27,6 +27,10 @@ from .R_th_tot import *
 from .weather_data import get_weather_data
 from .geometrycheck import check_geometry
 
+# import progress-modules
+from progress.vismain import SplashScreen
+from PySide6.QtWidgets import *
+
 
 def main(self):
 
@@ -40,6 +44,14 @@ def main(self):
     self.ui.text_console.insertPlainText(50 * '-' + '\n')
     self.ui.text_console.insertPlainText('Initializing simulation...\n')
     self.ui.text_console.insertPlainText(50 * '-' + '\n')
+
+    # Open progress window
+    progapp = QApplication.instance()
+    progwindow = SplashScreen()
+    progwindow.show()
+
+    progwindow.ui.running.setText("Initialization...")
+    progapp.processEvents()
 
     # 1.0) Standort
     h_NHN = self.ui.sb_h_NHN.value()                            # Höhe des Standorts über Normal-Null
@@ -223,6 +235,8 @@ def main(self):
     print('-----------------Simulationsstart-----------------\n')
     self.ui.text_console.insertPlainText('-----------------Simulationsstart-----------------\n')
 
+    progwindow.ui.running.setText("Simulation running...")
+
     while time < tmax:  # Iterationsschleife (ein Durchlauf pro Zeitschritt)
 
         # Zeitschritt um 1 inkrementieren
@@ -280,6 +294,12 @@ def main(self):
 
         # Konsolenausgabe des momentanen Zeitschritts
         print(f'Zeitschritt {i + 1} von {Nt}')
+
+        # Update progress window
+        progwindow.progress.set_value(int(i/Nt*100))
+        progapp.processEvents()
+
+    progwindow.close()
 
     # Zeitstempel (Simulationsdauer) [s]
     toc = tim.time()

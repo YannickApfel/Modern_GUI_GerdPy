@@ -188,9 +188,6 @@ class MainWindow(QMainWindow):
             USEFunctions.datecheck(self)
             simulation(self)
 
-        # PRINT BTN NAME
-        # print(f'Button "{btnName}" pressed!')
-
 
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////
