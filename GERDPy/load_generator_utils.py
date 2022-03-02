@@ -10,7 +10,8 @@
 
     Autor: Yannick Apfel
 """
-import math, sys
+import math
+import sys
 import CoolProp.CoolProp as CP
 
 
