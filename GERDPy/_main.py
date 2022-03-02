@@ -162,6 +162,8 @@ def main(self):
         self.ui.text_console.insertPlainText('Geometry-Check: OK!\n')
         self.ui.text_console.insertPlainText(50 * '-' + '\n')
 
+        progwindow.ui.running.setText("Geometry-Check: OK!")
+
     # -------------------------------------------------------------------------
     # 3.) Ermittlung thermischer Widerstände
     # -------------------------------------------------------------------------
