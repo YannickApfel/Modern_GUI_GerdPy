@@ -38,12 +38,12 @@ def main(self):
     # 1.) Parametrierung der Simulation (Geometrien, Stoffwerte, etc.)
     # -------------------------------------------------------------------------
 
-    print(50 * '-')
+    print(80 * '-')
     print('Initializing simulation...')
-    print(50 * '-')
-    self.ui.text_console.insertPlainText(50 * '-' + '\n')
+    print(80 * '-')
+    self.ui.text_console.insertPlainText(80 * '-' + '\n')
     self.ui.text_console.insertPlainText('Initializing simulation...\n')
-    self.ui.text_console.insertPlainText(50 * '-' + '\n')
+    self.ui.text_console.insertPlainText(80 * '-' + '\n')
 
     # Open progress window
     progapp = QApplication.instance()
@@ -147,20 +147,20 @@ def main(self):
     # -------------------------------------------------------------------------
 
     if check_geometry(boreField, hp, self):
-        print(50*'-')
+        print(80*'-')
         print('Geometry-Check: not OK! - Simulation aborted')
-        print(50*'-')
-        self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        print(80*'-')
+        self.ui.text_console.insertPlainText(80 * '-' + '\n')
         self.ui.text_console.insertPlainText('Geometry-Check: not OK! - Simulation aborted\n')
-        self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        self.ui.text_console.insertPlainText(80 * '-' + '\n')
         sys.exit()
     else:
-        print(50*'-')
+        print(80*'-')
         print('Geometry-Check: OK!')
-        print(50*'-')
-        self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        print(80*'-')
+        self.ui.text_console.insertPlainText(80 * '-' + '\n')
         self.ui.text_console.insertPlainText('Geometry-Check: OK!\n')
-        self.ui.text_console.insertPlainText(50 * '-' + '\n')
+        self.ui.text_console.insertPlainText(80 * '-' + '\n')
 
         progwindow.ui.running.setText("Geometry-Check: OK!")
 
@@ -235,7 +235,6 @@ def main(self):
     sim_mod = np.zeros(Nt)
 
     print('-----------------Simulationsstart-----------------\n')
-    self.ui.text_console.insertPlainText('-----------------Simulationsstart-----------------\n')
 
     progwindow.ui.running.setText("Simulation running...")
 
@@ -306,7 +305,9 @@ def main(self):
     # Zeitstempel (Simulationsdauer) [s]
     toc = tim.time()
     print('Total simulation time: {} sec'.format(toc - tic))
+    self.ui.text_console.insertPlainText(80 * '-' + '\n')
     self.ui.text_console.insertPlainText('Total simulation time: {} sec\n'.format(toc - tic))
+    self.ui.text_console.insertPlainText(80 * '-' + '\n')
 
     # -------------------------------------------------------------------------
     # 7.) Energiekennzahlen
@@ -328,10 +329,11 @@ def main(self):
 
     # Gesamtenergiemenge [MWh]
     E = (np.sum(Q) / len(Q)) * Nt * 1e-6
-    print(50*'-')
+    print(80*'-')
     print(f'Dem Boden wurden {round(E, 4)} MWh entnommen')
-    self.ui.text_console.insertPlainText(50*'-')
-    self.ui.text_console.insertPlainText(f'Dem Boden wurden {round(E, 4)} MWh entnommen')
+    self.ui.text_console.insertPlainText(80*'-'+'\n')
+    self.ui.text_console.insertPlainText(f'Obtained energy from ground: {round(E, 4)} MWh\n')
+    self.ui.text_console.insertPlainText(80 * '-' + '\n')
 
     # Nutzenergiefaktor [%]
     # f_N = (np.sum(Q_N) / len(Q_N)) / (np.sum(Q) / len(Q)) * 100

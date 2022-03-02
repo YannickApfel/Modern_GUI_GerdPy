@@ -77,12 +77,14 @@ def uniform_temperature(boreholes, time, alpha, self, nSegments=12, method='line
 
     """
     if disp:
-        print(60*'-')
+        print(80*'-')
         print('Calculating g-function for uniform borehole wall temperature')
-        print(60*'-')
-        self.ui.text_console.insertPlainText(60 * '-' + '\n')
+        print(80*'-')
+        self.ui.text_console.insertPlainText(80 * '-' + '\n')
         self.ui.text_console.insertPlainText('Calculating g-function for uniform borehole wall temperature\n')
-        self.ui.text_console.insertPlainText(60 * '-' + '\n')
+        self.ui.text_console.insertPlainText(80 * '-' + '\n')
+        self.ui.text_console.insertPlainText(80 * '-' + '\n')
+
     # Initialize chrono
     tic = tim.time()
     # Number of boreholes
@@ -164,10 +166,10 @@ def uniform_temperature(boreholes, time, alpha, self, nSegments=12, method='line
         print('{} sec'.format(toc2 - toc1))
         print('Total time for g-function evaluation: {} sec'.format(
                 toc2 - tic))
-        print(60*'-')
+        print(80*'-')
         self.ui.text_console.insertPlainText('{} sec\n'.format(toc2 - toc1))
         self.ui.text_console.insertPlainText('Total time for g-function evaluation: {} sec\n'.format(toc2 - tic))
-        self.ui.text_console.insertPlainText(60 * '-' + '\n')
+        self.ui.text_console.insertPlainText(80 * '-' + '\n')
 
     # Return float if time is a scalar
     if np.isscalar(time):
