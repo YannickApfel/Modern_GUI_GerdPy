@@ -278,5 +278,25 @@ class UIFunctions(MainWindow):
             self.top_grip.setGeometry(0, 0, self.width(), 10)
             self.bottom_grip.setGeometry(0, self.height() - 10, self.width(), 10)
 
+    # RADIOBUTTON TOGGLED
+    def rbstate(self, rb):
+        # turn text and QSpinBoxes transparent if radiobutton is toggled
+        if rb.isChecked():
+            self.ui.label_30.setStyleSheet("color: rgba(211,211,211,50)")
+            self.ui.sb_depth_boreholes.setStyleSheet("color: rgba(211,211,211,50)")
+            self.ui.sb_depth_boreholes.setDisabled(True)
+            self.ui.label_25.setStyleSheet("color: rgba(211,211,211,50)")
+            self.ui.sb_r_borehole.setStyleSheet("color: rgba(211,211,211,50)")
+            self.ui.sb_r_borehole.setDisabled(True)
+        else:
+            self.ui.label_30.setStyleSheet("color: rgb(211,211,211)")
+            self.ui.sb_depth_boreholes.setStyleSheet("color: rgb(211,211,211);"
+                                                     "background-color: rgb(33, 37, 43)")
+            self.ui.sb_depth_boreholes.setDisabled(False)
+            self.ui.label_25.setStyleSheet("color: rgb(211,211,211)")
+            self.ui.sb_r_borehole.setStyleSheet("color: rgb(211,211,211);"
+                                                "background-color: rgb(33, 37, 43)")
+            self.ui.sb_r_borehole.setDisabled(False)
+
     # ///////////////////////////////////////////////////////////////
     # END - GUI DEFINITIONS

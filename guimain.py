@@ -64,6 +64,9 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////////////////////////
         widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
+        # RADIOBUTTON
+        widgets.rb_depth.toggled.connect(lambda: UIFunctions.rbstate(self, self.ui.rb_depth))
+
         # DROPDOWN MONTHS
         widgets.cb_month.addItem("January", 1)
         widgets.cb_month.addItem("February", 2)
