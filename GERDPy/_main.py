@@ -319,13 +319,8 @@ def main(self):
             E - E_N         - Summe der Verluste durch Konvektion, Strahlung und Verdunstung
     '''
 
-    # gemittelte Entzugsleistung [W]
-    h_interv = 24                                   # Zeitintervall der gemittelten Entzugsleistung [h]
-
-    Q_m = np.zeros(Nt)
-    for i in range(0, Nt, h_interv):
-        Q_interv = [x for x in Q[i:(i+h_interv)]]
-        Q_m[i:(i+h_interv)] = np.mean(Q_interv)
+    # 24h-gemittelte Entzugsleistung (gleitender Mittelwert)
+    Q_ma = Q_moving_average(Q)
 
     # Gesamtenergiemenge [MWh]
     E = (np.sum(Q) / len(Q)) * Nt * 1e-6
