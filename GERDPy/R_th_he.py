@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
-""" Thermischer Widerstand des Heizelements
-
+""" GERDPy - 'R_th_he.py'
+    
+    Modul für den thermischen Widerstand des Heizelements
+    
     R_th_he:
 
     - analytisch ermittelter therm. Widerstand basierend auf der Norm
     VDI 2055-1 [2019] für die thermischen Verluste gedämmter Rohrleitungen
     verlegt in Registeranordnung in ein- oder mehrschichtigen Platten
     (z. B. Fußbodenheizungen) - vereinfacht und angepasst in [Apfel2020]
-
+    
     - variable Größen:
         - minimaler Oberflächenabstand x_min [m]
         - Wärmeleitfähigkeiten Beton und Kondensatrohre [W/mK]
         - Rohrgeometrie des Kondensator (Durchmesser, Rohrabstand,
                                          Rohrlänge) [m]
 
-    Autor: Yannick Apfel
+    Autor(en): Yannick Apfel, Meike Martin
 """
 from .heating_element_utils import *
 

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-""" GERDPy - Main-File
+""" GERDPy - '_main.py'
+
     Steuerungsfile des Auslegungstools für das Projekt GERDI
 
     Legende:
@@ -7,7 +8,7 @@
             - T in Kelvin [K] - für (kalorische) Gleichungen
             - Theta in Grad Celsius [°C] - Input aus dem Wetterdatenfile
 
-    Autor: Yannick Apfel
+    Autor(en): Yannick Apfel, Meike Martin
 """
 import sys
 import matplotlib.pyplot as plt

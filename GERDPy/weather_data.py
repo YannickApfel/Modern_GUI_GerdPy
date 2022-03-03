@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-""" Import der notwendigen Wetterdaten aus .csv-File
+""" GERDPy - 'weather_data.py'
+    
+    Import der notwendigen Wetterdaten aus Excel-File
 
-    Autor: Yannick Apfel
+    Autor(en): Yannick Apfel, Meike Martin
 """
-
-
 def get_weather_data(Nt, self):
 
     import sys
