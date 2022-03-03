@@ -98,7 +98,7 @@ class Borehole(object):
         return pos
 
 
-def field_from_file(filename):
+def field_from_file(self, filename):
     """
     Build a list of boreholes given coordinates and dimensions provided in a
     text file.
@@ -130,21 +130,58 @@ def field_from_file(filename):
     data = np.loadtxt(filename)
     # Build the bore field
     borefield = []
-    try:
-        for line in data:
-            x = line[0]
-            y = line[1]
-            H = line[2]
-            D = line[3]
-            r_b = line[4]
+    if not self.ui.rb_depth.isChecked():
+        if np.size(data, 1) == 5:
+            try:
+                for line in data:
+                    x = line[0]
+                    y = line[1]
+                    D = line[3]
+                    H = self.ui.sb_depth_boreholes.value()
+                    r_b = self.ui.sb_r_borehole.value()
+                    borefield.append(Borehole(H, D, r_b, x=x, y=y))
+            except IndexError:  # raises exception if only one borehole
+                x = data[0]
+                y = data[1]
+                D = data[3]
+                H = self.ui.sb_depth_boreholes.value()
+                r_b = self.ui.sb_r_borehole.value()
+                borefield.append(Borehole(H, D, r_b, x=x, y=y))
+            print(borefield)
+        else:
+            try:
+                for line in data:
+                    x = line[0]
+                    y = line[1]
+                    D = line[2]
+                    H = self.ui.sb_depth_boreholes.value()
+                    r_b = self.ui.sb_r_borehole.value()
+                    borefield.append(Borehole(H, D, r_b, x=x, y=y))
+            except IndexError:  # raises exception if only one borehole
+                x = data[0]
+                y = data[1]
+                D = data[2]
+                H = self.ui.sb_depth_boreholes.value()
+                r_b = self.ui.sb_r_borehole.value()
+                borefield.append(Borehole(H, D, r_b, x=x, y=y))
+            print(borefield)
+    else:
+        try:
+            for line in data:
+                x = line[0]
+                y = line[1]
+                H = line[2]
+                D = line[3]
+                r_b = line[4]
+                borefield.append(Borehole(H, D, r_b, x=x, y=y))
+        except IndexError:  # raises exception if only one borehole
+            x = data[0]
+            y = data[1]
+            H = data[2]
+            D = data[3]
+            r_b = data[4]
             borefield.append(Borehole(H, D, r_b, x=x, y=y))
-    except IndexError:  # raises exception if only one borehole
-        x = data[0]
-        y = data[1]
-        H = data[2]
-        D = data[3]
-        r_b = data[4]
-        borefield.append(Borehole(H, D, r_b, x=x, y=y))
+        print(borefield)
     return borefield
 
 

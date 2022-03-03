@@ -64,7 +64,7 @@ def main(self):
     # 1.2) Erdwärmesondenfeld
 
     # Geometrie-Import (.txt-Datei)
-    boreField = boreholes.field_from_file(self.ui.line_borefield_file.text())  # './data/custom_field_5.txt'
+    boreField = boreholes.field_from_file(self, self.ui.line_borefield_file.text())  # './data/custom_field_5.txt'
 
     # Sondenmeter (gesamt)
     H_field = boreholes.length_field(boreField)

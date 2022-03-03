@@ -188,9 +188,10 @@ class MainWindow(QMainWindow):
         # START SIMULATION
         if btnName == "btn_startsim":
             self.ui.text_console.clear()
-            self.ui.text_console.insertPlainText('--------------------------SIMULATION RUNNING--------------------------\n')
-            USEFunctions.datecheck(self)
-            simulation(self)
+            correct = USEFunctions.errorhandling(self)
+            if correct:
+                self.ui.text_console.insertPlainText('--------------------------SIMULATION RUNNING--------------------------\n')
+                simulation(self)
 
 
     # RESIZE EVENTS
