@@ -64,6 +64,9 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////////////////////////
         widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
+        # RADIOBUTTON
+        widgets.rb_depth.toggled.connect(lambda: UIFunctions.rbstate(self, self.ui.rb_depth))
+
         # DROPDOWN MONTHS
         widgets.cb_month.addItem("January", 1)
         widgets.cb_month.addItem("February", 2)
@@ -184,9 +187,11 @@ class MainWindow(QMainWindow):
 
         # START SIMULATION
         if btnName == "btn_startsim":
-            self.ui.text_console.insertPlainText('SIMULATION RUNNING...\n')
-            USEFunctions.datecheck(self)
-            simulation(self)
+            self.ui.text_console.clear()
+            correct = USEFunctions.errorhandling(self)
+            if correct:
+                self.ui.text_console.insertPlainText('--------------------------SIMULATION RUNNING--------------------------\n')
+                simulation(self)
 
 
     # RESIZE EVENTS
