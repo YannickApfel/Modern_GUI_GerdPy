@@ -1,54 +1,59 @@
 # -*- coding: utf-8 -*-
-""" Ermittlung der Systemleistung anhand einer stationären Leistungsbilanz an der Oberfläche
-    des Heizelements für jeden Zeitschritt
+""" GERDPy - 'load_generator.py'
 
-    Q. = (Theta_b - Theta_surf) / R_th_tot 
-       = Q._lat + Q._sen + R_f * (Q._con + Q._rad + Q._eva)
-    
-    Leistungsbilanzen: (ohne Betrachtung der Verluste)
-        - F_Q = Q._lat + Q._sen + R_f * (Q._con + Q._rad + Q._eva) - Q.
-        - F_T = Q._lat + Q._sen + R_f * (Q._con + Q._rad + Q._eva)
+    Modul zur Ermittlung der Oberflächenlast (Lastmodell) am Heizelement durch
+    stationäre Kopplung von Boden, Erdwärmesonden und Heizelementoberfläche
 
-    Fallunterscheidung:
-        - Theta_b >= Theta_surf: Lösung der vollen Leistungsbilanz 
-            F_Q = 0, Q. >= 0 (positiver Wärmeentzug aus dem Boden)
+    Ermittlung der Systemleistung anhand einer stationären Leistungsbilanz an der Oberfläche
+        des Heizelements für jeden Zeitschritt
 
-            {Erdboden + Oberfläche + Umgebung} -> Auflösung nach Q.
+        Q. = (Theta_b - Theta_surf) / R_th_tot 
+           = Q._lat + Q._sen + R_f * (Q._con + Q._rad + Q._eva)
+        
+        Leistungsbilanzen: (ohne Betrachtung der Verluste)
+            - F_Q = Q._lat + Q._sen + R_f * (Q._con + Q._rad + Q._eva) - Q.
+            - F_T = Q._lat + Q._sen + R_f * (Q._con + Q._rad + Q._eva)
 
-        - Theta_b < Theta_surf: Lösung der reduzierten Leistungsbilanz 
-            F_T = 0, Q. := 0 (kein Wärmeentzug aus dem Boden)
+        Fallunterscheidung:
+            - Theta_b >= Theta_surf: Lösung der vollen Leistungsbilanz 
+                F_Q = 0, Q. >= 0 (positiver Wärmeentzug aus dem Boden)
 
-            {Oberfläche + Umgebung} -> Auflösung nach Theta_surf (Oberflächentemperatur)
+                {Erdboden + Oberfläche + Umgebung} -> Auflösung nach Q.
 
-    Definition der Einzellasten:
+            - Theta_b < Theta_surf: Lösung der reduzierten Leistungsbilanz 
+                F_T = 0, Q. := 0 (kein Wärmeentzug aus dem Boden)
 
-        lat - latent
-        sen - sensibel
-        con - konvektiv
-        rad - Strahlung
-        eva - Verdunstung
+                {Oberfläche + Umgebung} -> Auflösung nach Theta_surf (Oberflächentemperatur)
 
-    &
+        Definition der Einzellasten:
 
-    Lösung der Leistungsbilanz - Verfahren: iterative Nullstellensuche
+            lat - latent
+            sen - sensibel
+            con - konvektiv
+            rad - Strahlung
+            eva - Verdunstung
 
-    Legende:
-        - Temperaturen:
-            - T in Kelvin [K] - für (kalorische) Gleichungen
-            - Theta in Grad Celsius [°C] - Input aus dem Wetterdatenfile
+        &
 
-    Algorithmus basierend in Teilen auf [Konrad2009]
-    
-    Anmerkungen zu Variablen:
-        - calc_T_surf:
-            - "False": Leistungsentzug aus dem Boden Q >= 0 (positiv), Oberflächentemp. Theta_surf wird in "main.py" ermittelt
-            (Simulationsmodi 2 und 4)
-            - "True": kein Leistungsentzug aus dem Boden, Oberflächentemp. Theta_surf wird in "load_generator.py" ermittelt
-        - sb_active:
-            - "True": Schneeschichtbilanzierung aktiv (es kann sich eine Schneeschicht bilden)
-            - "False": Schneeschichtbilanzierung inaktiv (die Schneelast wird in jedem Zeitschritt abgeschmolzen, keine Bildung einer Schneedecke)
+        Lösung der Leistungsbilanz - Verfahren: iterative Nullstellensuche
 
-    Autor: Yannick Apfel
+        Legende:
+            - Temperaturen:
+                - T in Kelvin [K] - für (kalorische) Gleichungen
+                - Theta in Grad Celsius [°C] - Input aus dem Wetterdatenfile
+
+        basiert auf: [Konrad 2009] und [Fuchs 2020]
+        
+        Anmerkungen zu Variablen:
+            - calc_T_surf:
+                - "False": Leistungsentzug aus dem Boden Q >= 0 (positiv), Oberflächentemp. Theta_surf wird in "main.py" ermittelt
+                (Simulationsmodi 2 und 4)
+                - "True": kein Leistungsentzug aus dem Boden, Oberflächentemp. Theta_surf wird in "load_generator.py" ermittelt
+            - sb_active:
+                - "True": Schneeschichtbilanzierung aktiv (es kann sich eine Schneeschicht bilden)
+                - "False": Schneeschichtbilanzierung inaktiv (die Schneelast wird in jedem Zeitschritt abgeschmolzen, keine Bildung einer Schneedecke)
+
+    Autor(en): Yannick Apfel, Meike Martin
 """
 import math
 from scipy.constants import sigma
@@ -224,23 +229,23 @@ def F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_s
 # Solver für die Lösung der Leistungsbilanz F_Q := 0 nach Q
 def solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he):
     step_refine = 0  # Hilfsvariable zur Verfeinerung der Schrittweite
-    step = 30  # doppelter Startwert als Iterationsschrittweite für Q
+    step = 100  # doppelter Startwert als Iterationsschrittweite für Q
     res = 0.001  # zulässiges Residuum für F_Q (Restfehler)
 
     Q = 0  # Startwert für Q
 
     error = abs(F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
 
-    # Ermittlung von Q für F_Q = 0 (stationäres System)
+    # Ermittlung von Q für F_Q := 0 (stationäres System)
     while error > res:
+        step_refine += 1
+        step = step / (2 * step_refine)  # Halbierung der Schrittweite für eine weitere Überschreitung/Unter- des Zielwerts
         if F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
-            step_refine += 1
             while F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
-                Q += (step / (2 * step_refine))  # Halbierung der Schrittweite für eine weitere Überschreitung/Unter- des Zielwerts
+                Q += step
         elif F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
-            step_refine += 1
             while F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
-                Q -= (step / (2 * step_refine))  # Halbierung der Schrittweite für eine weitere Überschreitung/Unter- des Zielwerts
+                Q -= step
 
         error = abs(F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
 
@@ -256,23 +261,23 @@ def solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_i
 # Solver für die Lösung der Leistungsbilanz F_T := 0 nach Theta_surf
 def solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he):
     step_refine = 0  # Hilfsvariable zur Verfeinerung der Schrittweite
-    step = 10  # doppelter Startwert als Iterationsschrittweite für T
-    res = 0.01  # zulässiges Residuum für F_T (Restfehler)
+    step = 100  # doppelter Startwert als Iterationsschrittweite für T
+    res = 0.001  # zulässiges Residuum für F_T (Restfehler)
 
     Theta_surf = 0  # Startwert für Q
 
     error = abs(F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
 
-    # Ermittlung von Theta_surf für F_T = 0 (stationäres System)
+    # Ermittlung von Theta_surf für F_T := 0 (stationäres System)
     while error > res:
+        step_refine += 1
+        step = step / (2 * step_refine)  # Halbierung der Schrittweite für eine weitere Überschreitung/Unter- des Zielwerts
         if F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
-            step_refine += 1
-            while F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
-                Theta_surf -= (step / (2 * step_refine))  # Halbierung der Schrittweite für eine weitere Überschreitung/Unter- des Zielwerts
+            while F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0: 
+                Theta_surf -= step
         elif F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
-            step_refine += 1
             while F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
-                Theta_surf += (step / (2 * step_refine))  # Halbierung der Schrittweite für eine weitere Überschreitung/Unter- des Zielwerts
+                Theta_surf += step
 
         error = abs(F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
 

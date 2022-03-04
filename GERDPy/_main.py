@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-""" GERDPy - Main-File
+""" GERDPy - '_main.py'
+
     Steuerungsfile des Auslegungstools für das Projekt GERDI
 
     Legende:
@@ -7,7 +8,7 @@
             - T in Kelvin [K] - für (kalorische) Gleichungen
             - Theta in Grad Celsius [°C] - Input aus dem Wetterdatenfile
 
-    Autor: Yannick Apfel
+    Autor(en): Yannick Apfel, Meike Martin
 """
 import sys
 import matplotlib.pyplot as plt
@@ -234,7 +235,8 @@ def main(self):
     sb_active = np.zeros(Nt)
     sim_mod = np.zeros(Nt)
 
-    print('-----------------Simulationsstart-----------------\n')
+    print('-----------------Simulation gestartet-----------------\n')
+    self.ui.text_console.insertPlainText('-----------------Simulation gestartet-----------------\n')
 
     progwindow.ui.running.setText("Simulation running...")
 
@@ -319,17 +321,14 @@ def main(self):
             E - E_N         - Summe der Verluste durch Konvektion, Strahlung und Verdunstung
     '''
 
-    # gemittelte Entzugsleistung [W]
-    h_interv = 24                                   # Zeitintervall der gemittelten Entzugsleistung [h]
-
-    Q_m = np.zeros(Nt)
-    for i in range(0, Nt, h_interv):
-        Q_interv = [x for x in Q[i:(i+h_interv)]]
-        Q_m[i:(i+h_interv)] = np.mean(Q_interv)
+    # 24h-gemittelte Entzugsleistung (gleitender Mittelwert)
+    Q_ma = Q_moving_average(Q)
 
     # Gesamtenergiemenge [MWh]
     E = (np.sum(Q) / len(Q)) * Nt * 1e-6
-    print(80*'-')
+
+    print('-----------------Simulation beendet-----------------')
+
     print(f'Dem Boden wurden {round(E, 4)} MWh entnommen')
     self.ui.text_console.insertPlainText(80*'-'+'\n')
     self.ui.text_console.insertPlainText(f'Obtained energy from ground: {round(E, 4)} MWh\n')
@@ -344,97 +343,57 @@ def main(self):
     #                                      f'Der Rest sind Verluste an der Ober-, Unterseite und Anbindungsleitungen.')
 
     # -------------------------------------------------------------------------
-    # 8.) Plot
+    # 8.) Plots für End-User
     # -------------------------------------------------------------------------
 
     # x-Achse aller Plots (Simulationsstunden) [h]
     hours = np.array([(j+1)*dt/3600. for j in range(Nt)])
 
-    # -------------------------------------------------------------------------
-    # 8.1) Figure 1 (Plots für End-User)
-    # -------------------------------------------------------------------------
- 
     plt.rc('figure')
     fig1 = plt.figure()
- 
-    font = {'weight': 'bold', 'size': 14}
+
+    font = {'weight': 'bold', 'size': 10}
     plt.rc('font', **font)
- 
+
     # Lastprofil {Entzugsleistung - Entzugsleistung (24h-gemittelt) - Verluste (Anbindung + Unterseite Heizelement)}
-    ax1 = fig1.add_subplot(311)
+    ax1 = fig1.add_subplot(411)
     ax1.set_ylabel(r'$q$ [W/m2]')
     ax1.plot(hours, Q / A_he, 'k-', lw=1.2)
     ax1.plot(hours, Q_m / A_he, 'r--', lw=1.2)
     ax1.plot(hours, Q_V / A_he, 'g-', lw=1.2)
     ax1.legend(['Entzugsleistung', 'Entzugsleistung-24h-gemittelt',
                 'Verluste (Anbindung + Unterseite Heizelement)'],
-               prop={'size': font['size'] - 5}, loc='upper left')
+               prop={'size': font['size']}, loc='upper left')
     ax1.grid('major')
- 
+
     # Schneefallrate - Schneehöhe - Umgebungstemperatur - Windgeschwindigkeit
-    ax2 = fig1.add_subplot(312)
-    ax2_2 = ax2.twinx()
+    ax2 = fig1.add_subplot(412)
     ax2.set_ylabel('Schneefallrate [mm/h] \n Schneehöhe [mm]')
-    ax2_2.set_ylabel('$T$ [degC] \n Windgeschwindigkeit [m/s]')
     ax2.plot(hours, S_w, 'b-', lw=0.8)
     ax2.plot(hours, m_Rs / A_he, 'g-', lw=0.8)
-    ax2_2.plot(hours, Theta_inf, 'k-', lw=0.8)
-    ax2_2.plot(hours, u_inf, 'm--', lw=0.8)
     ax2.legend(['Schneefallrate', 'Schneehöhe'],
-               prop={'size': font['size'] - 5}, loc='upper left')
-    ax2_2.legend(['Umgebungstemperatur', 'Windgeschwindigkeit'],
-                 prop={'size': font['size'] - 5}, loc='upper right')
+               prop={'size': font['size']}, loc='upper left')
     ax2.grid('major')
- 
-    # Temperaturverläufe Bohrlochrand und Oberfläche Heizelement
-    ax3 = fig1.add_subplot(313)
-    ax3.set_xlabel(r'$t$ [h]')
-    ax3.set_ylabel(r'$T$ [degC]')
-    ax3.plot(hours, Theta_b, 'r-', lw=1.2)
-    ax3.plot(hours, Theta_surf, 'c-', lw=0.6)
-    ax3.legend(['T_Bohrlochrand', 'T_Oberflaeche'],
-               prop={'size': font['size'] - 5}, loc='upper right')
-    ax3.grid('major')
- 
-    # -------------------------------------------------------------------------
-    # 8.2) Figure 2 (zusätzliche Plots)
-    # -------------------------------------------------------------------------
- 
-    plt.rc('figure')
-    fig2 = plt.figure()
- 
-    font = {'weight': 'bold', 'size': 14}
-    plt.rc('font', **font)
- 
-    # Darstellungen Simulationsmodus
-    ax4 = fig2.add_subplot(311)
-    ax4.plot(hours, start_sb_counter, 'k--', lw=1.5)
-    ax4.plot(hours, sb_active, 'g-', lw=1.3)
-    ax4.plot(hours, sim_mod, 'y-', lw=1.3)
-    ax4.plot(hours, sim_mod, 'y-', lw=1.3)    
-    ax4.legend(['sb_active', 'sim_mod'],
-               prop={'size': font['size'] - 5}, loc='upper right')
-    ax4.grid('major')
     
-    # Wasser- und Schneebilanzlinie (Wasserequivalent)
-    ax5 = fig2.add_subplot(312)
-    ax5.set_ylabel('[mm]')
-    ax5.plot(hours, m_Rw / A_he, 'b-', lw=0.8)
-    ax5.plot(hours, m_Rs / A_he, 'g-', lw=0.8)
-    ax5.legend(['Wasserhoehe', 'Schneehoehe'],
-               prop={'size': font['size'] - 5}, loc='upper left')
-    ax5.grid('major')
- 
+    # Umgebungstemperatur - Windgeschwindigkeit
+    ax3 = fig1.add_subplot(413)
+    ax3.set_ylabel('$T$ [degC] \n Windgeschwindigkeit [m/s]')
+    ax3.plot(hours, Theta_inf, 'k-', lw=0.8)
+    ax3.plot(hours, u_inf, 'm--', lw=0.8)
+    ax3.legend(['Umgebungstemperatur', 'Windgeschwindigkeit'],
+                 prop={'size': font['size']}, loc='upper right')
+    ax3.grid('major')
+
     # Temperaturverläufe Bohrlochrand und Oberfläche Heizelement
-    ax6 = fig2.add_subplot(313)
-    ax6.set_xlabel(r'$t$ [h]')
-    ax6.set_ylabel(r'$T$ [degC]')
-    ax6.plot(hours, Theta_b, 'r-', lw=1.2)
-    ax6.plot(hours, Theta_surf, 'c-', lw=0.6)
-    ax6.legend(['T_Bohrlochrand', 'T_Oberflaeche'],
-               prop={'size': font['size'] - 5}, loc='upper right')
-    ax6.grid('major')
- 
+    ax4 = fig1.add_subplot(414)
+    ax4.set_xlabel(r'$t$ [h]')
+    ax4.set_ylabel(r'$T$ [degC]')
+    ax4.plot(hours, Theta_b, 'r-', lw=1.2)
+    ax4.plot(hours, Theta_surf, 'c-', lw=0.6)
+    ax4.legend(['T_Bohrlochrand', 'T_Oberflaeche'],
+               prop={'size': font['size']}, loc='upper right')
+    ax4.grid('major')
+
     # Beschriftung Achsenwerte
     ax1.xaxis.set_minor_locator(AutoMinorLocator())
     ax1.yaxis.set_minor_locator(AutoMinorLocator())
@@ -444,11 +403,7 @@ def main(self):
     ax3.yaxis.set_minor_locator(AutoMinorLocator())
     ax4.xaxis.set_minor_locator(AutoMinorLocator())
     ax4.yaxis.set_minor_locator(AutoMinorLocator())
-    ax5.xaxis.set_minor_locator(AutoMinorLocator())
-    ax5.yaxis.set_minor_locator(AutoMinorLocator())
-    ax6.xaxis.set_minor_locator(AutoMinorLocator())
-    ax6.yaxis.set_minor_locator(AutoMinorLocator())
- 
+
     # plt.tight_layout()
     plt.show()
     
