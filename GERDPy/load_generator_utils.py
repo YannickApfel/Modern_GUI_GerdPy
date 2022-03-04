@@ -78,16 +78,34 @@ def p_s_ASHRAE(T):  # Input in [K]
         sys.exit()
 
 
-# Wärmeübergangskoeffizient [W/m²K]
-# nach [Bentz D. P. 2000] (nur erzwungene Konvektion)
-# alpha = alpha(u_air)
-def alpha_kon_Bentz(u):
+''' Wärmeübergangskoeffizient [W/m²K] nach [Bentz D. P. 2000]
+    erzwungene Konvektion längs zu ebener Wand
+    alpha = alpha(u_air)
+'''
+def alpha_kon_he_o(u):  # Heizelementoberseite
     if u <= 5:
         alpha = 5.6 + 4 * u
     else:
         alpha = 7.2 * u ** 0.78
 
     return alpha
+
+
+''' Wärmeübergangskoeffizient [W/m²K] nach [Löser: Technische Thermodynamik]
+    ruhende Luft senkrecht zu ebener Wand (Schätzwert)
+    alpha = alpha() = const
+'''
+def alpha_kon_he_u():
+
+    return 10
+
+
+''' Wärmeübergangskoeffizient [W/m²K] nach [Löser: Technische Thermodynamik]
+    Luft um gedämmte Rohre
+    alpha = alpha(deltaT)
+'''
+def alpha_kon_an(deltaT):
+    return 9.4 + 0.052 * deltaT
 
 
 # Wassermengen-Bilanz an Heizelement-Oberfläche (für Verdunstung)
