@@ -1536,7 +1536,7 @@ Qt::WA_AlwaysShowToolTips
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>3</number>
+                      <number>5</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -2935,10 +2935,10 @@ color: rgb(231, 81, 19);</string>
                                 </font>
                                </property>
                                <property name="toolTip">
-                                <string>Define varying borehole depths and radii via borefield parameters file.</string>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If activated, borehole depths and radii will be taken from borefield geometry file.&lt;/p&gt;&lt;p&gt;Otherwise borehole depths and radii will be taken from parameter input below and will be equal for all boreholes.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="toolTipDuration">
-                                <number>-1</number>
+                                <number>30000</number>
                                </property>
                                <property name="statusTip">
                                 <string/>
@@ -3240,7 +3240,7 @@ color: rgb(231, 81, 19);</string>
                              <string notr="true">color: #e75113;</string>
                             </property>
                             <property name="text">
-                             <string>Borefield  geometry &amp; Simulation parameters</string>
+                             <string>Borefield geometry &amp; Simulation parameters</string>
                             </property>
                            </widget>
                           </item>
@@ -3887,7 +3887,7 @@ QPushButton:pressed{
 }</string>
                                </property>
                                <property name="text">
-                                <string>START SIMULATION</string>
+                                <string> START SIMULATION</string>
                                </property>
                                <property name="icon">
                                 <iconset>
@@ -3897,6 +3897,100 @@ QPushButton:pressed{
                              </item>
                              <item>
                               <widget class="QFrame" name="frame_21">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>100</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="frame_27">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>150</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>200</height>
+                             </size>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_13">
+                             <item>
+                              <widget class="QFrame" name="frame_31">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>100</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="btn_save_results">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>100</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>16</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="cursor">
+                                <cursorShape>PointingHandCursor</cursorShape>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton{
+background-color: rgb(52, 59, 72);
+}
+QPushButton:hover{
+	background-color: rgba(242, 146, 0, 130);
+}
+QPushButton:pressed{
+	background-color: rgba(228, 38, 24, 130);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string> SAVE RESULTS</string>
+                               </property>
+                               <property name="icon">
+                                <iconset resource="resources.qrc">
+                                 <normaloff>:/icons/images/icons/cil-save.png</normaloff>:/icons/images/icons/cil-save.png</iconset>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_36">
                                <property name="maximumSize">
                                 <size>
                                  <width>100</width>
@@ -3937,43 +4031,84 @@ QPushButton:pressed{
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_10">
-                          <property name="spacing">
-                           <number>6</number>
-                          </property>
-                          <property name="leftMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>0</number>
-                          </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_8">
                           <item>
-                           <widget class="QLabel" name="label_36">
-                            <property name="maximumSize">
-                             <size>
-                              <width>16777215</width>
-                              <height>50</height>
-                             </size>
+                           <widget class="QFrame" name="frame_10">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
                             </property>
-                            <property name="font">
-                             <font>
-                              <pointsize>20</pointsize>
-                              <italic>false</italic>
-                              <bold>false</bold>
-                             </font>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: #f9b200;</string>
-                            </property>
-                            <property name="text">
-                             <string>Console</string>
-                            </property>
+                            <layout class="QHBoxLayout" name="horizontalLayout_14">
+                             <item>
+                              <widget class="QLabel" name="label_36">
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>50</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>20</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">color: #f9b200;</string>
+                               </property>
+                               <property name="text">
+                                <string>Console</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="btn_save_console">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>200</width>
+                                 <height>35</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>200</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>16</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="cursor">
+                                <cursorShape>PointingHandCursor</cursorShape>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton{
+background-color: rgb(52, 59, 72);
+}
+QPushButton:hover{
+	background-color: rgba(242, 146, 0, 130);
+}
+QPushButton:pressed{
+	background-color: rgba(228, 38, 24, 130);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string> Save Console</string>
+                               </property>
+                               <property name="icon">
+                                <iconset resource="resources.qrc">
+                                 <normaloff>:/icons/images/icons/cil-save.png</normaloff>:/icons/images/icons/cil-save.png</iconset>
+                               </property>
+                              </widget>
+                             </item>
+                            </layout>
                            </widget>
                           </item>
                           <item>
@@ -4361,7 +4496,7 @@ QPushButton:pressed{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>351</width>
+                                 <width>218</width>
                                  <height>218</height>
                                 </rect>
                                </property>
