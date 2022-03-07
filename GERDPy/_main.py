@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - '_main.py'
 
-    Steuerungsfile des Auslegungstools für das Projekt GERDI
+    Main Control-File of GERDPy - The Simulation Tool for Geothermal Heat Pipe Surface Heating Systems
 
-    Legende:
-        - Temperaturen:
-            - T in Kelvin [K] - für (kalorische) Gleichungen
-            - Theta in Grad Celsius [°C] - Input aus dem Wetterdatenfile
+    Legend:
+        Parameter [Unit]
+        - Temperatures:
+            - T in Kelvin [K] - for caloric equations
+            - Theta in degrees Celsius [°C] - for object temperatures
 
-    Autor(en): Yannick Apfel, Meike Martin
+    Author(s): Yannick Apfel, Meike Martin
 """
 import sys
 import matplotlib.pyplot as plt
@@ -36,7 +37,7 @@ from PySide6.QtWidgets import *
 def main(self):
 
     # -------------------------------------------------------------------------
-    # 1.) Parametrierung der Simulation (Geometrien, Stoffwerte, etc.)
+    # 1.) Parametrization of the simulation (geometries, physical params, etc.)
     # -------------------------------------------------------------------------
 
     print(80 * '-')
@@ -54,97 +55,100 @@ def main(self):
     progwindow.ui.running.setText("Initialization...")
     progapp.processEvents()
 
-    # 1.0) Standort
-    h_NHN = self.ui.sb_h_NHN.value()                            # Höhe des Standorts über Normal-Null
+    # 1.0) Location
+    h_NHN = self.ui.sb_h_NHN.value()                            # elevation (above sea-level) [m]
 
     # 1.1) Erdboden
-    a = self.ui.sb_therm_diffu.value() * 1.0e-6                 # Temperaturleitfähigkeit [m2/s] (default: 1)
-    lambda_g = self.ui.sb_therm_cond.value()                    # Wärmeleitfähigkeit [W/mK] (default: 2.0)
-    Theta_g = self.ui.sb_undis_soil_temp.value()                # ungestörte Bodentemperatur [°C] (default: 10.0)
+    a = self.ui.sb_therm_diffu.value() * 1.0e-6                 # thermal diffusivity [m2/s] (default: 1.0)
+    lambda_g = self.ui.sb_therm_cond.value()                    # thermal conductivity [W/mK] (default: 2.0)
+    Theta_g = self.ui.sb_undis_soil_temp.value()                # undisturbed ground temperature [°C] (default: 10.0)
 
-    # 1.2) Erdwärmesondenfeld
+    # 1.2) Borehole heat exchanger layout
 
-    # Geometrie-Import (.txt-Datei)
+    # Geometry-Import (.txt) & object generation
     boreField = boreholes.field_from_file(self, self.ui.line_borefield_file.text())  # './data/custom_field_5.txt'
 
-    # Sondenmeter (gesamt)
+    # Total length of geothermal borefield (boring depth)
     H_field = boreholes.length_field(boreField)
 
-    # Layout-Plot des Erdwärmesondenfeldes
+    # Borefield layout plot
     boreholes.visualize_field(boreField)
 
-    # 1.3) Bohrloch
+    # 1.3) Borehole
 
-    # Geometrie
-    N = self.ui.sb_number_heatpipes.value()                     # Anzahl Heatpipes pro Bohrloch [-] (default: 6)
-    r_b = self.ui.sb_r_borehole.value()                         # Radius der Erdwärmesondenbohrung [m] # boreField[0].r_b
-    r_w = self.ui.sb_radius_w.value()                           # Radius der Wärmerohr-Mittelpunkte [m] (default: 0.12)
-    r_iso_b = self.ui.sb_radius_iso.value()                     # Außenradius der Isolationsschicht [m] (default: 0.016)
-    r_pa = self.ui.sb_radius_pa.value()                         # Außenradius der Wärmerohre [m] (default: 0.016)
-    r_pi = self.ui.sb_radius_pi.value()                         # Innenradius der Wärmerohre [m] (default: 0.015)
+    # Geometry
+    N = self.ui.sb_number_heatpipes.value()                     # no. of heatpipes per borehole [-] (default: 6)
+    r_b = self.ui.sb_r_borehole.value()                         # borehole radius [m] (boreField[0].r_b)
+    r_w = self.ui.sb_radius_w.value()                           # radius of heatpipe-centres [m] (default: 0.12)
+    r_iso_b = self.ui.sb_radius_iso.value()                     # outer radius of heatpipe insulation [m] (default: 0.016)
+    r_pa = self.ui.sb_radius_pa.value()                         # outer radius of heatpipes [m] (default: 0.016)
+    r_pi = self.ui.sb_radius_pi.value()                         # inner radius of heatpipes [m] (default: 0.015)
 
-    # Wärmeleitfähigkeiten
-    lambda_b = self.ui.sb_lambda_b.value()                      # lambda der Hinterfüllung [W/mK] (default: 2)
-    lambda_iso = self.ui.sb_lambda_iso.value()                  # lambda der Isolationsschicht [W/mK] (default: 0.03)
-    lambda_p = self.ui.sb_lambda_p.value()                      # lambda der Heatpipe [W/mK] (default: 14.0)
+    # Thermal conductivities
+    lambda_b = self.ui.sb_lambda_b.value()                      # ~ of borehole backfill [W/mK] (default: 2.0)
+    lambda_iso = self.ui.sb_lambda_iso.value()                  # ~ of insulation layer [W/mK] (default: 0.03)
+    lambda_p = self.ui.sb_lambda_p.value()                      # ~ of heatpipe material [W/mK] (default: 14.0)
 
-    # Geometrie-Erstellung
+    # Heatpipe-object generation
     hp = heatpipes.Heatpipes(N, r_b, r_w, r_iso_b, r_pa, r_pi, lambda_b,
                              lambda_iso, lambda_p)
-    # Layout-Plot der Wärmerohrkonfiguration
+
+    # Heatpipe configuration layout plot
     hp.visualize_hp_config()
 
-    # 1.4) Anbindung zum Heizelement (zusätzliche Größen)
+    # 1.4) Connection borehole-to-heating element
 
-    # Geometrie
-    D_iso_An = 0.005                                            # Dicke der Isolationsschicht [m]
-    r_iso_An = r_pa + D_iso_An                                  # Außenradius der Isolationsschicht [m]
+    # Geometry
+    D_iso_An = 0.005                                            # thickness of the insulation layer [m]
+    r_iso_An = r_pa + D_iso_An                                  # outer radius of the insulation layer [m]
 
-    # Länge der Anbindungen zwischen Bohrlöchern und Heizelement (ab Geländeoberkante) [m]
-    ''' l_An * N ergibt die Gesamtlänge an Heatpipe im Bereich der Anbindung
+    # Total length of borehole-to-heating element connections (starting from ground surface) [m]
+    ''' l_An is the total length of all borehole-to-heating element connections, while
+        l_An * N yields the total heatpipe-length inside all borehole-to-heating element connections (= heatpipe bundles)
     '''
     l_An = 5
 
-    # 1.5) Heizelement
+    # 1.5) Heating element
 
-    # Fläche Heizelement [m2]
-    A_he = self.ui.sb_A_he.value()      # (default: 35)
+    # Surface area [m2]
+    A_he = self.ui.sb_A_he.value()                              # (default: 35.0)
 
-    # minimaler Oberflächenabstand [m]
-    x_min = self.ui.sb_x_min.value()    # (default: .025)
+    # Minimum vertical pipe-to-surface distance [m]
+    x_min = self.ui.sb_x_min.value()                            # (default: .025)
 
-    # Wärmeleitfähigkeit des Betonelements [W/mk]
+    # Thermal conductivity [W/mK]
     lambda_Bet = 2.1
 
-    # Mittelachsabstand der Kondensatrohre im Heizelement [m]
+    # Centre-distance of heatpipes [m]
     s_R = .050
 
-    # Gesamtlänge im Heizelement verbauter Kondensatrohre [m]
+    # Total length of heatpipes inside heating element [m]
     l_R = 1000
 
-    # Betondicke des Heizelements [m]
+    # Vertical thickness of heating element [m]
     D_he = 0.25
 
-    # Dicke der Isolationsschicht an der Unterseite [m]
+    # Vertical thickness of insulation layer on underside of heating element [m]
     D_iso_he = 0.03
 
-    # Geometrie-Erstellung
+    # Heating element-object generation
     he = heating_element.HeatingElement(A_he, x_min, lambda_Bet, lambda_p,
                                         2 * r_pa, 2 * r_pi, s_R, l_R,
                                         D_he, D_iso_he)
 
     # 2.) Simulation
 
-    # Simulationsparameter
-    ''' dt darf 3600s (eine Stunde) aufgrund des Gültigkeitsbereichs der G-Functions
-        nicht unterschreiten
+    # Simulation-Params
+    ''' default value for 'dt' is 3600 seconds (equaling one hour) - usage of
+        smaller time increments not suggested to stay within validity range of 
+        long-term g-functions
     '''
-    dt = 3600.                                                  # Zeitschrittweite [s] (default: 3600)
-    tmax = self.ui.sb_simtime.value() * 3600                    # Gesamt-Simulationsdauer [s] (default: 730 h)
-    Nt = int(np.ceil(tmax / dt))                                # Anzahl Zeitschritte [-]
+    dt = 3600.                                                  # time increment (step size) [s] (default: 3600)
+    tmax = self.ui.sb_simtime.value() * 3600                    # total simulation time [s] (default: 730 h * 3600 s)
+    Nt = int(np.ceil(tmax / dt))                                # number of time steps [-]
 
     # -------------------------------------------------------------------------
-    # 2.) Überprüfung der geometrischen Verträglichkeit (Sonden & Heatpipes)
+    # 2.) Geometric compatibility check (boreholes & heat pipes)
     # -------------------------------------------------------------------------
 
     if check_geometry(boreField, hp, self):
@@ -166,41 +170,41 @@ def main(self):
         progwindow.ui.running.setText("Geometry-Check: OK!")
 
     # -------------------------------------------------------------------------
-    # 3.) Ermittlung thermischer Widerstände
+    # 3.) Determination of system thermal resistances
     # -------------------------------------------------------------------------
 
-    R_th = R_th_tot(lambda_g, boreField, hp, he)                # Gesamtsystem
-    R_th_ghp = R_th_g_hp(lambda_g, boreField, hp)               # Boden bis Heatpipes
+    R_th = R_th_tot(lambda_g, boreField, hp, he)                # ground-to-surface (whole system)
+    R_th_ghp = R_th_g_hp(lambda_g, boreField, hp)               # ground-to-heatpipes (omits heating element)
 
     # -------------------------------------------------------------------------
-    # 4.) Ermittlung der G-Function (Bodenmodell)
+    # 4.) G-Function generation (Pygfunction ground model)
     # -------------------------------------------------------------------------
 
-    # Initialisierung Zeitstempel (Simulationsdauer)
+    # Time stamp (start simulation)
     tic = tim.time()
 
-    # Aufsetzen der Simulationsumgebung mit 'load_aggregation.py'
+    # Simulation environment setup using 'load_aggregation.py'
     LoadAgg = load_aggregation.ClaessonJaved(dt, tmax)
     time_req = LoadAgg.get_times_for_simulation()
 
-    # Berechnung der G-Function mit 'gfunction.py'
+    # G-Function calculation using 'gfunction.py'
     gFunc = gfunction.uniform_temperature(boreField, time_req, a, self,
                                           nSegments=12)
 
-    # Initialisierung der Simulation mit 'load_aggregation.py'
+    # Simulation initialization using 'load_aggregation.py'
     LoadAgg.initialize(gFunc/(2*pi*lambda_g))
 
     # -------------------------------------------------------------------------
-    # 5.) Import / Generierung der Wetterdaten
+    # 5.) Weather data import
     # -------------------------------------------------------------------------
 
-    # Import Wetterdaten aus weather_data.py
+    # Import weather data from 'weather_data.py'
     u_inf, Theta_inf, S_w, B, Phi, RR = get_weather_data(Nt, self)
-    ''' u_inf       - Windgeschwindigkeit [m/s]
-        Theta_inf   - Umgebungstemperatur [°C]
-        S_w         - Schneefallrate (Wasserequivalent) [mm/s]
-        B           - Bewölkungsgrad [octal units / 8]
-        Phi         - rel. Luftfeuchte [%]
+    ''' u_inf       - ambient wind speed [m/s]
+        Theta_inf   - ambient temperature [°C]
+        S_w         - snowfall rate [mm/s]
+        B           - cloudiness [octal units/8]
+        Phi         - relative air humidity [%]
     '''
 
     # -------------------------------------------------------------------------
