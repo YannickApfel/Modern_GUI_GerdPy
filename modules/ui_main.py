@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainoEbJFr.ui'
+## Form generated from reading UI file 'mainMbPnLi.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -1567,7 +1567,7 @@ class Ui_MainWindow(object):
         self.rb_depth = QRadioButton(self.frame_7)
         self.rb_depth.setObjectName(u"rb_depth")
         self.rb_depth.setFont(font7)
-        self.rb_depth.setToolTipDuration(10000)
+        self.rb_depth.setToolTipDuration(30000)
         self.rb_depth.setStyleSheet(u"")
 
         self.gridLayout_7.addWidget(self.rb_depth, 0, 0, 1, 2)
@@ -1998,6 +1998,53 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_26.addWidget(self.frame_18)
 
+        self.frame_27 = QFrame(self.frame_23)
+        self.frame_27.setObjectName(u"frame_27")
+        self.frame_27.setMinimumSize(QSize(0, 150))
+        self.frame_27.setMaximumSize(QSize(16777215, 200))
+        self.frame_27.setFrameShape(QFrame.StyledPanel)
+        self.frame_27.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_13 = QHBoxLayout(self.frame_27)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.frame_31 = QFrame(self.frame_27)
+        self.frame_31.setObjectName(u"frame_31")
+        self.frame_31.setMaximumSize(QSize(100, 16777215))
+        self.frame_31.setFrameShape(QFrame.StyledPanel)
+        self.frame_31.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_13.addWidget(self.frame_31)
+
+        self.btn_save_results = QPushButton(self.frame_27)
+        self.btn_save_results.setObjectName(u"btn_save_results")
+        self.btn_save_results.setMinimumSize(QSize(0, 100))
+        self.btn_save_results.setFont(font9)
+        self.btn_save_results.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_save_results.setStyleSheet(u"QPushButton{\n"
+"background-color: rgb(52, 59, 72);\n"
+"}\n"
+"QPushButton:hover{\n"
+"	background-color: rgba(242, 146, 0, 130);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"	background-color: rgba(228, 38, 24, 130);\n"
+"}")
+        icon5 = QIcon()
+        icon5.addFile(u":/icons/images/icons/cil-save.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_save_results.setIcon(icon5)
+
+        self.horizontalLayout_13.addWidget(self.btn_save_results)
+
+        self.frame_36 = QFrame(self.frame_27)
+        self.frame_36.setObjectName(u"frame_36")
+        self.frame_36.setMaximumSize(QSize(100, 16777215))
+        self.frame_36.setFrameShape(QFrame.StyledPanel)
+        self.frame_36.setFrameShadow(QFrame.Raised)
+
+        self.horizontalLayout_13.addWidget(self.frame_36)
+
+
+        self.verticalLayout_26.addWidget(self.frame_27)
+
 
         self.gridLayout_10.addWidget(self.frame_23, 1, 0, 1, 1)
 
@@ -2007,17 +2054,43 @@ class Ui_MainWindow(object):
         self.frame_22.setMaximumSize(QSize(16777215, 16777215))
         self.frame_22.setFrameShape(QFrame.StyledPanel)
         self.frame_22.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_10 = QVBoxLayout(self.frame_22)
-        self.verticalLayout_10.setSpacing(6)
-        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
-        self.verticalLayout_10.setContentsMargins(0, 0, 0, 0)
-        self.label_36 = QLabel(self.frame_22)
+        self.verticalLayout_8 = QVBoxLayout(self.frame_22)
+        self.verticalLayout_8.setObjectName(u"verticalLayout_8")
+        self.frame_10 = QFrame(self.frame_22)
+        self.frame_10.setObjectName(u"frame_10")
+        self.frame_10.setFrameShape(QFrame.StyledPanel)
+        self.frame_10.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_14 = QHBoxLayout(self.frame_10)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.label_36 = QLabel(self.frame_10)
         self.label_36.setObjectName(u"label_36")
         self.label_36.setMaximumSize(QSize(16777215, 50))
         self.label_36.setFont(font6)
         self.label_36.setStyleSheet(u"color: #f9b200;")
 
-        self.verticalLayout_10.addWidget(self.label_36)
+        self.horizontalLayout_14.addWidget(self.label_36)
+
+        self.btn_save_console = QPushButton(self.frame_10)
+        self.btn_save_console.setObjectName(u"btn_save_console")
+        self.btn_save_console.setMinimumSize(QSize(200, 35))
+        self.btn_save_console.setMaximumSize(QSize(200, 16777215))
+        self.btn_save_console.setFont(font9)
+        self.btn_save_console.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_save_console.setStyleSheet(u"QPushButton{\n"
+"background-color: rgb(52, 59, 72);\n"
+"}\n"
+"QPushButton:hover{\n"
+"	background-color: rgba(242, 146, 0, 130);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"	background-color: rgba(228, 38, 24, 130);\n"
+"}")
+        self.btn_save_console.setIcon(icon5)
+
+        self.horizontalLayout_14.addWidget(self.btn_save_console)
+
+
+        self.verticalLayout_8.addWidget(self.frame_10)
 
         self.text_console = QPlainTextEdit(self.frame_22)
         self.text_console.setObjectName(u"text_console")
@@ -2026,7 +2099,7 @@ class Ui_MainWindow(object):
         self.text_console.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.text_console.setReadOnly(True)
 
-        self.verticalLayout_10.addWidget(self.text_console)
+        self.verticalLayout_8.addWidget(self.text_console)
 
 
         self.gridLayout_10.addWidget(self.frame_22, 1, 1, 1, 1)
@@ -2202,7 +2275,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 351, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -2250,9 +2323,9 @@ class Ui_MainWindow(object):
         self.commandLinkButton.setObjectName(u"commandLinkButton")
         self.commandLinkButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.commandLinkButton.setStyleSheet(u"")
-        icon5 = QIcon()
-        icon5.addFile(u":/icons/images/icons/cil-link.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.commandLinkButton.setIcon(icon5)
+        icon6 = QIcon()
+        icon6.addFile(u":/icons/images/icons/cil-link.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.commandLinkButton.setIcon(icon6)
 
         self.gridLayout_2.addWidget(self.commandLinkButton, 1, 6, 1, 1)
 
@@ -2463,7 +2536,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(5)
         self.cb_month.setCurrentIndex(-1)
 
 
@@ -2525,7 +2598,7 @@ class Ui_MainWindow(object):
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity insulating layer [W/mK]:", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity heatpipe [W/mK]:", None))
 #if QT_CONFIG(tooltip)
-        self.rb_depth.setToolTip(QCoreApplication.translate("MainWindow", u"Define varying borehole depths and radii via borefield parameters file.", None))
+        self.rb_depth.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>If activated, borehole depths and radii will be taken from borefield geometry file.</p><p>Otherwise borehole depths and radii will be taken from parameter input below and will be equal for all boreholes.</p><p><br/></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(statustip)
         self.rb_depth.setStatusTip("")
@@ -2541,7 +2614,7 @@ class Ui_MainWindow(object):
         self.label_20.setText(QCoreApplication.translate("MainWindow", u"Radius heatpipe-epicenters [m]:", None))
         self.label_21.setText(QCoreApplication.translate("MainWindow", u"Outer radius heatpipes [m]:", None))
         self.label_19.setText(QCoreApplication.translate("MainWindow", u"Outer radius insulating layer [m]:", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Borefield  geometry & Simulation parameters", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Borefield geometry & Simulation parameters", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Borefield geometry import", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Enter borefield geometry file path:", None))
         self.line_borefield_file.setText("")
@@ -2556,8 +2629,10 @@ class Ui_MainWindow(object):
         self.label_28.setText(QCoreApplication.translate("MainWindow", u"Day:", None))
         self.label_33.setText(QCoreApplication.translate("MainWindow", u"Simulation", None))
         self.label_34.setText(QCoreApplication.translate("MainWindow", u"Please make sure that all parameters are correctly filled.", None))
-        self.btn_startsim.setText(QCoreApplication.translate("MainWindow", u"START SIMULATION", None))
+        self.btn_startsim.setText(QCoreApplication.translate("MainWindow", u" START SIMULATION", None))
+        self.btn_save_results.setText(QCoreApplication.translate("MainWindow", u" SAVE RESULTS", None))
         self.label_36.setText(QCoreApplication.translate("MainWindow", u"Console", None))
+        self.btn_save_console.setText(QCoreApplication.translate("MainWindow", u" Save Console", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Results", None))
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"FILE BOX", None))
         self.lineEdit.setText("")
