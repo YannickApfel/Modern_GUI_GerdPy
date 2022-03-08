@@ -1,56 +1,50 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'load_generator_utils.py'
     
-    Zusatzmodul für 'load_generator.py':
-    physikalische Gleichungen, Korrelationen und Unterfunktionen für das
-    Lastmodell
+    Utility module for 'load_generator.py':
+    physical equations, correlations and base functions for surface load generation
+    
+    Sources: [Konrad2009], [Fuchs2021], [ASHRAE2015]
 
-    Legende:
-        - Temperaturen:
-            - T in Kelvin [K] - für (kalorische) Gleichungen
-            - Theta in Grad Celsius [°C] - Input aus dem Wetterdatenfile
-
-    Quellen: [Konrad2009], [Fuchs2021], [ASHRAE2015]
-
-    Autor(en): Yannick Apfel, Meike Martin
+    Authors: Yannick Apfel, Meike Martin
 """
 import math
 import sys
 import CoolProp.CoolProp as CP
 
 
-# Stoffwerte (Normbedingungen, wo nicht anders vermerkt)
-lambda_l = 0.0262  # Wärmeleitfähigkeit von Luft [W/m*K]
-a_l = lambda_l / (1.293 * 1005)  # T-Leitfähigkeit von Luft [m²/s]
-theta_l = 13.3e-6  # kin. Vis. von Luft [m²/s]
-rho_w = 997  # Dichte von Wasser (bei 25 °C) [kg/m³]
-rho_l = 1.33  # Dichte trockener Luft (bei 0 °C, 1 bar) [kg/m³]
-h_Ph_sl = 333e3  # Phasenwechselenthalpie Schnee <=> Wasser [J/kg]
-h_Ph_lg = 2499e3  # Phasenwechselenthalpie Wasser <=> Dampf [J/kg]
-c_p_s = 2.04e3  # spez. Wärmekapazität Eis / Schnee (bei 0 °C) [J/kgK]
-c_p_w = 4212  # spez. Wärmekapazität Wasser (bei 0 °C) [J/kgK]
-c_p_l = 1005  # spez. Wärmekapazität Luft (bei 0 °C, 1 bar) [J/kgK]
-Theta_Schm = 0  # Schmelztemperatur von Eis / Schnee [°C]
-H_max = 2  # maximal erlaubte Wasserhöhe auf dem Heizelement [mm]
+# physical params (standard conditions, unless noted otherwise)
+lambda_l = 0.0262  # thermal conductivity of air [W/m*K]
+a_l = lambda_l / (1.293 * 1005)  # thermal diffusivity of air [m²/s]
+theta_l = 13.3e-6  # kinetic viscosity of air [m²/s]
+rho_w = 997  # density of water (at 25 °C) [kg/m³]
+rho_l = 1.33  # density of dry air (at 0 °C, 1 bar) [kg/m³]
+h_Ph_sl = 333e3  # phase-change enthalpy solid <-> liquid of water [J/kg]
+h_Ph_lg = 2499e3  # phase-change enthalpy liquid <-> vapour of water [J/kg]
+c_p_s = 2.04e3  # specific heat capacity of ice/snow (at 0 °C) [J/kgK]
+c_p_w = 4212  # specific heat capacity of water (at 0 °C) [J/kgK]
+c_p_l = 1005  # specific heat capacity of air (at 0 °C, 1 bar) [J/kgK]
+Theta_Schm = 0  # melting point of ice/snow [°C]
+H_max = 3  # maximum allowed water level on heating element without running off [mm]
 
 
-# korrigierte Windgeschwindigkeit (Wind-Shear) [m/s]
+# wind-shear-corrected wind speed (logarithmic) [m/s]
 def u_eff(v):
-    z_1 = 10  # Höhe, für die Windgeschwindigkeit bekannt ist (Wetterdaten) [m]
-    z_n = 1  # Bezugshöhe (liegt für das Problem definitorisch bei 1 m)
-    z_0 = 0.005  # Rauhigkeitshöhe
+    z_1 = 10  # typical height of meteorological weather stations [m]
+    z_n = 1  # reference height (:= 1 m)
+    z_0 = 0.005  # topographic roughness level of the ground
 
     return v * (math.log10(z_n) - math.log10(z_0)) / \
         (math.log10(z_1) - math.log10(z_0))
 
 
-# höhenkorrigierter Umgebungsdruck [Pa]
+# altitude-corrected ambient pressure [Pa]
 def p_inf(h_NHN):
     return 101325 * (1 - 0.0065 * h_NHN / 288.2) ** 5.265
 
 
-# Sättigungs-Dampfdruck nach ASHRAE2013 [Pa]
-def p_s_ASHRAE(T):  # Input in [K]
+# saturation vapour pressure acc. to ASHRAE2013 [Pa]
+def p_s_ASHRAE(T):  # input in [K]
     C_1 = -5.6745359e3
     C_2 = 6.3925247e0
     C_3 = -9.6778430e-3
@@ -72,17 +66,15 @@ def p_s_ASHRAE(T):  # Input in [K]
         return math.exp(C_8 / T + C_9 + C_10 * T + C_11 * T ** 2
                         + C_12 * T ** 3 + C_13 * math.log(T))
     else:
-        print('Interner Fehler: erlaubter T-Bereich für \
-              Sättigungs-Dampfdruckformel nach ASHRAE2013 \
-                  unter-/überschritten!')
+        print('Internal error: allowed temperature range exceeded!')
         sys.exit()
 
 
-''' Wärmeübergangskoeffizient [W/m²K] nach [Bentz D. P. 2000]
-    erzwungene Konvektion längs zu ebener Wand
+''' heat transfer coefficient [W/m²K] acc. to [Bentz D. P. 2000]
+    forced convection along horizontal wall/ground
     alpha = alpha(u_air)
 '''
-def alpha_kon_he_o(u):  # Heizelementoberseite
+def alpha_kon_he_o(u):  # heating element surface
     if u <= 5:
         alpha = 5.6 + 4 * u
     else:
@@ -91,8 +83,8 @@ def alpha_kon_he_o(u):  # Heizelementoberseite
     return alpha
 
 
-''' Wärmeübergangskoeffizient [W/m²K] nach [Löser: Technische Thermodynamik]
-    ruhende Luft senkrecht zu ebener Wand (Schätzwert)
+''' heat transfer coefficient [W/m²K] acc. to [Löser: Technische Thermodynamik]
+    calm air perpendicular to horizontal wall/ground
     alpha = alpha() = const
 '''
 def alpha_kon_he_u():
@@ -101,41 +93,40 @@ def alpha_kon_he_u():
 
 
 ''' Wärmeübergangskoeffizient [W/m²K] nach [Löser: Technische Thermodynamik]
-    Luft um gedämmte Rohre
+    air around insulated pipes
     alpha = alpha(deltaT)
 '''
 def alpha_kon_an(deltaT):
     return 9.4 + 0.052 * deltaT
 
 
-# Wassermengen-Bilanz an Heizelement-Oberfläche (für Verdunstung)
+# mass balance for water on heating element surface
 def m_Restwasser(m_Rw_0, RR, A_he, Q_eva):
     m_Rw_1 = m_Rw_0 + (RR * rho_w * A_he) / 1000 - (Q_eva / h_Ph_lg) * 3600
 
-    if (m_Rw_1 / (rho_w * A_he)) > (H_max / 1000):  # Maximale Wasserhöhe
+    if (m_Rw_1 / (rho_w * A_he)) > (H_max / 1000):  # maximum allowed water level
         m_Rw_1 = (H_max / 1000) * rho_w * A_he
 
-    if m_Rw_1 < 0:  # Restwassermenge kann nicht geringer werden als 0
+    if m_Rw_1 < 0:  # water-mass can't be < 0 kg
         m_Rw_1 = 0
 
     return m_Rw_1
 
 
-# Schneemengen-Bilanz an Heizelement-Oberfläche
+# mass balance for ice/snow on heating element surface
 def m_Restschnee(m_Rs_0, S_w, A_he, Q_lat, sb_active):
     if (sb_active == 1):
-        m_Rs_1 = m_Rs_0 + (S_w * rho_w * A_he) / 1000 - (Q_lat / h_Ph_sl) \
-            * 3600
+        m_Rs_1 = m_Rs_0 + (S_w * rho_w * A_he) / 1000 - (Q_lat / h_Ph_sl) * 3600
     else:
         m_Rs_1 = 0
 
-    if m_Rs_1 < 0:  # Restschneemenge kann nicht geringer werden als 0
+    if m_Rs_1 < 0:  # snow-mass can't be < 0 kg
         m_Rs_1 = 0
 
     return m_Rs_1
 
 
-# Emissionskoeffizient des Heizelements [-]
+# emission coefficient of the heating element surface (radiation) [-]
 def epsilon_surf(material):
     if material == 'Beton':
         return 0.94
@@ -143,11 +134,11 @@ def epsilon_surf(material):
         return 0.94
 
 
-# mittlere Strahlungstemperatur der Umgebung [K]
+# average ambient radiation temperature [K]
 def T_MS(S_w, Theta_inf, B, Phi):
-    if S_w > 0:  # entspricht bei Schneefall der Umgebungstemperatur
+    if S_w > 0:  # corresponds to the ambient temperature during snowfall
         return (Theta_inf + 273.15)
-    else:  # ohne Schneefall: Funktion von Umgebungstemp. und rel. Luftfeuchte
+    else:  # without snowfall: function of ambient temperature and rel. humidity
         T_H = (Theta_inf + 273.15) - (1.1058e3 - 7.562 * (Theta_inf + 273.15) +
                                       1.333e-2 * (Theta_inf + 273.15) ** 2
                                       - 31.292 * Phi + 14.58 * Phi ** 2)
@@ -161,40 +152,40 @@ def T_MS(S_w, Theta_inf, B, Phi):
         return T_MS
 
 
-# binärer Diffusionskoeffizient [-]
+# binary diffusion coefficient [-]
 def delta(Theta_inf, h_NHN):
 
     return (2.252 / p_inf(h_NHN)) * ((Theta_inf + 273.15) / 273.15) ** 1.81
 
 
-# Stoffübergangskoeffizient [m/s]
+# mass transfer coefficient [m/s]
 def beta_c(Theta_inf, u, h_NHN):
-    Pr = theta_l / a_l  # Prandtl-Zahl für Luft
-    Sc = theta_l / delta(Theta_inf, h_NHN)  # Schmidt-Zahl
-    alpha = alpha_kon_Bentz(u)  # Verwendung der einfachen Korrelation f alpha
+    Pr = theta_l / a_l  # Prandtl-number for air
+    Sc = theta_l / delta(Theta_inf, h_NHN)  # Schmidt-number
+    alpha = alpha_kon_he_o(u)
 
     beta_c = (Pr / Sc) ** (2/3) * alpha / (rho_l * c_p_l)
 
     return beta_c
 
 
-# Wasserdampfbeladung der gesättigten Luft bei Theta_inf [kg Dampf / kg Luft]
+# water vapour loading of saturated air at ambient conditions [vapour-kg / air-kg]
 def X_D_inf(Theta_inf, Phi, h_NHN):
-    ''' Sättigungsdampfdruck in der Umgebung bei Taupunkttemperatur:
-        p_D = p_s_ASHRAE(T_tau(Theta_inf, Phi))
+    ''' saturation vapour pressure of the environment at dew point temperature:
+        p_v = p_s_ASHRAE(T_tau(Theta_inf, Phi))
     '''
     T_tau = CP.HAPropsSI('DewPoint', 'T', (Theta_inf + 273.15),
                          'P', 101325, 'R', Phi)  # Input in [K]
-    p_D = p_s_ASHRAE(T_tau)  # Input in [K]
+    p_v = p_s_ASHRAE(T_tau)  # Input in [K]
 
-    return 0.622 * p_D / (p_inf(h_NHN) - p_D)
+    return 0.622 * p_v / (p_inf(h_NHN) - p_v)
 
 
-# Wasserdampfbeladung der gesättigten Luft bei Theta_surf [kg Dampf / kg Luft]
+# water vapour loading of saturated air at heating element surface [vapour-kg / air-kg]
 def X_D_sat_surf(Theta_surf, h_NHN):
-    ''' Sättigungsdampfdruck an der Heizelementoberfläche bei Theta_surf:
-        p_D = p_s_ASHRAE(Theta_surf)
+    ''' saturation vapour pressure at the heating element surface:
+        p_v = p_s_ASHRAE(Theta_surf)
     '''
-    p_D = p_s_ASHRAE(Theta_surf + 273.15)  # Input in [K]
+    p_v = p_s_ASHRAE(Theta_surf + 273.15)  # Input in [K]
 
-    return 0.622 * p_D / (p_inf(h_NHN) - p_D)
+    return 0.622 * p_v / (p_inf(h_NHN) - p_v)

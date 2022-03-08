@@ -44,6 +44,7 @@ def get_weather_data(Nt, self):
     for i, j in enumerate(Theta_inf):
         if j >= 1:
             S_w[i] = 0
+
     # 4.) Bewölkungsgrad [-]
     '''  zwischen 0/8 - wolkenlos und 8/8 - bedeckt
     '''

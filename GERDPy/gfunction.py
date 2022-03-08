@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'gfunction.py'
     
-    Funktionen zur Ermittlung der G-Function mittels Dirichlet-Randbedingung
-    für die Temperatur
+    Functions to determine the g-function (Dirichlet temperature boundary condition)
+    
+    based on: Pygfunction by Massimo Cimmino
 
-    basiert auf: Pygfunction von Massimo Cimmino
-
-    Autor(en): Massimo Cimmino
+    Authors: Massimo Cimmino
 """
 import time as tim
 

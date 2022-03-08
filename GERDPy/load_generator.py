@@ -461,10 +461,10 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
 
     # 3.) Wasser- und Schneehöhenbilanz auf Heizelement
 
-    # Ermittlung Restwassermenge
+    # Ermittlung Restwassermenge [mm]
     m_w_1 = m_Restwasser(m_Rw_0, RR, he.A_he, Q_eva)
 
-    # Ermittlung Restschneemenge
+    # Ermittlung Restschneemenge [mm]
     m_s_1 = m_Restschnee(m_Rs_0, S_w, he.A_he, Q_lat, sb_active)
 
     # 4.) Auswertung der Entzugsleistung Q_load, Nutzleistung Q_N und Verlustleistung Q_V (Anbindung und Unterseite Heizelement) [W]

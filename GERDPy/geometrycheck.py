@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'geometrycheck.py'
     
-    Modul zur Prüfung geometrischer Verträglichkeit:
-        - Abstand der Erwärmesondenbohrungen zueinander muss > 2 * r_b
-        - identische Außenradien der Erdwärmesondenbohrungen
-        - Abstände der Heatpipes in der Bohrung
+    Module for testing geometric compatibility:
+        - distance of boreholes to each other must be > 2 * r_b
+        - outer radii of boreholes (r_b) must be identical
+        - compatible heatpipe geometry
 
-    Autor(en): Yannick Apfel, Meike Martin
+    Authors: Yannick Apfel, Meike Martin
 """
 import numpy as np
 
 
 def check_geometry(borefield, heatpipes, self):
-    # errors_exist mit 0 initialisieren
+    # initialize with 0 errors
     errors_exist = 0
     
-    # Test auf Bohrloch-Duplikate
+    # test for borehole duplicates
     duplicate_pairs = []
     for i in range(len(borefield)):
         borehole_1 = borefield[i]
-        for j in range(i, len(borefield)):  # Schleife
+        for j in range(i, len(borefield)):  # loop
             borehole_2 = borefield[j]
-            if i == j:  # kein Vergleich mit sich selbst
+            if i == j:  # comparison of borehole with itself omitted
                 continue
             else:
                 dist = borehole_1.distance(borehole_2)
@@ -36,7 +36,7 @@ def check_geometry(borefield, heatpipes, self):
         self.ui.text_console.insertPlainText('Please adjust!\n')
         errors_exist = 1
 
-    # Test: Bohrlochradien müssen identisch sein
+    # test for identical borehole radii
     for i in range(len(borefield) - 1):
         if borefield[i].r_b != borefield[i+1].r_b:
             print('Borehole radii must be identical!')
@@ -46,7 +46,7 @@ def check_geometry(borefield, heatpipes, self):
             errors_exist = 1
             break
 
-    # Heatpipe-Geometrie prüfen
+    # test for compatible heatpipe geometry
     xy = heatpipes.xy_mat()
     heatpipe_distance = np.sqrt((xy[1, 0] - xy[2, 0])**2 + (xy[1, 1] - xy[2, 1])**2)
     if ((heatpipes.r_pa + heatpipes.r_w) >= heatpipes.r_b):

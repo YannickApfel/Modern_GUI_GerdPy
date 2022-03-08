@@ -1,35 +1,36 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'boreholes.py'
     
-    Klasse für Bohrlöcher und zugehörige Methoden
+    Class for boreholes and associated methods
     
-    basiert auf: Pygfunction von Massimo Cimmino
+    based on: Pygfunction by Massimo Cimmino
 
-    Autor(en): Massimo Cimmino, Yannick Apfel, Meike Martin
+    Authors: Massimo Cimmino, Yannick Apfel, Meike Martin
 """
 import numpy as np
 
 
 class Borehole(object):
     """
-    Enthält sämtliche geometrische Informationen zu einem Bohrloch.
-
-    Attribute
+    Contains information regarding the dimensions and position of a borehole.
+ 
+    Attributes
     ----------
-    H:              float [m]
-                    aktive Sondenlänge.
-    D:              float [m]
-                    'buried depth' des Bohrlochs (entspricht der adiabaten Zone).
-    r_b:            float [m]
-                    Bohrlochradius.
-    x:              float [m]
-                    x-Achsen-Position des Bohrlochs (Bohrlochmitte).
-    y:              float [m]
-                    y-Achsen-Position des Bohrlochs (Bohrlochmitte).
-    tilt:           float [radians]
-                    Neigungswinkel des Bohrlochs von der Senkrechten.
-    orientation:    float [radians]
-                    Neigungsrichtung.
+    H:              float
+                    borehole length [m]
+    D:              float
+                    borehole buried depth [m]
+    r_b:            float
+                    borehole radius [m]
+    x:              float
+                    position of the head of the borehole along the x-axis [m]
+    y:              float
+                    position of the head of the borehole along the y-axis [m]
+    tilt:           float
+                    angle from vertical of the axis of the borehole [m]
+    orientation:    float
+                    direction of the tilt of the borehole [radians]
+
     """
 
     def __init__(self, H, D, r_b, x, y, tilt=0., orientation=0.):
