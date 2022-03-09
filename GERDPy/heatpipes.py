@@ -21,7 +21,7 @@ class Heatpipes(object):
     r_b:        float 
                 borehole radius [m]
     r_w:        float
-                radius of heatpipe centers [m]
+                radius of heatpipe centres [m]
     r_iso_a:    float
                 outer radius of heatpipe insulation [m]
     r_pa:       float
@@ -56,8 +56,8 @@ class Heatpipes(object):
 
     def xy_mat(self):
         """
-        Returns a Nx2 matrix with the coordinates of the heatpipe centers
-        in the borehole coordinate system (origin = borehole center).
+        Returns a Nx2 matrix with the coordinates of the heatpipe centres
+        in the borehole coordinate system (origin = borehole centre).
         The N heatpipes are uniformly spaced on a circle with
         radius r_w.
 

@@ -17,7 +17,7 @@ class Borehole(object):
     Attributes
     ----------
     H:              float
-                    borehole length [m]
+                    borehole depth [m]
     D:              float
                     borehole buried depth [m]
     r_b:            float

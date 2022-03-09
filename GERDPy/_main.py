@@ -23,7 +23,7 @@ from scipy.constants import pi
 from progress.vismain import SplashScreen
 from PySide6.QtWidgets import *
 
-# import GERDPy-modules
+# import GERDPy modules
 import GERDPy.boreholes as boreholes
 import GERDPy.heatpipes as heatpipes
 import GERDPy.heating_element as heating_element
@@ -71,7 +71,7 @@ def main(self):
     # Geometry-Import (.txt) & object generation
     boreField = boreholes.field_from_file(self, self.ui.line_borefield_file.text())  # './data/custom_field_5.txt'
 
-    # Total length of geothermal borefield (boring depth)
+    # Total depth of geothermal borefield (sum of all boreholes)
     H_field = boreholes.length_field(boreField)
 
     # Borefield layout plot
@@ -82,7 +82,7 @@ def main(self):
     # Geometry
     N = self.ui.sb_number_heatpipes.value()  # no. of heatpipes per borehole [-] (default: 6)
     r_b = self.ui.sb_r_borehole.value()  # borehole radius [m] (boreField[0].r_b)
-    r_w = self.ui.sb_radius_w.value()  # radius of heatpipe-centers [m] (default: 0.12)
+    r_w = self.ui.sb_radius_w.value()  # radius of heatpipe-centres [m] (default: 0.12)
     r_iso_b = self.ui.sb_radius_iso.value()  # outer radius of heatpipe insulation [m] (default: 0.016)
     r_pa = self.ui.sb_radius_pa.value()  # outer radius of heatpipes [m] (default: 0.016)
     r_pi = self.ui.sb_radius_pi.value()  # inner radius of heatpipes [m] (default: 0.015)
@@ -122,7 +122,7 @@ def main(self):
     # Thermal conductivity [W/mK]
     lambda_Bet = 2.1
 
-    # center-distance between heatpipes [m]
+    # centre-distance between heatpipes [m]
     s_R = .050
 
     # Total heatpipe length inside heating element [m]
@@ -270,14 +270,14 @@ def main(self):
             - heating element surface dry and free of snow
         '''
         if i == 0:
-            Q[i], Q_N[i], Q_V[i], calc_T_surf, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
+            Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
                 load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], he, Theta_g,
                      R_th, R_th_ghp, Theta_g, B[i], Phi[i], RR[i], 0, 0, start_sb,
                      l_An * N, lambda_p, lambda_iso, r_iso_An, r_pa, r_pi)
 
         # Timesteps 2, 3, ..., Nt
         if i > 0:
-            Q[i], Q_N[i], Q_V[i], calc_T_surf, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
+            Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
                 load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], he, Theta_b[i - 1],
                      R_th, R_th_ghp, Theta_surf[i - 1], B[i], Phi[i], RR[i], m_Rw[i - 1], m_Rs[i - 1], start_sb,
                      l_An * N, lambda_p, lambda_iso, r_iso_An, r_pa, r_pi)
@@ -298,7 +298,7 @@ def main(self):
         ''' Theta_surf is only calculated here, if Q. >= 0 (positive heat extraction from ground),
             otherwise it is calculated in 'load_generator.py', using the simplified power balance F_T = 0.
         '''
-        if calc_T_surf is False:
+        if calc_T is False:
             Theta_surf[i] = Theta_b[i] - Q[i] * R_th  # heating element surface temperature
 
         # Start snow balancing
@@ -394,7 +394,7 @@ def main(self):
                prop={'size': font['size']}, loc='upper left')
     ax2.grid('major')
     
-    # ambient temperature - ambient wind speed
+    # Ambient temperature - ambient wind speed
     ax3 = fig1.add_subplot(413)
     ax3.set_ylabel('$T$ [degC] \n Ambient wind speed [m/s]')
     ax3.plot(hours, Theta_inf, 'k-', lw=0.8)  # ambient temperature [°C]

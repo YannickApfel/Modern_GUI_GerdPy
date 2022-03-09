@@ -1,29 +1,30 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'R_th_hp.py'
     
-    Modul für den thermischen Widerstand im Thermosiphon (Heatpipe)
+    Module for the thermal resistance of the thermosiphon heatpipes
     
-    Thermischer Widerstand im Thermosiphon (verdampferseitig) mit
-    simpler Charakteristik im Q.-deltaT - Diagramm (linearer Anstieg)
+    The complex two-phase flow phenomena are not modelled (e. g. the entrainment limit),
+    instead, the thermal resistance follows a simple linear power-over-delta-T characteristic.
     
-    Vernachlässigung von Leistungsgrenzen (z. B: Entrainment-Limit)
+    R_th_hp = 1 K / (500 W * N * N_b)
+    
+    N - number of heatpipes per borehole
+    N_b - number of boreholes in the borefield
 
-    Heatpipe-Charakteristik: Q. = (500 W * N_Anzahl_Heatpipes / 1 K) * deltaT
-
-    Autor(en): Yannick Apfel, Meike Martin
+    Authors: Yannick Apfel, Meike Martin
 """
 def R_th_hp(borefield, hp):
 
-    # %% 1.) Parameter
+    # %% 1.) Params
 
-    N = hp.N                                # Anzahl Heatpipes pro Bohrloch [-]
-    N_b = len(borefield)                    # Anzahl Bohrlöcher
+    N = hp.N  # number of heatpipes per borehole [-]
+    N_b = len(borefield)  # number of boreholes in the borefield [-]
 
-    # Steigung der Charakteristik (delta_y / delta_x)
-    delta_y = 500       # Leistung pro Heatpipe [W]
+    # linear slope of the characteristic (delta_y / delta_x)
+    delta_y = 500       # thermal power per heatpipe [W]
     delta_x = 1         # delta_T [K]
 
-    # %% 2.) thermischer Widerstand (Entrainment wird vernachlässigt)
+    # %% 2.) thermal resistance of the thermosiphon heatpipes
 
     R_th_hp = delta_x / (delta_y * N * N_b)
 

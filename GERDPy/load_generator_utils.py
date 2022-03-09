@@ -2,7 +2,7 @@
 """ GERDPy - 'load_generator_utils.py'
     
     Utility module for 'load_generator.py':
-    physical equations, correlations and base functions for surface load generation
+    physical model equations, correlations and base functions for surface load generation
     
     Sources: [Konrad2009], [Fuchs2021], [ASHRAE2015]
 
@@ -24,7 +24,7 @@ h_Ph_lg = 2499e3  # phase-change enthalpy liquid <-> vapour of water [J/kg]
 c_p_s = 2.04e3  # specific heat capacity of ice/snow (at 0 °C) [J/kgK]
 c_p_w = 4212  # specific heat capacity of water (at 0 °C) [J/kgK]
 c_p_l = 1005  # specific heat capacity of air (at 0 °C, 1 bar) [J/kgK]
-Theta_Schm = 0  # melting point of ice/snow [°C]
+Theta_mp = 0  # melting point of ice/snow [°C]
 H_max = 3  # maximum allowed water level on heating element without running off [mm]
 
 
@@ -128,7 +128,7 @@ def m_Restschnee(m_Rs_0, S_w, A_he, Q_lat, sb_active):
 
 # emission coefficient of the heating element surface (radiation) [-]
 def epsilon_surf(material):
-    if material == 'Beton':
+    if material == 'concrete':
         return 0.94
     else:
         return 0.94

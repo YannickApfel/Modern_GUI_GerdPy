@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'weather_data.py'
     
-    Import der notwendigen Wetterdaten aus Excel-File
+    Import of weather data from Excel-File
 
-    Autor(en): Yannick Apfel, Meike Martin
+    Authors: Yannick Apfel, Meike Martin
 """
 def get_weather_data(Nt, self):
 
@@ -11,10 +11,10 @@ def get_weather_data(Nt, self):
     import numpy as np
     import pandas as pd
 
-    # Dateipfad der Wetterdaten-Datei definieren
+    # path to excel-file
     path = self.ui.line_weather_file.text()  # './data/Wetterdaten_München-Riem_h.xlsx'
 
-    # Wetterdaten importieren
+    # import data
     data = pd.read_excel(path, skiprows=3, header=1)
 
     # get startdate
@@ -32,28 +32,29 @@ def get_weather_data(Nt, self):
     else:
         rows = list(range(start_index, start_index+Nt, 1))
 
-    # 1.) Windgeschwindigkeit [m/s]
+    # 1.) ambient wind speed [m/s]
     u_inf = np.array(data.iloc[rows, 6])
 
-    # 2.) Umgebungstemperatur [°C]
+    # 2.) ambient temperature [°C]
     Theta_inf = np.array(data.iloc[rows, 4])
 
-    # 3.) Schneefallrate [mm/h]
+    # 3.) snowfall rate [mm/h]
     S_w = np.array(data.iloc[rows, 3])
-    # Einträge zu null setzen, falls Theta_inf >= 1 °C (Niederschlag fällt als Regen)
+    # sets entries to 0, in case Theta_inf >= 1 °C (precipitation comes down as rain)
     for i, j in enumerate(Theta_inf):
         if j >= 1:
             S_w[i] = 0
 
-    # 4.) Bewölkungsgrad [-]
-    '''  zwischen 0/8 - wolkenlos und 8/8 - bedeckt
+    # 4.) cloudiness [octal units/8]
+    ''' between 0/8 - cloudless and 
+                8/8 - fully overcast
     '''
     B = np.array(data.iloc[rows, 7]) / 8
 
-    # 5.) rel. Luftfeuchte [-]
+    # 5.) relative humidity [-]
     Phi = np.array(data.iloc[rows, 5]) / 100
 
-    # 6.) gesamte Niederschlagsmenge [mm/h]
+    # 6.) total precipitation [mm/h]
     RR = np.array(data.iloc[rows, 3])
 
     return u_inf, Theta_inf, S_w, B, Phi, RR
