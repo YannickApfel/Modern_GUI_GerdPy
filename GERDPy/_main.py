@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - '_main.py'
 
-    Steuerungsfile des Auslegungstools für das Projekt GERDI
+    Main Control-Module of GERDPy - The Simulation Tool for Geothermal Heat Pipe Surface Heating Systems
 
-    Legende:
-        - Temperaturen:
-            - T in Kelvin [K] - für (kalorische) Gleichungen
-            - Theta in Grad Celsius [°C] - Input aus dem Wetterdatenfile
+    Legend:
+        Parameter [Unit]
+        - Temperatures:
+            - T in Kelvin [K] - for caloric equations
+            - Theta in degrees Celsius [°C] - for object temperatures
 
-    Autor(en): Yannick Apfel, Meike Martin
+    Authors: Yannick Apfel, Meike Martin
 """
+# import python libraries
 import sys
 import matplotlib.pyplot as plt
 import time as tim
@@ -17,7 +19,11 @@ import numpy as np
 from matplotlib.ticker import AutoMinorLocator
 from scipy.constants import pi
 
-# import GERDPy-modules
+# import GUI libraries
+from progress.vismain import SplashScreen
+from PySide6.QtWidgets import *
+
+# import GERDPy modules
 import GERDPy.boreholes as boreholes
 import GERDPy.heatpipes as heatpipes
 import GERDPy.heating_element as heating_element
@@ -28,25 +34,23 @@ from .R_th_tot import *
 from .weather_data import get_weather_data
 from .geometrycheck import check_geometry
 
-# import progress-modules
-from progress.vismain import SplashScreen
-from PySide6.QtWidgets import *
-
 
 def main(self):
 
     # -------------------------------------------------------------------------
-    # 1.) Parametrierung der Simulation (Geometrien, Stoffwerte, etc.)
+    # 1.) Parametrization of the simulation (geometries, physical params, etc.)
     # -------------------------------------------------------------------------
+
+    tic = tim.time()  # time stamp (start simulation)
 
     print(80 * '-')
     print('Initializing simulation...')
     print(80 * '-')
-    self.ui.text_console.insertPlainText(80 * '-' + '\n')
+    self.ui.text_console.insertPlainText(80 * '-' + '\n')  # GUI-console output
     self.ui.text_console.insertPlainText('Initializing simulation...\n')
     self.ui.text_console.insertPlainText(80 * '-' + '\n')
 
-    # Open progress window
+    # Open GUI-progress window
     progapp = QApplication.instance()
     progwindow = SplashScreen()
     progwindow.show()
@@ -54,104 +58,107 @@ def main(self):
     progwindow.ui.running.setText("Initialization...")
     progapp.processEvents()
 
-    # 1.0) Standort
-    h_NHN = self.ui.sb_h_NHN.value()                            # Höhe des Standorts über Normal-Null
+    # 1.0) Location
+    h_NHN = self.ui.sb_h_NHN.value()  # elevation (above sea-level) [m]
 
     # 1.1) Erdboden
-    a = self.ui.sb_therm_diffu.value() * 1.0e-6                 # Temperaturleitfähigkeit [m2/s] (default: 1)
-    lambda_g = self.ui.sb_therm_cond.value()                    # Wärmeleitfähigkeit [W/mK] (default: 2.0)
-    Theta_g = self.ui.sb_undis_soil_temp.value()                # ungestörte Bodentemperatur [°C] (default: 10.0)
+    a = self.ui.sb_therm_diffu.value() * 1.0e-6  # thermal diffusivity [m2/s] (default: 1.0)
+    lambda_g = self.ui.sb_therm_cond.value()  # thermal conductivity [W/mK] (default: 2.0)
+    Theta_g = self.ui.sb_undis_soil_temp.value()  # undisturbed ground temperature [°C] (default: 10.0)
 
-    # 1.2) Erdwärmesondenfeld
+    # 1.2) Borehole heat exchanger layout
 
-    # Geometrie-Import (.txt-Datei)
+    # Geometry-Import (.txt) & object generation
     boreField = boreholes.field_from_file(self, self.ui.line_borefield_file.text())  # './data/custom_field_5.txt'
 
-    # Sondenmeter (gesamt)
+    # Total depth of geothermal borefield (sum of all boreholes)
     H_field = boreholes.length_field(boreField)
 
-    # Layout-Plot des Erdwärmesondenfeldes
+    # Borefield layout plot
     boreholes.visualize_field(boreField)
 
-    # 1.3) Bohrloch
+    # 1.3) Borehole
 
-    # Geometrie
-    N = self.ui.sb_number_heatpipes.value()                     # Anzahl Heatpipes pro Bohrloch [-] (default: 6)
-    r_b = self.ui.sb_r_borehole.value()                         # Radius der Erdwärmesondenbohrung [m] # boreField[0].r_b
-    r_w = self.ui.sb_radius_w.value()                           # Radius der Wärmerohr-Mittelpunkte [m] (default: 0.12)
-    r_iso_b = self.ui.sb_radius_iso.value()                     # Außenradius der Isolationsschicht [m] (default: 0.016)
-    r_pa = self.ui.sb_radius_pa.value()                         # Außenradius der Wärmerohre [m] (default: 0.016)
-    r_pi = self.ui.sb_radius_pi.value()                         # Innenradius der Wärmerohre [m] (default: 0.015)
+    # Geometry
+    N = self.ui.sb_number_heatpipes.value()  # no. of heatpipes per borehole [-] (default: 6)
+    r_b = self.ui.sb_r_borehole.value()  # borehole radius [m] (boreField[0].r_b)
+    r_w = self.ui.sb_radius_w.value()  # radius of heatpipe-centres [m] (default: 0.12)
+    r_iso_b = self.ui.sb_radius_iso.value()  # outer radius of heatpipe insulation [m] (default: 0.016)
+    r_pa = self.ui.sb_radius_pa.value()  # outer radius of heatpipes [m] (default: 0.016)
+    r_pi = self.ui.sb_radius_pi.value()  # inner radius of heatpipes [m] (default: 0.015)
 
-    # Wärmeleitfähigkeiten
-    lambda_b = self.ui.sb_lambda_b.value()                      # lambda der Hinterfüllung [W/mK] (default: 2)
-    lambda_iso = self.ui.sb_lambda_iso.value()                  # lambda der Isolationsschicht [W/mK] (default: 0.03)
-    lambda_p = self.ui.sb_lambda_p.value()                      # lambda der Heatpipe [W/mK] (default: 14.0)
+    # Thermal conductivities
+    lambda_b = self.ui.sb_lambda_b.value()  # ~ of borehole backfill [W/mK] (default: 2.0)
+    lambda_iso = self.ui.sb_lambda_iso.value()  # ~ of insulation layer [W/mK] (default: 0.03)
+    lambda_p = self.ui.sb_lambda_p.value()  # ~ of heatpipe material [W/mK] (default: 14.0)
 
-    # Geometrie-Erstellung
+    # Heatpipe-object generation
     hp = heatpipes.Heatpipes(N, r_b, r_w, r_iso_b, r_pa, r_pi, lambda_b,
                              lambda_iso, lambda_p)
-    # Layout-Plot der Wärmerohrkonfiguration
+
+    # Heatpipe configuration layout plot
     hp.visualize_hp_config()
 
-    # 1.4) Anbindung zum Heizelement (zusätzliche Größen)
+    # 1.4) Connection borehole-to-heating element
 
-    # Geometrie
-    D_iso_An = 0.005                                            # Dicke der Isolationsschicht [m]
-    r_iso_An = r_pa + D_iso_An                                  # Außenradius der Isolationsschicht [m]
+    # Geometry
+    D_iso_An = 0.005  # thickness of the insulation layer [m]
+    r_iso_An = r_pa + D_iso_An  # outer radius of the insulation layer [m]
 
-    # Länge der Anbindungen zwischen Bohrlöchern und Heizelement (ab Geländeoberkante) [m]
-    ''' l_An * N ergibt die Gesamtlänge an Heatpipe im Bereich der Anbindung
+    # Total length of borehole-to-heating element connections (starting from ground surface) [m]
+    ''' l_An is the total length of all borehole-to-heating element connections, while
+        l_An * N yields the total heatpipe-length inside all borehole-to-heating element connections (= heatpipe bundles)
     '''
     l_An = 5
 
-    # 1.5) Heizelement
+    # 1.5) Heating element
 
-    # Fläche Heizelement [m2]
-    A_he = self.ui.sb_A_he.value()      # (default: 35)
+    # Surface area [m2]
+    A_he = self.ui.sb_A_he.value()  # (default: 35.0)
 
-    # minimaler Oberflächenabstand [m]
-    x_min = self.ui.sb_x_min.value()    # (default: .025)
+    # Minimum vertical pipe-to-surface distance [m]
+    x_min = self.ui.sb_x_min.value()  # (default: .025)
 
-    # Wärmeleitfähigkeit des Betonelements [W/mk]
+    # Thermal conductivity [W/mK]
     lambda_Bet = 2.1
 
-    # Mittelachsabstand der Kondensatrohre im Heizelement [m]
+    # centre-distance between heatpipes [m]
     s_R = .050
 
-    # Gesamtlänge im Heizelement verbauter Kondensatrohre [m]
+    # Total heatpipe length inside heating element [m]
     l_R = 1000
 
-    # Betondicke des Heizelements [m]
+    # Vertical thickness of heating element [m]
     D_he = 0.25
 
-    # Dicke der Isolationsschicht an der Unterseite [m]
+    # Vertical thickness of insulation layer on underside of heating element [m]
     D_iso_he = 0.03
 
-    # Geometrie-Erstellung
+    # Heating element-object generation
     he = heating_element.HeatingElement(A_he, x_min, lambda_Bet, lambda_p,
                                         2 * r_pa, 2 * r_pi, s_R, l_R,
                                         D_he, D_iso_he)
 
     # 2.) Simulation
 
-    # Simulationsparameter
-    ''' dt darf 3600s (eine Stunde) aufgrund des Gültigkeitsbereichs der G-Functions
-        nicht unterschreiten
+    # Simulation-Params
+    ''' default value for 'dt' is 3600 seconds (equaling one hour) - usage of
+        smaller time increments not suggested to stay within validity range of 
+        long-term g-functions
     '''
-    dt = 3600.                                                  # Zeitschrittweite [s] (default: 3600)
-    tmax = self.ui.sb_simtime.value() * 3600                    # Gesamt-Simulationsdauer [s] (default: 730 h)
-    Nt = int(np.ceil(tmax / dt))                                # Anzahl Zeitschritte [-]
+    dt = 3600.  # time increment (step size) [s] (default: 3600)
+    tmax = self.ui.sb_simtime.value() * 3600  # total simulation time [s] (default: 730 h * 3600 s)
+    Nt = int(np.ceil(tmax / dt))  # number of time steps [-]
 
     # -------------------------------------------------------------------------
-    # 2.) Überprüfung der geometrischen Verträglichkeit (Sonden & Heatpipes)
+    # 2.) Geometric compatibility check (boreholes & heat pipes)
     # -------------------------------------------------------------------------
 
     if check_geometry(boreField, hp, self):
         print(80*'-')
         print('Geometry-Check: not OK! - Simulation aborted')
         print(80*'-')
-        self.ui.text_console.insertPlainText(80 * '-' + '\n')
+        self.ui.text_console.insertPlainText(80 * '-' + '\n')  # GUI-console output
         self.ui.text_console.insertPlainText('Geometry-Check: not OK! - Simulation aborted\n')
         self.ui.text_console.insertPlainText(80 * '-' + '\n')
         sys.exit()
@@ -159,194 +166,206 @@ def main(self):
         print(80*'-')
         print('Geometry-Check: OK!')
         print(80*'-')
-        self.ui.text_console.insertPlainText(80 * '-' + '\n')
+        self.ui.text_console.insertPlainText(80 * '-' + '\n')  # GUI-console output
         self.ui.text_console.insertPlainText('Geometry-Check: OK!\n')
         self.ui.text_console.insertPlainText(80 * '-' + '\n')
 
-        progwindow.ui.running.setText("Geometry-Check: OK!")
+        progwindow.ui.running.setText("Geometry-Check: OK!")  # update GUI-progress window
 
     # -------------------------------------------------------------------------
-    # 3.) Ermittlung thermischer Widerstände
+    # 3.) Determination of system thermal resistances
     # -------------------------------------------------------------------------
 
-    R_th = R_th_tot(lambda_g, boreField, hp, he)                # Gesamtsystem
-    R_th_ghp = R_th_g_hp(lambda_g, boreField, hp)               # Boden bis Heatpipes
+    R_th = R_th_tot(lambda_g, boreField, hp, he)  # ground-to-surface (whole system)
+    R_th_ghp = R_th_g_hp(lambda_g, boreField, hp)  # ground-to-heatpipes (omits heating element)
 
     # -------------------------------------------------------------------------
-    # 4.) Ermittlung der G-Function (Bodenmodell)
+    # 4.) G-Function generation (Pygfunction ground model)
     # -------------------------------------------------------------------------
 
-    # Initialisierung Zeitstempel (Simulationsdauer)
-    tic = tim.time()
-
-    # Aufsetzen der Simulationsumgebung mit 'load_aggregation.py'
+    # Simulation environment setup using 'load_aggregation.py'
     LoadAgg = load_aggregation.ClaessonJaved(dt, tmax)
     time_req = LoadAgg.get_times_for_simulation()
 
-    # Berechnung der G-Function mit 'gfunction.py'
+    # G-Function calculation using 'gfunction.py'
     gFunc = gfunction.uniform_temperature(boreField, time_req, a, self,
                                           nSegments=12)
 
-    # Initialisierung der Simulation mit 'load_aggregation.py'
+    # Simulation initialization using 'load_aggregation.py'
     LoadAgg.initialize(gFunc/(2*pi*lambda_g))
 
     # -------------------------------------------------------------------------
-    # 5.) Import / Generierung der Wetterdaten
+    # 5.) Weather data import
     # -------------------------------------------------------------------------
 
-    # Import Wetterdaten aus weather_data.py
+    # Import weather data from 'weather_data.py'
     u_inf, Theta_inf, S_w, B, Phi, RR = get_weather_data(Nt, self)
-    ''' u_inf       - Windgeschwindigkeit [m/s]
-        Theta_inf   - Umgebungstemperatur [°C]
-        S_w         - Schneefallrate (Wasserequivalent) [mm/s]
-        B           - Bewölkungsgrad [octal units / 8]
-        Phi         - rel. Luftfeuchte [%]
+    ''' u_inf       - ambient wind speed [m/s]
+        Theta_inf   - ambient temperature [°C]
+        S_w         - snowfall rate [mm/h]
+        B           - cloudiness [octal units/8]
+        Phi         - relative air humidity [%]
+        RR          - precipitation (total) [mm/h]
     '''
 
     # -------------------------------------------------------------------------
-    # 6.) Iterationsschleife (Simulation mit Nt Zeitschritten der Länge dt)
+    # 6.) Iteration loop (Simulation using Nt time steps of stepsize dt)
     # -------------------------------------------------------------------------
 
     time = 0.
     i = -1
-    start_sb = False  # sb - snow balancing
+    start_sb = False  # start snow balancing variable
 
-    # Initialisierung Temperaturen [°C]
-    ''' Vektoren:
-            P[i] - Entzugsleistung f. Zeitschritt i 
-            Theta_surf[i] - Oberflächentemp. f. Zeitschritt i
+    # Initialization of result vectors
+    ''' Vectors: (i - current timestep)
+        - thermal powers [W]:
+            - Q[i]              - thermal extraction power (the total power extracted from the ground)
+            - Q_N[i]            - net used power (power used for melting snow & ice)
+            - Q_V[i]            - thermal power losses via connection & heating element underside
+        - temperatures [°C]:
+            - Theta_b[i]        - borehole wall temperature
+            - Theta_surf[i]     - heating element surface temperature
+        - mass balances [kg]:
+            - m_Rw[i]           - residual water
+            - m_Rs[i]           - residual snow
     '''
-    Theta_b = np.zeros(Nt)  # Bohrlochrand
-    Theta_surf = np.zeros(Nt)  # Oberfläche Heizelement
+    
+    # Initialization of power vectors [W]
+    Q = np.zeros(Nt)  # total extracted thermal power
+    Q_N = np.zeros(Nt)  # net used power
+    Q_V = np.zeros(Nt)  # losses
+    
+    # Initialization of temperature vectors [°C]
+    Theta_b = np.zeros(Nt)  # borehole wall temperature
+    Theta_surf = np.zeros(Nt)  # heating element surface temperature
 
-    # Initialisierung Vektor für Restwassermenge [mm]
+    # Initialization of water mass balancing vector [kg]
     m_Rw = np.zeros(Nt)
 
-    # Initialisierung Vektor für Restschneemenge [mm - Wasserequivalent]
+    # Initialization of snow mass balancing vector [kg]
     m_Rs = np.zeros(Nt)
 
-    # Initialisierung Gesamt-Entzugsleistung, Nutzleistung und Verluste [W]
-    Q = np.zeros(Nt)
-    Q_N = np.zeros(Nt)
-    Q_V = np.zeros(Nt)
-
-    # Hilfsgrößen
-    start_sb_counter = np.zeros(Nt)
+    # Auxiliary variables
+    start_sb_vector = np.zeros(Nt)
     sb_active = np.zeros(Nt)
     sim_mod = np.zeros(Nt)
 
-    print('-----------------Simulation gestartet-----------------\n')
-    self.ui.text_console.insertPlainText('-----------------Simulation gestartet-----------------\n')
+    print('-----------------Simulation started-----------------\n')
+    self.ui.text_console.insertPlainText('-----------------Simulation started-----------------\n')  # GUI-console output
 
     progwindow.ui.running.setText("Simulation running...")
 
-    while time < tmax:  # Iterationsschleife (ein Durchlauf pro Zeitschritt)
+    while time < tmax:  # iteration loop for each timestep
 
-        # Zeitschritt um 1 inkrementieren
-        if start_sb == False:
+        # increment timestep by 1
+        if start_sb == False:  # timestep not incremented in case snow balancing starts
             time += dt
             i += 1
 
         LoadAgg.next_time_step(time)
 
-        # Ermittlung der Entzugsleistung im 1. Zeitschritt
-        if i == 0:  # Annahme Theta_b = Theta_surf = Theta_g, Heizelementoberfläche trocken und schneefrei
-            Q[i], Q_N[i], Q_V[i], calc_T_surf, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
+        # Timestep 1
+        ''' Assumptions: 
+            - Theta_b = Theta_surf = Theta_g (undisturbed ground temperature for all temperature objects)
+            - heating element surface dry and free of snow
+        '''
+        if i == 0:
+            Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
                 load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], he, Theta_g,
                      R_th, R_th_ghp, Theta_g, B[i], Phi[i], RR[i], 0, 0, start_sb,
                      l_An * N, lambda_p, lambda_iso, r_iso_An, r_pa, r_pi)
 
-        # Ermittlung der Entzugsleistung im Zeitschritt 2, 3, ..., Nt
+        # Timesteps 2, 3, ..., Nt
         if i > 0:
-            Q[i], Q_N[i], Q_V[i], calc_T_surf, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
+            Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
                 load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], he, Theta_b[i - 1],
                      R_th, R_th_ghp, Theta_surf[i - 1], B[i], Phi[i], RR[i], m_Rw[i - 1], m_Rs[i - 1], start_sb,
                      l_An * N, lambda_p, lambda_iso, r_iso_An, r_pa, r_pi)
 
-        # Erhöhung der ermittelten Entzugsleistung um die Verluste an Anbindung (An) und Unterseite des Heizelements (He)
+        # Determined extraction power is incremented by the connection losses (An) and losses of the heating element underside (he)
         Q[i] += Q_V[i]
 
-        start_sb = False  # Variable Start-Schneebilanzierung zurücksetzen
+        start_sb = False  # reset snow balancing variable
 
-        # Aufprägung der ermittelten Entzugsleistung auf Bodenmodell ('load_aggregation.py')
+        # Load extraction power of current time step into the ground model using 'load_aggregation.py'
         LoadAgg.set_current_load(Q[i] / H_field)
 
-        # Temperatur am Bohrlochrand [°C]
+        # Calculate "new" borehole wall temperature after heat extraction [°C]
         deltaTheta_b = LoadAgg.temporal_superposition()
         Theta_b[i] = Theta_g - deltaTheta_b
 
-        # Temperatur an der Oberfläche des Heizelements [°C]
-        ''' Theta_surf wird hier nur ermittelt, falls Q. >= 0 (positive Entzugsleistung aus Boden), sonst
-            erfolgt deren Ermittlung in 'load_generator.py' mit Hilfe einer vereinfachten Leistungsbilanz an der Oberfläche.
+        # Calculate "new" surface temperature after heat extraction [°C]
+        ''' Theta_surf is only calculated here, if Q. >= 0 (positive heat extraction from ground),
+            otherwise it is calculated in 'load_generator.py', using the simplified power balance F_T = 0.
         '''
-        if calc_T_surf is False:
-            Theta_surf[i] = Theta_b[i] - Q[i] * R_th  # Oberflächentemp.
+        if calc_T is False:
+            Theta_surf[i] = Theta_b[i] - Q[i] * R_th  # heating element surface temperature
 
-        # Schneebilanzierung starten
-        ''' Zeitschritt wird einmalig wiederholt, falls sich eine Schneeschicht beginnt zu bilden:
-            - Oberflächentemperatur Theta_surf[i] < 0 UND
-            - Schneefallrate S_w[i] > 0 UND
-            - Restschneemenge m_Rs[i] == 0 (noch keine Restschneemenge vorhanden)
-            müssen erfüllt sein
-
-            => Schnee bleibt liegen: Schneebilanz an Oberfläche
+        # Start snow balancing
+        ''' The time step i will be repeated once in snow balancing mode if the following conditions 
+            for the formation of a snow layer are met:
+            - Theta_surf[i] < 0 AND
+            - S_w[i] > 0 AND
+            - m_Rs[i] == 0 (no remaining snow on surface)
         '''
         if (Theta_surf[i] < 0 and S_w[i] > 0 and m_Rs[i] == 0):
             start_sb = True
-            start_sb_counter[i] = 1
+            start_sb_vector[i] = 1
 
-        # Konsolenausgabe des momentanen Zeitschritts
+        # Current timestep: output to console
         print(f'Zeitschritt {i + 1} von {Nt}')
 
-        # Update progress window
+        # Update GUI-progress window
         progwindow.progress.set_value(int(i/Nt*100))
         progapp.processEvents()
 
     progwindow.close()
 
-    # Zeitstempel (Simulationsdauer) [s]
-    toc = tim.time()
+    toc = tim.time()  # time stamp (end simulation)
     print('Total simulation time: {} sec'.format(toc - tic))
-    self.ui.text_console.insertPlainText(80 * '-' + '\n')
+    self.ui.text_console.insertPlainText(80 * '-' + '\n')  # GUI-console output
     self.ui.text_console.insertPlainText('Total simulation time: {} sec\n'.format(toc - tic))
     self.ui.text_console.insertPlainText(80 * '-' + '\n')
 
     # -------------------------------------------------------------------------
-    # 7.) Energiekennzahlen
+    # 7.) Energy performance indicators
     # -------------------------------------------------------------------------
-    ''' Q_m                 - zeitlich gemittelte Entzugsleistung [W]
-        E                   - Gesamtenergiemenge, die dem Boden entzogen wurde [MWh]
-        f_N [%] = E_N / E   - Nutzenergiefaktor [%]
-            E_N             - zur sensiblen Erwärmung und latenten Schmelze des Schnees verwendete Energie
-            E - E_N         - Summe der Verluste durch Konvektion, Strahlung und Verdunstung
+    ''' Q_ma                - total extracted thermal power, 24h-moving-average [W]
+        E                   - total extracted thermal energy [MWh]
+        f_N [%] = E_N / E   - net energy usage factor [%]
+            E_N             - net used energy (latent & sensible energy for melting of snow and ice)
+            E - E_N         - net energy "lost" through convection, radiation and evaporation (surface losses)
     '''
 
-    # 24h-gemittelte Entzugsleistung (gleitender Mittelwert)
+    # 24h-moving-average total extracted thermal power [W]
     Q_ma = Q_moving_average(Q)
 
-    # Gesamtenergiemenge [MWh]
+    # Total extracted thermal energy [MWh]
     E = (np.sum(Q) / len(Q)) * Nt * 1e-6
 
-    print('-----------------Simulation beendet-----------------')
+    print('-----------------Simulation finished-----------------')
 
-    print(f'Dem Boden wurden {round(E, 4)} MWh entnommen')
+    print(f'Energy extracted from the ground: {round(E, 4)} MWh')
     self.ui.text_console.insertPlainText(80*'-'+'\n')
-    self.ui.text_console.insertPlainText(f'Obtained energy from ground: {round(E, 4)} MWh\n')
+    self.ui.text_console.insertPlainText(f'Energy extracted from the ground: {round(E, 4)} MWh\n')
     self.ui.text_console.insertPlainText(80 * '-' + '\n')
 
-    # Nutzenergiefaktor [%]
+    # Net energy usage factor [%]
     # f_N = (np.sum(Q_N) / len(Q_N)) / (np.sum(Q) / len(Q)) * 100
-    # print(f'Davon wurden {round(f_N, 2)} % als Nutzenergie zur Schneeschmelze aufgewendet. '
-    #       f'Der Rest sind Verluste an der Ober- und Unterseite des Heizelements sowie dessen Anbindungsleitungen.')
+    # print(f'{round(f_N, 2)} % of that energy went into melting snow and ice.'
+    #       f'The rest are surface losses in the form of convection, radiation and evaporation and \n'
+    #       f'thermal losses at the heating element underside and borehole-to-heating element connections.')
     # print(50*'-')
-    # self.ui.text_console.insertPlainText(f'Davon wurden {round(f_N, 2)} % als Nutzenergie zur Schneeschmelze aufgewendet. '
-    #                                      f'Der Rest sind Verluste an der Ober-, Unterseite und Anbindungsleitungen.')
+    # self.ui.text_console.insertPlainText(
+    #     f'{round(f_N, 2)} % of that energy went into melting snow and ice.'
+    #     f'The rest are surface losses in the form of convection, radiation and evaporation and \n'
+    #     f'thermal losses at the heating element underside and borehole-to-heating element connections.')
 
     # -------------------------------------------------------------------------
-    # 8.) Plots für End-User
+    # 8.) Result Plots
     # -------------------------------------------------------------------------
 
-    # x-Achse aller Plots (Simulationsstunden) [h]
+    # x-Axis (simulation hours) [h]
     hours = np.array([(j+1)*dt/3600. for j in range(Nt)])
 
     plt.rc('figure')
@@ -355,46 +374,46 @@ def main(self):
     font = {'weight': 'bold', 'size': 10}
     plt.rc('font', **font)
 
-    # Lastprofil {Entzugsleistung - Entzugsleistung (24h-gemittelt) - Verluste (Anbindung + Unterseite Heizelement)}
+    # Load profile
     ax1 = fig1.add_subplot(411)
     ax1.set_ylabel(r'$q$ [W/m2]')
-    ax1.plot(hours, Q / A_he, 'k-', lw=1.2)
-    ax1.plot(hours, Q_m / A_he, 'r--', lw=1.2)
-    ax1.plot(hours, Q_V / A_he, 'g-', lw=1.2)
-    ax1.legend(['Entzugsleistung', 'Entzugsleistung-24h-gemittelt',
-                'Verluste (Anbindung + Unterseite Heizelement)'],
+    ax1.plot(hours, Q / A_he, 'k-', lw=1.2)  # total extracted thermal power [W]
+    ax1.plot(hours, Q_ma / A_he, 'r--', lw=1.2)  # total extracted thermal power (24h-moving-average) [W]
+    ax1.plot(hours, Q_V / A_he, 'g-', lw=1.2)  # thermal losses (underside heating element & connection) [W]
+    ax1.legend(['Extracted thermal power', 'Extracted thermal power (24h-moving-average)',
+                'Thermal losses (underside heating element & connection)'],
                prop={'size': font['size']}, loc='upper left')
     ax1.grid('major')
 
-    # Schneefallrate - Schneehöhe - Umgebungstemperatur - Windgeschwindigkeit
+    # Snowfall rate - snow height
     ax2 = fig1.add_subplot(412)
-    ax2.set_ylabel('Schneefallrate [mm/h] \n Schneehöhe [mm]')
-    ax2.plot(hours, S_w, 'b-', lw=0.8)
-    ax2.plot(hours, m_Rs / A_he, 'g-', lw=0.8)
-    ax2.legend(['Schneefallrate', 'Schneehöhe'],
+    ax2.set_ylabel('Snowfall rate [mm/h] \n Snow height on heating element [H2O-mm]')
+    ax2.plot(hours, S_w, 'b-', lw=0.8)  # snowfall rate [mm/h]
+    ax2.plot(hours, m_Rs / (A_he * (997 / 1000)), 'g-', lw=0.8)  # snow height on heating element [mm]
+    ax2.legend(['Snowfall rate', 'Snow height on heating element'],
                prop={'size': font['size']}, loc='upper left')
     ax2.grid('major')
     
-    # Umgebungstemperatur - Windgeschwindigkeit
+    # Ambient temperature - ambient wind speed
     ax3 = fig1.add_subplot(413)
-    ax3.set_ylabel('$T$ [degC] \n Windgeschwindigkeit [m/s]')
-    ax3.plot(hours, Theta_inf, 'k-', lw=0.8)
-    ax3.plot(hours, u_inf, 'm--', lw=0.8)
-    ax3.legend(['Umgebungstemperatur', 'Windgeschwindigkeit'],
+    ax3.set_ylabel('$T$ [degC] \n Ambient wind speed [m/s]')
+    ax3.plot(hours, Theta_inf, 'k-', lw=0.8)  # ambient temperature [°C]
+    ax3.plot(hours, u_inf, 'm--', lw=0.8)  # ambient wind speed [m/s]
+    ax3.legend(['Ambient temperature', 'Ambient wind speed'],
                  prop={'size': font['size']}, loc='upper right')
     ax3.grid('major')
 
-    # Temperaturverläufe Bohrlochrand und Oberfläche Heizelement
+    # Temperature curves
     ax4 = fig1.add_subplot(414)
     ax4.set_xlabel(r'$t$ [h]')
     ax4.set_ylabel(r'$T$ [degC]')
-    ax4.plot(hours, Theta_b, 'r-', lw=1.2)
-    ax4.plot(hours, Theta_surf, 'c-', lw=0.6)
-    ax4.legend(['T_Bohrlochrand', 'T_Oberflaeche'],
+    ax4.plot(hours, Theta_b, 'r-', lw=1.2)  # borehole wall temperature [°C]
+    ax4.plot(hours, Theta_surf, 'c-', lw=0.6)  # heating element surface temperature [°C]
+    ax4.legend(['T_borehole-wall', 'T_surface'],
                prop={'size': font['size']}, loc='upper right')
     ax4.grid('major')
 
-    # Beschriftung Achsenwerte
+    # Axis ticks
     ax1.xaxis.set_minor_locator(AutoMinorLocator())
     ax1.yaxis.set_minor_locator(AutoMinorLocator())
     ax2.xaxis.set_minor_locator(AutoMinorLocator())

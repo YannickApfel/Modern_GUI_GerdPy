@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'heatpipes.py'
     
-    Klasse für die Wärmerohrkonfiguration im Bohrloch (identisch für jedes 
-                                                       Bohrloch)
+    Class for the heatpipe configuration inside the boreholes
 
-    Autor(en): Yannick Apfel, Meike Martin
+    Authors: Yannick Apfel, Meike Martin
 """
 import numpy as np
 from scipy.constants import pi
@@ -12,30 +11,29 @@ from scipy.constants import pi
 
 class Heatpipes(object):
     """
-    Enthält alle Informationen über das Heatpipe-Layout im Bohrloch und dessen
-    Wärmeleitfähigkeiten.
-    Dies muss für alle Bohrlöcher identisch sein.
+    Contains all relevant parameters regarding the heatpipe layout inside the boreholes
+    which must be identical for all of the latter (circle).
 
-    Attribute
+    Attributes
     ----------
-    N:          int [-]
-                Anzahl der Heatpipes im Bohrloch (kreisförmig angeordnet).
-    r_b:        float [m]
-                Radius der Erdwärmesondenbohrung
-    r_w:        float [m]
-                Radius der Wärmerohr-Mittelpunkte.
-    r_iso_a:    float [m]
-                Außenradius der Isolationsschicht.
-    r_pa:       float [m]
-                Außenradius des Wärmerohrs.
-    r_pi:       float [m]
-                Innenradius des Wärmerohrs.
-    lambda_b:   float [W/mK]
-                Wärmeleitfähigkeit des Hinterfüllmaterials
-    lambda_iso: float [W/mK]
-                Wärmeleitfähigkeit der Isolationsschicht.
-    lambda_p:   float [W/mK]
-                Wärmeleitfähigkeit der Heatpipe
+    N:          int
+                number of heatpipes per borehole (arranged in a circle) [-]
+    r_b:        float 
+                borehole radius [m]
+    r_w:        float
+                radius of heatpipe centres [m]
+    r_iso_a:    float
+                outer radius of heatpipe insulation [m]
+    r_pa:       float
+                outer radius of heatpipes [m]
+    r_pi:       float
+                inner radius of heatpipes [m]
+    lambda_b:   float
+                thermal conductivity of borehole backfill [W/mK]
+    lambda_iso: float
+                thermal conductivity of insulation layer [W/mK]
+    lambda_p:   float
+                thermal conductivity of heatpipe material [W/mK]
 
     """
 
@@ -58,14 +56,14 @@ class Heatpipes(object):
 
     def xy_mat(self):
         """
-        Gibt eine Nx2 Matrix mit den Koordinaten der Heatpipe-Mittelpunkte
-        im Bohrlochkoordinatensystem (Ursprung = Bohrlochmittelpunkt) zurück.
-        Die N Heatpipes werden gleichmäßig auf einem Kreis mit
-        Radius r_w verteilt.
+        Returns a Nx2 matrix with the coordinates of the heatpipe centres
+        in the borehole coordinate system (origin = borehole centre).
+        The N heatpipes are uniformly spaced on a circle with
+        radius r_w.
 
         """
 
-        xy_mat = np.zeros([self.N, 2])  # 1. Spalte: x, 2. Spalte: y
+        xy_mat = np.zeros([self.N, 2])  # 1. column: x, 2. column: y
 
         for i in range(self.N):
             xy_mat[i, 0] = self.r_w * np.cos(2 * pi * i / self.N)
@@ -75,18 +73,17 @@ class Heatpipes(object):
 
     def visualize_hp_config(self):
         """
-        Plot des Querschnitts eines Bohrlochs (visualisiert Heatpipe-Layout).
+        Plot of the cross-section of a borehole (visualizes heatpipe layout).
 
-        Rückgabe
+        Returns
         -------
         fig : figure
             Figure object (matplotlib).
-
         """
         import matplotlib.pyplot as plt
         from matplotlib.ticker import AutoMinorLocator
 
-        # Initialisierung
+        # Initialization
         LW = .5    # Line width
         FS = 12.    # Font size
 
@@ -94,18 +91,18 @@ class Heatpipes(object):
         fig = plt.figure()
         ax = fig.add_subplot(111)
 
-        # Umriss der Bohrlochwand
+        # Outline of the borehole wall
         borewall = plt.Circle((0., 0.), radius=self.r_b,
                               fill=False, linestyle='--', linewidth=LW)
         ax.add_patch(borewall)
 
-        # Heat Pipes
+        # Heatpipes
         for i in range(self.N):
-            # Koordinaten
+            # Coordinates
             xy = self.xy_mat()
             (x, y) = (xy[i, 0], xy[i, 1])
 
-            # Plot der Ummantellung und der Heatpipes
+            # Plot heatpipes + insulation layer
             hp_iso = plt.Circle((x, y), radius=self.r_iso_a,
                                 fill=False, linestyle='-', linewidth=LW)
             hp_itself_outer = plt.Circle((x, y), radius=self.r_pa,

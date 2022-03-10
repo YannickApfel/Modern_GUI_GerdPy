@@ -1,36 +1,37 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'heating_element.py'
     
-    Klasse für das Heizelement
+    Class for the heating element
 
-    Autor(en): Yannick Apfel, Meike Martin
+    Authors: Yannick Apfel, Meike Martin
 """
 class HeatingElement(object):
     """
-    Enthält die Klasse für das Heizelement.
+    Contains class for the heating element.
 
-    Attribute
+    Attributes
     ----------
-    A_he:           float [m²]
-                    Fläche des Heizelements.
-    x_min:          float [m]
-                    minimaler Oberflächenabstand der Verrohrung (Überdeckung)
-    lambda_B:       float [W/mK]
-                    Wärmeleitfähigkeit des Betonelements
-    lambda_R:       float [W/mK]
-                    Wärmeleitfähigkeit der Kondensatrohre
-    d_R_a:          float [m]
-                    Außendurchmesser eines Kondensatrohrs
-    d_R_i:          float [m]
-                    Innendurchmesser eines Kondensatrohrs
-    s_R:            float [m]
-                    Mittelachsabstand der Kondensatrohre des Rohrregisters
-    l_R:            float [m]
-                    Gesamtlänge im Heizelement verbauter Kondensatrohre
-    D:              float [m]
-                    Betondicke des Heizelements
-    D_iso:          float [m]
-                    Dicke der Isolationsschicht an der Unterseite des Heizelements
+    A_he:           float 
+                    area of the heating element [m²]
+    x_min:          float
+                    minimum vertical pipe-to-surface distance [m]
+    lambda_B:       float
+                    thermal conductivity of heating element material [W/mK]
+    lambda_R:       float 
+                    thermal conductivity of heat pipes [W/mK]
+    d_R_a:          float 
+                    outer radius of heatpipes [m]
+    d_R_i:          float
+                    inner radius of heatpipes [m]
+    s_R:            float
+                    centre-distance between heatpipes [m]
+    l_R:            float
+                    total heatpipe length inside heating element [m]
+    D:              float
+                    vertical thickness of heating element [m]
+    D_iso:          float
+                    vertical thickness of insulation layer on underside of heating element [m]
+
     """
 
     def __init__(self, A_he, x_min, lambda_B, lambda_R, d_R_a, d_R_i, s_R,

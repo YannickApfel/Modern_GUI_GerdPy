@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'R_th_tot.py'
     
-    Modul für den thermischen Gesamtwiderstand des Systems
+    Module for the thermal resistance of the overall system
     
-    Reihenschaltung aus Teilwiderständen:
-        - R_th_tot: Gesamtwiderstand Boden-Umgebung: 
-            = R_th_c + R_th_b + R_th_hp + R_th_he
-        - R_th_g_hp: Teil-Widerstand Boden-Heatpipe:
-            = R_th_c + R_th_b + R_th_hp = R_th_tot - R_th_he
+    Series connection of the four component resistances:
+        - R_th_tot = R_th_c + R_th_b + R_th_hp + R_th_he (ground-to-surface)
+        - R_th_g_hp = R_th_c + R_th_b + R_th_hp (ground-to-heatpipes)
 
-    Autor(en): Yannick Apfel, Meike Martin
+    Authors: Yannick Apfel, Meike Martin
 """
 from .R_th_c import R_th_c
 from .R_th_b import R_th_b
@@ -21,7 +19,7 @@ def R_th_tot(lambda_g, borefield, hp, he):  # [K/W]
 
     R_th_tot = R_th_c(borefield) + R_th_b(lambda_g, borefield, hp) + \
         R_th_hp(borefield, hp) + R_th_he(he)
-    # + weitere thermische Widerstände
+    # + additional component resistances possible
 
     return R_th_tot
 

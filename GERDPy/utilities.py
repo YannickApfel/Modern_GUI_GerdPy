@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'utilities.py'
     
-    diverse Hilfsfunktionen 
+    Auxiliary Functions
 
-    Autor(en): Massimo Cimmino, Yannick Apfel, Meike Martin
+    Authors: Massimo Cimmino, Yannick Apfel, Meike Martin
 """
 import numpy as np
 

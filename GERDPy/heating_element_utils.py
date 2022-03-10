@@ -1,31 +1,31 @@
 # -*- coding: utf-8 -*-
 """ GERDPy - 'heating_element_utils.py'
     
-    Zusatzmodul für 'heating_element.py':
-    analytische Reihenlösung für den Wärmestrom in einem Rohrregister mit
-    äquidistanten Rohren nach VDI 2055-1 (T-Randbedingung), verwendet zur 
-    Ermittlung des thermischen Widerstands des Heizelements
+    Utility module for 'heating_element.py':
+    analytical series solution for the heat flow in a pipe register with
+    equidistant tubes according to VDI 2055-1 (Dirichlet temperature boundary condition), 
+    used for determination of the thermal resistance of the heating element
 
-    q_l - Wärmeleistung pro Meter verbautem Rohr [W/m]
+    q_l - heat output per meter of installed pipe [W/m]
 
-    Autor(en): Yannick Apfel, Meike Martin
+    Authors: Yannick Apfel, Meike Martin
 """
 import math
 
 
-# Ermittlung des sum-Terms der analyt. Lösung aus VDI 2055-1
+# Determination of the sum-term
 def sum_fct(kappa_o, kappa_u, s, s_c, x_o, x_u, lambda_B):
 
-    # 1.) Definition der therm. Größen
+    # 1.) Definition of thermal parameters
     beta_o = kappa_o * s / lambda_B
     beta_u = kappa_u * s / lambda_B
 
-    # 2.) Approximation der unendlichen Reihensumme ssum
+    # 2.) Approximation of the infinite series sum
     ssum_temp = 0
     j = 0
     error = 1e-6
 
-    while 1:  # unendliche Schleife, bis break-Befehl
+    while 1:  # infinite loop until "break"
 
         j += 1
 
@@ -49,32 +49,32 @@ def sum_fct(kappa_o, kappa_u, s, s_c, x_o, x_u, lambda_B):
     return ssum
 
 
-# analyt. Lösung aus VDI 2055-1 (Wärmeleistung pro Rohrmeter)
+# Analytical series solution according to VDI 2055-1 (heat output per meter of piping)
 def q_l(x_o, x_u, d_R_a, d_R_i, lambda_B, lambda_R, s, Theta_R, Theta_inf_o, state_u_insul):  # [W/m]
 
-    # 1.) zusätzliche geometrische Größen
-    s_c = 0.0  # [m] -> setze 0, da keine Zusatzschichten vorhanden
-    d_insul_a = d_R_a + 0.0002  # Option: Modellierung Kontaktwiderstand als Luftschicht (1/10 mm)
+    # 1.) additional geometric params
+    s_c = 0.0  # [m] -> set to 0, because no additional layers in heating element
+    d_insul_a = d_R_a + 0.0002  # thermal contact resistance modelled as layer of air of 1/10 mm
 
-    # 2.) zusätzliche therm. Größen
+    # 2.) additional thermal params
     Theta_inf_u = Theta_inf_o
-    lambda_insul = 0.0262  # Luft
-    alpha_o = 1e10  # WÜK an Oberseite --> unendlich, da T-RB
+    lambda_insul = 0.0262  # air
+    alpha_o = 1e10  # surface heat transfer coefficient --> infinite (Dirichlet temperature boundary condition)
     alpha_u = alpha_o
     
     if state_u_insul:
-        alpha_u = 1e-10  # WÜK an Unterseite: --> 0, isoliert
-        x_u = 1e10  # x_u überschreiben mit halbunendlichem Raum
+        alpha_u = 1e-10  # surface heat transfer coefficient --> 0 (modelled as insulated, because only heat transfer to surface considered)
+        x_u = 1e10  # x_u equals semi-infinite space
 
-    # 3.) Wärmedurchgänge  [W/m²K]
+    # 3.) Heat transmission  [W/m²K]
     kappa_o = (1 / alpha_o + s_c / lambda_B) ** -1
     kappa_u = (1 / alpha_u + s_c / lambda_B) ** -1
     kappa_o_ = (kappa_o ** -1 + x_o / lambda_B) ** -1
     kappa_u_ = (kappa_u ** -1 + x_u / lambda_B) ** -1
 
-    # 4.) Wärmestrom pro Meter [W/m]
+    # 4.) Heat output per meter [W/m]
 
-    ssum = sum_fct(kappa_o, kappa_u, s, s_c, x_o, x_u, lambda_B)  # Ermittlung des sum-Terms
+    ssum = sum_fct(kappa_o, kappa_u, s, s_c, x_o, x_u, lambda_B)  # determination of ssum-term
 
     q_l = 2 * math.pi * lambda_B * (Theta_R - (Theta_inf_o * kappa_o_ + Theta_inf_u * kappa_u_) / (kappa_o_ + kappa_u_)) \
           / (lambda_B / lambda_R * math.log(d_R_a / d_R_i)
