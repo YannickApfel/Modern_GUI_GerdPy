@@ -101,7 +101,7 @@ def alpha_kon_an(deltaT):
 
 
 # mass balance for water on heating element surface
-def m_Restwasser(m_Rw_0, RR, A_he, Q_eva):
+def m_water(m_Rw_0, RR, A_he, Q_eva):
     m_Rw_1 = m_Rw_0 + (RR * rho_w * A_he) / 1000 - (Q_eva / h_Ph_lg) * 3600
 
     if (m_Rw_1 / (rho_w * A_he)) > (H_max / 1000):  # maximum allowed water level
@@ -114,7 +114,7 @@ def m_Restwasser(m_Rw_0, RR, A_he, Q_eva):
 
 
 # mass balance for ice/snow on heating element surface
-def m_Restschnee(m_Rs_0, S_w, A_he, Q_lat, sb_active):
+def m_snow(m_Rs_0, S_w, A_he, Q_lat, sb_active):
     if (sb_active == 1):
         m_Rs_1 = m_Rs_0 + (S_w * rho_w * A_he) / 1000 - (Q_lat / h_Ph_sl) * 3600
     else:

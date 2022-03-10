@@ -37,8 +37,6 @@
             - Theta_b < Theta_surf:
                 - Q. = 0 (no power extracted from the ground)
                 - F_T = 0 solved for surface temperature Theta_surf
-
-                {Oberfläche + Umgebung} -> Auflösung nach Theta_surf (Oberflächentemperatur)
                 
     Solver: iterative search for zero crossing
     
@@ -341,87 +339,106 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
     ''' Simulation modes 1-3'''
     if (sb_active == 1):
 
-        ''' Erdboden, Heizelement-Oberfläche und Umgebung bilden ein stationäres System, wobei
-            sich eine Schneedecke bildet, sodass T_surf = T_Schm (Schmelzwasser).
-            - Q._0 = (T_b - T_surf) / R_th definiert zur Verfügung stehende Leistung (delta-T)
-            - Q._R = Q._0 - (Q._con + Q._rad + Q._eva) ergibt die zur Schneeschmelze (= Q._lat + Q._sen) vor-
-            handene restliche Leistung
+        ''' Simulation modes 1-3 encompass all modes of snow/ice layer forming on the surface
+            
+            Basic assumption: Theta_surf := Theta_mp (melting point of water, 0 °C), because the snow/ice
+            layer is "waterized" in the contact zone.
+            
+            1.) Q._0 encompasses the available power inside the ground (corresponds to the available temperature spread delta-T):
+                
+                Q._0 = (Theta_b - Theta_surf) / R_th_tot
+            
+            2.) Q._R encompasses the part of Q._0, that is available for melting snow/ice (latent & sensible)
+                after subtracting surface losses (convection, radiation & evaporation)
+                
+                Q._R = Q._0 - (Q._con + Q._rad + Q._eva)
+                
+            Simulation mode 1: Q._0 < 0
+            - no temperature spread available inside the ground (Sibirian conditions, ground is frozen or cooled down too much)
+            - F_T = 0 solved for Theta_surf
 
-            - Simulationsmodus 1: Q._0 < 0, Lösung von F_T nach Theta_surf
-            (kein Wärmeentzug aus dem Boden möglich, da kein delta-T vorhanden - sibirische Verhältnisse)
+            Simulation mode 2: Q._0 >= 0, Q._R < 0
+            - temperature spread is not sufficient to melt snow/ice, the available power is used up for 
+              surface losses (convection, radiation, evaporation)
+            - F_Q = 0 solved for Q.
             
-            - Simulationsmodus 2: Q._R < 0, Lösung von F_Q nach Q.
-            (keine Restleistung zur Schneeschmelze vorhanden, Leistung geht für Konvektions- und Strahlungsverluste drauf)
-            
-            - Simulationsmodus 3: Q._R > 0, setze Theta_surf := Theta_mpelz (Oberfläche mit Wasser benetzt)
-            (Q._R wird zur Schneeschmelze verwendet)
+            Simulation mode 3: Q._0 >= 0, Q._R >= 0
+            - temperature spread is sufficient to melt snow/ice
+            - only simulation mode where snow/ice are melted!
+            - no power balancing, instead, the melted snow/ice volume flux is estimated using Q._R:
+                V._s = V._s(Q._R)
         '''
 
-        # 2.1) Pre-Processing
+        # 2.1) pre-processing
         R_f = 0.2  # free-area ratio
-        Theta_surf_0 = Theta_mp  # Fixieren der Oberflächentemperatur
+        Theta_surf_0 = Theta_mp  # define surface temperature as melting point of water
 
-        # 2.2) verfügbare Entzugsleistung
+        # 2.2) available power inside ground (corresponds to temperature spread)
         Q_0 = (Theta_b_0 - Theta_surf_0) * R_th ** -1
 
-        # 2.3) Fallunterscheidung Entzugsleistung Q_0
-        ''' Simulationsmodus 1'''
-        if Q_0 < 0:  # keine nutzbare T-Differenz im Boden vorhanden (sibirische Verhältnisse)
+        # 2.3) Simulation modes 1-3
+        ''' Simulation mode 1'''
+        if Q_0 < 0:  # no temperature spread available (Sibirian conditions)
 
-            sim_mod = 1  # Simulationsmodus aufzeichnen
+            sim_mod = 1
 
             calc_T = True
 
-            # Q_sensibel, Q_latent, Q_Verdunstung = 0
-            sen, lat, eva = 0, 0, 0  # Energie zur Schneeschmelze kommt definitorisch aus dem Boden, nicht der Umgebung
+            # Q_sensible, Q_latent, Q_evaporation := 0 
+            ''' thermal energy is modelled as coming from the ground only,
+                although thermal influx from surroundings possible in reality
+            '''
+            sen, lat, eva = 0, 0, 0
 
-            # 2.4) iterative Lösung der stationären Leistungsbilanz F_T = 0 am Heizelement (Oberfläche + Umgebung) nach T
+            # 2.4) iterative solution of reduced power balance F_T = 0, solved for Theta_surf
             Theta_surf_sol, Q_lat, Q_sen, Q_eva = solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
 
-            Q_sol = -1  # keine Entzugsleistung aus dem Boden
+            Q_sol = -1  # extracted power set to zero
 
-        else:  # Q_0 >= 0, nutzbare T-Differenz im Boden vorhanden (Regelfall)
-            ''' Simulationsmodi 2 & 3'''
-            # 2.4) Oberflächenverluste (explizit für Theta_surf_0 = Theta_mp formuliert)
+        else:  # temperature spread in ground available (usual case)
+            ''' Simulation modes 2 & 3'''
+            # 2.4) surface losses (explicit evaluation for Theta_surf_0 := Theta_mp)
 
-            # Q_Konvektion
+            # Q_convection
             Q_con = Q_con_T(Theta_surf_0, con, u_inf, Theta_inf, he.A_he)
 
-            # Q_Strahlung
+            # Q_radiation
             Q_rad = Q_rad_T(Theta_surf_0, rad, S_w, Theta_inf, B, Phi, he.A_he)
 
-            # Q_Verdunstung
+            # Q_evaporation
             Q_eva = 0
 
-            # 2.5) Ermittlung vorhandene Restleistung (f. Schnee- und Eisschmelze)
+            # 2.5) power available for melting of snow/ice
             Q_R = Q_0 - R_f * (Q_con + Q_rad + Q_eva)
 
-            # 2.6) Fallunterscheidung Restleistung Q_R
-            ''' Simulationsmodus 2'''
-            if Q_R < 0:  # keine Restleistung für Schneeschmelze vorhanden
+            # 2.6) Simulation modes 2 & 3
+            if Q_R < 0:  # temperature spread not suffient to melt snow/ice
+                ''' Simulation mode 2'''
+                sim_mod = 2
 
-                sim_mod = 2  # Simulationsmodus aufzeichnen
+                # Q_sensible, Q_latent, Q_evaporation := 0 
+                ''' thermal energy is modelled as coming from the ground only,
+                    although thermal influx from surroundings possible in reality
+                '''
+                sen, lat, eva = 0, 0, 0
 
-                # Q_sensibel, Q_latent, Q_Verdunstung = 0
-                sen, lat, eva = 0, 0, 0  # Energie zur Schneeschmelze kommt definitorisch aus dem Boden, nicht der Umgebung
-
-                # 2.7) iterative Lösung der stationären Leistungsbilanz F_Q = 0 am Heizelement (Erdboden + Oberfläche + Umgebung))
+                # 2.7) iterative solution of power balance F_Q = 0, solved for Q.
                 Q_sol, Q_lat, Q_sen, Q_eva = solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
 
-            else:  # Q_R >= 0, Restleistung für Schneeschmelze vorhanden
-                ''' Simulationsmodus 3'''
-                sim_mod = 3  # Simulationsmodus aufzeichnen
+            else:  # temperature spread sufficient to melt snow/ice
+                ''' Simulation mode 3'''
+                sim_mod = 3
 
                 calc_T = True
 
-                # 2.7) Volumenstrom der Schneeschmelze
+                # 2.7) volume flux of melted snow/ice: V._s = V._s(Q._R)
                 V_s = Q_R / (rho_w * (h_Ph_sl + c_p_s * (Theta_mp - Theta_inf)))
-                if V_s < 0:  # Schmelz-Volumenstrom ist definitorisch positiv
+                if V_s < 0:  # only positive values allowed
                     V_s = 0
 
-                # 2.8) Schmelzterme (explizit)
+                # 2.8) explicit evaluation of snow/ice melting loads using V._s
 
-                # Q_sensibel
+                # Q_sensible
                 Q_sen = 0
                 if sen:
                     Q_sen = rho_w * c_p_s * (Theta_mp - Theta_inf) * V_s
@@ -434,47 +451,59 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
                 Theta_surf_sol = Theta_mp
                 Q_sol = Q_0
 
-                ''' Simulationsmodi 4 & 5'''
-                ''' Erdboden, Heizelement-Oberfläche und Umgebung bilden ein stationäres System, wobei sich
-                        die Oberflächentemp. Theta_surf entsprechend der Oberflächenlasten ergibt.
-                        Die Leistungsbilanz F_Q = Q._lat + Q._sen + R_f(Q._con + Q._rad + Q._eva) - Q. wird für
-                        - Fall Q. >= 0 (Leistungsentzug aus dem Boden) nach Q. aufgelöst - Simulationsmodus 4
-                        - Fall Q. < 0 : Lösung der vereinfachten Leistungsbilanz F_T = F_Q(Q.=0) nach Theta_surf
-                            (kein Leistungsentzug aus dem Boden, Umgebung erwärmt Heizelement) - Simulationsmodus 5
-                '''
-    else:  # Schnee wird instantan abgeschmolzen (keine Bildung einer Schneedecke)
-        ''' Simulationsmodus 4'''
-        sim_mod = 4  # Simulationsmodus aufzeichnen
+    else:  # snow/ice is melted instantaneously (within current timestep), no forming of snow/ice layers
+        ''' Simulation modes 4 & 5'''
+        ''' Simulation modes 4 & 5 encompass all modes of snow-/ice-free operation of the surface heating element
+        
+            Basic assumption: snow/ice falling from the sky (acc. to snowfall rate) is melted instantaneously (within the current timestep)
+            
+            Simulation mode 4: most common simulation mode for reasonably sized systems
+            - Q. >= 0 (positive heat extraction from ground)
+            - F_Q = 0 solved for Q.
+            
+            Simulation mode 5: "summer mode"
+            - Q. = 0 (no heat extraction from ground, heat influx from surroundings lifts surface element temperature above borehole wall temperature)
+            - F_T = 0 solved for Theta_surf
+        '''
 
-        # 2.1) Pre-Processing
+        ''' Simulation mode 4'''
+        sim_mod = 4
+
+        # 2.1) pre-Processing
         R_f = 1  # free-area ratio
 
-        # 2.2) iterative Lösung der stationären Leistungsbilanz F_Q = 0 am Heizelement (Erdboden + Oberfläche + Umgebung) nach Q.
+        # 2.2) iterative solution of power balance F_Q = 0, solved for Q.
         Q_sol, Q_lat, Q_sen, Q_eva = solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
 
-        # 2.3) Fall Q. < 0
+        # 2.3) Simulation mode 5: "summer mode"
         ''' Simulationsmodus 5'''
-        if Q_sol < 0:  # kein Wärmeentzug aus Erdboden
+        if Q_sol < 0:
 
-            sim_mod = 5  # Simulationsmodus aufzeichnen
+            sim_mod = 5
 
             calc_T = True
 
-            # Q_sensibel, Q_latent = 0
-            sen, lat = 0, 0  # Energie zur Schneeschmelze kommt definitorisch aus dem Boden, nicht der Umgebung
+            # Q_sensible, Q_latent := 0
+            ''' thermal energy is modelled as coming from the ground only,
+                although thermal influx from surroundings possible in reality
+            '''
+            sen, lat = 0, 0
 
-            # 2.4) iterative Lösung der stationären Leistungsbilanz F_T = 0 am Heizelement (Oberfläche + Umgebung) nach T
+            # 2.4) iterative solution of reduced power balance F_T = 0, solved for Theta_surf
             Theta_surf_sol, Q_lat, Q_sen, Q_eva = solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
 
-    # 3.) Wasser- und Schneehöhenbilanz auf Heizelement
+    # 3.) Mass balances of water and snow on the heating element surface
 
-    # Ermittlung Restwassermenge [mm]
-    m_w_1 = m_Restwasser(m_Rw_0, RR, he.A_he, Q_eva)
+    # mass balance water [kg]
+    m_w_1 = m_water(m_Rw_0, RR, he.A_he, Q_eva)
 
-    # Ermittlung Restschneemenge [mm]
-    m_s_1 = m_Restschnee(m_Rs_0, S_w, he.A_he, Q_lat, sb_active)
+    # mass balance snow [kg]
+    m_s_1 = m_snow(m_Rs_0, S_w, he.A_he, Q_lat, sb_active)
 
-    # 4.) Auswertung der Entzugsleistung Q_sol, Nutzleistung Q_N und Verlustleistung Q_V (Anbindung und Unterseite Heizelement) [W]
+    # 4.) Q_sol, Q_N & Q_V [W]
+    ''' Evaluation of the extraction power Q_sol, net used power Q_N and 
+        thermal losses Q_V (borehole-to-heating element connection & heating element underside)
+    '''
 
     # 4.1) Q_sol [W]
     if Q_sol < 0:  # wickless thermosiphons don't allow negative heat flux (into the ground)
