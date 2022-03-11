@@ -341,9 +341,6 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
 
         ''' Simulation modes 1-3 encompass all modes of snow/ice layer forming on the surface
             
-            Basic assumption: Theta_surf := Theta_mp (melting point of water, 0 °C), because the snow/ice
-            layer is "waterized" in the contact zone.
-            
             1.) Q._0 encompasses the available power inside the ground (corresponds to the available temperature spread delta-T):
                 
                 Q._0 = (Theta_b - Theta_surf) / R_th_tot
@@ -367,11 +364,12 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
             - only simulation mode where snow/ice are melted!
             - no power balancing, instead, the melted snow/ice volume flux is estimated using Q._R:
                 V._s = V._s(Q._R)
+            - Theta_surf := Theta_mp (melting point of water, 0 °C), because the snow/ice
+              layer is "waterized" in the contact zone.
         '''
 
         # 2.1) pre-processing
         R_f = 0.2  # free-area ratio
-        Theta_surf_0 = Theta_mp  # define surface temperature as melting point of water
 
         # 2.2) available power inside ground (corresponds to temperature spread)
         Q_0 = (Theta_b_0 - Theta_surf_0) * R_th ** -1
@@ -384,11 +382,11 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
 
             calc_T = True
 
-            # Q_sensible, Q_latent, Q_evaporation := 0 
+            # Q_sensible, Q_latent := 0 
             ''' thermal energy is modelled as coming from the ground only,
                 although thermal influx from surroundings possible in reality
             '''
-            sen, lat, eva = 0, 0, 0
+            sen, lat = False, False
 
             # 2.4) iterative solution of reduced power balance F_T = 0, solved for Theta_surf
             Theta_surf_sol, Q_lat, Q_sen, Q_eva = solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
@@ -397,16 +395,20 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
 
         else:  # temperature spread in ground available (usual case)
             ''' Simulation modes 2 & 3'''
-            # 2.4) surface losses (explicit evaluation for Theta_surf_0 := Theta_mp)
+            # 2.4) new evaluation of Q_0 and surface losses
+            ''' Q_0 and surface losses are now calculated utilizing Theta_surf_0 := Theta_mp (explicit evaluation)
+            '''
+            # Q_0
+            Q_0 = (Theta_b_0 - Theta_mp) * R_th ** -1
 
             # Q_convection
-            Q_con = Q_con_T(Theta_surf_0, con, u_inf, Theta_inf, he.A_he)
+            Q_con = Q_con_T(Theta_mp, con, u_inf, Theta_inf, he.A_he)
 
             # Q_radiation
-            Q_rad = Q_rad_T(Theta_surf_0, rad, S_w, Theta_inf, B, Phi, he.A_he)
+            Q_rad = Q_rad_T(Theta_mp, rad, S_w, Theta_inf, B, Phi, he.A_he)
 
             # Q_evaporation
-            Q_eva = 0
+            Q_eva = Q_eva_T(Theta_mp, eva, Theta_mp, m_Rw_0, Theta_inf, u_inf, h_NHN, Phi, he.A_he)
 
             # 2.5) power available for melting of snow/ice
             Q_R = Q_0 - R_f * (Q_con + Q_rad + Q_eva)
@@ -416,11 +418,11 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
                 ''' Simulation mode 2'''
                 sim_mod = 2
 
-                # Q_sensible, Q_latent, Q_evaporation := 0 
+                # Q_sensible, Q_latent := 0 
                 ''' thermal energy is modelled as coming from the ground only,
                     although thermal influx from surroundings possible in reality
                 '''
-                sen, lat, eva = 0, 0, 0
+                sen, lat = False, False
 
                 # 2.7) iterative solution of power balance F_Q = 0, solved for Q.
                 Q_sol, Q_lat, Q_sen, Q_eva = solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
@@ -454,8 +456,6 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
     else:  # snow/ice is melted instantaneously (within current timestep), no forming of snow/ice layers
         ''' Simulation modes 4 & 5'''
         ''' Simulation modes 4 & 5 encompass all modes of snow-/ice-free operation of the surface heating element
-        
-            Basic assumption: snow/ice falling from the sky (acc. to snowfall rate) is melted instantaneously (within the current timestep)
             
             Simulation mode 4: most common simulation mode for reasonably sized systems
             - Q. >= 0 (positive heat extraction from ground)
@@ -487,7 +487,7 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
             ''' thermal energy is modelled as coming from the ground only,
                 although thermal influx from surroundings possible in reality
             '''
-            sen, lat = 0, 0
+            sen, lat = False, False
 
             # 2.4) iterative solution of reduced power balance F_T = 0, solved for Theta_surf
             Theta_surf_sol, Q_lat, Q_sen, Q_eva = solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)

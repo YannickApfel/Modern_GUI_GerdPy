@@ -102,14 +102,14 @@ def main(self):
     # 1.4) Connection borehole-to-heating element
 
     # Geometry
-    D_iso_An = 0.005  # thickness of the insulation layer [m]
-    r_iso_An = r_pa + D_iso_An  # outer radius of the insulation layer [m]
+    D_iso_an = 0.005  # thickness of the insulation layer [m]
+    r_iso_an = r_pa + D_iso_an  # outer radius of the insulation layer [m]
 
     # Total length of borehole-to-heating element connections (starting from ground surface) [m]
-    ''' l_An is the total length of all borehole-to-heating element connections, while
-        l_An * N yields the total heatpipe-length inside all borehole-to-heating element connections (= heatpipe bundles)
+    ''' l_an is the total length of all borehole-to-heating element connections, while
+        l_an * N yields the total heatpipe-length inside all borehole-to-heating element connections (= heatpipe bundles)
     '''
-    l_An = 5
+    l_an = 5
 
     # 1.5) Heating element
 
@@ -273,14 +273,14 @@ def main(self):
             Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
                 load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], he, Theta_g,
                      R_th, R_th_ghp, Theta_g, B[i], Phi[i], RR[i], 0, 0, start_sb,
-                     l_An * N, lambda_p, lambda_iso, r_iso_An, r_pa, r_pi)
+                     l_an * N, lambda_p, lambda_iso, r_iso_an, r_pa, r_pi)
 
         # Timesteps 2, 3, ..., Nt
         if i > 0:
             Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
                 load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], he, Theta_b[i - 1],
                      R_th, R_th_ghp, Theta_surf[i - 1], B[i], Phi[i], RR[i], m_Rw[i - 1], m_Rs[i - 1], start_sb,
-                     l_An * N, lambda_p, lambda_iso, r_iso_An, r_pa, r_pi)
+                     l_an * N, lambda_p, lambda_iso, r_iso_an, r_pa, r_pi)
 
         # Determined extraction power is incremented by the connection losses (An) and losses of the heating element underside (he)
         Q[i] += Q_V[i]
