@@ -13,13 +13,15 @@
 # https://doc.qt.io/qtforpython/licenses.html
 #
 # ///////////////////////////////////////////////////////////////
-
+import multiprocessing
 import sys
 import os
 import platform
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
+import threading
+
 from GERDPy._main import main as simulation
 from modules import *
 from widgets import *
@@ -129,6 +131,12 @@ class MainWindow(QMainWindow):
     # Post here your functions for clicked buttons
     # ///////////////////////////////////////////////////////////////
     def buttonClick(self):
+        # GET START/STOP ICONS
+        start_icon = QIcon()
+        stop_icon = QIcon()
+        start_icon.addFile(u":/icons/images/icons/cil-media-play.png", QSize(), QIcon.Normal, QIcon.Off)
+        stop_icon.addFile(u":/icons/images/icons/cil-media-stop.png", QSize(), QIcon.Normal, QIcon.Off)
+
         # GET BUTTON CLICKED
         btn = self.sender()
         btnName = btn.objectName()
@@ -187,11 +195,24 @@ class MainWindow(QMainWindow):
 
         # START SIMULATION
         if btnName == "btn_startsim":
+            # # SIMULATION AS THREAD
+            # sim = multiprocessing.Process(target=simulation, args=(self))
+
             self.ui.text_console.clear()
             correct = USEFunctions.errorhandling(self)
             if correct:
-                self.ui.text_console.insertPlainText('--------------------------SIMULATION RUNNING--------------------------\n')
-                simulation(self)
+                if self.ui.btn_startsim.text() == " START SIMULATION":
+                    self.ui.btn_startsim.setText(" ABORT SIMULATION")
+                    self.ui.btn_startsim.setIcon(stop_icon)
+                    self.ui.text_console.insertPlainText('--------------------------SIMULATION RUNNING--------------------------\n')
+                    simulation(self)
+                    # sim.start()
+                else:
+                    # sim.kill()
+                    quit()
+                    self.ui.btn_startsim.setText(" START SIMULATION")
+                    self.ui.btn_startsim.setIcon(start_icon)
+                    self.ui.text_console.insertPlainText('--------------------------SIMULATION ABORTED--------------------------\n')
 
 
     # RESIZE EVENTS
