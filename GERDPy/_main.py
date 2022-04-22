@@ -30,7 +30,7 @@ import GERDPy.heating_element as heating_element
 import GERDPy.gfunction as gfunction
 import GERDPy.load_aggregation as load_aggregation
 from .load_generator import *
-from .R_th_tot import *
+from .R_th import *
 from .weather_data import get_weather_data
 from .geometrycheck import check_geometry
 
@@ -175,9 +175,14 @@ def main(self):
     # -------------------------------------------------------------------------
     # 3.) Determination of system thermal resistances
     # -------------------------------------------------------------------------
+    
+    # ground-to-surface (whole system)
+    R_th = R_th_c(boreField) + R_th_b(lambda_g, boreField, hp) + \
+        R_th_hp(boreField, hp) + R_th_he(he)
 
-    R_th = R_th_tot(lambda_g, boreField, hp, he)  # ground-to-surface (whole system)
-    R_th_ghp = R_th_g_hp(lambda_g, boreField, hp)  # ground-to-heatpipes (omits heating element)
+    # ground-to-heatpipes (omits heating element)
+    R_th_ghp = R_th_c(boreField) + R_th_b(lambda_g, boreField, hp) + \
+        R_th_hp(boreField, hp)
 
     # -------------------------------------------------------------------------
     # 4.) G-Function generation (Pygfunction ground model)
