@@ -770,6 +770,7 @@ Qt::WA_AlwaysShowToolTips
              </property>
              <property name="font">
               <font>
+               <family>Segoe UI Semibold</family>
                <pointsize>12</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -799,6 +800,7 @@ Qt::WA_AlwaysShowToolTips
              </property>
              <property name="font">
               <font>
+               <family>Segoe UI</family>
                <pointsize>8</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -1121,41 +1123,6 @@ Qt::WA_AlwaysShowToolTips
                 </property>
                 <property name="text">
                  <string>Simulation parameters</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="btn_results">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>45</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <pointsize>10</pointsize>
-                  <italic>false</italic>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="cursor">
-                 <cursorShape>PointingHandCursor</cursorShape>
-                </property>
-                <property name="layoutDirection">
-                 <enum>Qt::LeftToRight</enum>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-image: url(:/icons/images/icons/cil-chart.png);</string>
-                </property>
-                <property name="text">
-                 <string>Results</string>
                 </property>
                </widget>
               </item>
@@ -1536,7 +1503,7 @@ Qt::WA_AlwaysShowToolTips
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>5</number>
+                      <number>4</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -3372,7 +3339,7 @@ color: rgb(231, 81, 19);</string>
                             <property name="maximumSize">
                              <size>
                               <width>16777215</width>
-                              <height>60</height>
+                              <height>50</height>
                              </size>
                             </property>
                             <property name="font">
@@ -3426,6 +3393,20 @@ color: rgb(231, 81, 19);</string>
                             </property>
                             <layout class="QVBoxLayout" name="verticalLayout_28">
                              <item>
+                              <widget class="QRadioButton" name="rb_multiyearsim">
+                               <property name="font">
+                                <font>
+                                 <pointsize>15</pointsize>
+                                 <italic>false</italic>
+                                 <bold>false</bold>
+                                </font>
+                               </property>
+                               <property name="text">
+                                <string>Activate multi-year simulation</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
                               <widget class="QFrame" name="frame_32">
                                <property name="frameShape">
                                 <enum>QFrame::StyledPanel</enum>
@@ -3433,10 +3414,7 @@ color: rgb(231, 81, 19);</string>
                                <property name="frameShadow">
                                 <enum>QFrame::Raised</enum>
                                </property>
-                               <layout class="QHBoxLayout" name="horizontalLayout_6">
-                                <property name="spacing">
-                                 <number>0</number>
-                                </property>
+                               <layout class="QGridLayout" name="gridLayout_4">
                                 <property name="leftMargin">
                                  <number>0</number>
                                 </property>
@@ -3449,7 +3427,10 @@ color: rgb(231, 81, 19);</string>
                                 <property name="bottomMargin">
                                  <number>0</number>
                                 </property>
-                                <item>
+                                <property name="spacing">
+                                 <number>0</number>
+                                </property>
+                                <item row="1" column="0">
                                  <widget class="QLabel" name="label_29">
                                   <property name="font">
                                    <font>
@@ -3463,8 +3444,8 @@ color: rgb(231, 81, 19);</string>
                                   </property>
                                  </widget>
                                 </item>
-                                <item>
-                                 <widget class="QSpinBox" name="sb_simtime">
+                                <item row="1" column="1">
+                                 <widget class="QSpinBox" name="sb_simtime_h">
                                   <property name="font">
                                    <font>
                                     <pointsize>12</pointsize>
@@ -3483,6 +3464,46 @@ color: rgb(231, 81, 19);</string>
                                   </property>
                                   <property name="value">
                                    <number>730</number>
+                                  </property>
+                                  <property name="displayIntegerBase">
+                                   <number>10</number>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="2" column="0">
+                                 <widget class="QLabel" name="label_37">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>15</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="text">
+                                   <string>Simulationtime [years]:</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="2" column="1">
+                                 <widget class="QSpinBox" name="sb_simtime_y">
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>12</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                  </property>
+                                  <property name="minimum">
+                                   <number>2</number>
+                                  </property>
+                                  <property name="maximum">
+                                   <number>20</number>
+                                  </property>
+                                  <property name="value">
+                                   <number>5</number>
                                   </property>
                                   <property name="displayIntegerBase">
                                    <number>10</number>
@@ -4496,7 +4517,7 @@ QPushButton:pressed{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>351</width>
                                  <height>218</height>
                                 </rect>
                                </property>

@@ -66,8 +66,9 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////////////////////////
         widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        # RADIOBUTTON
+        # RADIOBUTTONS
         widgets.rb_depth.toggled.connect(lambda: UIFunctions.rbstate(self, self.ui.rb_depth))
+        widgets.rb_multiyearsim.toggled.connect(lambda: UIFunctions.rbsimtime(self, self.ui.rb_multiyearsim))
 
         # DROPDOWN MONTHS
         widgets.cb_month.addItem("January", 1)
@@ -93,7 +94,6 @@ class MainWindow(QMainWindow):
         widgets.btn_borefield.clicked.connect(self.buttonClick)
         widgets.btn_surface.clicked.connect(self.buttonClick)
         widgets.btn_sim.clicked.connect(self.buttonClick)
-        widgets.btn_results.clicked.connect(self.buttonClick)
 
         # WEATHER SHEET
         widgets.btn_browse_weather.clicked.connect(self.buttonClick)
@@ -174,12 +174,6 @@ class MainWindow(QMainWindow):
         # SHOW SIMULATION PAGE
         if btnName == "btn_sim":
            widgets.stackedWidget.setCurrentWidget(widgets.simulation)
-           UIFunctions.resetStyle(self, btnName)
-           btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
-
-       # SHOW RESULTS PAGE
-        if btnName == "btn_results":
-           widgets.stackedWidget.setCurrentWidget(widgets.results)
            UIFunctions.resetStyle(self, btnName)
            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 

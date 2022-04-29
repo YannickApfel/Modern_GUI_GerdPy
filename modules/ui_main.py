@@ -1,17 +1,27 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainMbPnLi.ui'
+## Form generated from reading UI file 'maintBRPuC.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.1.2
+## Created by: Qt User Interface Compiler version 6.2.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import *  # type: ignore
-from PySide6.QtGui import *  # type: ignore
-from PySide6.QtWidgets import *  # type: ignore
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QCheckBox,
+    QComboBox, QCommandLinkButton, QDoubleSpinBox, QFrame,
+    QGridLayout, QHBoxLayout, QHeaderView, QLabel,
+    QLineEdit, QMainWindow, QPlainTextEdit, QPushButton,
+    QRadioButton, QScrollArea, QScrollBar, QSizePolicy,
+    QSlider, QSpinBox, QStackedWidget, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 from .resources_rc import *
 
 class Ui_MainWindow(object):
@@ -686,6 +696,7 @@ class Ui_MainWindow(object):
         self.titleLeftApp.setObjectName(u"titleLeftApp")
         self.titleLeftApp.setGeometry(QRect(70, 8, 160, 20))
         font1 = QFont()
+        font1.setFamilies([u"Segoe UI Semibold"])
         font1.setPointSize(12)
         font1.setBold(False)
         font1.setItalic(False)
@@ -696,6 +707,7 @@ class Ui_MainWindow(object):
         self.titleLeftDescription.setGeometry(QRect(70, 27, 160, 16))
         self.titleLeftDescription.setMaximumSize(QSize(16777215, 16))
         font2 = QFont()
+        font2.setFamilies([u"Segoe UI"])
         font2.setPointSize(8)
         font2.setBold(False)
         font2.setItalic(False)
@@ -812,18 +824,6 @@ class Ui_MainWindow(object):
         self.btn_sim.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-media-play.png);")
 
         self.verticalLayout_7.addWidget(self.btn_sim)
-
-        self.btn_results = QPushButton(self.topMenu)
-        self.btn_results.setObjectName(u"btn_results")
-        sizePolicy.setHeightForWidth(self.btn_results.sizePolicy().hasHeightForWidth())
-        self.btn_results.setSizePolicy(sizePolicy)
-        self.btn_results.setMinimumSize(QSize(0, 45))
-        self.btn_results.setFont(font)
-        self.btn_results.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_results.setLayoutDirection(Qt.LeftToRight)
-        self.btn_results.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-chart.png);")
-
-        self.verticalLayout_7.addWidget(self.btn_results)
 
         self.bottomMenu = QFrame(self.leftMenuFrame)
         self.bottomMenu.setObjectName(u"bottomMenu")
@@ -1029,7 +1029,11 @@ class Ui_MainWindow(object):
         self.line_weather_file = QLineEdit(self.frame_2)
         self.line_weather_file.setObjectName(u"line_weather_file")
         self.line_weather_file.setMinimumSize(QSize(0, 35))
-        self.line_weather_file.setFont(font1)
+        font6 = QFont()
+        font6.setPointSize(12)
+        font6.setBold(False)
+        font6.setItalic(False)
+        self.line_weather_file.setFont(font6)
         self.line_weather_file.setStyleSheet(u"background-color: rgb(33, 37, 43);")
 
         self.gridLayout_3.addWidget(self.line_weather_file, 2, 0, 1, 1)
@@ -1037,11 +1041,11 @@ class Ui_MainWindow(object):
         self.label_7 = QLabel(self.frame_2)
         self.label_7.setObjectName(u"label_7")
         self.label_7.setMaximumSize(QSize(16777215, 16777215))
-        font6 = QFont()
-        font6.setPointSize(20)
-        font6.setBold(False)
-        font6.setItalic(False)
-        self.label_7.setFont(font6)
+        font7 = QFont()
+        font7.setPointSize(20)
+        font7.setBold(False)
+        font7.setItalic(False)
+        self.label_7.setFont(font7)
         self.label_7.setStyleSheet(u"color: #f9b200;")
 
         self.gridLayout_3.addWidget(self.label_7, 0, 0, 1, 1)
@@ -1049,7 +1053,7 @@ class Ui_MainWindow(object):
         self.btn_browse_weather = QPushButton(self.frame_2)
         self.btn_browse_weather.setObjectName(u"btn_browse_weather")
         self.btn_browse_weather.setMinimumSize(QSize(150, 35))
-        self.btn_browse_weather.setFont(font1)
+        self.btn_browse_weather.setFont(font6)
         self.btn_browse_weather.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_browse_weather.setStyleSheet(u"background-color: rgb(52, 59, 72);")
         icon3 = QIcon()
@@ -1060,11 +1064,11 @@ class Ui_MainWindow(object):
 
         self.label_6 = QLabel(self.frame_2)
         self.label_6.setObjectName(u"label_6")
-        font7 = QFont()
-        font7.setPointSize(15)
-        font7.setBold(False)
-        font7.setItalic(False)
-        self.label_6.setFont(font7)
+        font8 = QFont()
+        font8.setPointSize(15)
+        font8.setBold(False)
+        font8.setItalic(False)
+        self.label_6.setFont(font8)
 
         self.gridLayout_3.addWidget(self.label_6, 1, 0, 1, 1)
 
@@ -1096,7 +1100,7 @@ class Ui_MainWindow(object):
         self.label_8 = QLabel(self.frame_26)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setMaximumSize(QSize(16777215, 50))
-        self.label_8.setFont(font6)
+        self.label_8.setFont(font7)
         self.label_8.setStyleSheet(u"color: #f9b200;")
 
         self.verticalLayout_5.addWidget(self.label_8)
@@ -1113,13 +1117,13 @@ class Ui_MainWindow(object):
         self.gridLayout_12.setContentsMargins(-1, 0, -1, -1)
         self.label_9 = QLabel(self.frame_28)
         self.label_9.setObjectName(u"label_9")
-        self.label_9.setFont(font7)
+        self.label_9.setFont(font8)
 
         self.gridLayout_12.addWidget(self.label_9, 0, 0, 1, 1)
 
         self.sb_therm_diffu = QDoubleSpinBox(self.frame_28)
         self.sb_therm_diffu.setObjectName(u"sb_therm_diffu")
-        self.sb_therm_diffu.setFont(font1)
+        self.sb_therm_diffu.setFont(font6)
         self.sb_therm_diffu.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_therm_diffu.setDecimals(1)
         self.sb_therm_diffu.setSingleStep(0.100000000000000)
@@ -1129,13 +1133,13 @@ class Ui_MainWindow(object):
 
         self.label_10 = QLabel(self.frame_28)
         self.label_10.setObjectName(u"label_10")
-        self.label_10.setFont(font7)
+        self.label_10.setFont(font8)
 
         self.gridLayout_12.addWidget(self.label_10, 1, 0, 1, 1)
 
         self.sb_therm_cond = QDoubleSpinBox(self.frame_28)
         self.sb_therm_cond.setObjectName(u"sb_therm_cond")
-        self.sb_therm_cond.setFont(font1)
+        self.sb_therm_cond.setFont(font6)
         self.sb_therm_cond.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_therm_cond.setDecimals(1)
         self.sb_therm_cond.setValue(2.000000000000000)
@@ -1144,13 +1148,13 @@ class Ui_MainWindow(object):
 
         self.label_11 = QLabel(self.frame_28)
         self.label_11.setObjectName(u"label_11")
-        self.label_11.setFont(font7)
+        self.label_11.setFont(font8)
 
         self.gridLayout_12.addWidget(self.label_11, 2, 0, 1, 1)
 
         self.sb_undis_soil_temp = QDoubleSpinBox(self.frame_28)
         self.sb_undis_soil_temp.setObjectName(u"sb_undis_soil_temp")
-        self.sb_undis_soil_temp.setFont(font1)
+        self.sb_undis_soil_temp.setFont(font6)
         self.sb_undis_soil_temp.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_undis_soil_temp.setDecimals(1)
         self.sb_undis_soil_temp.setMinimum(-50.000000000000000)
@@ -1162,7 +1166,7 @@ class Ui_MainWindow(object):
 
         self.label_35 = QLabel(self.frame_28)
         self.label_35.setObjectName(u"label_35")
-        self.label_35.setFont(font7)
+        self.label_35.setFont(font8)
 
         self.gridLayout_12.addWidget(self.label_35, 3, 0, 1, 1)
 
@@ -1170,7 +1174,7 @@ class Ui_MainWindow(object):
         self.sb_h_NHN.setObjectName(u"sb_h_NHN")
         self.sb_h_NHN.setMinimumSize(QSize(0, 0))
         self.sb_h_NHN.setMaximumSize(QSize(16777215, 16777215))
-        self.sb_h_NHN.setFont(font1)
+        self.sb_h_NHN.setFont(font6)
         self.sb_h_NHN.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_h_NHN.setMinimum(0)
         self.sb_h_NHN.setMaximum(9000)
@@ -1231,7 +1235,7 @@ class Ui_MainWindow(object):
         self.gridLayout_28.setContentsMargins(9, 0, 9, 0)
         self.label_73 = QLabel(self.frame_68)
         self.label_73.setObjectName(u"label_73")
-        self.label_73.setFont(font7)
+        self.label_73.setFont(font8)
 
         self.gridLayout_28.addWidget(self.label_73, 0, 0, 1, 1)
 
@@ -1239,7 +1243,7 @@ class Ui_MainWindow(object):
         self.label_77.setObjectName(u"label_77")
         self.label_77.setMinimumSize(QSize(400, 0))
         self.label_77.setMaximumSize(QSize(16777215, 16777215))
-        self.label_77.setFont(font7)
+        self.label_77.setFont(font8)
 
         self.gridLayout_28.addWidget(self.label_77, 6, 0, 1, 1)
 
@@ -1247,7 +1251,7 @@ class Ui_MainWindow(object):
         self.sb_l_An.setObjectName(u"sb_l_An")
         self.sb_l_An.setMinimumSize(QSize(130, 0))
         self.sb_l_An.setMaximumSize(QSize(16777215, 16777215))
-        self.sb_l_An.setFont(font1)
+        self.sb_l_An.setFont(font6)
         self.sb_l_An.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_l_An.setMinimum(1)
         self.sb_l_An.setMaximum(1000)
@@ -1257,7 +1261,7 @@ class Ui_MainWindow(object):
 
         self.sb_x_min = QDoubleSpinBox(self.frame_68)
         self.sb_x_min.setObjectName(u"sb_x_min")
-        self.sb_x_min.setFont(font1)
+        self.sb_x_min.setFont(font6)
         self.sb_x_min.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_x_min.setDecimals(3)
         self.sb_x_min.setMaximum(5.000000000000000)
@@ -1267,13 +1271,13 @@ class Ui_MainWindow(object):
 
         self.label_78 = QLabel(self.frame_68)
         self.label_78.setObjectName(u"label_78")
-        self.label_78.setFont(font7)
+        self.label_78.setFont(font8)
 
         self.gridLayout_28.addWidget(self.label_78, 7, 0, 1, 1)
 
         self.sb_lambda_Bet = QDoubleSpinBox(self.frame_68)
         self.sb_lambda_Bet.setObjectName(u"sb_lambda_Bet")
-        self.sb_lambda_Bet.setFont(font1)
+        self.sb_lambda_Bet.setFont(font6)
         self.sb_lambda_Bet.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_lambda_Bet.setDecimals(2)
         self.sb_lambda_Bet.setMaximum(10.000000000000000)
@@ -1284,19 +1288,19 @@ class Ui_MainWindow(object):
 
         self.label_75 = QLabel(self.frame_68)
         self.label_75.setObjectName(u"label_75")
-        self.label_75.setFont(font7)
+        self.label_75.setFont(font8)
 
         self.gridLayout_28.addWidget(self.label_75, 2, 0, 1, 1)
 
         self.label_76 = QLabel(self.frame_68)
         self.label_76.setObjectName(u"label_76")
-        self.label_76.setFont(font7)
+        self.label_76.setFont(font8)
 
         self.gridLayout_28.addWidget(self.label_76, 4, 0, 1, 1)
 
         self.label_74 = QLabel(self.frame_68)
         self.label_74.setObjectName(u"label_74")
-        self.label_74.setFont(font7)
+        self.label_74.setFont(font8)
 
         self.gridLayout_28.addWidget(self.label_74, 5, 0, 1, 1)
 
@@ -1304,7 +1308,7 @@ class Ui_MainWindow(object):
         self.sb_s_R.setObjectName(u"sb_s_R")
         self.sb_s_R.setMinimumSize(QSize(130, 0))
         self.sb_s_R.setMaximumSize(QSize(16777215, 16777215))
-        self.sb_s_R.setFont(font1)
+        self.sb_s_R.setFont(font6)
         self.sb_s_R.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_s_R.setDecimals(3)
         self.sb_s_R.setMaximum(10.000000000000000)
@@ -1315,7 +1319,7 @@ class Ui_MainWindow(object):
 
         self.sb_l_R = QSpinBox(self.frame_68)
         self.sb_l_R.setObjectName(u"sb_l_R")
-        self.sb_l_R.setFont(font1)
+        self.sb_l_R.setFont(font6)
         self.sb_l_R.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_l_R.setMaximum(5000)
         self.sb_l_R.setValue(1000)
@@ -1325,7 +1329,7 @@ class Ui_MainWindow(object):
 
         self.sb_A_he = QSpinBox(self.frame_68)
         self.sb_A_he.setObjectName(u"sb_A_he")
-        self.sb_A_he.setFont(font1)
+        self.sb_A_he.setFont(font6)
         self.sb_A_he.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_A_he.setMaximum(10000)
         self.sb_A_he.setValue(35)
@@ -1354,13 +1358,13 @@ class Ui_MainWindow(object):
         self.gridLayout_29.setObjectName(u"gridLayout_29")
         self.label_81 = QLabel(self.frame_70)
         self.label_81.setObjectName(u"label_81")
-        self.label_81.setFont(font7)
+        self.label_81.setFont(font8)
 
         self.gridLayout_29.addWidget(self.label_81, 3, 0, 1, 1)
 
         self.sb_D_he = QDoubleSpinBox(self.frame_70)
         self.sb_D_he.setObjectName(u"sb_D_he")
-        self.sb_D_he.setFont(font1)
+        self.sb_D_he.setFont(font6)
         self.sb_D_he.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_D_he.setDecimals(2)
         self.sb_D_he.setMaximum(1.000000000000000)
@@ -1371,13 +1375,13 @@ class Ui_MainWindow(object):
 
         self.label_79 = QLabel(self.frame_70)
         self.label_79.setObjectName(u"label_79")
-        self.label_79.setFont(font7)
+        self.label_79.setFont(font8)
 
         self.gridLayout_29.addWidget(self.label_79, 4, 0, 1, 1)
 
         self.sb_D_iso_he = QDoubleSpinBox(self.frame_70)
         self.sb_D_iso_he.setObjectName(u"sb_D_iso_he")
-        self.sb_D_iso_he.setFont(font1)
+        self.sb_D_iso_he.setFont(font6)
         self.sb_D_iso_he.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_D_iso_he.setDecimals(2)
         self.sb_D_iso_he.setMaximum(1.000000000000000)
@@ -1390,13 +1394,13 @@ class Ui_MainWindow(object):
         self.label_82.setObjectName(u"label_82")
         self.label_82.setMinimumSize(QSize(290, 0))
         self.label_82.setMaximumSize(QSize(16777215, 16777215))
-        self.label_82.setFont(font7)
+        self.label_82.setFont(font8)
 
         self.gridLayout_29.addWidget(self.label_82, 2, 0, 1, 1)
 
         self.sb_D_iso_An = QDoubleSpinBox(self.frame_70)
         self.sb_D_iso_An.setObjectName(u"sb_D_iso_An")
-        self.sb_D_iso_An.setFont(font1)
+        self.sb_D_iso_An.setFont(font6)
         self.sb_D_iso_An.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_D_iso_An.setDecimals(3)
         self.sb_D_iso_An.setMaximum(1.000000000000000)
@@ -1460,13 +1464,13 @@ class Ui_MainWindow(object):
         self.gridLayout_7.setContentsMargins(9, 0, 9, 0)
         self.label_30 = QLabel(self.frame_7)
         self.label_30.setObjectName(u"label_30")
-        self.label_30.setFont(font7)
+        self.label_30.setFont(font8)
 
         self.gridLayout_7.addWidget(self.label_30, 1, 0, 1, 1)
 
         self.sb_lambda_b = QDoubleSpinBox(self.frame_7)
         self.sb_lambda_b.setObjectName(u"sb_lambda_b")
-        self.sb_lambda_b.setFont(font1)
+        self.sb_lambda_b.setFont(font6)
         self.sb_lambda_b.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_lambda_b.setDecimals(1)
         self.sb_lambda_b.setSingleStep(0.100000000000000)
@@ -1476,7 +1480,7 @@ class Ui_MainWindow(object):
 
         self.sb_r_borehole = QDoubleSpinBox(self.frame_7)
         self.sb_r_borehole.setObjectName(u"sb_r_borehole")
-        self.sb_r_borehole.setFont(font1)
+        self.sb_r_borehole.setFont(font6)
         self.sb_r_borehole.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_r_borehole.setDecimals(2)
         self.sb_r_borehole.setMaximum(2.000000000000000)
@@ -1487,19 +1491,19 @@ class Ui_MainWindow(object):
 
         self.label_16 = QLabel(self.frame_7)
         self.label_16.setObjectName(u"label_16")
-        self.label_16.setFont(font7)
+        self.label_16.setFont(font8)
 
         self.gridLayout_7.addWidget(self.label_16, 6, 0, 1, 1)
 
         self.label_25 = QLabel(self.frame_7)
         self.label_25.setObjectName(u"label_25")
-        self.label_25.setFont(font7)
+        self.label_25.setFont(font8)
 
         self.gridLayout_7.addWidget(self.label_25, 3, 0, 1, 1)
 
         self.label_15 = QLabel(self.frame_7)
         self.label_15.setObjectName(u"label_15")
-        self.label_15.setFont(font7)
+        self.label_15.setFont(font8)
 
         self.gridLayout_7.addWidget(self.label_15, 5, 0, 1, 1)
 
@@ -1507,13 +1511,13 @@ class Ui_MainWindow(object):
         self.label_17.setObjectName(u"label_17")
         self.label_17.setMinimumSize(QSize(400, 0))
         self.label_17.setMaximumSize(QSize(16777215, 16777215))
-        self.label_17.setFont(font7)
+        self.label_17.setFont(font8)
 
         self.gridLayout_7.addWidget(self.label_17, 7, 0, 1, 1)
 
         self.sb_lambda_iso = QDoubleSpinBox(self.frame_7)
         self.sb_lambda_iso.setObjectName(u"sb_lambda_iso")
-        self.sb_lambda_iso.setFont(font1)
+        self.sb_lambda_iso.setFont(font6)
         self.sb_lambda_iso.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_lambda_iso.setDecimals(1)
         self.sb_lambda_iso.setSingleStep(0.100000000000000)
@@ -1523,13 +1527,13 @@ class Ui_MainWindow(object):
 
         self.label_18 = QLabel(self.frame_7)
         self.label_18.setObjectName(u"label_18")
-        self.label_18.setFont(font7)
+        self.label_18.setFont(font8)
 
         self.gridLayout_7.addWidget(self.label_18, 8, 0, 1, 1)
 
         self.sb_lambda_p = QDoubleSpinBox(self.frame_7)
         self.sb_lambda_p.setObjectName(u"sb_lambda_p")
-        self.sb_lambda_p.setFont(font1)
+        self.sb_lambda_p.setFont(font6)
         self.sb_lambda_p.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_lambda_p.setDecimals(1)
         self.sb_lambda_p.setValue(14.000000000000000)
@@ -1540,7 +1544,7 @@ class Ui_MainWindow(object):
         self.sb_number_heatpipes.setObjectName(u"sb_number_heatpipes")
         self.sb_number_heatpipes.setMinimumSize(QSize(130, 0))
         self.sb_number_heatpipes.setMaximumSize(QSize(16777215, 16777215))
-        self.sb_number_heatpipes.setFont(font1)
+        self.sb_number_heatpipes.setFont(font6)
         self.sb_number_heatpipes.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_number_heatpipes.setMinimum(1)
         self.sb_number_heatpipes.setMaximum(1000)
@@ -1552,7 +1556,7 @@ class Ui_MainWindow(object):
         self.sb_depth_boreholes.setObjectName(u"sb_depth_boreholes")
         self.sb_depth_boreholes.setMinimumSize(QSize(130, 0))
         self.sb_depth_boreholes.setMaximumSize(QSize(16777215, 16777215))
-        self.sb_depth_boreholes.setFont(font1)
+        self.sb_depth_boreholes.setFont(font6)
 #if QT_CONFIG(tooltip)
         self.sb_depth_boreholes.setToolTip(u"")
 #endif // QT_CONFIG(tooltip)
@@ -1566,7 +1570,7 @@ class Ui_MainWindow(object):
 
         self.rb_depth = QRadioButton(self.frame_7)
         self.rb_depth.setObjectName(u"rb_depth")
-        self.rb_depth.setFont(font7)
+        self.rb_depth.setFont(font8)
         self.rb_depth.setToolTipDuration(30000)
         self.rb_depth.setStyleSheet(u"")
 
@@ -1594,14 +1598,14 @@ class Ui_MainWindow(object):
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.label_22 = QLabel(self.frame_8)
         self.label_22.setObjectName(u"label_22")
-        self.label_22.setFont(font7)
+        self.label_22.setFont(font8)
 
         self.gridLayout_6.addWidget(self.label_22, 5, 0, 1, 1)
 
         self.sb_radius_w = QDoubleSpinBox(self.frame_8)
         self.sb_radius_w.setObjectName(u"sb_radius_w")
         self.sb_radius_w.setMinimumSize(QSize(150, 0))
-        self.sb_radius_w.setFont(font1)
+        self.sb_radius_w.setFont(font6)
         self.sb_radius_w.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_radius_w.setDecimals(2)
         self.sb_radius_w.setMaximum(10.000000000000000)
@@ -1612,7 +1616,7 @@ class Ui_MainWindow(object):
 
         self.sb_radius_pi = QDoubleSpinBox(self.frame_8)
         self.sb_radius_pi.setObjectName(u"sb_radius_pi")
-        self.sb_radius_pi.setFont(font1)
+        self.sb_radius_pi.setFont(font6)
         self.sb_radius_pi.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_radius_pi.setDecimals(3)
         self.sb_radius_pi.setMaximum(1.000000000000000)
@@ -1623,13 +1627,13 @@ class Ui_MainWindow(object):
 
         self.label_20 = QLabel(self.frame_8)
         self.label_20.setObjectName(u"label_20")
-        self.label_20.setFont(font7)
+        self.label_20.setFont(font8)
 
         self.gridLayout_6.addWidget(self.label_20, 1, 0, 1, 1)
 
         self.label_21 = QLabel(self.frame_8)
         self.label_21.setObjectName(u"label_21")
-        self.label_21.setFont(font7)
+        self.label_21.setFont(font8)
 
         self.gridLayout_6.addWidget(self.label_21, 4, 0, 1, 1)
 
@@ -1637,13 +1641,13 @@ class Ui_MainWindow(object):
         self.label_19.setObjectName(u"label_19")
         self.label_19.setMinimumSize(QSize(290, 0))
         self.label_19.setMaximumSize(QSize(16777215, 16777215))
-        self.label_19.setFont(font7)
+        self.label_19.setFont(font8)
 
         self.gridLayout_6.addWidget(self.label_19, 3, 0, 1, 1)
 
         self.sb_radius_pa = QDoubleSpinBox(self.frame_8)
         self.sb_radius_pa.setObjectName(u"sb_radius_pa")
-        self.sb_radius_pa.setFont(font1)
+        self.sb_radius_pa.setFont(font6)
         self.sb_radius_pa.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_radius_pa.setDecimals(3)
         self.sb_radius_pa.setMaximum(1.000000000000000)
@@ -1654,7 +1658,7 @@ class Ui_MainWindow(object):
 
         self.sb_radius_iso = QDoubleSpinBox(self.frame_8)
         self.sb_radius_iso.setObjectName(u"sb_radius_iso")
-        self.sb_radius_iso.setFont(font1)
+        self.sb_radius_iso.setFont(font6)
         self.sb_radius_iso.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_radius_iso.setDecimals(3)
         self.sb_radius_iso.setMaximum(1.000000000000000)
@@ -1683,11 +1687,11 @@ class Ui_MainWindow(object):
         self.frame_4 = QFrame(self.borefield_sim)
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setMaximumSize(QSize(16777215, 60))
-        font8 = QFont()
-        font8.setPointSize(9)
-        font8.setBold(False)
-        font8.setItalic(False)
-        self.frame_4.setFont(font8)
+        font9 = QFont()
+        font9.setPointSize(9)
+        font9.setBold(False)
+        font9.setItalic(False)
+        self.frame_4.setFont(font9)
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.verticalLayout_13 = QVBoxLayout(self.frame_4)
@@ -1713,21 +1717,21 @@ class Ui_MainWindow(object):
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.label_12 = QLabel(self.frame_5)
         self.label_12.setObjectName(u"label_12")
-        self.label_12.setFont(font6)
+        self.label_12.setFont(font7)
         self.label_12.setStyleSheet(u"color: #f9b200;")
 
         self.gridLayout_5.addWidget(self.label_12, 0, 0, 1, 1)
 
         self.label_13 = QLabel(self.frame_5)
         self.label_13.setObjectName(u"label_13")
-        self.label_13.setFont(font7)
+        self.label_13.setFont(font8)
 
         self.gridLayout_5.addWidget(self.label_13, 1, 0, 1, 1)
 
         self.line_borefield_file = QLineEdit(self.frame_5)
         self.line_borefield_file.setObjectName(u"line_borefield_file")
         self.line_borefield_file.setMinimumSize(QSize(0, 35))
-        self.line_borefield_file.setFont(font1)
+        self.line_borefield_file.setFont(font6)
         self.line_borefield_file.setStyleSheet(u"background-color: rgb(33, 37, 43);")
 
         self.gridLayout_5.addWidget(self.line_borefield_file, 2, 0, 1, 1)
@@ -1735,7 +1739,7 @@ class Ui_MainWindow(object):
         self.btn_browse_borefield = QPushButton(self.frame_5)
         self.btn_browse_borefield.setObjectName(u"btn_browse_borefield")
         self.btn_browse_borefield.setMinimumSize(QSize(150, 35))
-        self.btn_browse_borefield.setFont(font1)
+        self.btn_browse_borefield.setFont(font6)
         self.btn_browse_borefield.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_browse_borefield.setStyleSheet(u"background-color: rgb(52, 59, 72);")
         self.btn_browse_borefield.setIcon(icon3)
@@ -1754,8 +1758,8 @@ class Ui_MainWindow(object):
         self.gridLayout_14.setObjectName(u"gridLayout_14")
         self.label_26 = QLabel(self.frame_11)
         self.label_26.setObjectName(u"label_26")
-        self.label_26.setMaximumSize(QSize(16777215, 60))
-        self.label_26.setFont(font6)
+        self.label_26.setMaximumSize(QSize(16777215, 50))
+        self.label_26.setFont(font7)
         self.label_26.setStyleSheet(u"color: #f9b200;")
 
         self.gridLayout_14.addWidget(self.label_26, 0, 0, 1, 3)
@@ -1777,30 +1781,36 @@ class Ui_MainWindow(object):
         self.frame_29.setFrameShadow(QFrame.Raised)
         self.verticalLayout_28 = QVBoxLayout(self.frame_29)
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
+        self.rb_multiyearsim = QRadioButton(self.frame_29)
+        self.rb_multiyearsim.setObjectName(u"rb_multiyearsim")
+        self.rb_multiyearsim.setFont(font8)
+
+        self.verticalLayout_28.addWidget(self.rb_multiyearsim)
+
         self.frame_32 = QFrame(self.frame_29)
         self.frame_32.setObjectName(u"frame_32")
         self.frame_32.setFrameShape(QFrame.StyledPanel)
         self.frame_32.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_6 = QHBoxLayout(self.frame_32)
-        self.horizontalLayout_6.setSpacing(0)
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout_4 = QGridLayout(self.frame_32)
+        self.gridLayout_4.setSpacing(0)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.gridLayout_4.setContentsMargins(0, 0, 0, 0)
         self.label_29 = QLabel(self.frame_32)
         self.label_29.setObjectName(u"label_29")
-        self.label_29.setFont(font7)
+        self.label_29.setFont(font8)
 
-        self.horizontalLayout_6.addWidget(self.label_29)
+        self.gridLayout_4.addWidget(self.label_29, 1, 0, 1, 1)
 
         self.sb_simtime = QSpinBox(self.frame_32)
         self.sb_simtime.setObjectName(u"sb_simtime")
-        self.sb_simtime.setFont(font1)
+        self.sb_simtime.setFont(font6)
         self.sb_simtime.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_simtime.setMinimum(24)
         self.sb_simtime.setMaximum(8760)
         self.sb_simtime.setValue(730)
         self.sb_simtime.setDisplayIntegerBase(10)
 
-        self.horizontalLayout_6.addWidget(self.sb_simtime)
+        self.gridLayout_4.addWidget(self.sb_simtime, 1, 1, 1, 1)
 
 
         self.verticalLayout_28.addWidget(self.frame_32)
@@ -1815,13 +1825,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
         self.label_32 = QLabel(self.frame_35)
         self.label_32.setObjectName(u"label_32")
-        self.label_32.setFont(font7)
+        self.label_32.setFont(font8)
 
         self.horizontalLayout_10.addWidget(self.label_32)
 
         self.sb_rf = QDoubleSpinBox(self.frame_35)
         self.sb_rf.setObjectName(u"sb_rf")
-        self.sb_rf.setFont(font1)
+        self.sb_rf.setFont(font6)
         self.sb_rf.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_rf.setDecimals(1)
         self.sb_rf.setMaximum(1.000000000000000)
@@ -1854,7 +1864,7 @@ class Ui_MainWindow(object):
         self.label_31 = QLabel(self.frame_33)
         self.label_31.setObjectName(u"label_31")
         self.label_31.setMaximumSize(QSize(16777215, 50))
-        self.label_31.setFont(font6)
+        self.label_31.setFont(font7)
         self.label_31.setStyleSheet(u"")
 
         self.verticalLayout_31.addWidget(self.label_31)
@@ -1872,13 +1882,13 @@ class Ui_MainWindow(object):
         self.gridLayout_9.setContentsMargins(0, 0, 0, 0)
         self.label_27 = QLabel(self.frame_34)
         self.label_27.setObjectName(u"label_27")
-        self.label_27.setFont(font7)
+        self.label_27.setFont(font8)
 
         self.gridLayout_9.addWidget(self.label_27, 0, 0, 1, 1)
 
         self.cb_month = QComboBox(self.frame_34)
         self.cb_month.setObjectName(u"cb_month")
-        self.cb_month.setFont(font1)
+        self.cb_month.setFont(font6)
         self.cb_month.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.cb_month.setMaxVisibleItems(12)
 
@@ -1886,13 +1896,13 @@ class Ui_MainWindow(object):
 
         self.label_28 = QLabel(self.frame_34)
         self.label_28.setObjectName(u"label_28")
-        self.label_28.setFont(font7)
+        self.label_28.setFont(font8)
 
         self.gridLayout_9.addWidget(self.label_28, 1, 0, 1, 1)
 
         self.sb_day = QSpinBox(self.frame_34)
         self.sb_day.setObjectName(u"sb_day")
-        self.sb_day.setFont(font1)
+        self.sb_day.setFont(font6)
         self.sb_day.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.sb_day.setMinimum(1)
         self.sb_day.setMaximum(31)
@@ -1942,7 +1952,7 @@ class Ui_MainWindow(object):
         self.label_34.setObjectName(u"label_34")
         self.label_34.setMinimumSize(QSize(500, 0))
         self.label_34.setMaximumSize(QSize(16777215, 16777215))
-        self.label_34.setFont(font7)
+        self.label_34.setFont(font8)
         self.label_34.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.verticalLayout_26.addWidget(self.label_34)
@@ -1966,11 +1976,11 @@ class Ui_MainWindow(object):
         self.btn_startsim = QPushButton(self.frame_18)
         self.btn_startsim.setObjectName(u"btn_startsim")
         self.btn_startsim.setMinimumSize(QSize(0, 100))
-        font9 = QFont()
-        font9.setPointSize(16)
-        font9.setBold(False)
-        font9.setItalic(False)
-        self.btn_startsim.setFont(font9)
+        font10 = QFont()
+        font10.setPointSize(16)
+        font10.setBold(False)
+        font10.setItalic(False)
+        self.btn_startsim.setFont(font10)
         self.btn_startsim.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_startsim.setStyleSheet(u"QPushButton{\n"
 "background-color: rgb(52, 59, 72);\n"
@@ -2017,7 +2027,7 @@ class Ui_MainWindow(object):
         self.btn_save_results = QPushButton(self.frame_27)
         self.btn_save_results.setObjectName(u"btn_save_results")
         self.btn_save_results.setMinimumSize(QSize(0, 100))
-        self.btn_save_results.setFont(font9)
+        self.btn_save_results.setFont(font10)
         self.btn_save_results.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_save_results.setStyleSheet(u"QPushButton{\n"
 "background-color: rgb(52, 59, 72);\n"
@@ -2065,7 +2075,7 @@ class Ui_MainWindow(object):
         self.label_36 = QLabel(self.frame_10)
         self.label_36.setObjectName(u"label_36")
         self.label_36.setMaximumSize(QSize(16777215, 50))
-        self.label_36.setFont(font6)
+        self.label_36.setFont(font7)
         self.label_36.setStyleSheet(u"color: #f9b200;")
 
         self.horizontalLayout_14.addWidget(self.label_36)
@@ -2074,7 +2084,7 @@ class Ui_MainWindow(object):
         self.btn_save_console.setObjectName(u"btn_save_console")
         self.btn_save_console.setMinimumSize(QSize(200, 35))
         self.btn_save_console.setMaximumSize(QSize(200, 16777215))
-        self.btn_save_console.setFont(font9)
+        self.btn_save_console.setFont(font10)
         self.btn_save_console.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_save_console.setStyleSheet(u"QPushButton{\n"
 "background-color: rgb(52, 59, 72);\n"
@@ -2095,7 +2105,7 @@ class Ui_MainWindow(object):
         self.text_console = QPlainTextEdit(self.frame_22)
         self.text_console.setObjectName(u"text_console")
         self.text_console.setMinimumSize(QSize(200, 200))
-        self.text_console.setFont(font1)
+        self.text_console.setFont(font6)
         self.text_console.setStyleSheet(u"background-color: rgb(33, 37, 43);")
         self.text_console.setReadOnly(True)
 
@@ -2275,7 +2285,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 351, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -2364,9 +2374,9 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         if (self.tableWidget.rowCount() < 16):
             self.tableWidget.setRowCount(16)
-        font10 = QFont()
+        font11 = QFont()
         __qtablewidgetitem4 = QTableWidgetItem()
-        __qtablewidgetitem4.setFont(font10);
+        __qtablewidgetitem4.setFont(font11);
         self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem5)
@@ -2497,10 +2507,10 @@ class Ui_MainWindow(object):
         self.creditsLabel = QLabel(self.bottomBar)
         self.creditsLabel.setObjectName(u"creditsLabel")
         self.creditsLabel.setMaximumSize(QSize(16777215, 16))
-        font11 = QFont()
-        font11.setBold(False)
-        font11.setItalic(False)
-        self.creditsLabel.setFont(font11)
+        font12 = QFont()
+        font12.setBold(False)
+        font12.setItalic(False)
+        self.creditsLabel.setFont(font12)
         self.creditsLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_5.addWidget(self.creditsLabel)
@@ -2536,7 +2546,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(5)
+        self.stackedWidget.setCurrentIndex(4)
         self.cb_month.setCurrentIndex(-1)
 
 
@@ -2554,7 +2564,6 @@ class Ui_MainWindow(object):
         self.btn_borefield.setText(QCoreApplication.translate("MainWindow", u"Ground data", None))
         self.btn_surface.setText(QCoreApplication.translate("MainWindow", u"Surface data", None))
         self.btn_sim.setText(QCoreApplication.translate("MainWindow", u"Simulation parameters", None))
-        self.btn_results.setText(QCoreApplication.translate("MainWindow", u"Results", None))
         self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"PyDracula APP - Theme with colors based on Dracula for Python.", None))
 #if QT_CONFIG(tooltip)
         self.minimizeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Minimize", None))
@@ -2621,6 +2630,7 @@ class Ui_MainWindow(object):
         self.line_borefield_file.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
         self.btn_browse_borefield.setText(QCoreApplication.translate("MainWindow", u" Browse", None))
         self.label_26.setText(QCoreApplication.translate("MainWindow", u"Simulation parameters", None))
+        self.rb_multiyearsim.setText(QCoreApplication.translate("MainWindow", u"Activate multi-year simulation", None))
         self.label_29.setText(QCoreApplication.translate("MainWindow", u"Simulationtime [h]:", None))
         self.label_32.setText(QCoreApplication.translate("MainWindow", u"Snow free area ratio:", None))
         self.label_31.setText(QCoreApplication.translate("MainWindow", u"Startdate", None))
