@@ -32,6 +32,15 @@ def get_weather_data(Nt, self):
     else:
         rows = list(range(start_index, start_index+Nt, 1))
 
+    # create looped list for multi-year simulation
+    i = 1
+    while i <= Nt/len(data)-1:
+        if 0 != start_index:
+            rows = rows + list(range(start_index, len(data), 1)) + list(range(0, start_index, 1))
+        else:
+            rows = rows + list(range(len(data)))
+        i += 1
+
     # 1.) ambient wind speed [m/s]
     u_inf = np.array(data.iloc[rows, 6])
 

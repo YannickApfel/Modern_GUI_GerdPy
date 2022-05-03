@@ -29,6 +29,7 @@ import GERDPy.heatpipes as heatpipes
 import GERDPy.heating_element as heating_element
 import GERDPy.gfunction as gfunction
 import GERDPy.load_aggregation as load_aggregation
+import GERDPy.utilities as utilities
 from .load_generator import *
 from .R_th import *
 from .weather_data import get_weather_data
@@ -147,7 +148,10 @@ def main(self):
         long-term g-functions
     '''
     dt = 3600.  # time increment (step size) [s] (default: 3600)
-    tmax = self.ui.sb_simtime.value() * 3600  # total simulation time [s] (default: 730 h * 3600 s)
+    if self.ui.rb_multiyearsim:
+        tmax = self.ui.sb_simtime.value() * 365 * 24 * 3600  # total simulation time [s]
+    else:
+        tmax = self.ui.sb_simtime.value() * 3600  # total simulation time [s] (default: 730 h * 3600 s)
     Nt = int(np.ceil(tmax / dt))  # number of time steps [-]
 
     # -------------------------------------------------------------------------
@@ -343,7 +347,7 @@ def main(self):
     '''
 
     # 24h-moving-average total extracted thermal power [W]
-    Q_ma = Q_moving_average(Q)
+    Q_ma = utilities.Q_moving_average(Q)
 
     # Total extracted thermal energy [MWh]
     E = (np.sum(Q) / len(Q)) * Nt * 1e-6

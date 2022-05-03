@@ -298,5 +298,18 @@ class UIFunctions(MainWindow):
                                                 "background-color: rgb(33, 37, 43)")
             self.ui.sb_r_borehole.setDisabled(False)
 
+    def rbsimtime(self, rb):
+        # change text and values of simtime for multi-year simulation
+        if rb.isChecked():
+            self.ui.label_29.setText("Simulationtime [years]:")
+            self.ui.sb_simtime.setMinimum(2)
+            self.ui.sb_simtime.setMaximum(20)
+            self.ui.sb_simtime.setValue(5)
+        else:
+            self.ui.label_29.setText("Simulationtime [h]:")
+            self.ui.sb_simtime.setMinimum(24)
+            self.ui.sb_simtime.setMaximum(8760)
+            self.ui.sb_simtime.setValue(730)
+
     # ///////////////////////////////////////////////////////////////
     # END - GUI DEFINITIONS
