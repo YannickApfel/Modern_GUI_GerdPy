@@ -13,19 +13,22 @@ import sys
 import CoolProp.CoolProp as CP
 
 
-# physical params (standard conditions, unless noted otherwise)
-lambda_l = 0.0262  # thermal conductivity of air [W/m*K]
-a_l = lambda_l / (1.293 * 1005)  # thermal diffusivity of air [m²/s]
-theta_l = 13.3e-6  # kinetic viscosity of air [m²/s]
-rho_w = 997  # density of water (at 25 °C) [kg/m³]
-rho_l = 1.33  # density of dry air (at 0 °C, 1 bar) [kg/m³]
-h_Ph_sl = 333e3  # phase-change enthalpy solid <-> liquid of water [J/kg]
-h_Ph_lg = 2499e3  # phase-change enthalpy liquid <-> vapour of water [J/kg]
-c_p_s = 2.04e3  # specific heat capacity of ice/snow (at 0 °C) [J/kgK]
-c_p_w = 4212  # specific heat capacity of water (at 0 °C) [J/kgK]
-c_p_l = 1005  # specific heat capacity of air (at 0 °C, 1 bar) [J/kgK]
-Theta_mp = 0  # melting point of ice/snow [°C]
-H_max = 3  # maximum allowed water level on heating element without running off [mm]
+# physical params (mainly from [VDI2013])
+# water
+rho_w = 999.84  # density of water (p = 1 bar, T = 0 °C) [kg/m³]
+h_Ph_sl = 333e3  # phase-change enthalpy solid <-> liquid [J/kg]
+h_Ph_lg = 2500.9e3  # phase-change enthalpy liquid <-> vapour (T = 0,01 °C) [J/kg]
+c_p_s = 2.106e3  # specific heat capacity of ice/snow (T = 0 °C) [J/kgK]
+c_p_w = 4219  # specific heat capacity of water (T = 0 °C) [J/kgK]
+Theta_mp = 0  # melting point of ice/snow (p = 1 bar) [°C]
+# air
+rho_l = 1.276  # density of dry air (p = 1 bar, T = 0 °C) [kg/m³]
+c_p_l = 1006  # specific heat capacity of air (p = 1 bar, T = 0 °C) [J/kgK]
+lambda_l = 0.0244  # thermal conductivity of air [W/m*K]
+a_l = lambda_l / (rho_l * c_p_l)  # T-Leitfähigkeit von Luft [m²/s]
+theta_l = 13.5e-6  # kinetic viscosity of air (p = 1 bar, T = 0 °C) [m²/s]
+# arbitrary
+H_max = 2  # maximum allowed water level on heating element without running off [mm]
 
 
 # wind-shear-corrected wind speed (logarithmic) [m/s]
@@ -92,7 +95,7 @@ def alpha_kon_he_u():
     return 10
 
 
-''' Wärmeübergangskoeffizient [W/m²K] nach [Löser: Technische Thermodynamik]
+''' heat transfer coefficient [W/m²K] acc. to [Löser: Technische Thermodynamik]
     air around insulated pipes
     alpha = alpha(deltaT)
 '''

@@ -2,9 +2,9 @@
 """ GERDPy - 'load_generator.py'
 
     Module serves as the load model of the system. The surface load is determined through 
-    the stationary coupling of ground, borehole and surface.
+    the steady state coupling of ground, borehole and surface.
     
-    The load is determined through a stationary power balance on the surface for each timestep.
+    The load is determined through a steady-state power balance on the surface for each timestep.
     The thermal load components on the surface:
         
         lat - latent heat of snow/ice
@@ -13,8 +13,8 @@
         rad - radiation
         eva - evaporation
         
-    are in equilibrium with the whole system load and dictate the power which is extracted from the ground.
-    The load is propagated from surface to ground via the system thermal resistance R_th_tot and equally distributed
+    are in equilibrium with the whole system load and determine the power which is extracted from the ground.
+    The load is propagated from surface to ground via the system thermal resistance R_th and equally distributed
     among all boreholes acc. to their respective borehole depths.
     
     System thermal power:
@@ -296,7 +296,7 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
                      (snow/ice is melted "instantaneously", within the timestep)
             
         Legend: (* - placeholder for variable)
-            - *_sol: parameters generated from the stationary power balances on the heating element surface (above)
+            - *_sol: parameters generated from the steady state power balances on the heating element surface (above)
             - *_0: parameter containing value from preceding timestep is used for calculation, as the current value is yet tbd
             - Q_N: net used power (power used for melting snow & ice)
             - Q_V: thermal power losses via connection & heating element underside
