@@ -3445,7 +3445,7 @@ color: rgb(231, 81, 19);</string>
                                  </widget>
                                 </item>
                                 <item row="1" column="1">
-                                 <widget class="QSpinBox" name="sb_simtime_h">
+                                 <widget class="QSpinBox" name="sb_simtime">
                                   <property name="font">
                                    <font>
                                     <pointsize>12</pointsize>
@@ -3464,46 +3464,6 @@ color: rgb(231, 81, 19);</string>
                                   </property>
                                   <property name="value">
                                    <number>730</number>
-                                  </property>
-                                  <property name="displayIntegerBase">
-                                   <number>10</number>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="2" column="0">
-                                 <widget class="QLabel" name="label_37">
-                                  <property name="font">
-                                   <font>
-                                    <pointsize>15</pointsize>
-                                    <italic>false</italic>
-                                    <bold>false</bold>
-                                   </font>
-                                  </property>
-                                  <property name="text">
-                                   <string>Simulationtime [years]:</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item row="2" column="1">
-                                 <widget class="QSpinBox" name="sb_simtime_y">
-                                  <property name="font">
-                                   <font>
-                                    <pointsize>12</pointsize>
-                                    <italic>false</italic>
-                                    <bold>false</bold>
-                                   </font>
-                                  </property>
-                                  <property name="styleSheet">
-                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
-                                  </property>
-                                  <property name="minimum">
-                                   <number>2</number>
-                                  </property>
-                                  <property name="maximum">
-                                   <number>20</number>
-                                  </property>
-                                  <property name="value">
-                                   <number>5</number>
                                   </property>
                                   <property name="displayIntegerBase">
                                    <number>10</number>

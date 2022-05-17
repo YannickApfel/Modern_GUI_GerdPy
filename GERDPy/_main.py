@@ -148,7 +148,7 @@ def main(self):
         long-term g-functions
     '''
     dt = 3600.  # time increment (step size) [s] (default: 3600)
-    if self.ui.rb_multiyearsim:
+    if self.ui.rb_multiyearsim.isChecked():
         tmax = self.ui.sb_simtime.value() * 365 * 24 * 3600  # total simulation time [s]
     else:
         tmax = self.ui.sb_simtime.value() * 3600  # total simulation time [s] (default: 730 h * 3600 s)

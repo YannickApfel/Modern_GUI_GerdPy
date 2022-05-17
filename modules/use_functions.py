@@ -1,7 +1,6 @@
 # MAIN FILE
 # ///////////////////////////////////////////////////////////////
 from guimain import *
-import pandas as pd
 
 # SET AS GLOBAL WIDGETS
 # ///////////////////////////////////////////////////////////////
@@ -40,8 +39,13 @@ class USEFunctions(MainWindow):
         self.ui.text_console.insertPlainText('Please choose a borefield geometry file.')
       else:
         check = True
-
       return check
+
+    def save_console(self):
+      text = self.ui.text_console.toPlainText()
+      path = QFileDialog.getSaveFileName(self, "Save file", "", "Text files (*.txt)")
+      with open(path, 'w') as f:
+        f.write(text)
 
 
 

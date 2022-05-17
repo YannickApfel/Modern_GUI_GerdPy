@@ -103,6 +103,7 @@ class MainWindow(QMainWindow):
 
         # SIMULATION SHEET
         widgets.btn_startsim.clicked.connect(self.buttonClick)
+        widgets.btn_save_console.clicked.connect(self.buttonClick)
 
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
@@ -208,6 +209,9 @@ class MainWindow(QMainWindow):
                     self.ui.btn_startsim.setIcon(start_icon)
                     self.ui.text_console.insertPlainText('--------------------------SIMULATION ABORTED--------------------------\n')
 
+        # SAVE DATA
+        if btnName == "btn_save_console":
+            b_file = USEFunctions.save_console(self)
 
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////
