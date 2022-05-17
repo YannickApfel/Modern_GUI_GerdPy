@@ -17,6 +17,7 @@ import multiprocessing
 import sys
 import os
 import platform
+import pandas as pd
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
@@ -104,6 +105,10 @@ class MainWindow(QMainWindow):
         # SIMULATION SHEET
         widgets.btn_startsim.clicked.connect(self.buttonClick)
         widgets.btn_save_console.clicked.connect(self.buttonClick)
+        widgets.btn_save_results.clicked.connect(self.buttonClick)
+
+        # INITIALIZE RESULTS DATAFRAME
+        results = pd.DataFrame()
 
         # SHOW APP
         # ///////////////////////////////////////////////////////////////
@@ -200,10 +205,10 @@ class MainWindow(QMainWindow):
                     self.ui.btn_startsim.setText(" ABORT SIMULATION")
                     self.ui.btn_startsim.setIcon(stop_icon)
                     self.ui.text_console.insertPlainText('--------------------------SIMULATION RUNNING--------------------------\n')
-                    simulation(self)
-                    # sim.start()
+                    self.results = simulation(self)
+                    self.ui.btn_startsim.setText(" START SIMULATION")
+                    self.ui.btn_startsim.setIcon(start_icon)
                 else:
-                    # sim.kill()
                     quit()
                     self.ui.btn_startsim.setText(" START SIMULATION")
                     self.ui.btn_startsim.setIcon(start_icon)
@@ -211,7 +216,10 @@ class MainWindow(QMainWindow):
 
         # SAVE DATA
         if btnName == "btn_save_console":
-            b_file = USEFunctions.save_console(self)
+            USEFunctions.save_console(self)
+
+        if btnName == "btn_save_results":
+            USEFunctions.save_results(self, self.results)
 
     # RESIZE EVENTS
     # ///////////////////////////////////////////////////////////////

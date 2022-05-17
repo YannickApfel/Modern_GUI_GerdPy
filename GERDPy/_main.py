@@ -16,6 +16,7 @@ import sys
 import matplotlib.pyplot as plt
 import time as tim
 import numpy as np
+import pandas as pd
 from matplotlib.ticker import AutoMinorLocator
 from scipy.constants import pi
 
@@ -433,9 +434,17 @@ def main(self):
     ax4.yaxis.set_minor_locator(AutoMinorLocator())
 
     # plt.tight_layout()
-    plt.show()
-    
-    return
+    #plt.show()
+
+    # -------------------------------------------------------------------------
+    # 9.) Results dataframe
+    # -------------------------------------------------------------------------
+
+    results = pd.DataFrame({'timestep': hours, 'Q_extracted [W]': Q/A_he, 'Q_losses [W]': Q_V/A_he,
+                            'T_borehole-wall [°C]': Theta_b, 'T_surface [°C]': Theta_surf, 'T_ambient [°C]': Theta_inf,
+                            'u_wind [m/s]': u_inf, 'Snowfall rate [mm/h]': S_w, 'Snow heigth [mm]': m_Rs / (A_he * (997/1000))})
+
+    return results
 
 
 # Main function

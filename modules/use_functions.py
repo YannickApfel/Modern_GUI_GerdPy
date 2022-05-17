@@ -44,9 +44,17 @@ class USEFunctions(MainWindow):
     def save_console(self):
       text = self.ui.text_console.toPlainText()
       path = QFileDialog.getSaveFileName(self, "Save file", "", "Text files (*.txt)")
-      with open(path, 'w') as f:
+      with open(path[0], 'w') as f:
         f.write(text)
+      self.ui.text_console.insertPlainText('Console output saved.\n')
 
+    def save_results(self, results):
+      if results.empty:
+        self.ui.text_console.insertPlainText('No results to save. Please start simulation first.\n')
+      else:
+        path = QFileDialog.getSaveFileName(self, "Save file", "", "Csv files (*.csv)")
+        results.to_csv(path[0], sep='\t')
+        self.ui.text_console.insertPlainText('Results saved.\n')
 
 
 
