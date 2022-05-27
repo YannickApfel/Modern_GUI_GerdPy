@@ -55,6 +55,7 @@ QToolTip {
 	text-align: left;
 	padding-left: 8px;
 	margin: 0px;
+	font: 11pt;
 }
 
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -770,7 +771,6 @@ Qt::WA_AlwaysShowToolTips
              </property>
              <property name="font">
               <font>
-               <family>Segoe UI Semibold</family>
                <pointsize>12</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -800,7 +800,6 @@ Qt::WA_AlwaysShowToolTips
              </property>
              <property name="font">
               <font>
-               <family>Segoe UI</family>
                <pointsize>8</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -1503,7 +1502,7 @@ Qt::WA_AlwaysShowToolTips
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>4</number>
+                      <number>3</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -1702,6 +1701,12 @@ color: rgb(231, 81, 19);</string>
                               <bold>false</bold>
                              </font>
                             </property>
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Excel-file must be formatted as described in GERDPy documentation.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="toolTipDuration">
+                             <number>30000</number>
+                            </property>
                             <property name="text">
                              <string>Enter weather data file path:</string>
                             </property>
@@ -1808,6 +1813,12 @@ color: rgb(231, 81, 19);</string>
                                     <bold>false</bold>
                                    </font>
                                   </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Thermal diffusivity of the ground.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="toolTipDuration">
+                                   <number>30000</number>
+                                  </property>
                                   <property name="text">
                                    <string>Thermal diffusivity [1e-6 m2/s]:</string>
                                   </property>
@@ -1845,6 +1856,12 @@ color: rgb(231, 81, 19);</string>
                                     <bold>false</bold>
                                    </font>
                                   </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Thermal conductivity of the ground.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="toolTipDuration">
+                                   <number>30000</number>
+                                  </property>
                                   <property name="text">
                                    <string>Thermal conductivity [W/mK]:</string>
                                   </property>
@@ -1878,6 +1895,12 @@ color: rgb(231, 81, 19);</string>
                                     <italic>false</italic>
                                     <bold>false</bold>
                                    </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Undisturbed soil temperature will be set as starting-point for all entities in the simulation.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="toolTipDuration">
+                                   <number>30000</number>
                                   </property>
                                   <property name="text">
                                    <string>Undisturbed soil temperature [°C]:</string>
@@ -1921,6 +1944,12 @@ color: rgb(231, 81, 19);</string>
                                     <italic>false</italic>
                                     <bold>false</bold>
                                    </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Altitude of chosen location above sea level.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="toolTipDuration">
+                                   <number>30000</number>
                                   </property>
                                   <property name="text">
                                    <string>Altitude above sea level [m]:</string>
@@ -2088,6 +2117,12 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Total length of all borehole-to-heating element connections (one connection per borehole).&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;These connections contain the heatpipes from the boreholes as a bundle.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: I_an&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
+                               </property>
                                <property name="text">
                                 <string>Overall connecting pipes length [m]:</string>
                                </property>
@@ -2113,6 +2148,12 @@ color: rgb(231, 81, 19);</string>
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Total area of thermal activated surface.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
                                </property>
                                <property name="text">
                                 <string>Surface area heating element [m2]:</string>
@@ -2186,6 +2227,12 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Minimum vertical piping-to-surface distance inside heating element.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: x_min&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
+                               </property>
                                <property name="text">
                                 <string>Minimal surface distance [m]:</string>
                                </property>
@@ -2226,6 +2273,12 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Thermal conductivity of concrete material heating element.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
+                               </property>
                                <property name="text">
                                 <string>Thermal conductivity concrete [W/mK]:</string>
                                </property>
@@ -2240,6 +2293,9 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Centerline distance of the equidistant heatpipes inside the heating element.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: s_R&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
                                <property name="text">
                                 <string>Centerline distance condensor pipes [m]:</string>
                                </property>
@@ -2253,6 +2309,12 @@ color: rgb(231, 81, 19);</string>
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Total length of all condensor pipes inside heating element.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
                                </property>
                                <property name="text">
                                 <string>Overall length condensor pipes [m]:</string>
@@ -2387,6 +2449,12 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Thickness of insulation of borehole-to-heating element connections.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
+                               </property>
                                <property name="text">
                                 <string>Thickness insulation connecting pipes [m]:</string>
                                </property>
@@ -2426,6 +2494,12 @@ color: rgb(231, 81, 19);</string>
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Thickness of insulation layer on the bottom side of heating element.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
                                </property>
                                <property name="text">
                                 <string>Thickness insulation bottom side [m]:</string>
@@ -2478,6 +2552,12 @@ color: rgb(231, 81, 19);</string>
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Heating element vertical thickness.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: D_he&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
                                </property>
                                <property name="text">
                                 <string>Thickness heating element [m]:</string>
@@ -2637,6 +2717,12 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Borehole depth will be assumed for every borehole when radiobutton above is not checked.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
+                               </property>
                                <property name="text">
                                 <string>Borehole depth [m]:</string>
                                </property>
@@ -2700,6 +2786,12 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Thermal conductivity of the borehole backfill material.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: lambda_b&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
+                               </property>
                                <property name="text">
                                 <string>Thermal conductivity backfill [W/mK]:</string>
                                </property>
@@ -2714,6 +2806,12 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Borehole radius will be assumed for every borehole when radiobutton above is not checked.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
+                               </property>
                                <property name="text">
                                 <string>Borehole radius [m]:</string>
                                </property>
@@ -2727,6 +2825,12 @@ color: rgb(231, 81, 19);</string>
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;This number of heatpipes are uniformly spaced on a circle with radius heatpipe-epicenters.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
                                </property>
                                <property name="text">
                                 <string>Number of heatpipes per borehole:</string>
@@ -2753,6 +2857,12 @@ color: rgb(231, 81, 19);</string>
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Thermal conductivity of borehole insulating layer.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: lambda_iso&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
                                </property>
                                <property name="text">
                                 <string>Thermal conductivity insulating layer [W/mK]:</string>
@@ -2790,6 +2900,12 @@ color: rgb(231, 81, 19);</string>
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Thermal conductivity of a single heatpipe. Value will be assumed for every heatpipe in the system.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: lambda_p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
                                </property>
                                <property name="text">
                                 <string>Thermal conductivity heatpipe [W/mK]:</string>
@@ -2902,7 +3018,7 @@ color: rgb(231, 81, 19);</string>
                                 </font>
                                </property>
                                <property name="toolTip">
-                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If activated, borehole depths and radii will be taken from borefield geometry file.&lt;/p&gt;&lt;p&gt;Otherwise borehole depths and radii will be taken from parameter input below and will be equal for all boreholes.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;If checked, borehole depths and radii will be taken from borefield geometry file.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Otherwise borehole depths and radii will be taken from parameter input below and will be equal for all boreholes.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="toolTipDuration">
                                 <number>30000</number>
@@ -2970,6 +3086,12 @@ color: rgb(231, 81, 19);</string>
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Inner radius of single heatpipe. Value will be assumed for every heatpipe in the system.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_pi&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
                                </property>
                                <property name="text">
                                 <string>Inner radius heatpipes [m]:</string>
@@ -3043,6 +3165,12 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;The heatpipes per borehole are uniformly spaced on a circle with this radius.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_w&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
+                               </property>
                                <property name="text">
                                 <string>Radius heatpipe-epicenters [m]:</string>
                                </property>
@@ -3056,6 +3184,12 @@ color: rgb(231, 81, 19);</string>
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Outer radius of single heatpipe. Value will be assumed for every heatpipe in the system.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_pa&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
                                </property>
                                <property name="text">
                                 <string>Outer radius heatpipes [m]:</string>
@@ -3082,6 +3216,12 @@ color: rgb(231, 81, 19);</string>
                                  <italic>false</italic>
                                  <bold>false</bold>
                                 </font>
+                               </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Outer radius of borehole insulating layer.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_iso_b&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
                                </property>
                                <property name="text">
                                 <string>Outer radius insulating layer [m]:</string>
@@ -3255,6 +3395,12 @@ color: rgb(231, 81, 19);</string>
                               <bold>false</bold>
                              </font>
                             </property>
+                            <property name="toolTip">
+                             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Select the path to the txt.-file containing the borefield geometry. The file must be formatted like described in the GERDPy-documentation.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;If varying borehole depth and radii is checked, the file must contain both parameters for every borehole.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                            </property>
+                            <property name="toolTipDuration">
+                             <number>30000</number>
+                            </property>
                             <property name="text">
                              <string>Enter borefield geometry file path:</string>
                             </property>
@@ -3401,6 +3547,12 @@ color: rgb(231, 81, 19);</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;If checked, only full years are possible. The weather data file will be looped for every year, beginning from Startdate.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
+                               </property>
                                <property name="text">
                                 <string>Activate multi-year simulation</string>
                                </property>
@@ -3438,6 +3590,12 @@ color: rgb(231, 81, 19);</string>
                                     <italic>false</italic>
                                     <bold>false</bold>
                                    </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;If muli-year simulation is checked, only full years will be simulated. For single year simulation, simulationtime is choosed in hours.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="toolTipDuration">
+                                   <number>30000</number>
                                   </property>
                                   <property name="text">
                                    <string>Simulationtime [h]:</string>
@@ -3505,6 +3663,12 @@ color: rgb(231, 81, 19);</string>
                                     <italic>false</italic>
                                     <bold>false</bold>
                                    </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Snow free area ratio is the part of surface, which is always free of snow, if snow cumulates at the surface.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="toolTipDuration">
+                                   <number>30000</number>
                                   </property>
                                   <property name="text">
                                    <string>Snow free area ratio:</string>
@@ -3596,6 +3760,12 @@ color: rgb(231, 81, 19);</string>
                                     <italic>false</italic>
                                     <bold>false</bold>
                                    </font>
+                                  </property>
+                                  <property name="toolTip">
+                                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;The simulation will be started with the weather conditions at chosen date from weather data file and ends with the date one day before startdate.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                  </property>
+                                  <property name="toolTipDuration">
+                                   <number>30000</number>
                                   </property>
                                   <property name="styleSheet">
                                    <string notr="true"/>
@@ -4477,7 +4647,7 @@ QPushButton:pressed{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>351</width>
+                                 <width>218</width>
                                  <height>218</height>
                                 </rect>
                                </property>
