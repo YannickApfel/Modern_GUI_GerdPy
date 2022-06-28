@@ -4,6 +4,9 @@
     <file>images/images/PyDracula_vertical.png</file>
     <file>images/images/ZAE-Logo_klein.png</file>
     <file>images/images/ZAE-Logo_mini.png</file>
+    <file>images/images/title.png</file>
+    <file>images/images/heating_element.png</file>
+    <file>images/images/borehole.png</file>
   </qresource>
   <qresource prefix="icons">
     <file>images/icons/cil-3d.png</file>

@@ -286,7 +286,7 @@ def solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0,
 
 
 def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, B, Phi, RR, m_Rw_0, m_Rs_0, start_sb, 
-         l_R_An, lambda_p, lambda_iso, r_iso, r_pa, r_pi):
+         l_R_An, lambda_p, lambda_iso, r_iso, r_pa, r_pi, R_f):
     ''' Main algorithm for surface load calculation
                     
         Simulation modes 1-5:
@@ -369,7 +369,7 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
         '''
 
         # 2.1) pre-processing
-        R_f = 0.2  # free-area ratio
+        # R_f = self.ui.sb_rf.value()  # free-area ratio (default: 0.2)
 
         # 2.2) available power inside ground (corresponds to temperature spread)
         Q_0 = (Theta_b_0 - Theta_surf_0) * R_th ** -1

@@ -104,14 +104,14 @@ def main(self):
     # 1.4) Connection borehole-to-heating element
 
     # Geometry
-    D_iso_an = 0.005  # thickness of the insulation layer [m]
+    D_iso_an = self.ui.sb_D_iso_an.value()  # thickness of the insulation layer [m] (default: 0.005)
     r_iso_an = r_pa + D_iso_an  # outer radius of the insulation layer [m]
 
     # Total length of borehole-to-heating element connections (starting from ground surface) [m]
     ''' l_an is the total length of all borehole-to-heating element connections, while
         l_an * N yields the total heatpipe-length inside all borehole-to-heating element connections (= heatpipe bundles)
     '''
-    l_an = 5
+    l_an = self.ui.sb_l_An.value()  # default: 5
 
     # 1.5) Heating element
 
@@ -122,19 +122,19 @@ def main(self):
     x_min = self.ui.sb_x_min.value()  # (default: .025)
 
     # Thermal conductivity [W/mK]
-    lambda_Bet = 2.1
+    lambda_Bet = self.ui.sb_lambda_Bet.value()  # default: 2.1
 
     # centre-distance between heatpipes [m]
-    s_R = .050
+    s_R = self.ui.sb_s_R.value()    # default: 0.050
 
     # Total heatpipe length inside heating element [m]
-    l_R = 1000
+    l_R = self.ui.sb_l_R.value()    # default: 1000
 
     # Vertical thickness of heating element [m]
-    D_he = 0.25
+    D_he = self.ui.sb_D_he.value()  # default: 0.25
 
     # Vertical thickness of insulation layer on underside of heating element [m]
-    D_iso_he = 0.03
+    D_iso_he = self.ui.sb_D_iso_he.value()  # default: 0.03
 
     # Heating element-object generation
     he = heating_element.HeatingElement(A_he, x_min, lambda_Bet, lambda_p,
@@ -260,6 +260,8 @@ def main(self):
     sb_active = np.zeros(Nt)
     sim_mod = np.zeros(Nt)
 
+    R_f = self.ui.sb_rf.value() # Snow free area ration (default: 0.2)
+
     print('-----------------Simulation started-----------------\n')
     self.ui.text_console.insertPlainText('-----------------Simulation started-----------------\n')  # GUI-console output
 
@@ -283,14 +285,14 @@ def main(self):
             Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
                 load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], he, Theta_g,
                      R_th, R_th_ghp, Theta_g, B[i], Phi[i], RR[i], 0, 0, start_sb,
-                     l_an * N, lambda_p, lambda_iso, r_iso_an, r_pa, r_pi)
+                     l_an * N, lambda_p, lambda_iso, r_iso_an, r_pa, r_pi, R_f)
 
         # Timesteps 2, 3, ..., Nt
         if i > 0:
             Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
                 load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], he, Theta_b[i - 1],
                      R_th, R_th_ghp, Theta_surf[i - 1], B[i], Phi[i], RR[i], m_Rw[i - 1], m_Rs[i - 1], start_sb,
-                     l_an * N, lambda_p, lambda_iso, r_iso_an, r_pa, r_pi)
+                     l_an * N, lambda_p, lambda_iso, r_iso_an, r_pa, r_pi, R_f)
 
         # Determined extraction power is incremented by the connection losses (An) and losses of the heating element underside (he)
         Q[i] += Q_V[i]
