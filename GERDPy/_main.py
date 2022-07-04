@@ -457,8 +457,8 @@ def main(self):
     ax4.yaxis.set_minor_locator(AutoMinorLocator())
     ax5.xaxis.set_minor_locator(AutoMinorLocator())
     ax5.yaxis.set_minor_locator(AutoMinorLocator())
-    ax6.xaxis.set_minor_locator(AutoMinorLocator())
-    ax6.yaxis.set_minor_locator(AutoMinorLocator())
+    # ax6.xaxis.set_minor_locator(AutoMinorLocator())
+    # ax6.yaxis.set_minor_locator(AutoMinorLocator())
 
     # plt.tight_layout()
     #plt.show()
