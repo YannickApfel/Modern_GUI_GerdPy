@@ -144,15 +144,13 @@ def main(self):
     # 2.) Simulation
 
     # Simulation-Params
-    ''' default value for 'dt' is 3600 seconds (equaling one hour) - usage of
-        smaller time increments not suggested to stay within validity range of 
-        long-term g-functions
+    ''' default value for 'dt' is 3600 seconds (equaling one hour)
     '''
     dt = 3600.  # time increment (step size) [s] (default: 3600)
     if self.ui.rb_multiyearsim.isChecked():
-        tmax = self.ui.sb_simtime.value() * 365 * 24 * 3600  # total simulation time [s]
+        tmax = self.ui.sb_simtime.value() * 365 * 24 * dt  # total simulation time (multiple years) [s]
     else:
-        tmax = self.ui.sb_simtime.value() * 3600  # total simulation time [s] (default: 730 h * 3600 s)
+        tmax = self.ui.sb_simtime.value() * dt  # total simulation time [s] (default: 730 h * 3600 s)
     Nt = int(np.ceil(tmax / dt))  # number of time steps [-]
 
     # -------------------------------------------------------------------------
@@ -382,11 +380,13 @@ def main(self):
 
     plt.rc('figure')
     fig1 = plt.figure()
+    fig2 = plt.figure()
 
     font = {'weight': 'bold', 'size': 10}
     plt.rc('font', **font)
 
     # Load profile
+    # fig1
     ax1 = fig1.add_subplot(411)
     ax1.set_ylabel(r'$q$ [W/m2]')
     ax1.plot(hours, Q / A_he, 'k-', lw=1.2)  # total extracted thermal power [W]
@@ -398,6 +398,7 @@ def main(self):
     ax1.grid('major')
 
     # Snowfall rate - snow height
+    # fig1
     ax2 = fig1.add_subplot(412)
     ax2.set_ylabel('Snowfall rate [mm/h] \n Snow height on heating element [H2O-mm]')
     ax2.plot(hours, S_w, 'b-', lw=0.8)  # snowfall rate [mm/h]
@@ -407,6 +408,7 @@ def main(self):
     ax2.grid('major')
     
     # Ambient temperature - ambient wind speed
+    # fig1
     ax3 = fig1.add_subplot(413)
     ax3.set_ylabel('$T$ [degC] \n Ambient wind speed [m/s]')
     ax3.plot(hours, Theta_inf, 'k-', lw=0.8)  # ambient temperature [°C]
@@ -416,6 +418,7 @@ def main(self):
     ax3.grid('major')
 
     # Temperature curves
+    # fig1
     ax4 = fig1.add_subplot(414)
     ax4.set_xlabel(r'$t$ [h]')
     ax4.set_ylabel(r'$T$ [degC]')
@@ -424,6 +427,24 @@ def main(self):
     ax4.legend(['T_borehole-wall', 'T_surface'],
                prop={'size': font['size']}, loc='upper right')
     ax4.grid('major')
+    
+    # Borehole wall temperature annual stacked curves
+    # fig2
+    ax5 = fig2.add_subplot(211)
+    ax5.set_xlabel(r'$t$ [h]')
+    ax5.set_ylabel(r'$T$ [degC]')
+    if self.ui.rb_multiyearsim.isChecked():
+        colour_map = iter(plt.cm.gist_rainbow(np.linspace(0, 1, self.ui.sb_simtime.value())))
+        for j in range(self.ui.sb_simtime.value()):
+            ax5.plot(np.arange(1, 8761, 1, dtype=int), Theta_b[(0+j*8760):(8760+j*8760)], c=next(colour_map), 
+                     lw=0.7, label=f'Borehole wall temperature - Year {j+1}')
+    else:
+        ax5.plot(hours, Theta_b, 'r-', lw=1.2, label='Borehole wall temperature - Year 1')
+    ax5.legend(prop={'size': font['size'] - 2}, loc='lower center')
+    ax5.grid('major')
+    
+    # Borehole wall temperature single value over years
+    # fig2
 
     # Axis ticks
     ax1.xaxis.set_minor_locator(AutoMinorLocator())
@@ -434,6 +455,10 @@ def main(self):
     ax3.yaxis.set_minor_locator(AutoMinorLocator())
     ax4.xaxis.set_minor_locator(AutoMinorLocator())
     ax4.yaxis.set_minor_locator(AutoMinorLocator())
+    ax5.xaxis.set_minor_locator(AutoMinorLocator())
+    ax5.yaxis.set_minor_locator(AutoMinorLocator())
+    # ax6.xaxis.set_minor_locator(AutoMinorLocator())
+    # ax6.yaxis.set_minor_locator(AutoMinorLocator())
 
     # plt.tight_layout()
     #plt.show()
