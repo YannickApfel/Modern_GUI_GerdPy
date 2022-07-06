@@ -476,7 +476,7 @@ def main(self):
     # fig2
     if self.ui.rb_multiyearsim.isChecked():
         ax6 = fig2.add_subplot(212)
-        ax6.set_xlabel(r'$Years$ [a]')
+        ax6.set_xlabel(r'$Year$ [a]')
         ax6.set_ylabel(r'$T$ [degC]')
         ax6_x = np.arange(0, self.ui.sb_simtime.value()+1, 1, dtype=int)
         # straight connecting lines:
