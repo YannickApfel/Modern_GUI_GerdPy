@@ -207,14 +207,16 @@ def main(self):
     # -------------------------------------------------------------------------
 
     # Import weather data from 'weather_data.py'
-    u_inf, Theta_inf, S_w, B, Phi, RR = get_weather_data(Nt, self)
+    u_inf, Theta_inf, S_w, B, Phi, RR, dates = get_weather_data(Nt, self)
     ''' u_inf       - ambient wind speed [m/s]
         Theta_inf   - ambient temperature [°C]
         S_w         - snowfall rate [mm/h]
         B           - cloudiness [octal units/8]
         Phi         - relative air humidity [%]
         RR          - precipitation (total) [mm/h]
+        dates       - dates array of strings [mm-dd-hh]
     '''
+    print(dates)
 
     # -------------------------------------------------------------------------
     # 6.) Iteration loop (Simulation using Nt time steps of stepsize dt)
@@ -376,7 +378,7 @@ def main(self):
     # -------------------------------------------------------------------------
 
     # x-Axis (simulation hours) [h]
-    hours = np.array([(j+1)*dt/3600. for j in range(Nt)])
+    hours = dates # np.array([(j+1)*dt/3600. for j in range(Nt)])
 
     plt.rc('figure')
     fig1 = plt.figure()
@@ -396,6 +398,9 @@ def main(self):
                 'Thermal losses (underside heating element & connection)'],
                prop={'size': font['size']}, loc='upper left')
     ax1.grid('major')
+    ax1.set_xticks(np.arange(0, len(hours), len(hours)/24))
+    labels1 = ax1.get_xticklabels()
+    plt.setp(labels1, rotation=45, horizontalalignment='right')
 
     # Snowfall rate - snow height
     # fig1
@@ -406,6 +411,9 @@ def main(self):
     ax2.legend(['Snowfall rate', 'Snow height on heating element'],
                prop={'size': font['size']}, loc='upper left')
     ax2.grid('major')
+    ax2.set_xticks(np.arange(0, len(hours), len(hours) / 24))
+    labels2 = ax2.get_xticklabels()
+    plt.setp(labels2, rotation=45, horizontalalignment='right')
     
     # Ambient temperature - ambient wind speed
     # fig1
@@ -416,22 +424,28 @@ def main(self):
     ax3.legend(['Ambient temperature', 'Ambient wind speed'],
                  prop={'size': font['size']}, loc='upper right')
     ax3.grid('major')
+    ax3.set_xticks(np.arange(0, len(hours), len(hours) / 24))
+    labels3 = ax3.get_xticklabels()
+    plt.setp(labels3, rotation=45, horizontalalignment='right')
 
     # Temperature curves
     # fig1
     ax4 = fig1.add_subplot(414)
-    ax4.set_xlabel(r'$t$ [h]')
+    ax4.set_xlabel(r'$date$ [mm-dd-hh]')
     ax4.set_ylabel(r'$T$ [degC]')
     ax4.plot(hours, Theta_b, 'r-', lw=1.2)  # borehole wall temperature [°C]
     ax4.plot(hours, Theta_surf, 'c-', lw=0.6)  # heating element surface temperature [°C]
     ax4.legend(['T_borehole-wall', 'T_surface'],
                prop={'size': font['size']}, loc='upper right')
     ax4.grid('major')
-    
+    ax4.set_xticks(np.arange(0, len(hours), len(hours) / 24))
+    labels4 = ax4.get_xticklabels()
+    plt.setp(labels4, rotation=45, horizontalalignment='right')
+
     # Borehole wall temperature annual stacked curves
     # fig2
     ax5 = fig2.add_subplot(211)
-    ax5.set_xlabel(r'$t$ [h]')
+    ax5.set_xlabel(r'$date$ [mm-dd-hh]')
     ax5.set_ylabel(r'$T$ [degC]')
     if self.ui.rb_multiyearsim.isChecked():
         colour_map = iter(plt.cm.gist_rainbow(np.linspace(0, 1, self.ui.sb_simtime.value())))
@@ -442,6 +456,9 @@ def main(self):
         ax5.plot(hours, Theta_b, 'r-', lw=1.2, label='Borehole wall temperature - Year 1')
     ax5.legend(prop={'size': font['size'] - 2}, loc='lower center')
     ax5.grid('major')
+    ax5.set_xticks(np.arange(0, len(hours), len(hours) / 24))
+    labels5 = ax5.get_xticklabels()
+    plt.setp(labels5, rotation=45, horizontalalignment='right')
     
     # Borehole wall temperature single value over years
     # fig2
@@ -461,7 +478,8 @@ def main(self):
     # ax6.yaxis.set_minor_locator(AutoMinorLocator())
 
     # plt.tight_layout()
-    #plt.show()
+    fig1.subplots_adjust(hspace=0.7)
+    plt.show()
 
     # -------------------------------------------------------------------------
     # 9.) Results dataframe
