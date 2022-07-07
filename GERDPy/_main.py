@@ -18,6 +18,7 @@ import time as tim
 import numpy as np
 import pandas as pd
 from matplotlib.ticker import AutoMinorLocator
+from matplotlib.ticker import MaxNLocator
 from scipy.constants import pi
 
 # import GUI libraries
@@ -377,6 +378,10 @@ def main(self):
     # 8.) Result Plots
     # -------------------------------------------------------------------------
 
+    # -------------------------------------------------------------------------
+    # 8.1) Figure 1
+    # -------------------------------------------------------------------------
+    
     # x-Axis (simulation hours) [h]
     hours = dates # np.array([(j+1)*dt/3600. for j in range(Nt)])
 
@@ -442,17 +447,24 @@ def main(self):
     labels4 = ax4.get_xticklabels()
     plt.setp(labels4, rotation=45, horizontalalignment='right')
 
+    # -------------------------------------------------------------------------
+    # 8.2) Figure 1
+    # -------------------------------------------------------------------------
+
     # Borehole wall temperature annual stacked curves
     # fig2
-    ax5 = fig2.add_subplot(211)
-    ax5.set_xlabel(r'$date$ [mm-dd-hh]')
-    ax5.set_ylabel(r'$T$ [degC]')
     if self.ui.rb_multiyearsim.isChecked():
+        ax5 = fig2.add_subplot(211)
+        ax5.set_xlabel(r'$date$ [mm-dd-hh]')
+        ax5.set_ylabel(r'$T$ [degC]')
         colour_map = iter(plt.cm.gist_rainbow(np.linspace(0, 1, self.ui.sb_simtime.value())))
         for j in range(self.ui.sb_simtime.value()):
             ax5.plot(np.arange(1, 8761, 1, dtype=int), Theta_b[(0+j*8760):(8760+j*8760)], c=next(colour_map), 
                      lw=0.7, label=f'Borehole wall temperature - Year {j+1}')
     else:
+        ax5 = fig2.add_subplot(111)
+        ax5.set_xlabel(r'$date$ [mm-dd-hh]')
+        ax5.set_ylabel(r'$T$ [degC]')
         ax5.plot(hours, Theta_b, 'r-', lw=1.2, label='Borehole wall temperature - Year 1')
     ax5.legend(prop={'size': font['size'] - 2}, loc='lower center')
     ax5.grid('major')
@@ -460,8 +472,29 @@ def main(self):
     labels5 = ax5.get_xticklabels()
     plt.setp(labels5, rotation=45, horizontalalignment='right')
     
-    # Borehole wall temperature single value over years
+    # Borehole wall temperature at beginning of heating period
     # fig2
+    if self.ui.rb_multiyearsim.isChecked():
+        ax6 = fig2.add_subplot(212)
+        ax6.set_xlabel(r'$Year$ [a]')
+        ax6.set_ylabel(r'$T$ [degC]')
+        ax6_x = np.arange(0, self.ui.sb_simtime.value()+1, 1, dtype=int)
+        # straight connecting lines:
+        ax6.plot([ax6_x[0], ax6_x[1]], [Theta_g, Theta_b[5860]], 'b', linewidth=1)
+        for j in range(self.ui.sb_simtime.value()):
+            if j<(self.ui.sb_simtime.value()-1):
+                ax6.plot([ax6_x[j+1], ax6_x[j+2]], [Theta_b[5860+j*8760], Theta_b[5860+(j+1)*8760]], 'b', linewidth=1, label='_nolegend_')
+            else:
+                break
+        # scatter plot:
+        ax6.plot(ax6_x[0], Theta_g, marker='x', markersize=10, markeredgecolor='green', label='Undisturbed ground temperature')
+        for j in range(self.ui.sb_simtime.value()):
+            ax6.plot(ax6_x[j+1], Theta_b[5860+j*8760], color='red', marker='o', markersize=10, markeredgewidth=0.0)
+            if j==0:
+                ax6.plot(ax6_x[j+1], Theta_b[5860+j*8760], color='red', marker='o', markersize=10, markeredgewidth=0.0, 
+                         label='Borehole wall temperature at the beginning of the heating period (01.09.)')
+    ax6.legend(prop={'size': font['size'] - 2}, loc='upper right')
+    ax6.grid('major')
 
     # Axis ticks
     ax1.xaxis.set_minor_locator(AutoMinorLocator())
@@ -474,8 +507,9 @@ def main(self):
     ax4.yaxis.set_minor_locator(AutoMinorLocator())
     ax5.xaxis.set_minor_locator(AutoMinorLocator())
     ax5.yaxis.set_minor_locator(AutoMinorLocator())
-    # ax6.xaxis.set_minor_locator(AutoMinorLocator())
-    # ax6.yaxis.set_minor_locator(AutoMinorLocator())
+    ax6.xaxis.set_minor_locator(AutoMinorLocator())
+    ax6.xaxis.set_major_locator(MaxNLocator(integer=True))
+    ax6.yaxis.set_minor_locator(AutoMinorLocator())
 
     # plt.tight_layout()
     fig1.subplots_adjust(hspace=0.7)
