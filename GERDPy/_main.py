@@ -403,6 +403,8 @@ def main(self):
                 'Thermal losses (underside heating element & connection)'],
                prop={'size': font['size']}, loc='upper left')
     ax1.grid('major')
+    ax1.xaxis.set_minor_locator(AutoMinorLocator())
+    ax1.yaxis.set_minor_locator(AutoMinorLocator())
     ax1.set_xticks(np.arange(0, len(hours), len(hours)/24))
     labels1 = ax1.get_xticklabels()
     plt.setp(labels1, rotation=45, horizontalalignment='right')
@@ -416,6 +418,8 @@ def main(self):
     ax2.legend(['Snowfall rate', 'Snow height on heating element'],
                prop={'size': font['size']}, loc='upper left')
     ax2.grid('major')
+    ax2.xaxis.set_minor_locator(AutoMinorLocator())
+    ax2.yaxis.set_minor_locator(AutoMinorLocator())
     ax2.set_xticks(np.arange(0, len(hours), len(hours) / 24))
     labels2 = ax2.get_xticklabels()
     plt.setp(labels2, rotation=45, horizontalalignment='right')
@@ -429,6 +433,8 @@ def main(self):
     ax3.legend(['Ambient temperature', 'Ambient wind speed'],
                  prop={'size': font['size']}, loc='upper right')
     ax3.grid('major')
+    ax3.xaxis.set_minor_locator(AutoMinorLocator())
+    ax3.yaxis.set_minor_locator(AutoMinorLocator())
     ax3.set_xticks(np.arange(0, len(hours), len(hours) / 24))
     labels3 = ax3.get_xticklabels()
     plt.setp(labels3, rotation=45, horizontalalignment='right')
@@ -443,6 +449,8 @@ def main(self):
     ax4.legend(['T_borehole-wall', 'T_surface'],
                prop={'size': font['size']}, loc='upper right')
     ax4.grid('major')
+    ax4.xaxis.set_minor_locator(AutoMinorLocator())
+    ax4.yaxis.set_minor_locator(AutoMinorLocator())
     ax4.set_xticks(np.arange(0, len(hours), len(hours) / 24))
     labels4 = ax4.get_xticklabels()
     plt.setp(labels4, rotation=45, horizontalalignment='right')
@@ -468,6 +476,8 @@ def main(self):
         ax5.plot(hours, Theta_b, 'r-', lw=1.2, label='Borehole wall temperature - Year 1')
     ax5.legend(prop={'size': font['size'] - 2}, loc='lower center')
     ax5.grid('major')
+    ax5.xaxis.set_minor_locator(AutoMinorLocator())
+    ax5.yaxis.set_minor_locator(AutoMinorLocator())
     ax5.set_xticks(np.arange(0, len(hours), len(hours) / 24))
     labels5 = ax5.get_xticklabels()
     plt.setp(labels5, rotation=45, horizontalalignment='right')
@@ -493,23 +503,11 @@ def main(self):
             if j==0:
                 ax6.plot(ax6_x[j+1], Theta_b[5860+j*8760], color='red', marker='o', markersize=10, markeredgewidth=0.0, 
                          label='Borehole wall temperature at the beginning of the heating period (01.09.)')
-    ax6.legend(prop={'size': font['size'] - 2}, loc='upper right')
-    ax6.grid('major')
-
-    # Axis ticks
-    ax1.xaxis.set_minor_locator(AutoMinorLocator())
-    ax1.yaxis.set_minor_locator(AutoMinorLocator())
-    ax2.xaxis.set_minor_locator(AutoMinorLocator())
-    ax2.yaxis.set_minor_locator(AutoMinorLocator())
-    ax3.xaxis.set_minor_locator(AutoMinorLocator())
-    ax3.yaxis.set_minor_locator(AutoMinorLocator())
-    ax4.xaxis.set_minor_locator(AutoMinorLocator())
-    ax4.yaxis.set_minor_locator(AutoMinorLocator())
-    ax5.xaxis.set_minor_locator(AutoMinorLocator())
-    ax5.yaxis.set_minor_locator(AutoMinorLocator())
-    ax6.xaxis.set_minor_locator(AutoMinorLocator())
-    ax6.xaxis.set_major_locator(MaxNLocator(integer=True))
-    ax6.yaxis.set_minor_locator(AutoMinorLocator())
+        ax6.legend(prop={'size': font['size'] - 2}, loc='upper right')
+        ax6.grid('major')
+        ax6.xaxis.set_minor_locator(AutoMinorLocator())
+        ax6.xaxis.set_major_locator(MaxNLocator(integer=True))
+        ax6.yaxis.set_minor_locator(AutoMinorLocator())
 
     # plt.tight_layout()
     fig1.subplots_adjust(hspace=0.7)
