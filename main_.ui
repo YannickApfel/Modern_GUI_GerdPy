@@ -1516,7 +1516,7 @@ Qt::WA_AlwaysShowToolTips
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>3</number>
+                      <number>5</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -3917,7 +3917,7 @@ border-radius: 5px;</string>
                       </layout>
                      </widget>
                      <widget class="QWidget" name="simulation">
-                      <layout class="QVBoxLayout" name="verticalLayout_14">
+                      <layout class="QVBoxLayout" name="verticalLayout_8">
                        <item>
                         <widget class="QFrame" name="frame_17">
                          <property name="minimumSize">
@@ -3972,7 +3972,7 @@ border-radius: 5px;</string>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QFrame" name="frame_12">
+                        <widget class="QFrame" name="frame_10">
                          <property name="frameShape">
                           <enum>QFrame::StyledPanel</enum>
                          </property>
@@ -3993,17 +3993,11 @@ border-radius: 5px;</string>
                            <number>0</number>
                           </property>
                           <item>
-                           <widget class="QFrame" name="frame_23">
+                           <widget class="QFrame" name="frame_12">
                             <property name="minimumSize">
                              <size>
-                              <width>0</width>
+                              <width>600</width>
                               <height>0</height>
-                             </size>
-                            </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>16777215</width>
-                              <height>16777215</height>
                              </size>
                             </property>
                             <property name="frameShape">
@@ -4012,21 +4006,12 @@ border-radius: 5px;</string>
                             <property name="frameShadow">
                              <enum>QFrame::Raised</enum>
                             </property>
-                            <layout class="QVBoxLayout" name="verticalLayout_26">
-                             <property name="spacing">
-                              <number>6</number>
-                             </property>
-                             <property name="leftMargin">
-                              <number>9</number>
-                             </property>
-                             <property name="topMargin">
-                              <number>9</number>
-                             </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_14">
                              <item>
-                              <widget class="QLabel" name="label_34">
+                              <widget class="QLabel" name="label_80">
                                <property name="minimumSize">
                                 <size>
-                                 <width>0</width>
+                                 <width>400</width>
                                  <height>0</height>
                                 </size>
                                </property>
@@ -4043,14 +4028,14 @@ border-radius: 5px;</string>
                                  <bold>false</bold>
                                 </font>
                                </property>
+                               <property name="toolTip">
+                                <string/>
+                               </property>
+                               <property name="toolTipDuration">
+                                <number>30000</number>
+                               </property>
                                <property name="text">
-                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When pressing 'START SIMULATION', the simulation will be initialized. &lt;br&gt;This can take a few minutes.&lt;/p&gt;&lt;p&gt;After initialization, the simulation progress will be shown in a &lt;br&gt;seperate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                               </property>
-                               <property name="textFormat">
-                                <enum>Qt::AutoText</enum>
-                               </property>
-                               <property name="scaledContents">
-                                <bool>false</bool>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When pressing 'START SIMULATION', the simulation will first be &lt;br&gt;initialized. This can take a few minutes.&lt;/p&gt;&lt;p&gt;After initialization, the simulation progress will be shown in a &lt;br&gt;seperate window.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="alignment">
                                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -4058,17 +4043,11 @@ border-radius: 5px;</string>
                               </widget>
                              </item>
                              <item>
-                              <widget class="QFrame" name="frame_18">
+                              <widget class="QFrame" name="frame_14">
                                <property name="minimumSize">
                                 <size>
-                                 <width>650</width>
-                                 <height>150</height>
-                                </size>
-                               </property>
-                               <property name="maximumSize">
-                                <size>
-                                 <width>16777215</width>
-                                 <height>200</height>
+                                 <width>0</width>
+                                 <height>300</height>
                                 </size>
                                </property>
                                <property name="frameShape">
@@ -4077,23 +4056,54 @@ border-radius: 5px;</string>
                                <property name="frameShadow">
                                 <enum>QFrame::Raised</enum>
                                </property>
-                               <layout class="QHBoxLayout" name="horizontalLayout_7">
-                                <property name="spacing">
-                                 <number>0</number>
-                                </property>
-                                <property name="leftMargin">
-                                 <number>0</number>
-                                </property>
-                                <property name="topMargin">
-                                 <number>0</number>
-                                </property>
-                                <property name="rightMargin">
-                                 <number>0</number>
-                                </property>
-                                <property name="bottomMargin">
-                                 <number>0</number>
-                                </property>
-                                <item>
+                               <layout class="QGridLayout" name="gridLayout_10">
+                                <item row="0" column="0">
+                                 <widget class="QFrame" name="frame_18">
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>100</width>
+                                    <height>16777215</height>
+                                   </size>
+                                  </property>
+                                  <property name="frameShape">
+                                   <enum>QFrame::StyledPanel</enum>
+                                  </property>
+                                  <property name="frameShadow">
+                                   <enum>QFrame::Raised</enum>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="0" column="1">
+                                 <widget class="QPushButton" name="btn_startsim">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>0</width>
+                                    <height>100</height>
+                                   </size>
+                                  </property>
+                                  <property name="font">
+                                   <font>
+                                    <pointsize>16</pointsize>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="cursor">
+                                   <cursorShape>PointingHandCursor</cursorShape>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">background-color: rgb(52, 59, 72);</string>
+                                  </property>
+                                  <property name="text">
+                                   <string> START SIMULATION</string>
+                                  </property>
+                                  <property name="icon">
+                                   <iconset resource="resources.qrc">
+                                    <normaloff>:/icons/images/icons/cil-media-play.png</normaloff>:/icons/images/icons/cil-media-play.png</iconset>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="1" column="0">
                                  <widget class="QFrame" name="frame_20">
                                   <property name="maximumSize">
                                    <size>
@@ -4109,126 +4119,11 @@ border-radius: 5px;</string>
                                   </property>
                                  </widget>
                                 </item>
-                                <item>
-                                 <widget class="QPushButton" name="btn_startsim">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>300</width>
-                                    <height>100</height>
-                                   </size>
-                                  </property>
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>16777215</width>
-                                    <height>16777215</height>
-                                   </size>
-                                  </property>
-                                  <property name="font">
-                                   <font>
-                                    <pointsize>16</pointsize>
-                                    <italic>false</italic>
-                                    <bold>false</bold>
-                                   </font>
-                                  </property>
-                                  <property name="cursor">
-                                   <cursorShape>PointingHandCursor</cursorShape>
-                                  </property>
-                                  <property name="styleSheet">
-                                   <string notr="true">QPushButton{
-background-color: rgb(52, 59, 72);
-}
-QPushButton:hover{
-	background-color: rgba(242, 146, 0, 130);
-}
-QPushButton:pressed{
-	background-color: rgba(228, 38, 24, 130);
-}</string>
-                                  </property>
-                                  <property name="text">
-                                   <string> START SIMULATION</string>
-                                  </property>
-                                  <property name="icon">
-                                   <iconset>
-                                    <normaloff>images/icons/cil-media-play.png</normaloff>images/icons/cil-media-play.png</iconset>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <widget class="QFrame" name="frame_21">
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>100</width>
-                                    <height>16777215</height>
-                                   </size>
-                                  </property>
-                                  <property name="frameShape">
-                                   <enum>QFrame::StyledPanel</enum>
-                                  </property>
-                                  <property name="frameShadow">
-                                   <enum>QFrame::Raised</enum>
-                                  </property>
-                                 </widget>
-                                </item>
-                               </layout>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QFrame" name="frame_27">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>650</width>
-                                 <height>150</height>
-                                </size>
-                               </property>
-                               <property name="maximumSize">
-                                <size>
-                                 <width>16777215</width>
-                                 <height>200</height>
-                                </size>
-                               </property>
-                               <property name="frameShape">
-                                <enum>QFrame::StyledPanel</enum>
-                               </property>
-                               <property name="frameShadow">
-                                <enum>QFrame::Raised</enum>
-                               </property>
-                               <layout class="QHBoxLayout" name="horizontalLayout_13">
-                                <property name="spacing">
-                                 <number>0</number>
-                                </property>
-                                <property name="leftMargin">
-                                 <number>0</number>
-                                </property>
-                                <property name="topMargin">
-                                 <number>0</number>
-                                </property>
-                                <property name="rightMargin">
-                                 <number>0</number>
-                                </property>
-                                <property name="bottomMargin">
-                                 <number>0</number>
-                                </property>
-                                <item>
-                                 <widget class="QFrame" name="frame_31">
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>100</width>
-                                    <height>16777215</height>
-                                   </size>
-                                  </property>
-                                  <property name="frameShape">
-                                   <enum>QFrame::StyledPanel</enum>
-                                  </property>
-                                  <property name="frameShadow">
-                                   <enum>QFrame::Raised</enum>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
+                                <item row="1" column="1">
                                  <widget class="QPushButton" name="btn_save_results">
                                   <property name="minimumSize">
                                    <size>
-                                    <width>300</width>
+                                    <width>0</width>
                                     <height>100</height>
                                    </size>
                                   </property>
@@ -4243,15 +4138,7 @@ QPushButton:pressed{
                                    <cursorShape>PointingHandCursor</cursorShape>
                                   </property>
                                   <property name="styleSheet">
-                                   <string notr="true">QPushButton{
-background-color: rgb(52, 59, 72);
-}
-QPushButton:hover{
-	background-color: rgba(242, 146, 0, 130);
-}
-QPushButton:pressed{
-	background-color: rgba(228, 38, 24, 130);
-}</string>
+                                   <string notr="true">background-color: rgb(52, 59, 72);</string>
                                   </property>
                                   <property name="text">
                                    <string> SAVE RESULTS</string>
@@ -4262,8 +4149,24 @@ QPushButton:pressed{
                                   </property>
                                  </widget>
                                 </item>
-                                <item>
-                                 <widget class="QFrame" name="frame_36">
+                                <item row="1" column="2">
+                                 <widget class="QFrame" name="frame_22">
+                                  <property name="maximumSize">
+                                   <size>
+                                    <width>100</width>
+                                    <height>16777215</height>
+                                   </size>
+                                  </property>
+                                  <property name="frameShape">
+                                   <enum>QFrame::StyledPanel</enum>
+                                  </property>
+                                  <property name="frameShadow">
+                                   <enum>QFrame::Raised</enum>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item row="0" column="2">
+                                 <widget class="QFrame" name="frame_21">
                                   <property name="maximumSize">
                                    <size>
                                     <width>100</width>
@@ -4285,37 +4188,43 @@ QPushButton:pressed{
                            </widget>
                           </item>
                           <item>
-                           <widget class="QFrame" name="frame_22">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>0</height>
-                             </size>
-                            </property>
-                            <property name="maximumSize">
-                             <size>
-                              <width>16777215</width>
-                              <height>16777215</height>
-                             </size>
-                            </property>
+                           <widget class="QFrame" name="frame_13">
                             <property name="frameShape">
                              <enum>QFrame::StyledPanel</enum>
                             </property>
                             <property name="frameShadow">
                              <enum>QFrame::Raised</enum>
                             </property>
-                            <layout class="QVBoxLayout" name="verticalLayout_8">
+                            <layout class="QVBoxLayout" name="verticalLayout_20">
                              <item>
-                              <widget class="QFrame" name="frame_10">
+                              <widget class="QFrame" name="frame_23">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>55</height>
+                                </size>
+                               </property>
+                               <property name="maximumSize">
+                                <size>
+                                 <width>16777215</width>
+                                 <height>16777215</height>
+                                </size>
+                               </property>
                                <property name="frameShape">
                                 <enum>QFrame::StyledPanel</enum>
                                </property>
                                <property name="frameShadow">
                                 <enum>QFrame::Raised</enum>
                                </property>
-                               <layout class="QHBoxLayout" name="horizontalLayout_14">
+                               <layout class="QHBoxLayout" name="horizontalLayout_7">
                                 <item>
-                                 <widget class="QLabel" name="label_36">
+                                 <widget class="QLabel" name="label_34">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>300</width>
+                                    <height>0</height>
+                                   </size>
+                                  </property>
                                   <property name="maximumSize">
                                    <size>
                                     <width>16777215</width>
@@ -4341,14 +4250,8 @@ QPushButton:pressed{
                                  <widget class="QPushButton" name="btn_save_console">
                                   <property name="minimumSize">
                                    <size>
-                                    <width>200</width>
+                                    <width>0</width>
                                     <height>35</height>
-                                   </size>
-                                  </property>
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>200</width>
-                                    <height>16777215</height>
                                    </size>
                                   </property>
                                   <property name="font">
@@ -4362,18 +4265,10 @@ QPushButton:pressed{
                                    <cursorShape>PointingHandCursor</cursorShape>
                                   </property>
                                   <property name="styleSheet">
-                                   <string notr="true">QPushButton{
-background-color: rgb(52, 59, 72);
-}
-QPushButton:hover{
-	background-color: rgba(242, 146, 0, 130);
-}
-QPushButton:pressed{
-	background-color: rgba(228, 38, 24, 130);
-}</string>
+                                   <string notr="true">background-color: rgb(52, 59, 72);</string>
                                   </property>
                                   <property name="text">
-                                   <string> Save Console</string>
+                                   <string> Save Consol</string>
                                   </property>
                                   <property name="icon">
                                    <iconset resource="resources.qrc">
@@ -4385,25 +4280,15 @@ QPushButton:pressed{
                               </widget>
                              </item>
                              <item>
-                              <widget class="QPlainTextEdit" name="text_console">
+                              <widget class="QPlainTextEdit" name="plainTextEdit_2">
                                <property name="minimumSize">
                                 <size>
                                  <width>200</width>
                                  <height>200</height>
                                 </size>
                                </property>
-                               <property name="font">
-                                <font>
-                                 <pointsize>12</pointsize>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
                                <property name="styleSheet">
                                 <string notr="true">background-color: rgb(33, 37, 43);</string>
-                               </property>
-                               <property name="readOnly">
-                                <bool>true</bool>
                                </property>
                               </widget>
                              </item>
@@ -4772,7 +4657,7 @@ QPushButton:pressed{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>351</width>
                                  <height>218</height>
                                 </rect>
                                </property>
