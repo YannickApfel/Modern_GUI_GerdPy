@@ -213,7 +213,7 @@ def main(self):
         Theta_inf   - ambient temperature [°C]
         S_w         - snowfall rate [mm/h]
         B           - cloudiness [octal units/8]
-        Phi         - relative air humidity [%]
+        Phi         - relative air humidity [-]
         RR          - precipitation (total) [mm/h]
         dates       - dates array of strings [mm-dd-hh]
     '''

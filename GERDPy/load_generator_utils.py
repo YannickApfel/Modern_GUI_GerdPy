@@ -148,7 +148,7 @@ def T_MS(S_w, Theta_inf, B, Phi):
         T_W = (Theta_inf + 273.15) - 19.2
 
         if T_H > T_W:
-            T_H = T_W
+            T_W = T_H
 
         T_MS = (T_W ** 4 * B + T_H ** 4 * (1 - B)) ** 0.25
 
