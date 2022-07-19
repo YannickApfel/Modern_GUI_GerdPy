@@ -25,8 +25,8 @@ Theta_mp = 0  # melting point of ice/snow (p = 1 bar) [°C]
 rho_a = 1.276  # density of dry air (p = 1 bar, T = 0 °C) [kg/m³]
 c_p_a = 1006  # specific heat capacity of air (p = 1 bar, T = 0 °C) [J/kgK]
 lambda_a = 0.0244  # thermal conductivity of air [W/m*K]
-a_l = lambda_a / (rho_a * c_p_a)  # thermal diffusivity of air [m²/s]
-theta_a = 13.5e-6  # kinetic viscosity of air (p = 1 bar, T = 0 °C) [m²/s]
+a_a = lambda_a / (rho_a * c_p_a)  # thermal diffusivity of air [m²/s]
+mu_a = 13.5e-6  # kinetic viscosity of air (p = 1 bar, T = 0 °C) [m²/s]
 # arbitrary
 H_max = 2  # maximum allowed water level on heating element without running off [mm]
 
@@ -43,7 +43,7 @@ def u_eff(v):
 
 # altitude-corrected ambient pressure [Pa]
 def p_inf(z_asl):
-    return 101325 * (1 - 0.0065 * z_asl / 288.2) ** 5.265
+    return 101325 * (1 - 2.25577e-5 * z_asl) ** 5.2559
 
 
 # saturation vapour pressure acc. to ASHRAE2013 [Pa]
@@ -163,8 +163,8 @@ def delta(Theta_inf, z_asl):
 
 # mass transfer coefficient [m/s]
 def beta_c(Theta_inf, u, z_asl):
-    Pr = theta_a / a_l  # Prandtl-number for air
-    Sc = theta_a / delta(Theta_inf, z_asl)  # Schmidt-number
+    Pr = mu_a / a_a  # Prandtl-number for air
+    Sc = mu_a / delta(Theta_inf, z_asl)  # Schmidt-number
     alpha = alpha_con_he_o(u)
 
     beta_c = (Pr / Sc) ** (2/3) * alpha / (rho_a * c_p_a)
