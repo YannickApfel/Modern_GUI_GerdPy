@@ -35,7 +35,6 @@ import GERDPy.utilities as utilities
 from .load_generator import *
 from .R_th import *
 from .weather_data import get_weather_data
-from .geometrycheck import check_geometry
 
 
 def main(self):
@@ -49,9 +48,9 @@ def main(self):
     print(80 * '-')
     print('Initializing simulation...')
     print(80 * '-')
-    self.ui.text_console.insertPlainText(80 * '-' + '\n')  # GUI-console output
+    self.ui.text_console.insertPlainText(60 * '-' + '\n')  # GUI-console output
     self.ui.text_console.insertPlainText('Initializing simulation...\n')
-    self.ui.text_console.insertPlainText(80 * '-' + '\n')
+    self.ui.text_console.insertPlainText(60 * '-' + '\n')
 
     # Open GUI-progress window
     progapp = QApplication.instance()
@@ -155,29 +154,7 @@ def main(self):
     Nt = int(np.ceil(tmax / dt))  # number of time steps [-]
 
     # -------------------------------------------------------------------------
-    # 2.) Geometric compatibility check (boreholes & heat pipes)
-    # -------------------------------------------------------------------------
-
-    if check_geometry(boreField, hp, self):
-        print(80*'-')
-        print('Geometry-Check: not OK! - Simulation aborted')
-        print(80*'-')
-        self.ui.text_console.insertPlainText(80 * '-' + '\n')  # GUI-console output
-        self.ui.text_console.insertPlainText('Geometry-Check: not OK! - Simulation aborted\n')
-        self.ui.text_console.insertPlainText(80 * '-' + '\n')
-        sys.exit()
-    else:
-        print(80*'-')
-        print('Geometry-Check: OK!')
-        print(80*'-')
-        self.ui.text_console.insertPlainText(80 * '-' + '\n')  # GUI-console output
-        self.ui.text_console.insertPlainText('Geometry-Check: OK!\n')
-        self.ui.text_console.insertPlainText(80 * '-' + '\n')
-
-        progwindow.ui.running.setText("Geometry-Check: OK!")  # update GUI-progress window
-
-    # -------------------------------------------------------------------------
-    # 3.) Determination of system thermal resistances
+    # 2.) Determination of system thermal resistances
     # -------------------------------------------------------------------------
     
     # ground-to-surface (whole system)
@@ -189,7 +166,7 @@ def main(self):
         R_th_hp(boreField, hp)
 
     # -------------------------------------------------------------------------
-    # 4.) G-Function generation (Pygfunction ground model)
+    # 3.) G-Function generation (Pygfunction ground model)
     # -------------------------------------------------------------------------
 
     # Simulation environment setup using 'load_aggregation.py'
@@ -204,7 +181,7 @@ def main(self):
     LoadAgg.initialize(gFunc/(2*pi*lambda_g))
 
     # -------------------------------------------------------------------------
-    # 5.) Weather data import
+    # 4.) Weather data import
     # -------------------------------------------------------------------------
 
     # Import weather data from 'weather_data.py'
@@ -220,7 +197,7 @@ def main(self):
     print(dates)
 
     # -------------------------------------------------------------------------
-    # 6.) Iteration loop (Simulation using Nt time steps of stepsize dt)
+    # 5.) Iteration loop (Simulation using Nt time steps of stepsize dt)
     # -------------------------------------------------------------------------
 
     time = 0.
@@ -263,8 +240,8 @@ def main(self):
 
     R_f = self.ui.sb_rf.value() # Snow free area ration (default: 0.2)
 
-    print('-----------------Simulation started-----------------\n')
-    self.ui.text_console.insertPlainText('-----------------Simulation started-----------------\n')  # GUI-console output
+    print('------Simulation started------\n')
+    self.ui.text_console.insertPlainText('------Simulation started------\n')  # GUI-console output
 
     progwindow.ui.running.setText("Simulation running...")
 
@@ -336,12 +313,12 @@ def main(self):
 
     toc = tim.time()  # time stamp (end simulation)
     print('Total simulation time: {} sec'.format(toc - tic))
-    self.ui.text_console.insertPlainText(80 * '-' + '\n')  # GUI-console output
+    self.ui.text_console.insertPlainText(60 * '-' + '\n')  # GUI-console output
     self.ui.text_console.insertPlainText('Total simulation time: {} sec\n'.format(toc - tic))
-    self.ui.text_console.insertPlainText(80 * '-' + '\n')
+    self.ui.text_console.insertPlainText(60 * '-' + '\n')
 
     # -------------------------------------------------------------------------
-    # 7.) Energy performance indicators
+    # 6.) Energy performance indicators
     # -------------------------------------------------------------------------
     ''' Q_ma                - total extracted thermal power, 24h-moving-average [W]
         E                   - total extracted thermal energy [MWh]
@@ -356,12 +333,12 @@ def main(self):
     # Total extracted thermal energy [MWh]
     E = (np.sum(Q) / len(Q)) * Nt * 1e-6
 
-    print('-----------------Simulation finished-----------------')
+    print('------Simulation finished------')
 
     print(f'Energy extracted from the ground: {round(E, 4)} MWh')
-    self.ui.text_console.insertPlainText(80*'-'+'\n')
+    self.ui.text_console.insertPlainText(60*'-'+'\n')
     self.ui.text_console.insertPlainText(f'Energy extracted from the ground: {round(E, 4)} MWh\n')
-    self.ui.text_console.insertPlainText(80 * '-' + '\n')
+    self.ui.text_console.insertPlainText(60 * '-' + '\n')
 
     # Net energy usage factor [%]
     # f_N = (np.sum(Q_N) / len(Q_N)) / (np.sum(Q) / len(Q)) * 100
@@ -375,11 +352,11 @@ def main(self):
     #     f'thermal losses at the heating element underside and borehole-to-heating element connections.')
 
     # -------------------------------------------------------------------------
-    # 8.) Result Plots
+    # 7.) Result Plots
     # -------------------------------------------------------------------------
 
     # -------------------------------------------------------------------------
-    # 8.1) Figure 1
+    # 7.1) Figure 1
     # -------------------------------------------------------------------------
     
     # x-Axis (simulation hours) [h]
@@ -456,7 +433,7 @@ def main(self):
     plt.setp(labels4, rotation=45, horizontalalignment='right')
 
     # -------------------------------------------------------------------------
-    # 8.2) Figure 1
+    # 7.2) Figure 1
     # -------------------------------------------------------------------------
 
     # Borehole wall temperature annual stacked curves
@@ -514,7 +491,7 @@ def main(self):
     plt.show()
 
     # -------------------------------------------------------------------------
-    # 9.) Results dataframe
+    # 8.) Results dataframe
     # -------------------------------------------------------------------------
 
     results = pd.DataFrame({'timestep': hours, 'Q_extracted [W]': Q/A_he, 'Q_losses [W]': Q_V/A_he,
