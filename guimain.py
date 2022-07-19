@@ -201,10 +201,12 @@ class MainWindow(QMainWindow):
             self.ui.text_console.clear()
             correct = USEFunctions.errorhandling(self)
             if correct:
+                self.ui.text_console.insertPlainText('Geometry-Check: OK!\n')
                 if self.ui.btn_startsim.text() == " START SIMULATION":
                     self.ui.btn_startsim.setText(" ABORT SIMULATION")
                     self.ui.btn_startsim.setIcon(stop_icon)
-                    self.ui.text_console.insertPlainText('--------------------------SIMULATION RUNNING--------------------------\n')
+                    self.ui.text_console.insertPlainText('------SIMULATION RUNNING------\n')
+                    self.ui.text_console.insertPlainText('Geometry-Check: OK!\n')
                     self.results = simulation(self)
                     self.ui.btn_startsim.setText(" START SIMULATION")
                     self.ui.btn_startsim.setIcon(start_icon)
@@ -212,7 +214,7 @@ class MainWindow(QMainWindow):
                     quit()
                     self.ui.btn_startsim.setText(" START SIMULATION")
                     self.ui.btn_startsim.setIcon(start_icon)
-                    self.ui.text_console.insertPlainText('--------------------------SIMULATION ABORTED--------------------------\n')
+                    self.ui.text_console.insertPlainText('------SIMULATION ABORTED------\n')
 
         # SAVE DATA
         if btnName == "btn_save_console":
