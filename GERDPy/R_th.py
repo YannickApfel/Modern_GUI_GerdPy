@@ -45,14 +45,14 @@ def R_th_c(borefield):
     # 1.) Params
 
     phi = 0.8               # surface coverage ratio [-]
-    lambda_g = 0.025        # thermal conductivity of gas [W/mK]
+    lambda_a = 0.025        # thermal conductivity of air [W/mK]
     d = 1e-3                # particle diameter [m]
     delta = 250 * 1e-6      # particle surface roughness [m]
     C = 2.8                 # material constant [-]
     M = 0.02896             # molar mass of gas [kg/mol]
     T = 283                 # contact zone temperature [K]
-    c_pg = 1007             # specific heat capacity of gas [J/kgK]
-    epsilon_S = 0.2         # emission coefficient of backfill [-]
+    c_pa = 1007             # specific heat capacity of gas [J/kgK]
+    epsilon_B = 0.2         # emission coefficient of backfill [-]
     epsilon_W = 0.2         # emission coefficient of wall [-]
     p = 100000              # pressure [Pa]
 
@@ -63,15 +63,15 @@ def R_th_c(borefield):
 
     # free path length of gas molecules
     l_frei = 2 * (2 - gamma) / gamma * math.sqrt(2 * pi * R * T / M) * \
-        lambda_g / (p * (2 * c_pg - R / M))
+        lambda_a / (p * (2 * c_pa - R / M))
 
     # emission coefficient ratio
-    C_WS = Stefan_Boltzmann / (1 / epsilon_W + 1 / epsilon_S - 1)
+    C_WS = Stefan_Boltzmann / (1 / epsilon_W + 1 / epsilon_B - 1)
 
     # 2b.) Heat transfer coefficient wall-to-backfill
 
     # proportion of heat conduction
-    alpha_WP = 4 * lambda_g / d * ((1 + 2 * (l_frei + delta) / d) *
+    alpha_WP = 4 * lambda_a / d * ((1 + 2 * (l_frei + delta) / d) *
                                    math.log(1 + d / (2 * (l_frei + delta)))
                                    - 1)
 
@@ -108,7 +108,7 @@ def R_th_b(lambda_g, borefield, hp):
 
     # Heatpipe geometry
     N = hp.N  # no. of heatpipes per borehole [-]
-    r_iso_a = hp.r_iso_a  # outer radius of heatpipe insulation [m]
+    r_iso_b = hp.r_iso_b  # outer radius of heatpipe insulation [m]
     r_pa = hp.r_pa  # outer radius of heatpipes [m]
     r_pi = hp.r_pi  # inner radius of heatpipes [m]
 
@@ -128,7 +128,7 @@ def R_th_b(lambda_g, borefield, hp):
     sigma = (lambda_b - lambda_g) / (lambda_b + lambda_g)
 
     # Thermal resistance of heat pipe + insulation layer
-    r_pm = math.log(r_iso_a / r_pa) / (2 * pi * lambda_iso) + \
+    r_pm = math.log(r_iso_b / r_pa) / (2 * pi * lambda_iso) + \
         math.log(r_pa / r_pi) / (2 * pi * lambda_p)
     # r_pm = 0 (in case the thermal resistance is supposed to be neglected)
 
@@ -185,17 +185,17 @@ def R_th_he(he):  # heating element thermal resistance [K/W]
     from .heating_element_utils import q_l
 
     # 1.) auxiliary params
-    x_o = he.x_min + 0.5 * he.d_R_a  # vertical pipe-centre-to-surface distance [m]
-    x_u = he.D - x_o  # vertical pipe-centre-to-underside distance [m]
+    x_o = he.x_min + 0.5 * he.d_pa  # vertical pipe-centre-to-surface distance [m]
+    x_u = he.D_he - x_o  # vertical pipe-centre-to-underside distance [m]
 
     # 2.) delta-T between pipe wall and surface set to delta-T := 1 K
     Theta_R = 1
     Theta_inf_o = 0
 
-    # 3.) thermal resistance [K/W] --> R_th = 1 K / (q_l * l_R)
+    # 3.) thermal resistance [K/W] --> R_th = 1 K / (q_l * l_p_he)
     ''' heating element underside is parametrized as perfectly insulated: state_u_insul=True
     '''
-    R_th_he = (he.l_R * q_l(x_o, x_u, he.d_R_a, he.d_R_i, he.lambda_B, he.lambda_R, he.s_R, Theta_R, Theta_inf_o,
+    R_th_he = (he.l_p_he * q_l(x_o, x_u, he.d_pa, he.d_pi, he.lambda_c, he.lambda_p, he.s_R, Theta_R, Theta_inf_o,
                             state_u_insul=True)) ** -1
 
     return R_th_he
