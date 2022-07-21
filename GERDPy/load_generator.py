@@ -56,7 +56,7 @@ from .heating_element_utils import *
 def Q_con_Q(Q, con, u_inf, Theta_b_0, R_th, Theta_inf, A_he):  # [W]
     Q_con = 0
     if con:
-        Q_con = alpha_kon_he_o(u_inf) * (Theta_b_0 - Q * R_th - Theta_inf) * A_he
+        Q_con = alpha_con_he_o(u_inf) * (Theta_b_0 - Q * R_th - Theta_inf) * A_he
 
     return Q_con
 
@@ -65,38 +65,38 @@ def Q_con_Q(Q, con, u_inf, Theta_b_0, R_th, Theta_inf, A_he):  # [W]
 def Q_con_T(Theta_surf, con, u_inf, Theta_inf, A_he):  # [W]
     Q_con = 0
     if con:
-        Q_con = alpha_kon_he_o(u_inf) * (Theta_surf - Theta_inf) * A_he
+        Q_con = alpha_con_he_o(u_inf) * (Theta_surf - Theta_inf) * A_he
 
     return Q_con
 
 
 # Q_radiation = fct(Q.) - Input for power balance F_Q = 0
-def Q_rad_Q(Q, rad, Theta_b_0, R_th, S_w, Theta_inf, B, Phi, A_he):  # [W]
+def Q_rad_Q(Q, rad, Theta_b_0, R_th, S_r, Theta_inf, B, Phi, A_he):  # [W]
     Q_rad = 0
     if rad:
-        Q_rad = sigma * epsilon_surf('concrete') * ((Theta_b_0 - Q * R_th + 273.15) ** 4 - T_MS(S_w, Theta_inf, B, Phi) ** 4) * A_he
+        Q_rad = sigma * epsilon_surf('concrete') * ((Theta_b_0 - Q * R_th + 273.15) ** 4 - T_MR(S_r, Theta_inf, B, Phi) ** 4) * A_he
 
     return Q_rad
 
 
 # Q_radiation = fct(Theta_surf) - Input for reduced power balance F_T = 0
-def Q_rad_T(Theta_surf, rad, S_w, Theta_inf, B, Phi, A_he):  # [W]
+def Q_rad_T(Theta_surf, rad, S_r, Theta_inf, B, Phi, A_he):  # [W]
     Q_rad = 0
     if rad:
-        Q_rad = sigma * epsilon_surf('concrete') * ((Theta_surf + 273.15) ** 4 - T_MS(S_w, Theta_inf, B, Phi) ** 4) * A_he
+        Q_rad = sigma * epsilon_surf('concrete') * ((Theta_surf + 273.15) ** 4 - T_MR(S_r, Theta_inf, B, Phi) ** 4) * A_he
 
     return Q_rad
 
 
 # Q_evaporation = fct(Q.) - Input for power balance F_Q = 0
-def Q_eva_Q(Q, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Theta_b_0, R_th, Phi, A_he):  # [W]
+def Q_eva_Q(Q, eva, Theta_surf_0, m_w_0, Theta_inf, u_inf, z_asl, Theta_b_0, R_th, Phi, A_he):  # [W]
     ''' Prerequisites:
         - Theta_surf >= 0 °C
         - Surface is wet (m_Rw > 0)
     '''
     Q_eva = 0
-    if (eva and Theta_surf_0 >= 0 and m_Rw_0 > 0):
-        Q_eva = rho_l * beta_c(Theta_inf, u_inf, h_NHN) * (X_D_sat_surf(Theta_b_0 - Q * R_th, h_NHN) - X_D_inf(Theta_inf, Phi, h_NHN)) * h_Ph_lg * A_he
+    if (eva and Theta_surf_0 >= 0 and m_w_0 > 0):
+        Q_eva = rho_l * beta_c(Theta_inf, u_inf, z_asl) * (X_sat_surf(Theta_b_0 - Q * R_th, z_asl) - X_inf(Theta_inf, Phi, z_asl)) * h_Ph_lg * A_he
 
     if Q_eva < 0:  # evaporative power flux cannot be negative!
         Q_eva = 0
@@ -105,14 +105,14 @@ def Q_eva_Q(Q, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Theta_b_0, R_
 
 
 # Q_evaporation = fct(Theta_surf) - Input for reduced power balance F_T = 0
-def Q_eva_T(Theta_surf, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Phi, A_he):  # [W]
+def Q_eva_T(Theta_surf, eva, Theta_surf_0, m_w_0, Theta_inf, u_inf, z_asl, Phi, A_he):  # [W]
     ''' Prerequisites:
         - Theta_surf >= 0 °C
         - Surface is wet (m_Rw > 0)
     '''
     Q_eva = 0
-    if (eva and Theta_surf_0 >= 0 and m_Rw_0 > 0):
-        Q_eva = rho_l * beta_c(Theta_inf, u_inf, h_NHN) * (X_D_sat_surf(Theta_surf, h_NHN) - X_D_inf(Theta_inf, Phi, h_NHN)) * h_Ph_lg * A_he
+    if (eva and Theta_surf_0 >= 0 and m_w_0 > 0):
+        Q_eva = rho_l * beta_c(Theta_inf, u_inf, z_asl) * (X_sat_surf(Theta_surf, z_asl) - X_inf(Theta_inf, Phi, z_asl)) * h_Ph_lg * A_he
 
     if Q_eva < 0:  # evaporative power flux cannot be negative!
         Q_eva = 0
@@ -121,28 +121,28 @@ def Q_eva_T(Theta_surf, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Phi,
 
 
 # Q_sensible = fct(Q.) - Input for power balance F_Q = 0
-def Q_sen_Q(Q, sen, S_w, Theta_inf, Theta_b_0, R_th, A_he):  # [W]
+def Q_sen_Q(Q, sen, S_r, Theta_inf, Theta_b_0, R_th, A_he):  # [W]
     Q_sen = 0
     if sen:
-        Q_sen = rho_w * S_w * (c_p_s * (Theta_mp - Theta_inf) + c_p_w * (Theta_b_0 - Q * R_th - Theta_mp)) * (3.6e6)**-1 * A_he
+        Q_sen = rho_w * S_r * (c_p_s * (Theta_mp - Theta_inf) + c_p_w * (Theta_b_0 - Q * R_th - Theta_mp)) * (3.6e6)**-1 * A_he
 
     return Q_sen
 
 
 # Q_sensible = fct(Theta_surf) - Input for reduced power balance F_T = 0
-def Q_sen_T(Theta_surf, sen, S_w, Theta_inf, A_he):  # [W]
+def Q_sen_T(Theta_surf, sen, S_r, Theta_inf, A_he):  # [W]
     Q_sen = 0
     if sen:
-        Q_sen = rho_w * S_w * (c_p_s * (Theta_mp - Theta_inf) + c_p_w * (Theta_surf - Theta_mp)) * (3.6e6)**-1 * A_he
+        Q_sen = rho_w * S_r * (c_p_s * (Theta_mp - Theta_inf) + c_p_w * (Theta_surf - Theta_mp)) * (3.6e6)**-1 * A_he
 
     return Q_sen
 
 
 # Q_latent - identical for both non-reduced and reduced power balances F_Q = 0 and F_T = 0
-def Q_lat(lat, S_w, A_he):  # [W]
+def Q_lat(lat, S_r, A_he):  # [W]
     Q_lat = 0
     if lat:
-        Q_lat = rho_w * S_w * h_Ph_sl * (3.6e6)**-1 * A_he
+        Q_lat = rho_w * S_r * h_Ph_sl * (3.6e6)**-1 * A_he
 
     return Q_lat
 
@@ -166,7 +166,7 @@ def Q_V(Theta_R, Theta_inf, lambda_p, lambda_iso, l_R_An, r_iso, r_pa, r_pi, he)
 
         Q_V_an = (Theta_R - Theta_inf) * (2 * math.pi * l_R_An) \
                 * (math.log(r_pa / r_pi) / lambda_p + math.log(r_iso / r_pa) / lambda_iso
-                    + 1 / (alpha_kon_an(Theta_R - Theta_inf) * r_iso)) ** -1
+                    + 1 / (alpha_con_an(Theta_R - Theta_inf) * r_iso)) ** -1
         if Q_V_an < 0:  # wickless thermosiphons don't allow negative heat flux (into the ground)
             Q_V_an = 0
 
@@ -175,13 +175,13 @@ def Q_V(Theta_R, Theta_inf, lambda_p, lambda_iso, l_R_An, r_iso, r_pa, r_pi, he)
     def Q_V_he(he, lambda_iso, Theta_R, Theta_inf):  # [W]
         
         # thermal resistance piping-to-underside (without insulation)
-        R_th_he_u = (he.l_R * q_l(he.D - (he.x_min + 0.5 * he.d_R_a), (he.x_min + 0.5 * he.d_R_a), he.d_R_a, he.d_R_i, he.lambda_B, he.lambda_R, he.s_R, 1, 0, state_u_insul=True)) ** -1
+        R_th_he_u = (he.l_p_he * q_l(he.D_he - (he.x_min + 0.5 * he.d_pa), (he.x_min + 0.5 * he.d_pa), he.d_pa, he.d_pi, he.lambda_c, he.lambda_p, he.s_R, 1, 0, state_u_insul=True)) ** -1
 
         # thermal resistance of insulation layer on underside
-        R_th_he_iso = 1 / lambda_iso * he.D_iso / he.A_he
+        R_th_he_iso = 1 / lambda_iso * he.D_iso_he / he.A_he
         
         # thermal transfer resistance insulation-to-surroundings
-        R_th_he_alpha = (alpha_kon_he_u() * he.A_he) ** -1
+        R_th_he_alpha = (alpha_con_he_u() * he.A_he) ** -1
         
         Q_V_he = (Theta_R - Theta_inf) * (R_th_he_u + R_th_he_iso + R_th_he_alpha) ** -1
         if Q_V_he < 0:  # wickless thermosiphons don't allow negative heat flux (into the ground)
@@ -195,97 +195,97 @@ def Q_V(Theta_R, Theta_inf, lambda_p, lambda_iso, l_R_An, r_iso, r_pa, r_pi, he)
 
 
 # Power balance F_Q (= 0)
-def F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he):
+def F_Q(R_f, lat, S_r, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he):
 
-    F_Q = Q_lat(lat, S_w, A_he) \
-        + Q_sen_Q(Q, sen, S_w, Theta_inf, Theta_b_0, R_th, A_he) \
+    F_Q = Q_lat(lat, S_r, A_he) \
+        + Q_sen_Q(Q, sen, S_r, Theta_inf, Theta_b_0, R_th, A_he) \
         + R_f \
         * (Q_con_Q(Q, con, u_inf, Theta_b_0, R_th, Theta_inf, A_he)
-        + Q_rad_Q(Q, rad, Theta_b_0, R_th, S_w, Theta_inf, B, Phi, A_he)
-        + Q_eva_Q(Q, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Theta_b_0, R_th, Phi, A_he)) \
+        + Q_rad_Q(Q, rad, Theta_b_0, R_th, S_r, Theta_inf, B, Phi, A_he)
+        + Q_eva_Q(Q, eva, Theta_surf_0, m_w_0, Theta_inf, u_inf, z_asl, Theta_b_0, R_th, Phi, A_he)) \
         - Q
 
     return F_Q
 
 
 # Reduced power balance F_T (= 0)
-def F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he):
-    F_T = Q_lat(lat, S_w, A_he) \
-        + Q_sen_T(Theta_surf, sen, S_w, Theta_inf, A_he) \
+def F_T(R_f, lat, S_r, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he):
+    F_T = Q_lat(lat, S_r, A_he) \
+        + Q_sen_T(Theta_surf, sen, S_r, Theta_inf, A_he) \
         + R_f \
         * (Q_con_T(Theta_surf, con, u_inf, Theta_inf, A_he)
-        + Q_rad_T(Theta_surf, rad, S_w, Theta_inf, B, Phi, A_he)
-        + Q_eva_T(Theta_surf, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Phi, A_he))
+        + Q_rad_T(Theta_surf, rad, S_r, Theta_inf, B, Phi, A_he)
+        + Q_eva_T(Theta_surf, eva, Theta_surf_0, m_w_0, Theta_inf, u_inf, z_asl, Phi, A_he))
 
     return F_T
 
 
 # Solver for F_Q = 0, solved for the system thermal power Q.
-def solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he):
+def solve_F_Q(R_f, con, rad, eva, sen, lat, S_r, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he):
     step_refine = 0  # auxiliary variable for refining the iteration step size for Q.
     step = 100  # starting value for stepsize
     res = 0.001  # maximum allowed residual of F_Q for the optimization
 
     Q = 0  # starting value for Q.
 
-    error = abs(F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
+    error = abs(F_Q(R_f, lat, S_r, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he))
 
     # solves F_Q = 0 for Q. (iterative search for zero crossing)
     while error > res:
         step_refine += 1
         step = step / (2 * step_refine)  # step size reduction for each zero crossing
-        if F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
-            while F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
+        if F_Q(R_f, lat, S_r, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he) > 0:
+            while F_Q(R_f, lat, S_r, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he) > 0:
                 Q += step  # increases Q. by stepsize if F_Q > 0
-        elif F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
-            while F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
+        elif F_Q(R_f, lat, S_r, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he) < 0:
+            while F_Q(R_f, lat, S_r, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he) < 0:
                 Q -= step  # decreases Q. by stepsize if F_Q < 0
 
         # re-evaluate residual
-        error = abs(F_Q(R_f, lat, S_w, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
+        error = abs(F_Q(R_f, lat, S_r, Q, sen, Theta_inf, Theta_b_0, R_th, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he))
 
     # Evaluate the thermal load components for the determined Q.
-    Q_lat_sol = Q_lat(lat, S_w, A_he)
-    Q_sen_sol = Q_sen_Q(Q, sen, S_w, Theta_inf, Theta_b_0, R_th, A_he)
-    Q_eva_sol = Q_eva_Q(Q, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Theta_b_0, R_th, Phi, A_he)
+    Q_lat_sol = Q_lat(lat, S_r, A_he)
+    Q_sen_sol = Q_sen_Q(Q, sen, S_r, Theta_inf, Theta_b_0, R_th, A_he)
+    Q_eva_sol = Q_eva_Q(Q, eva, Theta_surf_0, m_w_0, Theta_inf, u_inf, z_asl, Theta_b_0, R_th, Phi, A_he)
     Q_sol = Q
 
     return Q_sol, Q_lat_sol, Q_sen_sol, Q_eva_sol
 
 
 # Solver for F_T = 0, solved for the surface temperature Theta_surf
-def solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he):
+def solve_F_T(R_f, con, rad, eva, sen, lat, S_r, Theta_inf, u_inf, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he):
     step_refine = 0  # auxiliary variable for refining the iteration step size for Q.
     step = 100  # starting value for stepsize
     res = 0.001  # maximum allowed residual of F_T for the optimization
 
     Theta_surf = 0  # starting value for Theta_surf
 
-    error = abs(F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
+    error = abs(F_T(R_f, lat, S_r, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he))
 
     # solves F_T = 0 for Theta_surf (iterative search for zero crossing)
     while error > res:
         step_refine += 1
         step = step / (2 * step_refine)  # step size reduction for each zero crossing
-        if F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0:
-            while F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) > 0: 
+        if F_T(R_f, lat, S_r, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he) > 0:
+            while F_T(R_f, lat, S_r, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he) > 0: 
                 Theta_surf -= step  # decreases Theta_surf by stepsize if F_T > 0
-        elif F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
-            while F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he) < 0:
+        elif F_T(R_f, lat, S_r, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he) < 0:
+            while F_T(R_f, lat, S_r, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he) < 0:
                 Theta_surf += step  # increases Theta_surf by stepsize if F_T < 0
 
-        error = abs(F_T(R_f, lat, S_w, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, A_he))
+        error = abs(F_T(R_f, lat, S_r, Theta_surf, sen, Theta_inf, con, u_inf, rad, eva, Theta_surf_0, m_w_0, z_asl, Phi, B, A_he))
 
     # Evaluate the thermal load components for the determined Theta_surf
-    Q_lat_sol = Q_lat(lat, S_w, A_he)
-    Q_sen_sol = Q_sen_T(Theta_surf, sen, S_w, Theta_inf, A_he)
-    Q_eva_sol = Q_eva_T(Theta_surf, eva, Theta_surf_0, m_Rw_0, Theta_inf, u_inf, h_NHN, Phi, A_he)
+    Q_lat_sol = Q_lat(lat, S_r, A_he)
+    Q_sen_sol = Q_sen_T(Theta_surf, sen, S_r, Theta_inf, A_he)
+    Q_eva_sol = Q_eva_T(Theta_surf, eva, Theta_surf_0, m_w_0, Theta_inf, u_inf, z_asl, Phi, A_he)
     Theta_surf_sol = Theta_surf
 
     return Theta_surf_sol, Q_lat_sol, Q_sen_sol, Q_eva_sol
 
 
-def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, B, Phi, RR, m_Rw_0, m_Rs_0, start_sb, 
+def load(z_asl, v, Theta_inf, S_r, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, B, Phi, RR, m_w_0, m_s_0, start_sb, 
          l_R_An, lambda_p, lambda_iso, r_iso, r_pa, r_pi, R_f):
     ''' Main algorithm for surface load calculation
                     
@@ -323,7 +323,7 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
         "True": snow balancing is activated: a layer of snow/ice may form on the surface
         "False": snow balancing is deactivated: any snow/ice is melted from the surface instantaneously (within the current timestep)
     '''
-    if (m_Rs_0 > 0 or start_sb is True):  # activate snow balancing
+    if (m_s_0 > 0 or start_sb is True):  # activate snow balancing
         sb_active = 1
     else:  # deactivate snow balancing
         sb_active = 0
@@ -389,7 +389,7 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
             sen, lat = False, False
 
             # 2.4) iterative solution of reduced power balance F_T = 0, solved for Theta_surf
-            Theta_surf_sol, Q_lat, Q_sen, Q_eva = solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
+            Theta_surf_sol, Q_lat, Q_sen, Q_eva = solve_F_T(R_f, con, rad, eva, sen, lat, S_r, Theta_inf, u_inf, Theta_surf_0, m_w_0, z_asl, Phi, B, he.A_he)
 
             Q_sol = -1  # extracted power set to zero
 
@@ -405,10 +405,10 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
             Q_con = Q_con_T(Theta_mp, con, u_inf, Theta_inf, he.A_he)
 
             # Q_radiation
-            Q_rad = Q_rad_T(Theta_mp, rad, S_w, Theta_inf, B, Phi, he.A_he)
+            Q_rad = Q_rad_T(Theta_mp, rad, S_r, Theta_inf, B, Phi, he.A_he)
 
             # Q_evaporation
-            Q_eva = Q_eva_T(Theta_mp, eva, Theta_mp, m_Rw_0, Theta_inf, u_inf, h_NHN, Phi, he.A_he)
+            Q_eva = Q_eva_T(Theta_mp, eva, Theta_mp, m_w_0, Theta_inf, u_inf, z_asl, Phi, he.A_he)
 
             # 2.5) power available for melting of snow/ice
             Q_R = Q_0 - R_f * (Q_con + Q_rad + Q_eva)
@@ -425,7 +425,7 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
                 sen, lat = False, False
 
                 # 2.7) iterative solution of power balance F_Q = 0, solved for Q.
-                Q_sol, Q_lat, Q_sen, Q_eva = solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
+                Q_sol, Q_lat, Q_sen, Q_eva = solve_F_Q(R_f, con, rad, eva, sen, lat, S_r, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_w_0, z_asl, Phi, B, he.A_he)
 
             else:  # temperature spread sufficient to melt snow/ice
                 ''' Simulation mode 3'''
@@ -473,7 +473,7 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
         R_f = 1  # free-area ratio
 
         # 2.2) iterative solution of power balance F_Q = 0, solved for Q.
-        Q_sol, Q_lat, Q_sen, Q_eva = solve_F_Q(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
+        Q_sol, Q_lat, Q_sen, Q_eva = solve_F_Q(R_f, con, rad, eva, sen, lat, S_r, Theta_inf, Theta_b_0, R_th, u_inf, Theta_surf_0, m_w_0, z_asl, Phi, B, he.A_he)
 
         # 2.3) Simulation mode 5: "summer mode"
         ''' Simulationsmodus 5'''
@@ -490,15 +490,15 @@ def load(h_NHN, v, Theta_inf, S_w, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
             sen, lat = False, False
 
             # 2.4) iterative solution of reduced power balance F_T = 0, solved for Theta_surf
-            Theta_surf_sol, Q_lat, Q_sen, Q_eva = solve_F_T(R_f, con, rad, eva, sen, lat, S_w, Theta_inf, u_inf, Theta_surf_0, m_Rw_0, h_NHN, Phi, B, he.A_he)
+            Theta_surf_sol, Q_lat, Q_sen, Q_eva = solve_F_T(R_f, con, rad, eva, sen, lat, S_r, Theta_inf, u_inf, Theta_surf_0, m_w_0, z_asl, Phi, B, he.A_he)
 
     # 3.) Mass balances of water and snow on the heating element surface
 
     # mass balance water [kg]
-    m_w_1 = m_water(m_Rw_0, RR, he.A_he, Q_eva)
+    m_w_1 = m_water(m_w_0, RR, he.A_he, Q_eva)
 
     # mass balance snow [kg]
-    m_s_1 = m_snow(m_Rs_0, S_w, he.A_he, Q_lat, sb_active)
+    m_s_1 = m_snow(m_s_0, S_r, he.A_he, Q_lat, sb_active)
 
     # 4.) Q_sol, Q_N & Q_V [W]
     ''' Evaluation of the extraction power Q_sol, net used power Q_N and 

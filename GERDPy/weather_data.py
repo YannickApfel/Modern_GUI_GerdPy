@@ -48,11 +48,11 @@ def get_weather_data(Nt, self):
     Theta_inf = np.array(data.iloc[rows, 4])
 
     # 3.) snowfall rate [mm/h]
-    S_w = np.array(data.iloc[rows, 3])
+    S_r = np.array(data.iloc[rows, 3])
     # sets entries to 0, in case Theta_inf >= 1 °C (precipitation comes down as rain)
     for i, j in enumerate(Theta_inf):
         if j >= 1:
-            S_w[i] = 0
+            S_r[i] = 0
 
     # 4.) cloudiness [octal units/8]
     ''' between 0/8 - cloudless and 
@@ -72,4 +72,4 @@ def get_weather_data(Nt, self):
         dates[i] = str(data.iloc[rows[i], 0]) + '-' + str(data.iloc[rows[i], 1]) + '-' + str(data.iloc[rows[i], 2])
 
 
-    return u_inf, Theta_inf, S_w, B, Phi, RR, dates
+    return u_inf, Theta_inf, S_r, B, Phi, RR, dates

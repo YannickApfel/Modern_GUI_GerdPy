@@ -61,10 +61,10 @@ def main(self):
     progapp.processEvents()
 
     # 1.0) Location
-    h_NHN = self.ui.sb_h_NHN.value()  # elevation (above sea-level) [m]
+    z_asl = self.ui.sb_h_NHN.value()  # elevation (above sea-level) [m]
 
-    # 1.1) Erdboden
-    a = self.ui.sb_therm_diffu.value() * 1.0e-6  # thermal diffusivity [m2/s] (default: 1.0)
+    # 1.1) Ground
+    a_g = self.ui.sb_therm_diffu.value() * 1.0e-6  # thermal diffusivity [m2/s] (default: 1.0)
     lambda_g = self.ui.sb_therm_cond.value()  # thermal conductivity [W/mK] (default: 2.0)
     Theta_g = self.ui.sb_undis_soil_temp.value()  # undisturbed ground temperature [°C] (default: 10.0)
 
@@ -74,7 +74,7 @@ def main(self):
     boreField = boreholes.field_from_file(self, self.ui.line_borefield_file.text())  # './data/custom_field_5.txt'
 
     # Total depth of geothermal borefield (sum of all boreholes)
-    H_field = boreholes.length_field(boreField)
+    H_total = boreholes.length_field(boreField)
 
     # Borefield layout plot
     boreholes.visualize_field(boreField)
@@ -104,14 +104,14 @@ def main(self):
     # 1.4) Connection borehole-to-heating element
 
     # Geometry
-    D_iso_an = self.ui.sb_D_iso_an.value()  # thickness of the insulation layer [m] (default: 0.005)
-    r_iso_an = r_pa + D_iso_an  # outer radius of the insulation layer [m]
+    D_iso_conn = self.ui.sb_D_iso_an.value()  # thickness of the insulation layer [m] (default: 0.005)
+    r_iso_conn = r_pa + D_iso_conn  # outer radius of the insulation layer [m]
 
     # Total length of borehole-to-heating element connections (starting from ground surface) [m]
-    ''' l_an is the total length of all borehole-to-heating element connections, while
-        l_an * N yields the total heatpipe-length inside all borehole-to-heating element connections (= heatpipe bundles)
+    ''' l_conn is the total length of all borehole-to-heating element connections (=bundles of heatpipes), while
+        (l_conn * N) yields the total heatpipe-length inside all borehole-to-heating element connections
     '''
-    l_an = self.ui.sb_l_An.value()  # default: 5
+    l_conn = self.ui.sb_l_An.value()  # default: 5
 
     # 1.5) Heating element
 
@@ -122,13 +122,13 @@ def main(self):
     x_min = self.ui.sb_x_min.value()  # (default: .025)
 
     # Thermal conductivity [W/mK]
-    lambda_Bet = self.ui.sb_lambda_Bet.value()  # default: 2.1
+    lambda_c = self.ui.sb_lambda_Bet.value()  # default: 2.1 (concrete)
 
     # centre-distance between heatpipes [m]
     s_R = self.ui.sb_s_R.value()    # default: 0.050
 
     # Total heatpipe length inside heating element [m]
-    l_R = self.ui.sb_l_R.value()    # default: 1000
+    l_p_he = self.ui.sb_l_R.value()    # default: 1000
 
     # Vertical thickness of heating element [m]
     D_he = self.ui.sb_D_he.value()  # default: 0.25
@@ -137,8 +137,8 @@ def main(self):
     D_iso_he = self.ui.sb_D_iso_he.value()  # default: 0.03
 
     # Heating element-object generation
-    he = heating_element.HeatingElement(A_he, x_min, lambda_Bet, lambda_p,
-                                        2 * r_pa, 2 * r_pi, s_R, l_R,
+    he = heating_element.HeatingElement(A_he, x_min, lambda_c, lambda_p,
+                                        2 * r_pa, 2 * r_pi, s_R, l_p_he,
                                         D_he, D_iso_he)
 
     # 2.) Simulation
@@ -174,7 +174,7 @@ def main(self):
     time_req = LoadAgg.get_times_for_simulation()
 
     # G-Function calculation using 'gfunction.py'
-    gFunc = gfunction.uniform_temperature(boreField, time_req, a, self,
+    gFunc = gfunction.uniform_temperature(boreField, time_req, a_g, self,
                                           nSegments=12)
 
     # Simulation initialization using 'load_aggregation.py'
@@ -185,10 +185,10 @@ def main(self):
     # -------------------------------------------------------------------------
 
     # Import weather data from 'weather_data.py'
-    u_inf, Theta_inf, S_w, B, Phi, RR, dates = get_weather_data(Nt, self)
+    u_inf, Theta_inf, S_r, B, Phi, RR, dates = get_weather_data(Nt, self)
     ''' u_inf       - ambient wind speed [m/s]
         Theta_inf   - ambient temperature [°C]
-        S_w         - snowfall rate [mm/h]
+        S_r         - snowfall rate [mm/h]
         B           - cloudiness [octal units/8]
         Phi         - relative air humidity [-]
         RR          - precipitation (total) [mm/h]
@@ -214,8 +214,8 @@ def main(self):
             - Theta_b[i]        - borehole wall temperature
             - Theta_surf[i]     - heating element surface temperature
         - mass balances [kg]:
-            - m_Rw[i]           - residual water
-            - m_Rs[i]           - residual snow
+            - m_w[i]            - residual water
+            - m_s[i]            - residual snow
     '''
     
     # Initialization of power vectors [W]
@@ -228,10 +228,10 @@ def main(self):
     Theta_surf = np.zeros(Nt)  # heating element surface temperature
 
     # Initialization of water mass balancing vector [kg]
-    m_Rw = np.zeros(Nt)
+    m_w = np.zeros(Nt)
 
     # Initialization of snow mass balancing vector [kg]
-    m_Rs = np.zeros(Nt)
+    m_s = np.zeros(Nt)
 
     # Auxiliary variables
     start_sb_vector = np.zeros(Nt)
@@ -260,17 +260,17 @@ def main(self):
             - heating element surface dry and free of snow
         '''
         if i == 0:
-            Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
-                load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], he, Theta_g,
+            Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_w[i], m_s[i], sb_active[i], sim_mod[i] = \
+                load(z_asl, u_inf[i], Theta_inf[i], S_r[i], he, Theta_g,
                      R_th, R_th_ghp, Theta_g, B[i], Phi[i], RR[i], 0, 0, start_sb,
-                     l_an * N, lambda_p, lambda_iso, r_iso_an, r_pa, r_pi, R_f)
+                     l_conn * N, lambda_p, lambda_iso, r_iso_conn, r_pa, r_pi, R_f)
 
         # Timesteps 2, 3, ..., Nt
         if i > 0:
-            Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_Rw[i], m_Rs[i], sb_active[i], sim_mod[i] = \
-                load(h_NHN, u_inf[i], Theta_inf[i], S_w[i], he, Theta_b[i - 1],
-                     R_th, R_th_ghp, Theta_surf[i - 1], B[i], Phi[i], RR[i], m_Rw[i - 1], m_Rs[i - 1], start_sb,
-                     l_an * N, lambda_p, lambda_iso, r_iso_an, r_pa, r_pi, R_f)
+            Q[i], Q_N[i], Q_V[i], calc_T, Theta_surf[i], m_w[i], m_s[i], sb_active[i], sim_mod[i] = \
+                load(z_asl, u_inf[i], Theta_inf[i], S_r[i], he, Theta_b[i - 1],
+                     R_th, R_th_ghp, Theta_surf[i - 1], B[i], Phi[i], RR[i], m_w[i - 1], m_s[i - 1], start_sb,
+                     l_conn * N, lambda_p, lambda_iso, r_iso_conn, r_pa, r_pi, R_f)
 
         # Determined extraction power is incremented by the connection losses (An) and losses of the heating element underside (he)
         Q[i] += Q_V[i]
@@ -278,7 +278,7 @@ def main(self):
         start_sb = False  # reset snow balancing variable
 
         # Load extraction power of current time step into the ground model using 'load_aggregation.py'
-        LoadAgg.set_current_load(Q[i] / H_field)
+        LoadAgg.set_current_load(Q[i] / H_total)
 
         # Calculate "new" borehole wall temperature after heat extraction [°C]
         deltaTheta_b = LoadAgg.temporal_superposition()
@@ -295,10 +295,10 @@ def main(self):
         ''' The time step i will be repeated once in snow balancing mode if the following conditions 
             for the formation of a snow layer are met:
             - Theta_surf[i] < 0 AND
-            - S_w[i] > 0 AND
-            - m_Rs[i] == 0 (no remaining snow on surface)
+            - S_r[i] > 0 AND
+            - m_s[i] == 0 (no remaining snow on surface)
         '''
-        if (Theta_surf[i] < 0 and S_w[i] > 0 and m_Rs[i] == 0):
+        if (Theta_surf[i] < 0 and S_r[i] > 0 and m_s[i] == 0):
             start_sb = True
             start_sb_vector[i] = 1
 
@@ -390,8 +390,8 @@ def main(self):
     # fig1
     ax2 = fig1.add_subplot(412)
     ax2.set_ylabel('Snowfall rate [mm/h] \n Snow height on heating element [H2O-mm]')
-    ax2.plot(hours, S_w, 'b-', lw=0.8)  # snowfall rate [mm/h]
-    ax2.plot(hours, m_Rs / (A_he * (997 / 1000)), 'g-', lw=0.8)  # snow height on heating element [mm]
+    ax2.plot(hours, S_r, 'b-', lw=0.8)  # snowfall rate [mm/h]
+    ax2.plot(hours, m_s / (A_he * (997 / 1000)), 'g-', lw=0.8)  # snow height on heating element [mm]
     ax2.legend(['Snowfall rate', 'Snow height on heating element'],
                prop={'size': font['size']}, loc='upper left')
     ax2.grid('major')
@@ -496,7 +496,7 @@ def main(self):
 
     results = pd.DataFrame({'timestep': hours, 'Q_extracted [W]': Q/A_he, 'Q_losses [W]': Q_V/A_he,
                             'T_borehole-wall [°C]': Theta_b, 'T_surface [°C]': Theta_surf, 'T_ambient [°C]': Theta_inf,
-                            'u_wind [m/s]': u_inf, 'Snowfall rate [mm/h]': S_w, 'Snow heigth [mm]': m_Rs / (A_he * (997/1000))})
+                            'u_wind [m/s]': u_inf, 'Snowfall rate [mm/h]': S_r, 'Snow heigth [mm]': m_s / (A_he * (997/1000))})
 
     return results
 
