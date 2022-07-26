@@ -296,7 +296,7 @@ def load(z_asl, v, Theta_inf, S_r, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
                      (snow/ice is melted "instantaneously", within the timestep)
             
         Legend: (* - placeholder for variable)
-            - *_sol: parameters generated from the steady state power balances on the heating element surface (above)
+            - *_sol: evaluated parameters generated e.g. from the steady state power balances on the heating element surface
             - *_0: parameter containing value from preceding timestep is used for calculation, as the current value is yet tbd
             - Q_N: net used power (power used for melting snow & ice)
             - Q_V: thermal power losses via connection & heating element underside
@@ -451,7 +451,7 @@ def load(z_asl, v, Theta_inf, S_r, he, Theta_b_0, R_th, R_th_ghp, Theta_surf_0, 
                     Q_lat = rho_w * h_Ph_sl * V_s
 
                 Theta_surf_sol = Theta_mp
-                Q_load = Q_lat + Q_sen + R_f * (Q_con + Q_rad + Q_eva)
+                Q_sol = Q_lat + Q_sen + R_f * (Q_con + Q_rad + Q_eva)
 
     else:  # snow/ice is melted instantaneously (within current timestep), no forming of snow/ice layers
         ''' Simulation modes 4 & 5'''
