@@ -96,7 +96,7 @@ def Q_eva_Q(Q, eva, Theta_surf_0, m_w_0, Theta_inf, u_inf, z_asl, Theta_b_0, R_t
     '''
     Q_eva = 0
     if (eva and Theta_surf_0 >= 0 and m_w_0 > 0):
-        Q_eva = rho_l * beta_c(Theta_inf, u_inf, z_asl) * (X_sat_surf(Theta_b_0 - Q * R_th, z_asl) - X_inf(Theta_inf, Phi, z_asl)) * h_Ph_lg * A_he
+        Q_eva = rho_a * beta_c(Theta_inf, u_inf, z_asl) * (X_sat_surf(Theta_b_0 - Q * R_th, z_asl) - X_inf(Theta_inf, Phi, z_asl)) * h_Ph_lg * A_he
 
     if Q_eva < 0:  # evaporative power flux cannot be negative!
         Q_eva = 0
@@ -112,7 +112,7 @@ def Q_eva_T(Theta_surf, eva, Theta_surf_0, m_w_0, Theta_inf, u_inf, z_asl, Phi, 
     '''
     Q_eva = 0
     if (eva and Theta_surf_0 >= 0 and m_w_0 > 0):
-        Q_eva = rho_l * beta_c(Theta_inf, u_inf, z_asl) * (X_sat_surf(Theta_surf, z_asl) - X_inf(Theta_inf, Phi, z_asl)) * h_Ph_lg * A_he
+        Q_eva = rho_a * beta_c(Theta_inf, u_inf, z_asl) * (X_sat_surf(Theta_surf, z_asl) - X_inf(Theta_inf, Phi, z_asl)) * h_Ph_lg * A_he
 
     if Q_eva < 0:  # evaporative power flux cannot be negative!
         Q_eva = 0
