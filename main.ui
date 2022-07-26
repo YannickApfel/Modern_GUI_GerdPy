@@ -771,6 +771,7 @@ Qt::WA_AlwaysShowToolTips
              </property>
              <property name="font">
               <font>
+               <family>Segoe UI Semibold</family>
                <pointsize>12</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -800,6 +801,7 @@ Qt::WA_AlwaysShowToolTips
              </property>
              <property name="font">
               <font>
+               <family>Segoe UI</family>
                <pointsize>8</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -1522,7 +1524,7 @@ Simulation parameters</string>
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>4</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -2862,13 +2864,13 @@ border-radius: 5px;</string>
                                 </font>
                                </property>
                                <property name="toolTip">
-                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;This number of heatpipes are uniformly spaced on a circle with radius heatpipe-epicenters.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;This number of heat pipes are uniformly spaced on a circle with radius heat pipe epicenters.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="toolTipDuration">
                                 <number>30000</number>
                                </property>
                                <property name="text">
-                                <string>Number of heatpipes per borehole:</string>
+                                <string>Number of heat pipes per borehole:</string>
                                </property>
                               </widget>
                              </item>
@@ -2937,13 +2939,13 @@ border-radius: 5px;</string>
                                 </font>
                                </property>
                                <property name="toolTip">
-                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Thermal conductivity of a single heatpipe. Value will be assumed for every heatpipe in the system.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: lambda_p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Thermal conductivity of a single heat pipe. Value will be assumed for every heat pipe in the system.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: lambda_p&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="toolTipDuration">
                                 <number>30000</number>
                                </property>
                                <property name="text">
-                                <string>Thermal conductivity heatpipe [W/mK]:</string>
+                                <string>Thermal conductivity heat pipe [W/mK]:</string>
                                </property>
                               </widget>
                              </item>
@@ -3123,13 +3125,13 @@ border-radius: 5px;</string>
                                 </font>
                                </property>
                                <property name="toolTip">
-                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Inner radius of single heatpipe. Value will be assumed for every heatpipe in the system.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_pi&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Inner radius of single heat pipe. Value will be assumed for every heat pipe in the system.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_pi&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="toolTipDuration">
                                 <number>30000</number>
                                </property>
                                <property name="text">
-                                <string>Inner radius heatpipes [m]:</string>
+                                <string>Inner radius heat pipes [m]:</string>
                                </property>
                               </widget>
                              </item>
@@ -3201,13 +3203,13 @@ border-radius: 5px;</string>
                                 </font>
                                </property>
                                <property name="toolTip">
-                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;The heatpipes per borehole are uniformly spaced on a circle with this radius.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_w&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;The heat pipes per borehole are uniformly spaced on a circle with this radius.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_w&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="toolTipDuration">
                                 <number>30000</number>
                                </property>
                                <property name="text">
-                                <string>Radius heatpipe-epicenters [m]:</string>
+                                <string>Radius heat pipe epicenters [m]:</string>
                                </property>
                               </widget>
                              </item>
@@ -3221,13 +3223,13 @@ border-radius: 5px;</string>
                                 </font>
                                </property>
                                <property name="toolTip">
-                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Outer radius of single heatpipe. Value will be assumed for every heatpipe in the system.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_pa&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Outer radius of single heat pipe. Value will be assumed for every heat pipe in the system.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_pa&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="toolTipDuration">
                                 <number>30000</number>
                                </property>
                                <property name="text">
-                                <string>Outer radius heatpipes [m]:</string>
+                                <string>Outer radius heat pipes [m]:</string>
                                </property>
                               </widget>
                              </item>
@@ -3636,7 +3638,7 @@ border-radius: 5px;</string>
                                    <number>30000</number>
                                   </property>
                                   <property name="text">
-                                   <string>Simulationtime [h]:</string>
+                                   <string>Simulation time [h]:</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -3809,7 +3811,7 @@ border-radius: 5px;</string>
                                    <string notr="true"/>
                                   </property>
                                   <property name="text">
-                                   <string>Startdate</string>
+                                   <string>Start date</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -4778,7 +4780,7 @@ QPushButton:pressed{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>351</width>
                                  <height>218</height>
                                 </rect>
                                </property>

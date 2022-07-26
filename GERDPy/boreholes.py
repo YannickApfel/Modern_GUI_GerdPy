@@ -127,12 +127,12 @@ def field_from_file(self, filename):
     -----
     The text file should be formatted as follows::
 
-        # x   y     H     D     r_b
-        0.    0.    100.  2.5   0.075
-        5.    0.    100.  2.5   0.075
-        0.    5.    100.  2.5   0.075
-        0.    10.   100.  2.5   0.075
-        0.    20.   100.  2.5   0.075
+        # x   y     H     D
+        0.    0.    100.  2.5
+        5.    0.    100.  2.5
+        0.    5.    100.  2.5
+        0.    10.   100.  2.5
+        0.    20.   100.  2.5
 
     """
 
@@ -140,8 +140,8 @@ def field_from_file(self, filename):
     data = np.loadtxt(filename)
     # Build the bore field
     borefield = []
-    if not self.ui.rb_depth.isChecked():
-        if np.size(data, 1) == 5:
+    if not self.ui.rb_depth.isChecked(): # equal borehole depth
+        if np.size(data, 1) == 4:
             try:
                 for line in data:
                     x = line[0]
@@ -157,7 +157,6 @@ def field_from_file(self, filename):
                 H = self.ui.sb_depth_boreholes.value()
                 r_b = self.ui.sb_r_borehole.value()
                 borefield.append(Borehole(H, D, r_b, x=x, y=y))
-            print(borefield)
         else:
             try:
                 for line in data:
@@ -174,24 +173,23 @@ def field_from_file(self, filename):
                 H = self.ui.sb_depth_boreholes.value()
                 r_b = self.ui.sb_r_borehole.value()
                 borefield.append(Borehole(H, D, r_b, x=x, y=y))
-            print(borefield)
-    else:
+    else: # varying depth
         try:
             for line in data:
                 x = line[0]
                 y = line[1]
                 H = line[2]
                 D = line[3]
-                r_b = line[4]
+                r_b = self.ui.sb_r_borehole.value()
                 borefield.append(Borehole(H, D, r_b, x=x, y=y))
         except IndexError:  # raises exception if only one borehole
             x = data[0]
             y = data[1]
             H = data[2]
             D = data[3]
-            r_b = data[4]
+            r_b = self.ui.sb_r_borehole.value()
             borefield.append(Borehole(H, D, r_b, x=x, y=y))
-        print(borefield)
+    print(borefield)
     return borefield
 
 

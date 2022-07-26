@@ -285,18 +285,11 @@ class UIFunctions(MainWindow):
             self.ui.label_30.setStyleSheet("color: rgba(211,211,211,50)")
             self.ui.sb_depth_boreholes.setStyleSheet("color: rgba(211,211,211,50)")
             self.ui.sb_depth_boreholes.setDisabled(True)
-            self.ui.label_25.setStyleSheet("color: rgba(211,211,211,50)")
-            self.ui.sb_r_borehole.setStyleSheet("color: rgba(211,211,211,50)")
-            self.ui.sb_r_borehole.setDisabled(True)
         else:
             self.ui.label_30.setStyleSheet("color: rgb(211,211,211)")
             self.ui.sb_depth_boreholes.setStyleSheet("color: rgb(211,211,211);"
                                                      "background-color: rgb(33, 37, 43)")
             self.ui.sb_depth_boreholes.setDisabled(False)
-            self.ui.label_25.setStyleSheet("color: rgb(211,211,211)")
-            self.ui.sb_r_borehole.setStyleSheet("color: rgb(211,211,211);"
-                                                "background-color: rgb(33, 37, 43)")
-            self.ui.sb_r_borehole.setDisabled(False)
 
     def rbsimtime(self, rb):
         # change text and values of simtime for multi-year simulation

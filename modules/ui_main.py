@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainoEWrHA.ui'
+## Form generated from reading UI file 'mainukqzEJ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.1.2
 ##
@@ -2596,7 +2596,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
         self.cb_month.setCurrentIndex(-1)
 
 
@@ -2703,21 +2703,21 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity backfill [W/mK]:", None))
 #if QT_CONFIG(tooltip)
-        self.label_25.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Borehole radius will be assumed for every borehole when radiobutton above is not checked.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: r_b</span></p></body></html>", None))
+        self.label_25.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Borehole radius will be assumed for every borehole.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: r_b</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_25.setText(QCoreApplication.translate("MainWindow", u"Borehole radius [m]:", None))
 #if QT_CONFIG(tooltip)
-        self.label_15.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">This number of heatpipes are uniformly spaced on a circle with radius heatpipe-epicenters.</span></p></body></html>", None))
+        self.label_15.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">This number of heat pipes are uniformly spaced on a circle with radius heat pipe epicenters.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_15.setText(QCoreApplication.translate("MainWindow", u"Number of heatpipes per borehole:", None))
+        self.label_15.setText(QCoreApplication.translate("MainWindow", u"Number of heat pipes per borehole:", None))
 #if QT_CONFIG(tooltip)
         self.label_17.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Thermal conductivity of borehole insulating layer.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: lambda_iso</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity insulating layer [W/mK]:", None))
 #if QT_CONFIG(tooltip)
-        self.label_18.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Thermal conductivity of a single heatpipe. Value will be assumed for every heatpipe in the system.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: lambda_p</span></p></body></html>", None))
+        self.label_18.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Thermal conductivity of a single heat pipe. Value will be assumed for every heat pipe in the system.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: lambda_p</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_18.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity heatpipe [W/mK]:", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"Thermal conductivity heat pipe [W/mK]:", None))
 #if QT_CONFIG(tooltip)
         self.rb_depth.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">If checked, borehole depths and radii will be taken from borefield geometry file.</span></p><p><span style=\" font-size:11pt;\">Otherwise borehole depths and radii will be taken from parameter input below and will be equal for all boreholes.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -2730,19 +2730,19 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(accessibility)
         self.rb_depth.setAccessibleDescription("")
 #endif // QT_CONFIG(accessibility)
-        self.rb_depth.setText(QCoreApplication.translate("MainWindow", u"Activate varying borehole depths and radii", None))
+        self.rb_depth.setText(QCoreApplication.translate("MainWindow", u"Activate varying borehole depths", None))
 #if QT_CONFIG(tooltip)
-        self.label_22.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Inner radius of single heatpipe. Value will be assumed for every heatpipe in the system.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: r_pi</span></p></body></html>", None))
+        self.label_22.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Inner radius of single heat pipe. Value will be assumed for every heat pipe in the system.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: r_pi</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_22.setText(QCoreApplication.translate("MainWindow", u"Inner radius heatpipes [m]:", None))
+        self.label_22.setText(QCoreApplication.translate("MainWindow", u"Inner radius heat pipes [m]:", None))
 #if QT_CONFIG(tooltip)
-        self.label_20.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">The heatpipes per borehole are uniformly spaced on a circle with this radius.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: r_w</span></p></body></html>", None))
+        self.label_20.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">The heat pipes per borehole are uniformly spaced on a circle with this radius.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: r_w</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_20.setText(QCoreApplication.translate("MainWindow", u"Radius heatpipe-epicenters [m]:", None))
+        self.label_20.setText(QCoreApplication.translate("MainWindow", u"Radius heat pipe epicenters [m]:", None))
 #if QT_CONFIG(tooltip)
-        self.label_21.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Outer radius of single heatpipe. Value will be assumed for every heatpipe in the system.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: r_pa</span></p></body></html>", None))
+        self.label_21.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Outer radius of single heat pipe. Value will be assumed for every heat pipe in the system.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: r_pa</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_21.setText(QCoreApplication.translate("MainWindow", u"Outer radius heatpipes [m]:", None))
+        self.label_21.setText(QCoreApplication.translate("MainWindow", u"Outer radius heat pipes [m]:", None))
 #if QT_CONFIG(tooltip)
         self.label_19.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Outer radius of borehole insulating layer.</span></p><p><span style=\" font-size:11pt;\">Schematics symbol: r_iso</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -2764,7 +2764,7 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.label_29.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">If muli-year simulation is checked, only full years will be simulated. For single year simulation, simulationtime is choosed in hours.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_29.setText(QCoreApplication.translate("MainWindow", u"Simulationtime [h]:", None))
+        self.label_29.setText(QCoreApplication.translate("MainWindow", u"Simulation time [h]:", None))
 #if QT_CONFIG(tooltip)
         self.label_32.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Snow free area ratio is the part of surface, which is always free of snow, if snow cumulates at the surface.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
@@ -2772,7 +2772,7 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.label_31.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">The simulation will be started with the weather conditions at chosen date from weather data file and ends with the date one day before startdate.</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-        self.label_31.setText(QCoreApplication.translate("MainWindow", u"Startdate", None))
+        self.label_31.setText(QCoreApplication.translate("MainWindow", u"Start date", None))
         self.label_27.setText(QCoreApplication.translate("MainWindow", u"Month:", None))
         self.cb_month.setCurrentText("")
         self.label_28.setText(QCoreApplication.translate("MainWindow", u"Day:", None))

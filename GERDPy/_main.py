@@ -240,8 +240,8 @@ def main(self):
 
     R_f = self.ui.sb_rf.value() # Snow free area ration (default: 0.2)
 
-    print('------Simulation started------\n')
-    self.ui.text_console.insertPlainText('------Simulation started------\n')  # GUI-console output
+    print('------Simulation running------\n')
+    self.ui.text_console.insertPlainText('------Simulation running------\n')  # GUI-console output
 
     progwindow.ui.running.setText("Simulation running...")
 
