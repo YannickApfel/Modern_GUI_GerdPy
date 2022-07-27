@@ -378,7 +378,7 @@ def main(self):
     ax1.plot(hours, Q_V / A_he, 'g-', lw=1.2)  # thermal losses (underside heating element & connection) [W]
     ax1.legend(['Extracted thermal power', 'Extracted thermal power (24h-moving-average)',
                 'Thermal losses (underside heating element & connection)'],
-               prop={'size': font['size']}, loc='upper left')
+               prop={'size': font['size']}, loc='best')
     ax1.grid('major')
     ax1.xaxis.set_minor_locator(AutoMinorLocator())
     ax1.yaxis.set_minor_locator(AutoMinorLocator())
@@ -393,7 +393,7 @@ def main(self):
     ax2.plot(hours, S_r, 'b-', lw=0.8)  # snowfall rate [mm/h]
     ax2.plot(hours, m_s / (A_he * (997 / 1000)), 'g-', lw=0.8)  # snow height on heating element [mm]
     ax2.legend(['Snowfall rate', 'Snow height on heating element'],
-               prop={'size': font['size']}, loc='upper left')
+               prop={'size': font['size']}, loc='best')
     ax2.grid('major')
     ax2.xaxis.set_minor_locator(AutoMinorLocator())
     ax2.yaxis.set_minor_locator(AutoMinorLocator())
@@ -408,7 +408,7 @@ def main(self):
     ax3.plot(hours, Theta_inf, 'k-', lw=0.8)  # ambient temperature [°C]
     ax3.plot(hours, u_inf, 'm--', lw=0.8)  # ambient wind speed [m/s]
     ax3.legend(['Ambient temperature', 'Ambient wind speed'],
-                 prop={'size': font['size']}, loc='upper right')
+                 prop={'size': font['size']}, loc='best')
     ax3.grid('major')
     ax3.xaxis.set_minor_locator(AutoMinorLocator())
     ax3.yaxis.set_minor_locator(AutoMinorLocator())
@@ -424,7 +424,7 @@ def main(self):
     ax4.plot(hours, Theta_b, 'r-', lw=1.2)  # borehole wall temperature [°C]
     ax4.plot(hours, Theta_surf, 'c-', lw=0.6)  # heating element surface temperature [°C]
     ax4.legend(['T_borehole-wall', 'T_surface'],
-               prop={'size': font['size']}, loc='upper right')
+               prop={'size': font['size']}, loc='best')
     ax4.grid('major')
     ax4.xaxis.set_minor_locator(AutoMinorLocator())
     ax4.yaxis.set_minor_locator(AutoMinorLocator())
@@ -451,7 +451,7 @@ def main(self):
         ax5.set_xlabel(r'$date$ [mm-dd-hh]')
         ax5.set_ylabel(r'$T$ [degC]')
         ax5.plot(hours, Theta_b, 'r-', lw=1.2, label='Borehole wall temperature - Year 1')
-    ax5.legend(prop={'size': font['size'] - 2}, loc='lower center')
+    ax5.legend(prop={'size': font['size'] - 2}, loc='best')
     ax5.grid('major')
     ax5.xaxis.set_minor_locator(AutoMinorLocator())
     ax5.yaxis.set_minor_locator(AutoMinorLocator())
@@ -480,7 +480,7 @@ def main(self):
             if j==0:
                 ax6.plot(ax6_x[j+1], Theta_b[5860+j*8760], color='red', marker='o', markersize=10, markeredgewidth=0.0, 
                          label='Borehole wall temperature at the beginning of the heating period (01.09.)')
-        ax6.legend(prop={'size': font['size'] - 2}, loc='upper right')
+        ax6.legend(prop={'size': font['size'] - 2}, loc='best')
         ax6.grid('major')
         ax6.xaxis.set_minor_locator(AutoMinorLocator())
         ax6.xaxis.set_major_locator(MaxNLocator(integer=True))
