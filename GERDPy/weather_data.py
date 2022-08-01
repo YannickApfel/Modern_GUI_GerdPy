@@ -66,10 +66,13 @@ def get_weather_data(Nt, self):
     # 6.) total precipitation [mm/h]
     RR = np.array(data.iloc[rows, 3])
 
-    # 7.) dates array of strings ['mm-dd-hh']
+    # 7.) dates array of strings
     dates = np.empty(len(rows), dtype=object)
-    for i in range(0, len(rows)):
-        dates[i] = str(data.iloc[rows[i], 0]) + '-' + str(data.iloc[rows[i], 1]) + '-' + str(data.iloc[rows[i], 2])
-
+    if len(rows) > 8760:  # if multi-year simulation, add the year to the date with format ['y-mm-dd-hh']
+        for i in range(0, len(rows)):
+            dates[i] = str(int(i/8760)+1) + '-' + str(data.iloc[rows[i], 0]) + '-' + str(data.iloc[rows[i], 1]) + '-' + str(data.iloc[rows[i], 2])
+    else:  # else just use format ['mm-dd-hh']
+        for i in range(0, len(rows)):
+            dates[i] = str(data.iloc[rows[i], 0]) + '-' + str(data.iloc[rows[i], 1]) + '-' + str(data.iloc[rows[i], 2])
 
     return u_inf, Theta_inf, S_r, B, Phi, RR, dates

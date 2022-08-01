@@ -144,14 +144,19 @@ def main(self):
     # 2.) Simulation
 
     # Simulation-Params
-    ''' default value for 'dt' is 3600 seconds (equaling one hour)
-    '''
-    dt = 3600.  # time increment (step size) [s] (default: 3600)
     if self.ui.rb_multiyearsim.isChecked():
-        tmax = self.ui.sb_simtime.value() * 365 * 24 * dt  # total simulation time (multiple years) [s]
+        Nt = int(self.ui.sb_simtime.value() * 365 * 24)
     else:
-        tmax = self.ui.sb_simtime.value() * dt  # total simulation time [s] (default: 730 h * 3600 s)
-    Nt = int(np.ceil(tmax / dt))  # number of time steps [-]
+        Nt = int(self.ui.sb_simtime.value())
+
+    dt = 3600.  # time increment (step size) [s] (default: 3600)
+    tmax = Nt*3600  # total simulation time [s]
+
+    # if self.ui.rb_multiyearsim.isChecked():
+    #     tmax = self.ui.sb_simtime.value() * 365 * 24 * dt  # total simulation time (multiple years) [s]
+    # else:
+    #     tmax = self.ui.sb_simtime.value() * dt  # total simulation time [s] (default: 730 h * 3600 s)
+    # Nt = int(np.ceil(tmax / dt))  # number of time steps [-]
 
     # -------------------------------------------------------------------------
     # 2.) Determination of system thermal resistances
@@ -194,7 +199,6 @@ def main(self):
         RR          - precipitation (total) [mm/h]
         dates       - dates array of strings [mm-dd-hh]
     '''
-    print(dates)
 
     # -------------------------------------------------------------------------
     # 5.) Iteration loop (Simulation using Nt time steps of stepsize dt)
@@ -360,7 +364,7 @@ def main(self):
     # -------------------------------------------------------------------------
     
     # x-Axis (simulation hours) [h]
-    hours = dates # np.array([(j+1)*dt/3600. for j in range(Nt)])
+    hours = dates
 
     plt.rc('figure')
     fig1 = plt.figure()
@@ -419,7 +423,7 @@ def main(self):
     # Temperature curves
     # fig1
     ax4 = fig1.add_subplot(414)
-    ax4.set_xlabel(r'$date$ [mm-dd-hh]')
+    ax4.set_xlabel(r'$date$ [y-mm-dd-hh]')
     ax4.set_ylabel(r'$T$ [degC]')
     ax4.plot(hours, Theta_b, 'r-', lw=1.2)  # borehole wall temperature [°C]
     ax4.plot(hours, Theta_surf, 'c-', lw=0.6)  # heating element surface temperature [°C]
@@ -439,24 +443,30 @@ def main(self):
     # Borehole wall temperature annual stacked curves
     # fig2
     if self.ui.rb_multiyearsim.isChecked():
+        single_year = np.empty(8760, dtype=object)
+        for i in range(0, len(single_year)):
+            single_year[i] = hours[i][2:]
+
         ax5 = fig2.add_subplot(211)
         ax5.set_xlabel(r'$date$ [mm-dd-hh]')
         ax5.set_ylabel(r'$T$ [degC]')
         colour_map = iter(plt.cm.gist_rainbow(np.linspace(0, 1, self.ui.sb_simtime.value())))
         for j in range(self.ui.sb_simtime.value()):
-            ax5.plot(np.arange(1, 8761, 1, dtype=int), Theta_b[(0+j*8760):(8760+j*8760)], c=next(colour_map), 
+            ax5.plot(single_year, Theta_b[(0+j*8760):(8760+j*8760)], c=next(colour_map),
                      lw=0.7, label=f'Borehole wall temperature - Year {j+1}')
+        ax5.set_xticks(np.arange(0, len(single_year), len(single_year) / 24))
+        labels5 = ax5.get_xticklabels()
     else:
         ax5 = fig2.add_subplot(111)
         ax5.set_xlabel(r'$date$ [mm-dd-hh]')
         ax5.set_ylabel(r'$T$ [degC]')
         ax5.plot(hours, Theta_b, 'r-', lw=1.2, label='Borehole wall temperature - Year 1')
+        ax5.set_xticks(np.arange(0, len(hours), len(hours) / 24))
+        labels5 = ax5.get_xticklabels()
     ax5.legend(prop={'size': font['size'] - 2}, loc='best')
     ax5.grid('major')
     ax5.xaxis.set_minor_locator(AutoMinorLocator())
     ax5.yaxis.set_minor_locator(AutoMinorLocator())
-    ax5.set_xticks(np.arange(0, len(hours), len(hours) / 24))
-    labels5 = ax5.get_xticklabels()
     plt.setp(labels5, rotation=45, horizontalalignment='right')
     
     # Borehole wall temperature at beginning of heating period

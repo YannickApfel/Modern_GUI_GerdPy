@@ -189,7 +189,6 @@ def field_from_file(self, filename):
             D = data[3]
             r_b = self.ui.sb_r_borehole.value()
             borefield.append(Borehole(H, D, r_b, x=x, y=y))
-    print(borefield)
     return borefield
 
 

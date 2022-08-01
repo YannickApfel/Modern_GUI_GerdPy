@@ -771,7 +771,6 @@ Qt::WA_AlwaysShowToolTips
              </property>
              <property name="font">
               <font>
-               <family>Segoe UI Semibold</family>
                <pointsize>12</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -801,7 +800,6 @@ Qt::WA_AlwaysShowToolTips
              </property>
              <property name="font">
               <font>
-               <family>Segoe UI</family>
                <pointsize>8</pointsize>
                <italic>false</italic>
                <bold>false</bold>
@@ -1524,7 +1522,7 @@ Simulation parameters</string>
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>4</number>
+                      <number>3</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -2844,7 +2842,7 @@ border-radius: 5px;</string>
                                 </font>
                                </property>
                                <property name="toolTip">
-                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Borehole radius will be assumed for every borehole when radiobutton above is not checked.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_b&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Borehole radius will be assumed for every borehole.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Schematics symbol: r_b&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
                                <property name="toolTipDuration">
                                 <number>30000</number>
@@ -3073,7 +3071,7 @@ border-radius: 5px;</string>
                                 <string notr="true"/>
                                </property>
                                <property name="text">
-                                <string>Activate varying borehole depths and radii</string>
+                                <string>Activate varying borehole depths</string>
                                </property>
                               </widget>
                              </item>
@@ -4780,7 +4778,7 @@ QPushButton:pressed{
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>351</width>
+                                 <width>218</width>
                                  <height>218</height>
                                 </rect>
                                </property>
