@@ -437,7 +437,7 @@ def main(self):
     plt.setp(labels4, rotation=45, horizontalalignment='right')
 
     # -------------------------------------------------------------------------
-    # 7.2) Figure 1
+    # 7.2) Figure 2
     # -------------------------------------------------------------------------
 
     # Borehole wall temperature annual stacked curves
