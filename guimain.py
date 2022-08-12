@@ -195,8 +195,6 @@ class MainWindow(QMainWindow):
 
         # START SIMULATION
         if btnName == "btn_startsim":
-            # # SIMULATION AS THREAD
-            # sim = multiprocessing.Process(target=simulation, args=(self))
 
             self.ui.text_console.clear()
             correct = USEFunctions.errorhandling(self)
@@ -239,6 +237,6 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("icon.ico"))
+    app.setWindowIcon(QIcon("ZAE.ico"))
     window = MainWindow()
     sys.exit(app.exec())

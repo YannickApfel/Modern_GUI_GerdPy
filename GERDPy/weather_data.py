@@ -71,8 +71,10 @@ def get_weather_data(Nt, self):
     if len(rows) > 8760:  # if multi-year simulation, add the year to the date with format ['y-mm-dd-hh']
         for i in range(0, len(rows)):
             dates[i] = str(int(i/8760)+1) + '-' + str(data.iloc[rows[i], 0]) + '-' + str(data.iloc[rows[i], 1]) + '-' + str(data.iloc[rows[i], 2])
+        fos = np.where(dates == '1-9-1-1')[0][0] # get index of first 1st of September
     else:  # else just use format ['mm-dd-hh']
         for i in range(0, len(rows)):
             dates[i] = str(data.iloc[rows[i], 0]) + '-' + str(data.iloc[rows[i], 1]) + '-' + str(data.iloc[rows[i], 2])
+        fos = 0
 
-    return u_inf, Theta_inf, S_r, B, Phi, RR, dates
+    return u_inf, Theta_inf, S_r, B, Phi, RR, dates, fos

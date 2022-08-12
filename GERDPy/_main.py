@@ -190,7 +190,7 @@ def main(self):
     # -------------------------------------------------------------------------
 
     # Import weather data from 'weather_data.py'
-    u_inf, Theta_inf, S_r, B, Phi, RR, dates = get_weather_data(Nt, self)
+    u_inf, Theta_inf, S_r, B, Phi, RR, dates, fos = get_weather_data(Nt, self)
     ''' u_inf       - ambient wind speed [m/s]
         Theta_inf   - ambient temperature [°C]
         S_r         - snowfall rate [mm/h]
@@ -474,21 +474,21 @@ def main(self):
     if self.ui.rb_multiyearsim.isChecked():
         ax6 = fig2.add_subplot(212)
         ax6.set_xlabel(r'$Year$ [a]')
-        ax6.set_ylabel(r'$T$ [degC]')
+        ax6.set_ylabel(r'$T$ [degC]')   
         ax6_x = np.arange(0, self.ui.sb_simtime.value()+1, 1, dtype=int)
         # straight connecting lines:
-        ax6.plot([ax6_x[0], ax6_x[1]], [Theta_g, Theta_b[5860]], 'b', linewidth=1)
+        ax6.plot([ax6_x[0], ax6_x[1]], [Theta_g, Theta_b[fos]], 'b', linewidth=1)
         for j in range(self.ui.sb_simtime.value()):
             if j<(self.ui.sb_simtime.value()-1):
-                ax6.plot([ax6_x[j+1], ax6_x[j+2]], [Theta_b[5860+j*8760], Theta_b[5860+(j+1)*8760]], 'b', linewidth=1, label='_nolegend_')
+                ax6.plot([ax6_x[j+1], ax6_x[j+2]], [Theta_b[fos+j*8760], Theta_b[fos+(j+1)*8760]], 'b', linewidth=1, label='_nolegend_')
             else:
                 break
         # scatter plot:
         ax6.plot(ax6_x[0], Theta_g, marker='x', markersize=10, markeredgecolor='green', label='Undisturbed ground temperature')
         for j in range(self.ui.sb_simtime.value()):
-            ax6.plot(ax6_x[j+1], Theta_b[5860+j*8760], color='red', marker='o', markersize=10, markeredgewidth=0.0)
+            ax6.plot(ax6_x[j+1], Theta_b[fos+j*8760], color='red', marker='o', markersize=10, markeredgewidth=0.0)
             if j==0:
-                ax6.plot(ax6_x[j+1], Theta_b[5860+j*8760], color='red', marker='o', markersize=10, markeredgewidth=0.0, 
+                ax6.plot(ax6_x[j+1], Theta_b[fos+j*8760], color='red', marker='o', markersize=10, markeredgewidth=0.0,
                          label='Borehole wall temperature at the beginning of the heating period (01.09.)')
         ax6.legend(prop={'size': font['size'] - 2}, loc='best')
         ax6.grid('major')
@@ -510,7 +510,7 @@ def main(self):
 
     return results
 
-
-# Main function
-if __name__ == '__main__':
-    main()
+#
+# # Main function
+# if __name__ == '__main__':
+#     main()
